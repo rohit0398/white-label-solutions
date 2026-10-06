@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Currency } from "@/types";
+import { Currency, Language } from "@/types";
 import { BRAND } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -11,6 +11,7 @@ import { ShowcaseSection } from "@/components/sections/ShowcaseSection";
 import { AdminTourSection } from "@/components/sections/AdminTourSection";
 import { ArchitectureSection } from "@/components/sections/ArchitectureSection";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { CostCalculator } from "@/components/widgets/CostCalculator";
 import { LeadModal } from "@/components/widgets/LeadModal";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -27,6 +28,7 @@ import {
 
 export default function HomePage() {
   const [currentCurrency, setCurrentCurrency] = useState<Currency>("USD");
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
   const [selectedTierId, setSelectedTierId] = useState<string>("turnkey-setup");
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -55,7 +57,7 @@ export default function HomePage() {
     },
     {
       q: "Can you migrate our existing products and customer data from Shopify or WooCommerce?",
-      a: "Yes. Our team provides complete data migration assistance. We write ingestion scripts for your existing products, categories, images, and customer records, plus set up 301 URL redirects so you don't lose any existing Google search rankings.",
+      a: "Yes. Our team provides complete data migration assistance. We seamlessly transfer all your existing products, categories, photos, and customer records, plus set up 301 URL redirects so you don't lose any existing Google search rankings.",
     },
     {
       q: "What payment options and tax rules are supported out of the box?",
@@ -69,17 +71,22 @@ export default function HomePage() {
       <Navbar
         currentCurrency={currentCurrency}
         onCurrencyChange={setCurrentCurrency}
+        currentLanguage={currentLanguage}
+        onLanguageChange={setCurrentLanguage}
         onOpenBookModal={() => handleOpenModal("turnkey-setup")}
       />
 
       <main className="flex-1">
         {/* Hero Section with High-Intent Layman Copy & CTAs */}
-        <HeroSection onOpenBookModal={() => handleOpenModal("turnkey-setup")} />
+        <HeroSection
+          currentLanguage={currentLanguage}
+          onOpenBookModal={() => handleOpenModal("turnkey-setup")}
+        />
 
         {/* Interactive Brand Previewer (Dual Device Mockups) */}
         <BrandPreviewer />
 
-        {/* Showcase of 3 Live Production Stores */}
+        {/* Showcase of Active Client Stores */}
         <ShowcaseSection />
 
         {/* Interactive All-in-One Admin Panel & CRM Walkthrough */}
@@ -93,6 +100,9 @@ export default function HomePage() {
           currentCurrency={currentCurrency}
           onOpenBookModal={handleOpenModal}
         />
+
+        {/* Interactive Cost & Savings Calculator */}
+        <CostCalculator onOpenBookModal={() => handleOpenModal("turnkey-setup")} />
 
         {/* FAQ Section */}
         <section className="py-20 bg-[#06080d] border-t border-slate-900">
@@ -153,8 +163,8 @@ export default function HomePage() {
               Ready to Own Your E-Commerce Store & Apps?
             </h2>
             <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-              Stop paying monthly platform fees and revenue cuts. Schedule a live technical walkthrough
-              with our engineering team and review our live sandbox today.
+              Stop paying monthly platform fees and revenue cuts. Schedule a live store & app demo
+              with our team and review our live sandbox today.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -164,7 +174,7 @@ export default function HomePage() {
                 onClick={() => handleOpenModal("turnkey-setup")}
                 className="w-full sm:w-auto shadow-2xl"
               >
-                <span>Book Technical Consultation</span>
+                <span>Schedule a Live Store & App Demo</span>
                 <ArrowRight className="h-4 w-4" />
               </Button>
 

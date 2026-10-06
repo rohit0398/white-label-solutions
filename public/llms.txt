@@ -1,0 +1,36 @@
+# Mechatron Lab White-Label E-Commerce Platform
+
+> Complete pre-built, customizable white-label e-commerce platform and mobile apps deployed directly onto the client's own cloud infrastructure.
+
+## Core Value Proposition
+- Complete E-Commerce Solution: Includes high-speed Next.js web store, cross-platform Flutter native mobile apps (Android & iOS), and All-in-One E-Commerce Admin Panel & CRM.
+- 100% Client Infrastructure: Deployed directly onto client's private AWS, Google Cloud (GCP), Microsoft Azure, or VPS. No customer data or databases are hosted on shared servers.
+- Complete Ownership: Full source code and unrestricted commercial IP rights available.
+- Zero Platform Fees: 0% GMV revenue cut or per-transaction commission. Clients keep 100% of sales.
+- Speed to Market: Pre-built and customized within 14 to 21 business days.
+
+## Commercial Pricing Model
+- Turnkey Launch Package: $4,999 (one-time setup) | ₹3,99,000 in India. Includes customized storefront, Flutter iOS & Android apps published to stores, All-in-One Admin & CRM, cloud deployment, and 30 days warranty.
+- Full Source Code & Commercial License: +$1,999 (one-time add-on) | ₹1,49,000 in India. Includes 100% unencrypted Git repositories, architecture documentation, and perpetual redistribution rights.
+- Dedicated Developer Support: $20 / hour per developer | ₹1,500 / hr in India. Custom ERP/CRM integrations, custom checkout flows, and scaling.
+
+## Verified Live Production Proof
+- eStoreAlley (https://estorealley.web.app): Wholesale & retail directory and marketplace engine with global Stripe checkout and Google Play mobile app.
+- Mechatron Lab (https://mechatronlab.com): Hardware, robotics, and IoT store with 1,000+ SKUs, AI shopping assistant, GST invoicing, and Google Play app.
+- Style Gear (https://stylegear.co.in): Fast-loading D2C fashion & apparel storefront with variant selection and lookbook gallery.
+
+## Operational Capabilities (Admin Panel & CRM)
+- Multi-Warehouse Inventory: Allocate stock across multiple geographic hubs with automated dispatch routing based on customer delivery pincode.
+- Smart Stock Alerts: Automated sales velocity calculation and 'Days of Stock' cover warnings before items run out.
+- Real Profit & Loss Engine: Calculates true gross and net profit margin per order by matching supplier purchase invoice costs to sales prices.
+- Visual Drag-and-Drop Page Customizer: No-code banner and product shelf management with independent desktop and mobile layout controls.
+- Omnichannel Order Pipeline: Supports COD, UPI, Stripe, Cards, SMEPAY, and Bank Transfer with wholesale B2B dealer accounts.
+
+## Target Geographies & Compliance
+- Supported Regions: United States, United Kingdom, European Union, and India.
+- Regulatory Compliance: GDPR (EU), Digital Personal Data Protection Act 2023 (India), CCPA (US).
+
+## Contact & Inquiries
+- Website: https://solutions.mechatronlab.com
+- Email: contact@mechatronlab.com
+- WhatsApp: +91 98879 98663

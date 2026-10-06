@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Currency } from "@/types";
+import { Currency, Language } from "@/types";
 import { BRAND } from "@/lib/constants";
+import { LANGUAGES, TRANSLATIONS } from "@/lib/translations";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import {
@@ -19,30 +20,38 @@ import {
 interface NavbarProps {
   currentCurrency: Currency;
   onCurrencyChange: (c: Currency) => void;
+  currentLanguage?: Language;
+  onLanguageChange?: (l: Language) => void;
   onOpenBookModal: () => void;
 }
 
 export function Navbar({
   currentCurrency,
   onCurrencyChange,
+  currentLanguage = "en",
+  onLanguageChange,
   onOpenBookModal,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
+  const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
 
-  const currencies: { code: Currency; label: string; symbol: string }[] = [
-    { code: "USD", label: "US Dollar", symbol: "$" },
-    { code: "EUR", label: "Euro (EU)", symbol: "€" },
-    { code: "GBP", label: "British Pound", symbol: "£" },
-    { code: "INR", label: "Indian Rupee", symbol: "₹" },
+  const t = TRANSLATIONS[currentLanguage] || TRANSLATIONS.en;
+
+  const markets = [
+    { code: "USD" as Currency, label: "United States (USD)", flag: "🇺🇸", symbol: "$", lang: "en" as Language },
+    { code: "EUR" as Currency, label: "Europe (EUR)", flag: "🇪🇺", symbol: "€", lang: "en" as Language },
+    { code: "GBP" as Currency, label: "United Kingdom (GBP)", flag: "🇬🇧", symbol: "£", lang: "en" as Language },
+    { code: "INR" as Currency, label: "India (INR)", flag: "🇮🇳", symbol: "₹", lang: "en" as Language },
   ];
 
+  const activeMarket = markets.find((m) => m.code === currentCurrency) || markets[0];
+
+  // Streamlined 4 core navigation items to prevent navbar congestion
   const navLinks = [
-    { name: "Live Showcase", href: "#showcase" },
-    { name: "Admin Tour", href: "#admin-tour" },
-    { name: "Brand Preview", href: "#brand-previewer" },
-    { name: "Architecture", href: "#architecture" },
-    { name: "Commercial Pricing", href: "#pricing" },
+    { name: t.nav.showcase, href: "/#showcase" },
+    { name: t.nav.adminTour, href: "/#admin-tour" },
+    { name: t.nav.pricing, href: "/#pricing" },
+    { name: t.nav.shopifyAlt, href: "/compare/shopify-alternative" },
   ];
 
   return (
@@ -50,7 +59,7 @@ export function Navbar({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 p-0.5 shadow-lg shadow-blue-500/20 group-hover:shadow-cyan-500/30 transition-all">
               <div className="h-full w-full bg-[#090d16] rounded-[10px] flex items-center justify-center">
                 <Layers className="h-5 w-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
@@ -71,8 +80,8 @@ export function Navbar({
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          {/* Desktop Navigation Links - Spacious and Uncluttered */}
+          <nav className="hidden lg:flex items-center gap-2 xl:gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -84,41 +93,80 @@ export function Navbar({
             ))}
           </nav>
 
-          {/* Action Tools: Currency Switcher + WhatsApp + CTA */}
+          {/* Action Tools: Unified Synced Currency & Language + WhatsApp + CTA */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Currency Selector */}
+            {/* Unified Region / Market Selector (Synced Currency & Language) */}
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setCurrencyDropdownOpen(!currencyDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-700/80 bg-slate-900/80 text-xs font-semibold text-slate-200 hover:border-slate-500 transition-colors"
+                onClick={() => setRegionDropdownOpen(!regionDropdownOpen)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/90 text-xs font-semibold text-slate-200 hover:border-slate-500 transition-colors"
+                title="Choose Market & Currency"
               >
-                <Globe className="h-3.5 w-3.5 text-slate-400" />
-                <span>{currentCurrency}</span>
+                <Globe className="h-3.5 w-3.5 text-cyan-400" />
+                <span>
+                  {activeMarket.flag} {activeMarket.code} ({activeMarket.symbol})
+                </span>
                 <ChevronDown className="h-3 w-3 text-slate-400" />
               </button>
 
-              {currencyDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 rounded-xl glass-panel shadow-2xl py-1 z-50 border border-slate-700">
-                  {currencies.map((c) => (
+              {regionDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-64 rounded-2xl glass-panel shadow-2xl p-2 z-50 border border-slate-700 space-y-1">
+                  <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 border-b border-slate-800">
+                    Select Market & Currency
+                  </div>
+                  {markets.map((m) => (
                     <button
-                      key={c.code}
+                      key={m.code}
                       onClick={() => {
-                        onCurrencyChange(c.code);
-                        setCurrencyDropdownOpen(false);
+                        onCurrencyChange(m.code);
+                        onLanguageChange?.(m.lang);
+                        setRegionDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-slate-800/80 transition-colors ${
-                        currentCurrency === c.code
-                          ? "text-cyan-400 font-semibold bg-blue-500/10"
-                          : "text-slate-300"
+                      className={`w-full text-left p-2.5 rounded-xl text-xs flex items-center justify-between transition-colors ${
+                        currentCurrency === m.code
+                          ? "bg-blue-600/20 text-cyan-300 border border-blue-500/30"
+                          : "hover:bg-slate-800 text-slate-300"
                       }`}
                     >
-                      <span>{c.code}</span>
-                      <span className="text-slate-500 font-mono">
-                        {c.symbol}
-                      </span>
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-base">{m.flag}</span>
+                        <div>
+                          <div className="font-semibold text-white">{m.label}</div>
+                          <div className="text-[10px] text-slate-400 font-mono">
+                            {m.symbol} One-Time Pricing
+                          </div>
+                        </div>
+                      </div>
+                      {currentCurrency === m.code && (
+                        <span className="h-2 w-2 rounded-full bg-cyan-400" />
+                      )}
                     </button>
                   ))}
+
+                  {/* Quick Language Override Strip */}
+                  <div className="pt-2 border-t border-slate-800 px-2 pb-1">
+                    <div className="text-[10px] font-mono text-slate-400 mb-1.5">
+                      Language Override:
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {LANGUAGES.map((l) => (
+                        <button
+                          key={l.code}
+                          onClick={() => {
+                            onLanguageChange?.(l.code);
+                          }}
+                          className={`px-2 py-1 text-[11px] rounded-lg font-medium transition-colors ${
+                            currentLanguage === l.code
+                              ? "bg-blue-600 text-white font-bold"
+                              : "bg-slate-800/80 text-slate-400 hover:text-slate-200"
+                          }`}
+                        >
+                          {l.flag} {l.code.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -139,15 +187,15 @@ export function Navbar({
               variant="glow"
               size="sm"
               onClick={onOpenBookModal}
-              className="gap-2"
+              className="gap-2 shrink-0 shadow-lg shadow-blue-500/20"
             >
               <Sparkles className="h-3.5 w-3.5 text-cyan-200" />
-              <span>Book Demo</span>
+              <span>{t.nav.bookDemo}</span>
             </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60"
@@ -164,25 +212,52 @@ export function Navbar({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-            <span className="text-xs text-slate-400 font-mono">Currency</span>
-            <div className="flex gap-1.5">
-              {currencies.map((c) => (
+        <div className="lg:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-6 space-y-4">
+          {/* Synced Market & Currency */}
+          <div className="space-y-2 pb-3 border-b border-slate-800">
+            <span className="text-xs text-slate-400 font-mono">Market & Currency</span>
+            <div className="grid grid-cols-2 gap-1.5">
+              {markets.map((m) => (
                 <button
-                  key={c.code}
-                  onClick={() => onCurrencyChange(c.code)}
-                  className={`px-2 py-1 text-xs rounded-md ${
-                    currentCurrency === c.code
-                      ? "bg-blue-600 text-white font-bold"
-                      : "bg-slate-800 text-slate-400"
+                  key={m.code}
+                  onClick={() => {
+                    onCurrencyChange(m.code);
+                    onLanguageChange?.(m.lang);
+                  }}
+                  className={`px-3 py-2 text-xs rounded-xl flex items-center justify-between border transition-colors ${
+                    currentCurrency === m.code
+                      ? "bg-blue-600/30 border-blue-500/50 text-white font-bold"
+                      : "bg-slate-800/60 border-slate-700/60 text-slate-300"
                   }`}
                 >
-                  {c.code}
+                  <span>{m.flag} {m.code}</span>
+                  <span className="text-[11px] font-mono text-slate-400">{m.symbol}</span>
                 </button>
               ))}
             </div>
           </div>
+
+          {/* Quick Language Switcher */}
+          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span className="text-xs text-slate-400 font-mono">Language</span>
+            <div className="flex gap-1">
+              {LANGUAGES.map((l) => (
+                <button
+                  key={l.code}
+                  onClick={() => onLanguageChange?.(l.code)}
+                  className={`px-2 py-1 text-xs rounded-md ${
+                    currentLanguage === l.code
+                      ? "bg-blue-600 text-white font-bold"
+                      : "bg-slate-800 text-slate-400"
+                  }`}
+                  title={l.label}
+                >
+                  {l.flag} {l.code.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <a
@@ -195,16 +270,17 @@ export function Navbar({
               </a>
             ))}
           </div>
+
           <div className="pt-2 flex flex-col gap-2">
             <Button
               variant="glow"
-              className="w-full"
+              className="w-full shadow-lg shadow-cyan-500/20"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBookModal();
               }}
             >
-              Book Technical Demo
+              Book Live Store Demo
             </Button>
             <a
               href={BRAND.contact.whatsappUrl}

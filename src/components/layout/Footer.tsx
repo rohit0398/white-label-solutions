@@ -39,7 +39,7 @@ export function Footer() {
 
             <div className="flex flex-wrap items-center gap-2 pt-2">
               <Badge variant="live" size="sm">
-                Production Tested
+                Active Client Stores
               </Badge>
               <Badge variant="outline" size="sm">
                 Zero Platform Cut
@@ -66,31 +66,53 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Platform Stack */}
+          {/* Column 2: Solutions & Guides */}
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-200">
-              Core Architecture
+              Solutions & Case Studies
             </h4>
             <ul className="space-y-2 text-xs">
-              <li className="flex items-center gap-2 text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
-                Next.js App Router Web
+              <li>
+                <Link
+                  href="/case-studies/mechatron-lab"
+                  className="text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1"
+                >
+                  <span>Mechatron Lab Case Study</span>
+                  <span className="text-[10px] text-cyan-400 font-mono">1,000+ SKUs</span>
+                </Link>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-blue-400"></span>
-                Flutter Cross-Platform (iOS/Android)
+              <li>
+                <Link
+                  href="/case-studies/estorealley"
+                  className="text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1"
+                >
+                  <span>eStoreAlley Case Study</span>
+                  <span className="text-[10px] text-emerald-400 font-mono">Marketplace</span>
+                </Link>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                MongoDB & Firebase Microservices
+              <li>
+                <Link
+                  href="/compare/shopify-alternative"
+                  className="text-slate-300 hover:text-cyan-400 transition-colors"
+                >
+                  Shopify Alternative (Zero Fees)
+                </Link>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-purple-400"></span>
-                All-in-One Admin Panel & CRM
+              <li>
+                <Link
+                  href="/solutions/ecommerce"
+                  className="text-slate-300 hover:text-cyan-400 transition-colors"
+                >
+                  Full E-Commerce Stack Tour
+                </Link>
               </li>
-              <li className="flex items-center gap-2 text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
-                Multi-Warehouse Dispatch
+              <li>
+                <Link
+                  href="/#pricing"
+                  className="text-slate-300 hover:text-cyan-400 transition-colors"
+                >
+                  Turnkey Packages ($4,999)
+                </Link>
               </li>
             </ul>
           </div>

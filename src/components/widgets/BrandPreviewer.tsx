@@ -71,12 +71,19 @@ export function BrandPreviewer() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left: Desktop Web Storefront Mockup (7 cols) */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="flex items-center justify-between text-xs text-slate-400 font-mono pb-2">
-                <span className="flex items-center gap-1.5 text-slate-300">
-                  <Monitor className="h-4 w-4 text-cyan-400" />
-                  Your Online Store (Fast Responsive Website)
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs text-slate-400 font-mono pb-2">
+                <span className="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <Monitor className="h-4 w-4 text-cyan-400 shrink-0" />
+                  <span>
+                    Online Storefront{" "}
+                    <span className="text-slate-500 font-normal hidden sm:inline">
+                      (Fast Responsive Website)
+                    </span>
+                  </span>
                 </span>
-                <span className="text-emerald-400">Loads in &lt; 1 Second</span>
+                <span className="text-emerald-400 text-[11px] sm:text-xs">
+                  ⚡ Loads in &lt; 1s
+                </span>
               </div>
 
               {/* Browser Window Frame */}
@@ -126,7 +133,7 @@ export function BrandPreviewer() {
                     <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-cyan-400">
                       {selectedTheme.industryName}
                     </span>
-                    <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                    <h3 className="text-base sm:text-xl font-bold text-white tracking-tight leading-snug">
                       {selectedTheme.heroHeadline}
                     </h3>
                   </div>
@@ -169,12 +176,19 @@ export function BrandPreviewer() {
 
             {/* Right: Flutter Mobile App Mockup (5 cols) */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="flex items-center justify-between text-xs text-slate-400 font-mono pb-2">
-                <span className="flex items-center gap-1.5 text-slate-300">
-                  <Smartphone className="h-4 w-4 text-emerald-400" />
-                  Your Mobile Shopping App (Android & iPhone)
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs text-slate-400 font-mono pb-2">
+                <span className="flex items-center gap-1.5 text-slate-300 font-semibold">
+                  <Smartphone className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>
+                    Mobile Shopping App{" "}
+                    <span className="text-slate-500 font-normal hidden sm:inline">
+                      (Android & iOS)
+                    </span>
+                  </span>
                 </span>
-                <span className="text-emerald-400">Google Play & App Store</span>
+                <span className="text-cyan-400 text-[11px] sm:text-xs">
+                  Google Play & App Store
+                </span>
               </div>
 
               {/* Smartphone Frame */}

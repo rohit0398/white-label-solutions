@@ -2,6 +2,8 @@ export type Region = "US" | "EU" | "UK" | "IN";
 
 export type Currency = "USD" | "EUR" | "GBP" | "INR";
 
+export type Language = "en" | "es" | "de" | "fr" | "hi";
+
 export interface PricingTier {
   id: string;
   name: string;
@@ -33,6 +35,7 @@ export interface ShowcaseProject {
   }[];
   features: string[];
   techTags: string[];
+  screenshotUrl?: string;
 }
 
 export interface AdminFeature {

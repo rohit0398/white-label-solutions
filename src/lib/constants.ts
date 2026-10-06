@@ -64,7 +64,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "100% Full, Clean Source Code (No encrypted files, no locks)",
       "Complete Web Storefront Codebase (Next.js & React)",
       "Cross-Platform Mobile Apps Codebase (Flutter for iOS & Android)",
-      "Backend API & Database Microservices (Node.js & MongoDB / Firebase)",
+      "Complete Server Backend & Secure Database (Node.js & MongoDB / Firebase)",
       "Complete Admin Panel & CRM Codebase",
       "Full Database Architecture & Deployment Documentation",
       "Perpetual Commercial Rights (Customize, host, or resell to your own clients)",
@@ -115,8 +115,9 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
       "A high-volume technical store offering 1,000+ hardware components, DIY car & drone kits, an AI shopping assistant, real-time GST pricing, and a native Android app.",
     url: "https://mechatronlab.com",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.mechatronlab.mechatronlab&hl=en_IN",
-    badge: "Live Production Store",
+    badge: "Active Client Store",
     accentColor: "from-blue-600 to-cyan-500",
+    screenshotUrl: "/showcase/mechatron-store.png",
     metrics: [
       { label: "Products Listed", value: "1,000+ SKUs" },
       { label: "Real Sessions", value: "5,000+" },
@@ -132,6 +133,32 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     techTags: ["Next.js", "Flutter", "Firebase", "MongoDB", "GCP"],
   },
   {
+    id: "estore-alley",
+    title: "eStoreAlley",
+    tagline: "Retail & Wholesale E-Commerce Directory & Marketplace",
+    industry: "Multi-Vendor & Directory",
+    description:
+      "An international marketplace directory connecting retail and wholesale merchants with buyers. Includes multi-store vendor listings, global Stripe checkout, verified business profiles, and a dedicated mobile app on Google Play.",
+    url: "https://estorealley.web.app",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.estorealley.app&hl=en_IN",
+    badge: "Active Client Store",
+    accentColor: "from-emerald-500 to-teal-400",
+    screenshotUrl: "/showcase/estorealley-store.png",
+    metrics: [
+      { label: "Platform Type", value: "Multi-Store" },
+      { label: "Global Gateway", value: "Stripe v3" },
+      { label: "Sales Channels", value: "B2B + B2C" },
+      { label: "Google Play App", value: "Live" },
+    ],
+    features: [
+      "Tiered pricing visibility for retail shoppers vs wholesale buyers",
+      "Global multi-currency payment processing via Stripe",
+      "Cross-border shipping options and verified merchant profiles",
+      "Dedicated mobile marketplace app on Google Play",
+    ],
+    techTags: ["Next.js", "Flutter", "Firebase", "Stripe API"],
+  },
+  {
     id: "style-gear",
     title: "Style Gear",
     tagline: "Contemporary D2C Lifestyle & Apparel Storefront",
@@ -139,8 +166,9 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     description:
       "A polished, fast-loading apparel store crafted for the modern online shopper. Features high-resolution imagery, instant size and color variant selectors, and lightning-fast mobile checkout.",
     url: "https://stylegear.co.in",
-    badge: "Live Fashion Store",
+    badge: "Active Client Store",
     accentColor: "from-rose-500 to-amber-500",
+    screenshotUrl: "/showcase/stylegear-store.png",
     metrics: [
       { label: "Page Load Speed", value: "0.8s" },
       { label: "Mobile Shoppers", value: "85%" },
@@ -155,31 +183,6 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     ],
     techTags: ["Next.js", "Tailwind CSS", "Flutter", "Stripe / UPI"],
   },
-  {
-    id: "estore-alley",
-    title: "eStoreAlley",
-    tagline: "Retail & Wholesale E-Commerce Directory & Marketplace",
-    industry: "Multi-Vendor & Directory",
-    description:
-      "An international marketplace directory connecting retail and wholesale merchants with buyers. Includes multi-store vendor listings, global Stripe checkout, and a dedicated mobile app.",
-    url: "https://estorealley.web.app",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.estorealley.app&hl=en_IN",
-    badge: "Live Marketplace Engine",
-    accentColor: "from-emerald-500 to-teal-400",
-    metrics: [
-      { label: "Store Directory", value: "Multi-Vendor" },
-      { label: "Global Gateway", value: "Stripe v3" },
-      { label: "Sales Channels", value: "B2B + B2C" },
-      { label: "Google Play App", value: "Live" },
-    ],
-    features: [
-      "Tiered pricing visibility for retail shoppers vs wholesale buyers",
-      "Global multi-currency payment processing via Stripe",
-      "Cross-border shipping options and verified merchant profiles",
-      "Dedicated mobile marketplace app on Google Play",
-    ],
-    techTags: ["Next.js", "Flutter", "Firebase", "Stripe API"],
-  },
 ];
 
 export const ADMIN_FEATURES: AdminFeature[] = [
@@ -192,10 +195,10 @@ export const ADMIN_FEATURES: AdminFeature[] = [
       "Easily track exact physical stock across all your store locations, regional warehouses, or fulfillment centers. When an order arrives, the system routes dispatch to the closest warehouse with available stock to cut shipping times and delivery costs.",
     keyCapabilities: [
       "Location-specific inventory counts for every product and variant",
-      "Automatic order dispatch routing based on customer delivery pincode",
+      "Automatic order dispatch routing based on customer postal / zip code",
       "Separate staff access permissions for individual warehouse managers",
     ],
-    auditProof: "Battle-tested in live production managing inventory across multiple regional hubs.",
+    auditProof: "Tested and proven in active client stores managing inventory across multiple regional hubs.",
   },
   {
     id: "demand-forecasting",
@@ -213,7 +216,7 @@ export const ADMIN_FEATURES: AdminFeature[] = [
   },
   {
     id: "profit-margin-engine",
-    title: "Live Profit & Loss Tracking per Order",
+    title: "Live Profit & Margin Tracking per Order",
     subtitle: "See your real profit on every sale after product costs and shipping.",
     icon: "DollarSign",
     description:
@@ -223,7 +226,7 @@ export const ADMIN_FEATURES: AdminFeature[] = [
       "Instant gross profit % and net margin calculations on every invoice",
       "Customer credit ledger and pending payment collection tracking",
     ],
-    auditProof: "Verified in live production tracking invoice sales against supplier costs with instant margin reports.",
+    auditProof: "Proven in active client stores tracking invoice sales against supplier costs with instant margin reports.",
   },
   {
     id: "visual-dashboard-builder",
@@ -237,7 +240,7 @@ export const ADMIN_FEATURES: AdminFeature[] = [
       "Pre-built layout blocks: Hero Banners, Product Shelves, Promo Strips, Image Carousels",
       "Instant visual preview with zero code changes or redeployments needed",
     ],
-    auditProof: "Live in production driving dynamic homepage layout tiles across desktop and mobile screens.",
+    auditProof: "Active in live client stores driving dynamic homepage layout tiles across desktop and mobile screens.",
   },
   {
     id: "omnichannel-orders",
@@ -273,6 +276,22 @@ export const BRAND_THEMES: BrandTheme[] = [
     },
   },
   {
+    id: "marketplace-directory",
+    name: "eStoreAlley Wholesale & Marketplace",
+    industryName: "Wholesale & Multi-Vendor Directory",
+    primaryColor: "#059669",
+    secondaryColor: "#064e3b",
+    accentGradient: "from-emerald-500 via-teal-600 to-cyan-700",
+    storeName: "eStoreAlley Directory & Market",
+    heroHeadline: "Verified Wholesale Manufacturers & Global Directory",
+    sampleProduct: {
+      name: "Bulk Order: 50x Smart Bluetooth Transceivers",
+      category: "Wholesale Electronics",
+      price: "$299.00",
+      rating: "5.0 ★ (Verified Supplier)",
+    },
+  },
+  {
     id: "fashion-apparel",
     name: "Fashion, Apparel & D2C Brands",
     industryName: "D2C Fashion & Apparel",
@@ -286,22 +305,6 @@ export const BRAND_THEMES: BrandTheme[] = [
       category: "Outerwear & Jackets",
       price: "$89.00",
       rating: "4.8 ★ (340+ orders)",
-    },
-  },
-  {
-    id: "marketplace-directory",
-    name: "Wholesale & Marketplace Directory",
-    industryName: "Wholesale & Multi-Vendor Directory",
-    primaryColor: "#059669",
-    secondaryColor: "#064e3b",
-    accentGradient: "from-emerald-500 via-teal-600 to-cyan-700",
-    storeName: "Global Wholesale Exchange",
-    heroHeadline: "Verified Wholesale Suppliers & Business Directory",
-    sampleProduct: {
-      name: "Bulk Order: 50x Smart Bluetooth Transceivers",
-      category: "Wholesale Electronics",
-      price: "$299.00",
-      rating: "5.0 ★ (Verified Supplier)",
     },
   },
   {

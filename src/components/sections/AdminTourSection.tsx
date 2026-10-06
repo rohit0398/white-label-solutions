@@ -91,23 +91,54 @@ export function AdminTourSection() {
 
           {/* Feature Deep Dive Canvas (7 cols) */}
           <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-6 glow-card">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-slate-800">
+              <div className="flex items-start sm:items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 shrink-0 mt-0.5 sm:mt-0">
                   {getIcon(activeFeature.icon)}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">
-                    {activeFeature.title}
-                  </h3>
-                  <span className="text-xs text-cyan-400 font-mono">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-white leading-snug">
+                      {activeFeature.title}
+                    </h3>
+                    <Badge variant="live" size="sm" className="sm:hidden">
+                      Active Client Store
+                    </Badge>
+                  </div>
+                  <span className="text-xs text-cyan-400 font-mono block mt-0.5">
                     White-Label Core Module • 100% Rebrandable
                   </span>
                 </div>
               </div>
-              <Badge variant="live" size="sm">
-                Production Verified
+              <Badge variant="live" size="sm" className="hidden sm:inline-flex shrink-0">
+                Active Client Store
               </Badge>
+            </div>
+
+            {/* Real Dashboard Screenshot Preview */}
+            <div className="rounded-2xl overflow-hidden border border-slate-700/80 bg-[#0b0f19] shadow-xl relative group/admin">
+              <div className="bg-[#111726] px-3 py-2 border-b border-slate-800 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+                </div>
+                <span className="text-[11px] font-mono text-slate-400 truncate max-w-[170px] sm:max-w-none">
+                  Commerce Operations & CRM
+                </span>
+                <Badge variant="cyan" size="sm" className="shrink-0">
+                  Live System
+                </Badge>
+              </div>
+              <div className="relative aspect-[16/9] overflow-hidden bg-slate-950">
+                <img
+                  src="/showcase/admin-dashboard.png"
+                  alt="Live E-Commerce Admin Panel & CRM Dashboard Interface"
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/admin:scale-102"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07090e] via-transparent to-transparent opacity-30" />
+              </div>
             </div>
 
             {/* Description */}
@@ -138,7 +169,7 @@ export function AdminTourSection() {
               <ShieldAlert className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
               <div className="text-xs">
                 <strong className="text-slate-200 block font-mono">
-                  FIELD-TESTED IN REAL PRODUCTION
+                  TESTED & PROVEN IN ACTIVE STORES
                 </strong>
                 <span className="text-slate-400">
                   {activeFeature.auditProof}
