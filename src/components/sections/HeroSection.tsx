@@ -32,8 +32,8 @@ export function HeroSection({
     <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 bg-radial-glow bg-grid-tech">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto space-y-6">
-          {/* Top Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-cyan-300 text-xs sm:text-sm font-semibold shadow-lg shadow-blue-500/10">
+          {/* Top Pill Badge with Continuous Ambient Shimmer */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-cyan-300 text-xs sm:text-sm font-semibold shadow-lg shadow-blue-500/10 shimmer-badge">
             <Sparkles className="h-4 w-4 text-cyan-400 animate-pulse" />
             <span>{t.hero.pill}</span>
           </div>
@@ -51,33 +51,33 @@ export function HeroSection({
             {t.hero.subtitle}
           </p>
 
-          {/* High-Impact Value Badges */}
+          {/* High-Impact Value Badges with Gentle Ambient Floating Dynamics */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-300 pt-2">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 animate-float-slow hover:border-cyan-500/50 hover:bg-slate-800 transition-all duration-300 hover:scale-105 cursor-default">
               <Cloud className="h-3.5 w-3.5 text-cyan-400" />
               {t.hero.badgeCloud}
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 animate-float-reverse hover:border-emerald-500/50 hover:bg-slate-800 transition-all duration-300 hover:scale-105 cursor-default">
               <Smartphone className="h-3.5 w-3.5 text-emerald-400" />
               {t.hero.badgeApps}
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 animate-float-slow hover:border-indigo-500/50 hover:bg-slate-800 transition-all duration-300 hover:scale-105 cursor-default">
               <Server className="h-3.5 w-3.5 text-indigo-400" />
               {t.hero.badgeCrm}
             </span>
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 animate-float-reverse hover:border-amber-500/50 hover:bg-slate-800 transition-all duration-300 hover:scale-105 cursor-default">
               <Code2 className="h-3.5 w-3.5 text-amber-400" />
               {t.hero.badgeCode}
             </span>
           </div>
 
-          {/* Dual CTAs */}
+          {/* Dual CTAs with Rich Micro-Animations */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4">
             <Button
               variant="glow"
               size="lg"
               onClick={onOpenBookModal}
-              className="w-full sm:w-auto shadow-2xl"
+              className="w-full sm:w-auto shadow-2xl transition-all duration-200 hover:scale-105 active:scale-95 animate-pulse-glow"
             >
               <span>{t.hero.ctaDemo}</span>
               <ArrowRight className="h-4 w-4 text-cyan-200" />
@@ -85,10 +85,10 @@ export function HeroSection({
 
             <a
               href="#showcase"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-700 bg-slate-900/70 text-slate-200 hover:text-white hover:border-slate-500 transition-colors text-sm font-semibold"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-700 bg-slate-900/70 text-slate-200 hover:text-white hover:border-slate-500 hover:bg-slate-800/80 hover:scale-105 active:scale-95 transition-all text-sm font-semibold"
             >
               <span>{t.hero.ctaExplore}</span>
-              <ExternalLink className="h-4 w-4 text-slate-400" />
+              <ExternalLink className="h-4 w-4 text-slate-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>

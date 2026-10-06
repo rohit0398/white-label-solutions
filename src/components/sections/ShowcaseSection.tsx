@@ -29,17 +29,58 @@ export function ShowcaseSection() {
           </p>
         </div>
 
+        {/* Continuous Live Activity Marquee Strip (Runs Automatically Without Hover) */}
+        <div className="mb-12 overflow-hidden rounded-2xl border border-slate-800 bg-[#080d17]/80 py-3 shadow-inner">
+          <div className="animate-marquee flex items-center gap-8 text-xs font-mono text-slate-300">
+            <span className="flex items-center gap-2 text-cyan-300">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              Mechatron Lab: 1,000+ Robotics SKUs Active · Google Play App Live
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-2 text-emerald-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+              eStoreAlley: B2B Wholesale Tiered Invoicing · Instant Checkout Active
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-2 text-purple-300">
+              <span className="h-2 w-2 rounded-full bg-purple-400 animate-ping" />
+              Style Gear: Direct-to-Consumer Fashion · iOS & Android Apps
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-2 text-blue-300">
+              <span className="h-2 w-2 rounded-full bg-blue-400 animate-ping" />
+              Zero Revenue Share: Keep 100% of Sales Profit on Your Private Cloud
+            </span>
+            <span className="text-slate-600">•</span>
+            {/* Duplicated for seamless infinite looping */}
+            <span className="flex items-center gap-2 text-cyan-300">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
+              Mechatron Lab: 1,000+ Robotics SKUs Active · Google Play App Live
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-2 text-emerald-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+              eStoreAlley: B2B Wholesale Tiered Invoicing · Instant Checkout Active
+            </span>
+            <span className="text-slate-600">•</span>
+            <span className="flex items-center gap-2 text-purple-300">
+              <span className="h-2 w-2 rounded-full bg-purple-400 animate-ping" />
+              Style Gear: Direct-to-Consumer Fashion · iOS & Android Apps
+            </span>
+          </div>
+        </div>
+
         {/* Showcase Grid - Mechatron Lab First, eStoreAlley Second */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {SHOWCASE_PROJECTS.map((project, pIndex) => (
             <div
               key={project.id}
-              className={`glass-panel rounded-3xl p-6 sm:p-7 border flex flex-col justify-between hover:border-slate-700 transition-all duration-300 group hover:-translate-y-1.5 ${
+              className={`glass-panel rounded-3xl p-6 sm:p-7 border flex flex-col justify-between hover:border-slate-700 transition-all duration-300 group hover:-translate-y-2 hover:shadow-2xl ${
                 pIndex === 0
-                  ? "border-blue-500/50 shadow-2xl shadow-blue-500/10 bg-[#091120]"
+                  ? "border-blue-500/50 shadow-2xl shadow-blue-500/10 bg-[#091120] hover:border-blue-400 hover:shadow-blue-500/20"
                   : pIndex === 1
-                  ? "border-emerald-500/40 shadow-xl shadow-emerald-500/10 bg-[#08131d]"
-                  : "border-slate-800 bg-[#0a0e18]"
+                  ? "border-emerald-500/40 shadow-xl shadow-emerald-500/10 bg-[#08131d] hover:border-emerald-400 hover:shadow-emerald-500/20"
+                  : "border-slate-800 bg-[#0a0e18] hover:border-purple-400/50 hover:shadow-purple-500/10"
               }`}
             >
               <div className="space-y-5">

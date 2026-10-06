@@ -55,7 +55,7 @@ export function Navbar({
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-panel border-b border-slate-800/80">
+    <header className="sticky top-0 z-50 w-full bg-[#07090e]/95 backdrop-blur-xl border-b border-slate-800/90 shadow-xl shadow-black/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo */}
@@ -86,7 +86,7 @@ export function Navbar({
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-300 hover:text-white px-3 py-2 rounded-lg hover:bg-slate-800/50 transition-colors"
+                className="text-sm font-medium text-slate-300 hover:text-cyan-300 px-3 py-2 rounded-lg hover:bg-slate-800/50 transition-colors"
               >
                 {link.name}
               </a>
@@ -100,7 +100,7 @@ export function Navbar({
               <button
                 type="button"
                 onClick={() => setRegionDropdownOpen(!regionDropdownOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/90 text-xs font-semibold text-slate-200 hover:border-slate-500 transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-700/80 bg-slate-900/90 text-xs font-semibold text-slate-200 hover:border-cyan-500/50 hover:bg-slate-800/90 transition-all"
                 title="Choose Market & Currency"
               >
                 <Globe className="h-3.5 w-3.5 text-cyan-400" />
@@ -171,15 +171,20 @@ export function Navbar({
               )}
             </div>
 
-            {/* Quick WhatsApp Link */}
+            {/* Quick WhatsApp Live Chat Link with Animated Radar Ping */}
             <a
               href={BRAND.contact.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 rounded-xl transition-colors border border-emerald-500/20"
-              title="Chat on WhatsApp"
+              className="group relative p-2 text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl transition-all duration-300 hover:scale-110 active:scale-95 border border-emerald-500/40 hover:border-emerald-400 shadow-md shadow-emerald-950/40 animate-pulse-glow"
+              title="Chat with Us on WhatsApp (Instant Reply)"
             >
-              <MessageSquare className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+              {/* Live Online Ping Beacon */}
+              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5 pointer-events-none">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border-2 border-[#07090e]" />
+              </span>
             </a>
 
             {/* Schedule Demo CTA */}
@@ -187,7 +192,7 @@ export function Navbar({
               variant="glow"
               size="sm"
               onClick={onOpenBookModal}
-              className="gap-2 shrink-0 shadow-lg shadow-blue-500/20"
+              className="gap-2 shrink-0 shadow-lg shadow-blue-500/20 transition-all duration-200 hover:scale-105 active:scale-95 animate-pulse-glow"
             >
               <Sparkles className="h-3.5 w-3.5 text-cyan-200" />
               <span>{t.nav.bookDemo}</span>
@@ -280,7 +285,7 @@ export function Navbar({
                 onOpenBookModal();
               }}
             >
-              Book Live Store Demo
+              Book Demo
             </Button>
             <a
               href={BRAND.contact.whatsappUrl}

@@ -48,10 +48,10 @@ export function PricingSection({
             return (
               <div
                 key={tier.id}
-                className={`glass-panel rounded-3xl p-7 border flex flex-col justify-between transition-all duration-300 relative ${
+                className={`glass-panel rounded-3xl p-7 border flex flex-col justify-between transition-all duration-300 relative group hover:-translate-y-2 hover:shadow-2xl ${
                   tier.isPopular
-                    ? "border-cyan-500/60 shadow-2xl shadow-cyan-500/10 lg:-translate-y-2 bg-[#0d1322]"
-                    : "border-slate-800 hover:border-slate-700 bg-[#0a0e18]"
+                    ? "border-cyan-500/60 shadow-2xl shadow-cyan-500/20 lg:-translate-y-2 bg-[#0d1322] hover:border-cyan-400"
+                    : "border-slate-800 hover:border-slate-600 bg-[#0a0e18] hover:shadow-cyan-500/10"
                 }`}
               >
                 {/* Popular Pill */}
@@ -60,7 +60,7 @@ export function PricingSection({
                     <Badge
                       variant={tier.isPopular ? "live" : "cyan"}
                       size="md"
-                      className="shadow-lg"
+                      className="shadow-lg animate-pulse-glow"
                     >
                       {tier.badge}
                     </Badge>

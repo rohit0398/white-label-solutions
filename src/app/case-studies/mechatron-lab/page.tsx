@@ -28,9 +28,43 @@ export const metadata: Metadata = {
     "multi warehouse inventory ecommerce",
     "self hosted ecommerce case study",
   ],
+  alternates: {
+    canonical: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+  },
+  openGraph: {
+    title: "Case Study: Mechatron Lab Technical Store & Android App",
+    description: "1,000+ SKUs, AI shopping assistant, multi-warehouse inventory, and native Android app on client-owned cloud.",
+    url: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+    images: ["/showcase/mechatron-store.png"],
+  },
 };
 
 export default function MechatronLabCaseStudyPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://solutions.mechatronlab.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: "https://solutions.mechatronlab.com/#showcase",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Mechatron Lab",
+        item: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+      },
+    ],
+  };
+
   const metrics = [
     { label: "Catalog Scale", value: "1,000+ SKUs", desc: "Technical robotics & electronic parts" },
     { label: "Page Speed", value: "0.9s", desc: "Sub-second load times worldwide" },
@@ -40,8 +74,16 @@ export default function MechatronLabCaseStudyPage() {
 
   return (
     <div className="min-h-screen bg-[#07090e] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-300">
+      {/* Breadcrumb Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full glass-panel border-b border-slate-800/80">
+      <header className="sticky top-0 z-50 w-full bg-[#07090e]/95 backdrop-blur-xl border-b border-slate-800/90 shadow-xl shadow-black/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 p-0.5 shadow-md">

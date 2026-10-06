@@ -62,7 +62,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       pricing: "Pricing",
       shopifyAlt: "Shopify Alternative",
       caseStudies: "Case Studies",
-      bookDemo: "Book Live Demo",
+      bookDemo: "Book Demo",
     },
     hero: {
       pill: "Pre-Built White-Label E-Commerce Platform • Deployed on Your Cloud",
@@ -154,7 +154,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       pricing: "Preise",
       shopifyAlt: "Shopify-Alternative",
       caseStudies: "Fallstudien",
-      bookDemo: "Live-Demo buchen",
+      bookDemo: "Demo buchen",
     },
     hero: {
       pill: "Vorgefertigte White-Label E-Commerce-Plattform • Auf Ihrer Cloud",
@@ -200,7 +200,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       pricing: "Tarifs",
       shopifyAlt: "Alternative à Shopify",
       caseStudies: "Études de Cas",
-      bookDemo: "Réserver une Démo",
+      bookDemo: "Réserver Démo",
     },
     hero: {
       pill: "Plateforme E-Commerce Marque Blanche • Déployée sur Votre Cloud",
@@ -246,7 +246,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
       pricing: "कीमतें",
       shopifyAlt: "शॉपिफाइ का विकल्प",
       caseStudies: "केस स्टडीज",
-      bookDemo: "लाइव डेमो बुक करें",
+      bookDemo: "डेमो बुक करें",
     },
     hero: {
       pill: "रेडीमेड व्हाइट-लेबल ई-कॉमर्स प्लेटफॉर्म • आपके प्राइवेट क्लाउड पर डिप्लॉय",

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BRAND_THEMES } from "@/lib/constants";
 import { BrandTheme } from "@/types";
 import { Badge } from "@/components/ui/Badge";
@@ -13,10 +13,43 @@ import {
   CheckCircle2,
   Bot,
   Cloud,
+  Play,
+  Pause,
 } from "lucide-react";
 
 export function BrandPreviewer() {
-  const [selectedTheme, setSelectedTheme] = useState<BrandTheme>(BRAND_THEMES[0]);
+  const [selectedThemeIndex, setSelectedThemeIndex] = useState<number>(0);
+  const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
+
+  const selectedTheme = BRAND_THEMES[selectedThemeIndex] || BRAND_THEMES[0];
+
+  // Auto-rotation timer: advances theme every 5 seconds if not paused by hover or manual toggle
+  useEffect(() => {
+    if (!isAutoPlay || isHovered) return;
+
+    const intervalStep = 50; // update progress every 50ms
+    const totalDuration = 5000; // 5 seconds per theme
+    const stepIncrement = (intervalStep / totalDuration) * 100;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setSelectedThemeIndex((current) => (current + 1) % BRAND_THEMES.length);
+          return 0;
+        }
+        return prev + stepIncrement;
+      });
+    }, intervalStep);
+
+    return () => clearInterval(timer);
+  }, [isAutoPlay, isHovered]);
+
+  const handleSelectTheme = (index: number) => {
+    setSelectedThemeIndex(index);
+    setProgress(0);
+  };
 
   return (
     <div id="brand-previewer" className="w-full py-16 scroll-mt-24">
@@ -36,32 +69,72 @@ export function BrandPreviewer() {
           </p>
         </div>
 
-        {/* Theme Selector Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
-          {BRAND_THEMES.map((theme) => {
-            const isActive = selectedTheme.id === theme.id;
-            return (
-              <button
-                key={theme.id}
-                onClick={() => setSelectedTheme(theme)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-                  isActive
-                    ? "bg-slate-800 text-white border-cyan-400/80 shadow-lg shadow-cyan-500/20 scale-105"
-                    : "bg-slate-900/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200"
-                }`}
-              >
-                <span
-                  className="h-3 w-3 rounded-full"
-                  style={{ backgroundColor: theme.primaryColor }}
-                />
-                <span>{theme.name}</span>
-              </button>
-            );
-          })}
+        {/* Theme Selector Pills + Auto-Play Control */}
+        <div className="flex flex-col items-center gap-3 mb-10">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+            {BRAND_THEMES.map((theme, idx) => {
+              const isActive = selectedThemeIndex === idx;
+              return (
+                <button
+                  key={theme.id}
+                  onClick={() => handleSelectTheme(idx)}
+                  className={`relative overflow-hidden flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                    isActive
+                      ? "bg-slate-800 text-white border-cyan-400/80 shadow-lg shadow-cyan-500/20 scale-105"
+                      : "bg-slate-900/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200 hover:-translate-y-0.5"
+                  }`}
+                >
+                  <span
+                    className="h-3 w-3 rounded-full transition-transform duration-300"
+                    style={{ backgroundColor: theme.primaryColor }}
+                  />
+                  <span>{theme.name}</span>
+
+                  {/* Animated Progress Countdown Bar on Active Tab */}
+                  {isActive && isAutoPlay && (
+                    <span
+                      className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-75"
+                      style={{ width: `${progress}%` }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Interactive Play / Pause & Status Indicator */}
+          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+            <button
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-800 bg-slate-900/80 hover:border-slate-700 hover:text-slate-200 transition-colors"
+              title={isAutoPlay ? "Pause Auto-Preview" : "Resume Auto-Preview"}
+            >
+              {isAutoPlay ? (
+                <>
+                  <Pause className="h-3 w-3 text-cyan-400" />
+                  <span>Auto-Preview On</span>
+                </>
+              ) : (
+                <>
+                  <Play className="h-3 w-3 text-emerald-400" />
+                  <span>Auto-Preview Paused</span>
+                </>
+              )}
+            </button>
+            {isHovered && isAutoPlay && (
+              <span className="text-[11px] text-amber-400/90 font-sans">
+                (Paused while inspecting)
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Dual Device Preview Canvas */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 glow-cyan relative overflow-hidden">
+        {/* Dual Device Preview Canvas with Hover Pause */}
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 glow-cyan relative overflow-hidden transition-all duration-500 hover:border-slate-700"
+        >
           {/* Subtle glow background */}
           <div
             className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl opacity-20 pointer-events-none transition-colors duration-700"
@@ -139,7 +212,7 @@ export function BrandPreviewer() {
                   </div>
 
                   {/* Sample Featured Product Card */}
-                  <div className="bg-[#121929] rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="bg-[#121929] rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all duration-300 hover:border-slate-700 hover:bg-[#151f33] hover:shadow-lg group/prod">
                     <div className="space-y-1 w-full">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-slate-400 font-medium">
@@ -150,7 +223,7 @@ export function BrandPreviewer() {
                           {selectedTheme.sampleProduct.rating}
                         </span>
                       </div>
-                      <h4 className="text-sm font-semibold text-slate-100">
+                      <h4 className="text-sm font-semibold text-slate-100 group-hover/prod:text-white transition-colors">
                         {selectedTheme.sampleProduct.name}
                       </h4>
                       <p className="text-xs text-slate-400">
@@ -163,7 +236,7 @@ export function BrandPreviewer() {
                         {selectedTheme.sampleProduct.price}
                       </span>
                       <button
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-opacity cursor-pointer shadow-md"
+                        className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white transition-all duration-200 cursor-pointer shadow-md hover:scale-105 active:scale-95 hover:brightness-115 hover:shadow-lg"
                         style={{ backgroundColor: selectedTheme.primaryColor }}
                       >
                         Add to Cart
@@ -191,8 +264,8 @@ export function BrandPreviewer() {
                 </span>
               </div>
 
-              {/* Smartphone Frame */}
-              <div className="mx-auto max-w-[280px] rounded-[36px] p-3 bg-[#111726] border-2 border-slate-700 shadow-2xl relative">
+              {/* Smartphone Frame with Micro-Hover Tilt and Glow */}
+              <div className="mx-auto max-w-[280px] rounded-[36px] p-3 bg-[#111726] border-2 border-slate-700 shadow-2xl relative transition-all duration-300 hover:border-slate-500 hover:shadow-cyan-500/10 hover:-translate-y-1">
                 {/* Speaker Notch */}
                 <div className="w-24 h-4 bg-[#07090e] rounded-full mx-auto mb-2 flex items-center justify-center">
                   <div className="w-3 h-3 rounded-full bg-slate-800"></div>
@@ -211,12 +284,13 @@ export function BrandPreviewer() {
                     />
                   </div>
 
-                  {/* App Hero Banner */}
+                  {/* App Hero Banner with Micro-Interactivity */}
                   <div
-                    className="p-3 rounded-xl text-white space-y-1 shadow-md"
+                    className="p-3 rounded-xl text-white space-y-1 shadow-md transition-all duration-200 hover:scale-[1.02] hover:brightness-110 cursor-pointer"
                     style={{ backgroundColor: selectedTheme.primaryColor }}
                   >
-                    <span className="text-[10px] font-mono tracking-wider opacity-90 uppercase">
+                    <span className="text-[10px] font-mono tracking-wider opacity-90 uppercase flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-white animate-ping" />
                       Push Notifications
                     </span>
                     <p className="text-xs font-bold leading-tight">
@@ -225,7 +299,7 @@ export function BrandPreviewer() {
                   </div>
 
                   {/* Product Mini Tile */}
-                  <div className="bg-[#121929] p-3 rounded-xl border border-slate-800 space-y-2">
+                  <div className="bg-[#121929] p-3 rounded-xl border border-slate-800 space-y-2 transition-colors hover:border-slate-700">
                     <div className="text-[11px] font-semibold text-slate-200 line-clamp-1">
                       {selectedTheme.sampleProduct.name}
                     </div>

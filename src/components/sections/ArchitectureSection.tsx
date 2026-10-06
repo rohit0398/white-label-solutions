@@ -97,11 +97,11 @@ export function ArchitectureSection() {
             return (
               <div
                 key={idx}
-                className="glass-panel rounded-3xl p-6 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all group"
+                className="glass-panel rounded-3xl p-6 border border-slate-800 flex flex-col justify-between hover:border-slate-600 transition-all duration-300 group hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10"
               >
                 <div className="space-y-4">
                   <div
-                    className={`h-12 w-12 rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center`}
+                    className={`h-12 w-12 rounded-2xl ${item.bg} border ${item.border} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
                   >
                     <Icon className={`h-6 w-6 ${item.color}`} />
                   </div>

@@ -65,8 +65,29 @@ export default function HomePage() {
     },
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#07090e] text-slate-100">
+      {/* FAQPage Structured Data for Google Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
+
       {/* Sticky Global Navigation */}
       <Navbar
         currentCurrency={currentCurrency}

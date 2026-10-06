@@ -85,9 +85,9 @@ export function CostCalculator({ onOpenBookModal }: CostCalculatorProps) {
                 </div>
               </div>
 
-              {/* Monthly Breakdown Explanations */}
+              {/* Monthly Breakdown Explanations with Interactive Hover Highlight */}
               <div className="space-y-2 text-xs text-slate-300">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80 hover:border-slate-700 hover:bg-[#0e1526] transition-colors">
                   <span className="text-slate-400">
                     SaaS Platform Base Fees (3 Years)
                   </span>
@@ -96,7 +96,7 @@ export function CostCalculator({ onOpenBookModal }: CostCalculatorProps) {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80 hover:border-slate-700 hover:bg-[#0e1526] transition-colors">
                   <span className="text-slate-400">
                     1.5% Payment & GMV Cuts (3 Years)
                   </span>
@@ -105,7 +105,7 @@ export function CostCalculator({ onOpenBookModal }: CostCalculatorProps) {
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0b101c] border border-slate-800/80 hover:border-slate-700 hover:bg-[#0e1526] transition-colors">
                   <span className="text-slate-400">
                     3rd-Party Mobile App Builder Fees (3 Years)
                   </span>
@@ -116,13 +116,14 @@ export function CostCalculator({ onOpenBookModal }: CostCalculatorProps) {
               </div>
             </div>
 
-            {/* Right: Net 3-Year Savings Result Card (5 cols) */}
-            <div className="lg:col-span-5 glass-panel rounded-2xl p-6 border border-emerald-500/40 bg-[#08151f] text-center space-y-4 shadow-xl">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+            {/* Right: Net 3-Year Savings Result Card (5 cols) with Ambient Pulse Glow */}
+            <div className="lg:col-span-5 glass-panel rounded-2xl p-6 border border-emerald-500/40 bg-[#08151f] text-center space-y-4 shadow-xl animate-pulse-glow transition-transform hover:scale-102">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center justify-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
                 Estimated 3-Year Savings
               </span>
 
-              <div className="text-4xl sm:text-5xl font-black text-emerald-400 font-mono tracking-tight">
+              <div className="text-4xl sm:text-5xl font-black text-emerald-400 font-mono tracking-tight drop-shadow-md">
                 ${Math.round(estimatedSavings).toLocaleString()}
               </div>
 
