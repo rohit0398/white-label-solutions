@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
 
 const columns = [
   {
@@ -66,7 +67,10 @@ export function Footer() {
       </div>
       <div className="wrap-wide pb-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-sm text-ink-3">
         <p>© 2026 Mechatron Lab</p>
-        <LanguageSwitcher />
+        <div className="flex items-center gap-6">
+          <ThemeSwitcher />
+          <LanguageSwitcher />
+        </div>
       </div>
     </footer>
   );

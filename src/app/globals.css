@@ -2,17 +2,50 @@
 
 /*
  * Design tokens.
- * Light, mostly monochrome palette with a single accent.
- * To switch to a dark theme, only these values need to change.
+ * Mapped to CSS variables for dynamic Dark / Light switching.
+ * Default: Pure Neutral Dark (#0A0A0A, 0% blue tint).
  */
 @theme {
-  --color-paper: #fafaf9;
-  --color-wash: #f1f0ed;
-  --color-ink: #161616;
-  --color-ink-2: #55534e;
-  --color-ink-3: #8b8984;
-  --color-line: #e4e2dd;
-  --color-accent: #1e5b45;
+  --color-paper: var(--theme-paper);
+  --color-wash: var(--theme-wash);
+  --color-ink: var(--theme-ink);
+  --color-ink-2: var(--theme-ink-2);
+  --color-ink-3: var(--theme-ink-3);
+  --color-line: var(--theme-line);
+  --color-accent: var(--theme-accent);
+}
+
+:root,
+[data-theme="dark"],
+.dark {
+  --theme-paper: #0a0a0a;
+  --theme-wash: #141414;
+  --theme-ink: #f4f4f5;
+  --theme-ink-2: #a1a1aa;
+  --theme-ink-3: #71717a;
+  --theme-line: #262626;
+  --theme-accent: #34d399;
+  --theme-scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(255, 255, 255, 0.45);
+  --theme-shimmer-highlight: rgba(255, 255, 255, 0.08);
+  --theme-accent-pulse: rgba(52, 211, 153, 0.25);
+  --theme-ink-pulse: rgba(244, 244, 245, 0.2);
+}
+
+[data-theme="light"],
+.light {
+  --theme-paper: #fafaf9;
+  --theme-wash: #f1f0ed;
+  --theme-ink: #161616;
+  --theme-ink-2: #55534e;
+  --theme-ink-3: #8b8984;
+  --theme-line: #e4e2dd;
+  --theme-accent: #1e5b45;
+  --theme-scrollbar-thumb: rgba(22, 22, 22, 0.2);
+  --theme-scrollbar-thumb-hover: rgba(22, 22, 22, 0.45);
+  --theme-shimmer-highlight: rgba(30, 91, 69, 0.12);
+  --theme-accent-pulse: rgba(30, 91, 69, 0.25);
+  --theme-ink-pulse: rgba(22, 22, 22, 0.15);
 }
 
 @theme inline {
@@ -67,7 +100,7 @@ html,
 body,
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(22, 22, 22, 0.22) transparent;
+  scrollbar-color: var(--theme-scrollbar-thumb) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -80,13 +113,13 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(22, 22, 22, 0.2);
+  background: var(--theme-scrollbar-thumb);
   border-radius: 9999px;
   transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(22, 22, 22, 0.45);
+  background: var(--theme-scrollbar-thumb-hover);
 }
 
 /* Keyframe animations for living ambient dynamics and tactile motion */
@@ -154,19 +187,19 @@ body,
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(30, 91, 69, 0.2);
+    box-shadow: 0 0 0 0 var(--theme-accent-pulse);
   }
   50% {
-    box-shadow: 0 0 16px 2px rgba(30, 91, 69, 0.25);
+    box-shadow: 0 0 16px 2px var(--theme-accent-pulse);
   }
 }
 
 @keyframes inkPulseGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(22, 22, 22, 0.15);
+    box-shadow: 0 0 0 0 var(--theme-ink-pulse);
   }
   50% {
-    box-shadow: 0 0 16px 2px rgba(22, 22, 22, 0.25);
+    box-shadow: 0 0 16px 2px var(--theme-ink-pulse);
   }
 }
 
@@ -200,9 +233,9 @@ body,
 .shimmer-badge {
   background: linear-gradient(
     90deg,
-    rgba(22, 22, 22, 0.03) 0%,
-    rgba(30, 91, 69, 0.12) 50%,
-    rgba(22, 22, 22, 0.03) 100%
+    transparent 0%,
+    var(--theme-shimmer-highlight) 50%,
+    transparent 100%
   );
   background-size: 200% 100%;
   animation: shimmerSweep 4s infinite linear;

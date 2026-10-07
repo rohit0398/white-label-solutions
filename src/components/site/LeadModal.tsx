@@ -42,14 +42,14 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="lead-modal-title"
-        className="relative w-full max-w-lg rounded-lg bg-paper p-6 sm:p-8 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-lg rounded-lg bg-paper border border-line p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
