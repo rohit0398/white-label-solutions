@@ -3,6 +3,7 @@ import { FAQS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { LiveTicker } from "@/components/sections/LiveTicker";
 import { WhatYouGet } from "@/components/sections/WhatYouGet";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Work } from "@/components/sections/Work";
@@ -37,6 +38,7 @@ export default function HomePage() {
 
       <main className="flex-1">
         <Hero />
+        <LiveTicker />
         <WhatYouGet />
         <HowItWorks />
         <Work />

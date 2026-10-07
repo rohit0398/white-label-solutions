@@ -22,7 +22,7 @@ export function Section({ id, index, title, intro, wide, bare, className, childr
   return (
     <section id={id} className={cn("border-t border-line py-20 sm:py-28", className)}>
       {(index || title || intro) && (
-        <header className="wrap mb-12">
+        <header className={wide ? "wrap-wide mb-12" : "wrap mb-12"}>
           {index && <p className="font-mono text-xs text-ink-3 mb-4">{index}</p>}
           {title && (
             <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-tight">

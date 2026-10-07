@@ -62,8 +62,145 @@ summary::-webkit-details-marker {
   display: none;
 }
 
+/* Keyframe animations for living ambient dynamics and tactile motion */
+@keyframes breathingPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes marqueeContinuous {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(30, 91, 69, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px rgba(30, 91, 69, 0.25);
+  }
+}
+
+@keyframes inkPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(22, 22, 22, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px rgba(22, 22, 22, 0.25);
+  }
+}
+
+/* Utility animation classes */
+.animate-pulse-subtle {
+  animation: breathingPulse 2.8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 6s ease-in-out infinite;
+}
+
+.animate-radar-ping {
+  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeContinuous 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.shimmer-badge {
+  background: linear-gradient(
+    90deg,
+    rgba(22, 22, 22, 0.03) 0%,
+    rgba(30, 91, 69, 0.12) 50%,
+    rgba(22, 22, 22, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 4s infinite linear;
+}
+
+.animate-pulse-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.animate-pulse-ink {
+  animation: inkPulseGlow 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-pulse-subtle,
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-radar-ping,
+  .animate-marquee,
+  .shimmer-badge,
+  .animate-pulse-glow,
+  .animate-pulse-ink {
+    animation: none;
   }
 }

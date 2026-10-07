@@ -2,6 +2,7 @@ import { Language } from "@/types";
 
 export interface TranslationDictionary {
   nav: {
+    solutions: string;
     work: string;
     pricing: string;
     faq: string;
@@ -26,7 +27,7 @@ export const LANGUAGES: { code: Language; label: string }[] = [
 
 export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
   en: {
-    nav: { work: "Work", pricing: "Pricing", faq: "FAQ", bookDemo: "Book a demo" },
+    nav: { solutions: "Solutions", work: "Work", pricing: "Pricing", faq: "FAQ", bookDemo: "Book a demo" },
     hero: {
       headline: "Your store, your apps, your code.",
       subtitle:
@@ -37,7 +38,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
   },
   es: {
-    nav: { work: "Proyectos", pricing: "Precios", faq: "Preguntas", bookDemo: "Reservar demo" },
+    nav: { solutions: "Soluciones", work: "Proyectos", pricing: "Precios", faq: "Preguntas", bookDemo: "Reservar demo" },
     hero: {
       headline: "Tu tienda, tus apps, tu código.",
       subtitle:
@@ -48,7 +49,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
   },
   de: {
-    nav: { work: "Projekte", pricing: "Preise", faq: "FAQ", bookDemo: "Demo buchen" },
+    nav: { solutions: "Lösungen", work: "Projekte", pricing: "Preise", faq: "FAQ", bookDemo: "Demo buchen" },
     hero: {
       headline: "Ihr Shop, Ihre Apps, Ihr Code.",
       subtitle:
@@ -59,7 +60,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
   },
   fr: {
-    nav: { work: "Réalisations", pricing: "Tarifs", faq: "FAQ", bookDemo: "Réserver une démo" },
+    nav: { solutions: "Solutions", work: "Réalisations", pricing: "Tarifs", faq: "FAQ", bookDemo: "Réserver une démo" },
     hero: {
       headline: "Votre boutique, vos apps, votre code.",
       subtitle:
@@ -70,7 +71,7 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
     },
   },
   hi: {
-    nav: { work: "प्रोजेक्ट्स", pricing: "कीमतें", faq: "सवाल", bookDemo: "डेमो बुक करें" },
+    nav: { solutions: "सॉल्यूशंस", work: "प्रोजेक्ट्स", pricing: "कीमतें", faq: "सवाल", bookDemo: "डेमो बुक करें" },
     hero: {
       headline: "आपका स्टोर, आपके ऐप्स, आपका कोड।",
       subtitle:
