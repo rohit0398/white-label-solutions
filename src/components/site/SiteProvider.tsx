@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Currency, Language } from "@/types";
 import { LeadModal } from "@/components/site/LeadModal";
 
@@ -21,13 +22,32 @@ const SiteContext = createContext<SiteContextValue | null>(null);
 
 /**
  * Holds the interactive state shared across the site (theme, currency, language, demo modal).
- * Defaults to neutral dark theme ("dark").
+ * Automatically synchronizes language with URL sub-path (/es, /de, /fr, /hi, or / for English).
  */
 export function SiteProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Detect active language from URL pathname
+  const urlLocale = useMemo<Language>(() => {
+    if (!pathname) return "en";
+    const segment = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+    if (segment === "es") return "es";
+    if (segment === "de") return "de";
+    if (segment === "fr") return "fr";
+    if (segment === "hi") return "hi";
+    return "en";
+  }, [pathname]);
+
   const [theme, setThemeState] = useState<Theme>("dark");
   const [currency, setCurrencyState] = useState<Currency>("USD");
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(urlLocale);
   const [demoTier, setDemoTier] = useState<string | null>(null);
+
+  // Sync state when URL route changes
+  React.useEffect(() => {
+    setLanguageState(urlLocale);
+  }, [urlLocale]);
 
   // Sync theme, language, and currency with localStorage and browser preferences
   React.useEffect(() => {
@@ -89,12 +109,19 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const setLanguage = useCallback((l: Language) => {
-    setLanguageState(l);
-    try {
-      localStorage.setItem("site_language", l);
-    } catch {}
-  }, []);
+  const setLanguage = useCallback(
+    (l: Language) => {
+      setLanguageState(l);
+      try {
+        localStorage.setItem("site_language", l);
+        document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=31536000; SameSite=Lax`;
+      } catch {}
+
+      const targetUrl = l === "en" ? "/" : `/${l}`;
+      router.push(targetUrl);
+    },
+    [router]
+  );
 
   const setCurrency = useCallback((c: Currency) => {
     setCurrencyState(c);
