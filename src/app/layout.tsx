@@ -39,6 +39,14 @@ export const metadata: Metadata = {
   creator: "Mechatron Lab",
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      es: "/es",
+      de: "/de",
+      fr: "/fr",
+      hi: "/hi",
+      "x-default": "/",
+    },
   },
   openGraph: {
     type: "website",

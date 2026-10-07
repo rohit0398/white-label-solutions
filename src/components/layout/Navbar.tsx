@@ -13,17 +13,19 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
+  const homeHref = language === "en" ? "/" : `/${language}`;
+
   const links = [
     { label: t.nav.solutions, href: "/solutions/ecommerce" },
-    { label: t.nav.work, href: "/#work" },
-    { label: t.nav.pricing, href: "/#pricing" },
-    { label: t.nav.faq, href: "/#faq" },
+    { label: t.nav.work, href: `${homeHref}#work` },
+    { label: t.nav.pricing, href: `${homeHref}#pricing` },
+    { label: t.nav.faq, href: `${homeHref}#faq` },
   ];
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
       <div className="wrap-wide h-16 flex items-center justify-between gap-2 sm:gap-6">
-        <Link href="/" id="nav-home" className="text-[15px] font-semibold tracking-tight hover:opacity-85 transition-opacity shrink-0">
+        <Link href={homeHref} id="nav-home" className="text-[15px] font-semibold tracking-tight hover:opacity-85 transition-opacity shrink-0">
           Mechatron Lab <span className="text-ink-3 font-normal hidden min-[400px]:inline">Solutions</span>
         </Link>
 

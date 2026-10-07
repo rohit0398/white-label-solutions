@@ -25,7 +25,7 @@ export function Footer() {
       links: [
         { label: t.footer.whatsIncluded, href: "/solutions/ecommerce" },
         { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
-        { label: t.footer.pricing, href: "/#pricing" },
+        { label: t.footer.pricing, href: `${language === "en" ? "/" : `/${language}`}#pricing` },
       ],
     },
     {
