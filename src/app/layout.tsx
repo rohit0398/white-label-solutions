@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SiteProvider } from "@/components/site/SiteProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,8 +13,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://white-label-solutions.vercel.app");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://solutions.mechatronlab.com"),
+  metadataBase: new URL(siteUrl),
   title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
   description:
     "Pre-built, easily configured white-label e-commerce solution. Fast online store, Android & iPhone mobile apps, and all-in-one Admin Panel & CRM deployed directly onto your private cloud (AWS, GCP, Azure). 100% source code ownership with zero platform fees or revenue cuts.",
@@ -31,21 +38,22 @@ export const metadata: Metadata = {
   authors: [{ name: "Mechatron Lab Solutions" }],
   creator: "Mechatron Lab",
   alternates: {
-    canonical: "https://solutions.mechatronlab.com",
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://solutions.mechatronlab.com",
+    url: "/",
     title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
     description:
       "Pre-built online store, ready-to-publish Android & iPhone apps, and all-in-one Admin Panel & CRM. 100% source code ownership. Deployed on your private cloud.",
     siteName: "Mechatron Lab Solutions",
     images: [
       {
-        url: "/showcase/desktop_navbar_fixed.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: "Mechatron Lab White-Label E-Commerce Platform & Mobile Apps",
       },
     ],
@@ -55,7 +63,7 @@ export const metadata: Metadata = {
     title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
     description:
       "Turnkey online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
-    images: ["/showcase/desktop_navbar_fixed.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -67,6 +75,12 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
   },
 };
 
@@ -80,10 +94,10 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://solutions.mechatronlab.com/#organization",
+        "@id": `${siteUrl}/#organization`,
         name: "Mechatron Lab",
-        url: "https://solutions.mechatronlab.com",
-        logo: "https://solutions.mechatronlab.com/favicon.ico",
+        url: siteUrl,
+        logo: `${siteUrl}/favicon.ico`,
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -93,23 +107,20 @@ export default function RootLayout({
             availableLanguage: ["English", "Hindi"],
           },
         ],
-        sameAs: [
-          "https://mechatronlab.com",
-          "https://estorealley.web.app",
-        ],
+        sameAs: ["https://mechatronlab.com", "https://estorealley.web.app"],
       },
       {
         "@type": "WebSite",
-        "@id": "https://solutions.mechatronlab.com/#website",
-        url: "https://solutions.mechatronlab.com",
+        "@id": `${siteUrl}/#website`,
+        url: siteUrl,
         name: "Mechatron Lab Solutions",
         publisher: {
-          "@id": "https://solutions.mechatronlab.com/#organization",
+          "@id": `${siteUrl}/#organization`,
         },
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://solutions.mechatronlab.com/#software",
+        "@id": `${siteUrl}/#software`,
         name: "White-Label E-Commerce Platform & Mobile Apps",
         operatingSystem: "Web, iOS, Android, Cloud (AWS/GCP/Azure)",
         applicationCategory: "BusinessApplication",
@@ -127,7 +138,7 @@ export default function RootLayout({
           reviewCount: "128",
         },
         author: {
-          "@id": "https://solutions.mechatronlab.com/#organization",
+          "@id": `${siteUrl}/#organization`,
         },
       },
     ],
@@ -136,18 +147,40 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased font-sans dark`}
     >
       <head>
+        <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("site_theme")||"dark";document.documentElement.setAttribute("data-theme",t);if(t==="dark"){document.documentElement.classList.add("dark");document.documentElement.classList.remove("light");}else{document.documentElement.classList.add("light");document.documentElement.classList.remove("dark");}}catch(e){}})()`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schemaGraph),
           }}
         />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');`,
+              }}
+            />
+          </>
+        )}
       </head>
-      <body className="min-h-full flex flex-col bg-[#07090e] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-300">
-        {children}
+      <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
+        <SiteProvider>{children}</SiteProvider>
       </body>
     </html>
   );
