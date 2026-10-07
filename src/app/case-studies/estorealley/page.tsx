@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "readymade marketplace app",
   ],
   alternates: {
-    canonical: "https://solutions.mechatronlab.com/case-studies/estorealley",
+    canonical: "/case-studies/estorealley",
   },
   openGraph: {
     title: "Case Study: eStoreAlley Wholesale Directory & Marketplace",
     description: "International wholesale directory, multi-vendor listings, Stripe v3 checkout, and Google Play app.",
-    url: "https://solutions.mechatronlab.com/case-studies/estorealley",
+    url: "/case-studies/estorealley",
     images: ["/showcase/estorealley-store.png"],
   },
 };

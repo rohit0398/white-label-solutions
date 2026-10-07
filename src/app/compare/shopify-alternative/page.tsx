@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     "shopify alternative india us europe",
   ],
   alternates: {
-    canonical: "https://solutions.mechatronlab.com/compare/shopify-alternative",
+    canonical: "/compare/shopify-alternative",
   },
   openGraph: {
     title: "Shopify Alternative with No Monthly Fees & Mobile Apps Included",
     description: "Keep 100% of your customer revenue. Deploy on your own AWS/GCP/Azure cloud with full code rights.",
-    url: "https://solutions.mechatronlab.com/compare/shopify-alternative",
-    images: ["/showcase/desktop_navbar_fixed.png"],
+    url: "/compare/shopify-alternative",
+    images: ["/og-image.png"],
   },
 };
 

@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "self hosted ecommerce case study",
   ],
   alternates: {
-    canonical: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+    canonical: "/case-studies/mechatron-lab",
   },
   openGraph: {
     title: "Case Study: Mechatron Lab Technical Store & Android App",
     description: "1,000+ SKUs, AI shopping assistant, multi-warehouse inventory, and native Android app on client-owned cloud.",
-    url: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+    url: "/case-studies/mechatron-lab",
     images: ["/showcase/mechatron-store.png"],
   },
 };

@@ -17,13 +17,13 @@ export const metadata: Metadata = {
     "self hosted ecommerce solution",
   ],
   alternates: {
-    canonical: "https://solutions.mechatronlab.com/solutions/ecommerce",
+    canonical: "/solutions/ecommerce",
   },
   openGraph: {
     title: "Complete White-Label E-Commerce Platform | Mechatron Lab",
     description: "Web storefront, Flutter iOS/Android apps, and Admin CRM deployed directly onto your cloud.",
-    url: "https://solutions.mechatronlab.com/solutions/ecommerce",
-    images: ["/showcase/desktop_navbar_fixed.png"],
+    url: "/solutions/ecommerce",
+    images: ["/og-image.png"],
   },
 };
 

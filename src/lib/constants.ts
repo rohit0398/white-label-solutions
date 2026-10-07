@@ -1,7 +1,15 @@
 import { ShowcaseProject, PricingTier, AdminFeature, Faq } from "@/types";
 
+const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@mechatronlab.com";
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919887998663").replace(/[^0-9]/g, "");
+const whatsappDisplay = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+91 98879 98663";
+const whatsappPrefill = encodeURIComponent(
+  process.env.NEXT_PUBLIC_WHATSAPP_PREFILL_TEXT ||
+    "Hi Mechatron Lab, I am interested in your White-Label E-Commerce Solution."
+);
+
 export const BRAND = {
-  name: "Mechatron Lab Solutions",
+  name: process.env.NEXT_PUBLIC_SITE_NAME || "Mechatron Lab Solutions",
   parentCompany: "Mechatron Lab",
   subdomains: {
     solutions: "https://solutions.mechatronlab.com",
@@ -9,11 +17,10 @@ export const BRAND = {
     whitelabel: "https://white-label-solution.mechatronlab.com",
   },
   contact: {
-    email: "contact@mechatronlab.com",
-    whatsapp: "+919887998663",
-    whatsappDisplay: "+91 98879 98663",
-    whatsappUrl:
-      "https://wa.me/919887998663?text=Hi%20Mechatron%20Lab%2C%20I%20am%20interested%20in%20your%20White-Label%20E-Commerce%20Solution.",
+    email,
+    whatsapp: `+${whatsappNumber}`,
+    whatsappDisplay,
+    whatsappUrl: `https://wa.me/${whatsappNumber}?text=${whatsappPrefill}`,
   },
 };
 
