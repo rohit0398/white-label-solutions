@@ -147,31 +147,47 @@ export function Pricing() {
             </thead>
             <tbody className="divide-y divide-line text-ink-2 text-xs sm:text-sm">
               <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Initial setup</td>
+                <td className="py-3.5 pr-4 text-ink font-medium">Initial setup & launch</td>
                 <td className="py-3.5 px-4 font-mono text-accent font-medium">
                   {formatCurrency(4999, "USD")} one-time
                 </td>
-                <td className="py-3.5 pl-4 font-mono">$10,000 – $25,000+</td>
+                <td className="py-3.5 pl-4 font-mono">$10,000 – $25,000+ agency setup</td>
               </tr>
               <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">3-year platform fees</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">$0 (private hosting only)</td>
+                <td className="py-3.5 pr-4 text-ink font-medium">3-year software license fees</td>
+                <td className="py-3.5 px-4 font-mono text-accent font-medium">$0 (zero recurring SaaS fee)</td>
                 <td className="py-3.5 pl-4 font-mono">$72,000+ ($2,000/mo min)</td>
               </tr>
               <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Transaction fee / cut</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">0%</td>
+                <td className="py-3.5 pr-4 text-ink font-medium">3-year cloud infrastructure</td>
+                <td className="py-3.5 px-4 font-mono text-accent font-medium">
+                  ~$720 – $1,440 (~$20–$40/mo direct to your AWS / GCP)
+                </td>
+                <td className="py-3.5 pl-4 font-mono">Bundled in SaaS (no server access)</td>
+              </tr>
+              <tr className="hover:bg-wash/30 transition-colors">
+                <td className="py-3.5 pr-4 text-ink font-medium">Transaction fee / cut on sales</td>
+                <td className="py-3.5 px-4 font-mono text-accent font-medium">0% (keep 100% of revenue)</td>
                 <td className="py-3.5 pl-4 font-mono">0.5% – 2.0% per order</td>
               </tr>
               <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Android & iOS apps</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">Included</td>
-                <td className="py-3.5 pl-4 font-mono">$500 – $1,500/mo in plugins</td>
+                <td className="py-3.5 pr-4 text-ink font-medium">Android & iOS native apps</td>
+                <td className="py-3.5 px-4 font-mono text-accent font-medium">Included with codebase</td>
+                <td className="py-3.5 pl-4 font-mono">$18,000 – $54,000 ($500–$1,500/mo plugins)</td>
               </tr>
               <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Source code rights</td>
+                <td className="py-3.5 pr-4 text-ink font-medium">Source code & data sovereignty</td>
                 <td className="py-3.5 px-4 font-mono text-accent font-medium">100% full ownership option</td>
-                <td className="py-3.5 pl-4 font-mono">0% (Vendor lock-in)</td>
+                <td className="py-3.5 pl-4 font-mono">0% (vendor lock-in)</td>
+              </tr>
+              <tr className="hover:bg-wash/30 transition-colors font-semibold border-t-2 border-line">
+                <td className="py-4 pr-4 text-ink font-semibold">Total 3-year estimated cost</td>
+                <td className="py-4 px-4 font-mono text-accent font-bold">
+                  ~$5,719 – $6,439 (one-time setup + real hosting)
+                </td>
+                <td className="py-4 pl-4 font-mono text-ink">
+                  $90,000 – $150,000+ (base + apps + cuts)
+                </td>
               </tr>
             </tbody>
           </table>

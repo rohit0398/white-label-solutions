@@ -19,7 +19,7 @@ export function Screenshot({ src, alt, caption, priority, className }: Screensho
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
-          className="block w-full h-auto aspect-[16/10] object-cover object-top"
+          className="block w-full h-auto"
         />
       </div>
       {caption && <figcaption className="text-sm text-ink-3">{caption}</figcaption>}

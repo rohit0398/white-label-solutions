@@ -72,7 +72,7 @@ export function Work() {
                   src={p.screenshotUrl}
                   alt={`${p.title} storefront screenshot`}
                   loading="lazy"
-                  className="block w-full aspect-[16/10] object-cover object-top transition-transform duration-500 group-hover:scale-[1.06]"
+                  className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </a>
             )}
