@@ -126,7 +126,7 @@ export default function EcommerceSolutionPillarPage() {
           <p className="mt-6 text-lg text-ink-2 leading-relaxed">
             Everything your business needs to sell online at scale. Web storefront,
             native mobile apps, and an all-in-one operations dashboard—pre-built and
-            deployed onto your private cloud in 2 to 3 weeks.
+            deployed onto your private cloud in 2 to 4 weeks.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ export default function EcommerceSolutionPillarPage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Ready to launch on your cloud?</h2>
-              <p className="mt-2 text-sm text-ink-2">Get started in 2–3 weeks with fixed, transparent pricing.</p>
+              <p className="mt-2 text-sm text-ink-2">Get started in 2–4 weeks with fixed, transparent pricing.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
               <DemoButton size="sm">Book a demo</DemoButton>

@@ -99,8 +99,13 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
             </h2>
             <p className="mt-2 text-ink-2 text-sm sm:text-[15px] leading-relaxed">
               A 30-minute call. We show you a live store and app and answer questions about your
-              setup.
+              setup. Typical turnkey deployment is 2–4 weeks directly onto your private cloud.
             </p>
+
+            <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-md border border-line bg-wash/50 text-xs font-mono text-ink-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              <span>Turnkey delivery timeline: 2–4 weeks</span>
+            </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
               {/* Spam bot honeypot field */}

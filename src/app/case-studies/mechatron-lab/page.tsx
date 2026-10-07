@@ -189,7 +189,7 @@ export default function MechatronLabCaseStudyPage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Need a setup like Mechatron Lab?</h2>
-              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–3 weeks with zero platform commissions.</p>
+              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–4 weeks with zero platform commissions.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
               <DemoButton size="sm">Book a demo</DemoButton>

@@ -28,7 +28,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: "turnkey-setup",
     name: "Launch",
-    tagline: "Store, apps and admin, branded and deployed to your cloud in 2–3 weeks.",
+    tagline: "Store, apps and admin, branded and deployed to your cloud in 2–4 weeks.",
     isPopular: true,
     prices: {
       USD: { amount: 4999, period: "one-time" },

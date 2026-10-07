@@ -179,7 +179,7 @@ export default function EStoreAlleyCaseStudyPage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Launch a marketplace on your cloud</h2>
-              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–3 weeks with zero percentage revenue cuts.</p>
+              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–4 weeks with zero percentage revenue cuts.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
               <DemoButton size="sm">Book a demo</DemoButton>

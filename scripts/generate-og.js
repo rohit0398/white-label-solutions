@@ -64,7 +64,7 @@ const svg = `
 
     <!-- Pill 4 -->
     <rect x="695" y="0" width="195" height="46" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1"/>
-    <text x="715" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#f4f4f5">Live in 2–3 Weeks</text>
+    <text x="715" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#f4f4f5">Live in 2–4 Weeks</text>
   </g>
 
   <!-- Bottom brand footer -->
