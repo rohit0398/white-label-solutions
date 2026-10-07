@@ -21,7 +21,7 @@ export function Hero() {
             <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
-          <span>Private cloud deployment · AWS · GCP · Azure</span>
+          <span>{t.hero.badge}</span>
         </div>
 
         <h1 className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]">
@@ -35,19 +35,19 @@ export function Hero() {
             href="#what-you-get"
             className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
           >
-            01 Storefront
+            {t.hero.anchors.storefront}
           </a>
           <a
             href="#what-you-get"
             className="animate-float-reverse px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
           >
-            02 Mobile Apps
+            {t.hero.anchors.apps}
           </a>
           <a
             href="#what-you-get"
             className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
           >
-            03 Admin CRM
+            {t.hero.anchors.admin}
           </a>
         </div>
 

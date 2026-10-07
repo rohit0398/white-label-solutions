@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
+import { useSite } from "@/components/site/SiteProvider";
+import { TRANSLATIONS } from "@/lib/translations";
 
 interface LeadModalProps {
   onClose: () => void;
@@ -15,6 +17,8 @@ const field =
 const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
 export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadModalProps) {
+  const { language } = useSite();
+  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -58,53 +62,51 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
   // Close on Escape and lock background scroll while open.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
+    window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
   }, [onClose]);
 
-  const set = (key: keyof typeof form) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => setForm({ ...form, [key]: e.target.value });
+  const set =
+    (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+      setForm((prev) => ({ ...prev, [k]: e.target.value }));
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
-      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lead-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm animate-fade-in"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="lead-modal-title"
-        className="relative w-full max-w-lg rounded-xl bg-paper border border-line p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="relative w-full max-w-xl rounded-xl border border-line bg-paper p-6 sm:p-8 shadow-xl max-h-[92vh] overflow-y-auto">
+        {/* Close Button */}
         <button
-          id="lead-modal-close"
+          type="button"
           onClick={onClose}
-          aria-label="Close"
-          className="absolute top-4 right-4 h-8 w-8 rounded-md text-ink-3 hover:text-ink hover:bg-wash flex items-center justify-center text-xl leading-none transition-colors"
+          aria-label="Close modal"
+          className="absolute right-4 top-4 h-8 w-8 inline-flex items-center justify-center rounded-md text-ink-3 hover:text-ink hover:bg-wash transition-colors cursor-pointer"
         >
-          ×
+          ✕
         </button>
 
         {!submitted ? (
           <>
             <h2 id="lead-modal-title" className="text-2xl font-semibold tracking-tight text-ink">
-              Book a demo
+              {t.leadModal.title}
             </h2>
             <p className="mt-2 text-ink-2 text-sm sm:text-[15px] leading-relaxed">
-              A 30-minute call. We show you a live store and app and answer questions about your
-              setup. Typical turnkey deployment is 2–4 weeks directly onto your private cloud.
+              {t.leadModal.subtitle}
             </p>
 
             <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-md border border-line bg-wash/50 text-xs font-mono text-ink-2">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span>Turnkey delivery timeline: 2–4 weeks</span>
+              <span>{t.hero.badge}</span>
             </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -123,23 +125,23 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
               {/* Row 1: Name and Email side-by-side on desktop */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="lead-name" className={label}>Name</label>
+                  <label htmlFor="lead-name" className={label}>{t.leadModal.nameLabel}</label>
                   <input
                     id="lead-name"
                     required
-                    placeholder="Full name"
+                    placeholder={t.leadModal.namePlaceholder}
                     value={form.name}
                     onChange={set("name")}
                     className={field}
                   />
                 </div>
                 <div>
-                  <label htmlFor="lead-email" className={label}>Work email</label>
+                  <label htmlFor="lead-email" className={label}>{t.leadModal.emailLabel}</label>
                   <input
                     id="lead-email"
                     type="email"
                     required
-                    placeholder="name@company.com"
+                    placeholder={t.leadModal.emailPlaceholder}
                     value={form.email}
                     onChange={set("email")}
                     className={field}
@@ -150,7 +152,7 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
               {/* Row 2: Phone or WhatsApp with full-width unified Country Code input group */}
               <div>
                 <label htmlFor="lead-phone" className={label}>
-                  Phone or WhatsApp
+                  {t.leadModal.phoneLabel}
                 </label>
                 <div className="flex w-full rounded-md border border-line bg-paper focus-within:border-ink transition-all">
                   <select
@@ -178,7 +180,7 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
                   <input
                     id="lead-phone"
                     type="tel"
-                    placeholder="Mobile or WhatsApp number"
+                    placeholder={t.leadModal.phonePlaceholder}
                     value={form.phone}
                     onChange={set("phone")}
                     className="flex-1 min-w-0 h-11 bg-transparent px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none"
@@ -189,11 +191,11 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
               {/* Row 3: Company (Optional) - Full width */}
               <div>
                 <label htmlFor="lead-company" className={label}>
-                  Company <span className="text-ink-3 text-xs font-normal">(optional)</span>
+                  {t.leadModal.companyLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
                 </label>
                 <input
                   id="lead-company"
-                  placeholder="Your store or company name"
+                  placeholder={t.leadModal.companyPlaceholder}
                   value={form.company}
                   onChange={set("company")}
                   className={field}
@@ -201,12 +203,12 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
               </div>
 
               <Button id="lead-submit" type="submit" disabled={loading} className="w-full h-11 mt-2 text-[15px] font-medium">
-                {loading ? "Sending request..." : "Book demo call →"}
+                {loading ? t.leadModal.submitting : t.leadModal.submitBtn}
               </Button>
             </form>
 
             <p className="mt-6 text-sm text-ink-3">
-              Or message us on{" "}
+              {t.leadModal.whatsappText}{" "}
               <a
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
@@ -221,13 +223,13 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
         ) : (
           <div className="py-6">
             <h2 id="lead-modal-title" className="text-2xl font-semibold tracking-tight">
-              Thanks, {form.name.split(" ")[0] || "we got it"}.
+              {t.leadModal.successTitle}, {form.name.split(" ")[0] || ""}.
             </h2>
             <p className="mt-3 text-ink-2">
-              We&apos;ll email {form.email} within one business day to pick a time.
+              {t.leadModal.successDesc}
             </p>
             <Button variant="secondary" className="mt-6" onClick={onClose}>
-              Close
+              {t.leadModal.closeBtn}
             </Button>
           </div>
         )}

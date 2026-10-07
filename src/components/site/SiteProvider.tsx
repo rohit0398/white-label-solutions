@@ -25,23 +25,49 @@ const SiteContext = createContext<SiteContextValue | null>(null);
  */
 export function SiteProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("dark");
-  const [currency, setCurrency] = useState<Currency>("USD");
-  const [language, setLanguage] = useState<Language>("en");
+  const [currency, setCurrencyState] = useState<Currency>("USD");
+  const [language, setLanguageState] = useState<Language>("en");
   const [demoTier, setDemoTier] = useState<string | null>(null);
 
-  // Sync theme with document attributes and localStorage
+  // Sync theme, language, and currency with localStorage and browser preferences
   React.useEffect(() => {
     try {
-      const saved = localStorage.getItem("site_theme") as Theme | null;
-      const initial: Theme = saved === "light" ? "light" : "dark";
-      setThemeState(initial);
-      document.documentElement.setAttribute("data-theme", initial);
-      if (initial === "dark") {
+      const savedTheme = localStorage.getItem("site_theme") as Theme | null;
+      const initialTheme: Theme = savedTheme === "light" ? "light" : "dark";
+      setThemeState(initialTheme);
+      document.documentElement.setAttribute("data-theme", initialTheme);
+      if (initialTheme === "dark") {
         document.documentElement.classList.add("dark");
         document.documentElement.classList.remove("light");
       } else {
         document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
+      }
+
+      // Auto-detect or restore preferred language
+      const savedLang = localStorage.getItem("site_language") as Language | null;
+      if (savedLang && ["en", "es", "de", "fr", "hi"].includes(savedLang)) {
+        setLanguageState(savedLang);
+      } else if (typeof navigator !== "undefined" && navigator.language) {
+        const browserLang = navigator.language.toLowerCase();
+        if (browserLang.startsWith("es")) setLanguageState("es");
+        else if (browserLang.startsWith("de")) setLanguageState("de");
+        else if (browserLang.startsWith("fr")) setLanguageState("fr");
+        else if (browserLang.startsWith("hi")) setLanguageState("hi");
+        else setLanguageState("en");
+      }
+
+      // Auto-detect or restore preferred currency
+      const savedCurrency = localStorage.getItem("site_currency") as Currency | null;
+      if (savedCurrency && ["USD", "EUR", "GBP", "INR"].includes(savedCurrency)) {
+        setCurrencyState(savedCurrency);
+      } else if (typeof Intl !== "undefined") {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+          if (tz.includes("Kolkata") || tz.includes("Calcutta")) setCurrencyState("INR");
+          else if (tz.includes("London")) setCurrencyState("GBP");
+          else if (tz.startsWith("Europe/")) setCurrencyState("EUR");
+        } catch {}
       }
     } catch {
       // Ignore storage errors in restricted environments
@@ -61,6 +87,20 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
     }
+  }, []);
+
+  const setLanguage = useCallback((l: Language) => {
+    setLanguageState(l);
+    try {
+      localStorage.setItem("site_language", l);
+    } catch {}
+  }, []);
+
+  const setCurrency = useCallback((c: Currency) => {
+    setCurrencyState(c);
+    try {
+      localStorage.setItem("site_currency", c);
+    } catch {}
   }, []);
 
   const toggleTheme = useCallback(() => {

@@ -1,42 +1,49 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
-
-const columns = [
-  {
-    title: "Work",
-    links: [
-      { label: "Mechatron Lab", href: "/case-studies/mechatron-lab" },
-      { label: "eStoreAlley", href: "/case-studies/estorealley" },
-    ],
-  },
-  {
-    title: "Product",
-    links: [
-      { label: "What's included", href: "/solutions/ecommerce" },
-      { label: "Compared to Shopify", href: "/compare/shopify-alternative" },
-      { label: "Pricing", href: "/#pricing" },
-    ],
-  },
-  {
-    title: "Contact",
-    links: [
-      { label: BRAND.contact.email, href: `mailto:${BRAND.contact.email}` },
-      { label: "WhatsApp", href: BRAND.contact.whatsappUrl, external: true },
-    ],
-  },
-];
+import { useSite } from "@/components/site/SiteProvider";
+import { TRANSLATIONS } from "@/lib/translations";
 
 export function Footer() {
+  const { language } = useSite();
+  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+
+  const columns = [
+    {
+      title: t.footer.colWork,
+      links: [
+        { label: "Mechatron Lab", href: "/case-studies/mechatron-lab" },
+        { label: "eStoreAlley", href: "/case-studies/estorealley" },
+      ],
+    },
+    {
+      title: t.footer.colProduct,
+      links: [
+        { label: t.footer.whatsIncluded, href: "/solutions/ecommerce" },
+        { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
+        { label: t.footer.pricing, href: "/#pricing" },
+      ],
+    },
+    {
+      title: t.footer.colContact,
+      links: [
+        { label: BRAND.contact.email, href: `mailto:${BRAND.contact.email}` },
+        { label: "WhatsApp", href: BRAND.contact.whatsappUrl, external: true },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t border-line">
       <div className="wrap-wide py-16 grid gap-10 sm:grid-cols-4 text-sm">
         <div>
-          <p className="font-semibold">Mechatron Lab</p>
+          <p className="font-semibold">{BRAND.name}</p>
           <p className="mt-2 text-ink-3 leading-relaxed">
-            E-commerce stores and apps, set up on your own cloud.
+            {t.footer.tagline}
           </p>
         </div>
         {columns.map((col) => (
@@ -66,7 +73,7 @@ export function Footer() {
         ))}
       </div>
       <div className="wrap-wide pb-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-sm text-ink-3">
-        <p>© 2026 Mechatron Lab</p>
+        <p>© 2026 {BRAND.name}. {t.footer.copyright}</p>
         <div className="flex items-center gap-6">
           <ThemeSwitcher />
           <LanguageSwitcher />

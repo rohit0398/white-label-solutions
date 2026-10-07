@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { PRICING_TIERS } from "@/lib/constants";
+import { Currency } from "@/types";
 import { formatCurrency } from "@/lib/utils";
-import { useSite } from "@/components/site/SiteProvider";
 import { Section } from "@/components/ui/Section";
 import { DemoButton } from "@/components/site/DemoButton";
-import { Currency } from "@/types";
+import { useSite } from "@/components/site/SiteProvider";
+import { TRANSLATIONS } from "@/lib/translations";
 
 const currencies: { code: Currency; symbol: string; label: string }[] = [
   { code: "USD", symbol: "$", label: "USD" },
@@ -16,7 +17,8 @@ const currencies: { code: Currency; symbol: string; label: string }[] = [
 ];
 
 export function Pricing() {
-  const { currency, setCurrency } = useSite();
+  const { currency, setCurrency, language } = useSite();
+  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
   const [monthlyGmv, setMonthlyGmv] = useState<number>(50000);
 
   // Minimal 3-year calculator:
@@ -38,15 +40,15 @@ export function Pricing() {
   return (
     <Section
       id="pricing"
-      index="04"
-      title="Pricing"
-      intro="Pay once for the setup. No recurring software subscriptions, no revenue cuts."
+      index={t.pricing.index}
+      title={t.pricing.title}
+      intro={t.pricing.intro}
       wide
       bare
     >
       {/* Currency Switcher */}
       <div className="wrap-wide mb-10 flex items-center justify-between flex-wrap gap-4">
-        <p className="text-sm text-ink-3">Select currency</p>
+        <p className="text-sm text-ink-3">{t.pricing.currencyLabel}</p>
         <div className="inline-flex rounded-md border border-line p-0.5 bg-wash">
           {currencies.map((c) => (
             <button
@@ -67,8 +69,9 @@ export function Pricing() {
 
       {/* Tier Cards / Rows with Tactile Hover Physics */}
       <div className="wrap-wide grid gap-6 sm:grid-cols-3">
-        {PRICING_TIERS.map((tier) => {
+        {PRICING_TIERS.map((tier, idx) => {
           const price = tier.prices[currency];
+          const translatedTier = t.pricing.tiers[idx] ?? tier;
           return (
             <div
               key={tier.id}
@@ -80,14 +83,14 @@ export function Pricing() {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold tracking-tight">{tier.name}</h3>
+                  <h3 className="text-lg font-semibold tracking-tight">{translatedTier.name}</h3>
                   {tier.isPopular && (
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/5 text-[11px] font-mono text-accent font-semibold shimmer-badge">
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
                       </span>
-                      Recommended
+                      {t.pricing.popularBadge}
                     </span>
                   )}
                 </div>
@@ -101,12 +104,12 @@ export function Pricing() {
                       <span className="text-xs text-ink-3">/{price.period}</span>
                     )}
                   </div>
-                  <p className="mt-2 text-xs text-ink-2 leading-relaxed">{tier.tagline}</p>
+                  <p className="mt-2 text-xs text-ink-2 leading-relaxed">{translatedTier.tagline}</p>
                 </div>
 
                 <ul className="mt-5 space-y-2.5 text-xs text-ink-2">
-                  {tier.deliverables.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
+                  {translatedTier.deliverables.map((item, dIdx) => (
+                    <li key={dIdx} className="flex items-start gap-2">
                       <span className="text-ink-3 mt-0.5 select-none">—</span>
                       <span>{item}</span>
                     </li>
@@ -121,7 +124,7 @@ export function Pricing() {
                   size="sm"
                   className="w-full text-xs"
                 >
-                  {tier.ctaText}
+                  {translatedTier.ctaText}
                 </DemoButton>
               </div>
             </div>
@@ -131,64 +134,42 @@ export function Pricing() {
 
       {/* 3-Year Comparison Table */}
       <div className="wrap-wide mt-20">
-        <h3 className="text-xl font-semibold tracking-tight">3-year total cost comparison</h3>
+        <h3 className="text-xl font-semibold tracking-tight">{t.pricing.tco.title}</h3>
         <p className="mt-1 text-sm text-ink-3">
-          What a typical merchant spends over 36 months of selling online.
+          {t.pricing.tco.subtitle}
         </p>
 
         <div className="mt-6 overflow-x-auto border-t border-line">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-line text-xs font-mono text-ink-3">
-                <th className="py-3 pr-4 font-normal">Item</th>
-                <th className="py-3 px-4 font-semibold text-ink">Mechatron (Your Cloud)</th>
-                <th className="py-3 pl-4 font-normal">Shopify Plus / SaaS</th>
+                <th className="py-3 pr-4 font-normal">{t.pricing.tco.colItem}</th>
+                <th className="py-3 px-4 font-semibold text-ink">{t.pricing.tco.colMechatron}</th>
+                <th className="py-3 pl-4 font-normal">{t.pricing.tco.colShopify}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line text-ink-2 text-xs sm:text-sm">
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Initial setup & launch</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">
-                  {formatCurrency(4999, "USD")} one-time
-                </td>
-                <td className="py-3.5 pl-4 font-mono">$10,000 – $25,000+ agency setup</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">3-year software license fees</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">$0 (zero recurring SaaS fee)</td>
-                <td className="py-3.5 pl-4 font-mono">$72,000+ ($2,000/mo min)</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">3-year cloud infrastructure</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">
-                  ~$720 – $1,440 (~$20–$40/mo direct to your AWS / GCP)
-                </td>
-                <td className="py-3.5 pl-4 font-mono">Bundled in SaaS (no server access)</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Transaction fee / cut on sales</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">0% (keep 100% of revenue)</td>
-                <td className="py-3.5 pl-4 font-mono">0.5% – 2.0% per order</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Android & iOS native apps</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">Included with codebase</td>
-                <td className="py-3.5 pl-4 font-mono">$18,000 – $54,000 ($500–$1,500/mo plugins)</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors">
-                <td className="py-3.5 pr-4 text-ink font-medium">Source code & data sovereignty</td>
-                <td className="py-3.5 px-4 font-mono text-accent font-medium">100% full ownership option</td>
-                <td className="py-3.5 pl-4 font-mono">0% (vendor lock-in)</td>
-              </tr>
-              <tr className="hover:bg-wash/30 transition-colors font-semibold border-t-2 border-line">
-                <td className="py-4 pr-4 text-ink font-semibold">Total 3-year estimated cost</td>
-                <td className="py-4 px-4 font-mono text-accent font-bold">
-                  ~$5,719 – $6,439 (one-time setup + real hosting)
-                </td>
-                <td className="py-4 pl-4 font-mono text-ink">
-                  $90,000 – $150,000+ (base + apps + cuts)
-                </td>
-              </tr>
+              {t.pricing.tco.rows.map((row, rIdx) => {
+                const isLast = rIdx === t.pricing.tco.rows.length - 1;
+                return (
+                  <tr
+                    key={rIdx}
+                    className={`hover:bg-wash/30 transition-colors ${
+                      isLast ? "font-semibold border-t-2 border-line" : ""
+                    }`}
+                  >
+                    <td className={`pr-4 text-ink ${isLast ? "py-4 font-semibold" : "py-3.5 font-medium"}`}>
+                      {row.label}
+                    </td>
+                    <td className={`px-4 font-mono text-accent ${isLast ? "py-4 font-bold" : "py-3.5 font-medium"}`}>
+                      {rIdx === 0 ? `${formatCurrency(4999, currency)} ${row.mechatron}` : row.mechatron}
+                    </td>
+                    <td className={`pl-4 font-mono ${isLast ? "py-4 text-ink font-semibold" : "py-3.5 text-ink-2"}`}>
+                      {row.shopify}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -196,14 +177,14 @@ export function Pricing() {
 
       {/* Interactive Savings Playground with Live Reactive Comparison Bars */}
       <div className="wrap-wide mt-16 p-6 sm:p-8 rounded-lg border border-line bg-wash transition-all duration-200">
-        <h4 className="text-base font-semibold tracking-tight text-ink">Interactive 3-year savings calculator</h4>
+        <h4 className="text-base font-semibold tracking-tight text-ink">{t.pricing.calculator.headline}</h4>
         <p className="mt-1 text-xs text-ink-2">
-          Drag the sales slider to watch how SaaS platform cuts compare against client-owned cloud deployment.
+          {t.pricing.calculator.subtitle}
         </p>
 
         <div className="mt-6 space-y-4">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-ink-2 font-medium">Monthly sales volume:</span>
+            <span className="text-ink-2 font-medium">{t.pricing.calculator.salesVolume}</span>
             <span className="font-mono font-bold text-ink text-base">
               ${monthlyGmv.toLocaleString()} / mo
             </span>
@@ -231,7 +212,7 @@ export function Pricing() {
         <div className="mt-8 pt-6 border-t border-line space-y-3">
           <div className="space-y-1">
             <div className="flex justify-between text-xs font-mono">
-              <span className="text-ink-3">Shopify Plus / SaaS 3-Yr Cost:</span>
+              <span className="text-ink-3">{t.pricing.calculator.shopifyLabel}</span>
               <span className="text-ink font-semibold">${Math.round(totalShopify3Y).toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full bg-line/80 overflow-hidden">
@@ -244,7 +225,7 @@ export function Pricing() {
 
           <div className="space-y-1">
             <div className="flex justify-between text-xs font-mono">
-              <span className="text-accent font-medium">Mechatron White-Label 3-Yr Cost:</span>
+              <span className="text-accent font-medium">{t.pricing.calculator.mechatronLabel}</span>
               <span className="text-accent font-bold">${Math.round(totalMechatron3Y).toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full bg-line/80 overflow-hidden">
@@ -259,7 +240,7 @@ export function Pricing() {
         {/* Bottom Savings Total */}
         <div className="mt-6 pt-5 border-t border-line flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <span className="text-xs text-ink-2 font-medium">
-            3-Year retained profit kept in your company:
+            {t.pricing.calculator.savingsTitle}:
           </span>
           <span className="text-2xl sm:text-3xl font-bold font-mono text-accent">
             +${Math.round(estimatedSavings).toLocaleString()}
