@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SiteProvider } from "@/components/site/SiteProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -93,10 +94,7 @@ export default function RootLayout({
             availableLanguage: ["English", "Hindi"],
           },
         ],
-        sameAs: [
-          "https://mechatronlab.com",
-          "https://estorealley.web.app",
-        ],
+        sameAs: ["https://mechatronlab.com", "https://estorealley.web.app"],
       },
       {
         "@type": "WebSite",
@@ -121,11 +119,6 @@ export default function RootLayout({
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: "128",
-        },
         author: {
           "@id": "https://solutions.mechatronlab.com/#organization",
         },
@@ -136,7 +129,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased font-sans`}
     >
       <head>
         <script
@@ -146,8 +139,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#07090e] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-300">
-        {children}
+      <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
+        <SiteProvider>{children}</SiteProvider>
       </body>
     </html>
   );
