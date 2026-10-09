@@ -26,9 +26,21 @@ export const metadata: Metadata = {
     url: "/case-studies/estorealley",
     images: ["/showcase/estorealley-store.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Study: eStoreAlley Wholesale Directory & Global Marketplace",
+    description: "International wholesale marketplace with Stripe checkout and Google Play Android app.",
+    images: ["/showcase/estorealley-store.png"],
+  },
 };
 
 export default function EStoreAlleyCaseStudyPage() {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://white-label-solutions.vercel.app");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -37,19 +49,19 @@ export default function EStoreAlleyCaseStudyPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://solutions.mechatronlab.com",
+        item: siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Case Studies",
-        item: "https://solutions.mechatronlab.com/#work",
+        item: `${siteUrl}/#work`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: "eStoreAlley",
-        item: "https://solutions.mechatronlab.com/case-studies/estorealley",
+        item: `${siteUrl}/case-studies/estorealley`,
       },
     ],
   };
@@ -179,7 +191,7 @@ export default function EStoreAlleyCaseStudyPage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Launch a marketplace on your cloud</h2>
-              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–4 weeks with zero percentage revenue cuts.</p>
+              <p className="mt-2 text-sm text-ink-2">Production-ready deployment in 2–4 weeks with zero percentage revenue cuts.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
               <DemoButton size="sm">Book a demo</DemoButton>

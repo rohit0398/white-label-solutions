@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
   description:
-    "Pre-built, easily configured white-label e-commerce solution. Fast online store, Android & iPhone mobile apps, and all-in-one Admin Panel & CRM deployed directly onto your private cloud (AWS, GCP, Azure). 100% source code ownership with zero platform fees or revenue cuts.",
+    "Production-ready white-label e-commerce platform & mobile apps. Fast online store, iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
   keywords: [
     "buy readymade ecommerce website and mobile app",
     "white label ecommerce platform with mobile app",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
     description:
-      "Turnkey online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
+      "Production-ready online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
     images: ["/og-image.png"],
   },
   robots: {

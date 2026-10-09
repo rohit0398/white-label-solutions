@@ -17,6 +17,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   };
 
+  const ecommerceAlternates = {
+    languages: {
+      en: `${baseUrl}/solutions/ecommerce`,
+      es: `${baseUrl}/es/solutions/ecommerce`,
+      de: `${baseUrl}/de/solutions/ecommerce`,
+      fr: `${baseUrl}/fr/solutions/ecommerce`,
+      hi: `${baseUrl}/hi/solutions/ecommerce`,
+    },
+  };
+
+  const ottAlternates = {
+    languages: {
+      en: `${baseUrl}/solutions/ott-streaming`,
+      es: `${baseUrl}/es/solutions/ott-streaming`,
+      de: `${baseUrl}/de/solutions/ott-streaming`,
+      fr: `${baseUrl}/fr/solutions/ott-streaming`,
+      hi: `${baseUrl}/hi/solutions/ott-streaming`,
+    },
+  };
+
   const now = new Date();
 
   return [
@@ -68,10 +88,82 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/solutions`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // E-Commerce Solution (All Languages)
+    {
       url: `${baseUrl}/solutions/ecommerce`,
       lastModified: now,
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: ecommerceAlternates,
+    },
+    {
+      url: `${baseUrl}/es/solutions/ecommerce`,
+      lastModified: now,
+      changeFrequency: "weekly",
       priority: 0.85,
+      alternates: ecommerceAlternates,
+    },
+    {
+      url: `${baseUrl}/de/solutions/ecommerce`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ecommerceAlternates,
+    },
+    {
+      url: `${baseUrl}/fr/solutions/ecommerce`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ecommerceAlternates,
+    },
+    {
+      url: `${baseUrl}/hi/solutions/ecommerce`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ecommerceAlternates,
+    },
+    // OTT Streaming Solution (All Languages)
+    {
+      url: `${baseUrl}/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/es/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/de/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/fr/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/hi/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
     },
     {
       url: `${baseUrl}/case-studies/mechatron-lab`,

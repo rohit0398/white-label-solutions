@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { PRICING_TIERS } from "@/lib/constants";
-import { Currency } from "@/types";
+import { Currency, PricingTier } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { Section } from "@/components/ui/Section";
 import { DemoButton } from "@/components/site/DemoButton";
@@ -16,10 +16,32 @@ const currencies: { code: Currency; symbol: string; label: string }[] = [
   { code: "INR", symbol: "₹", label: "INR" },
 ];
 
-export function Pricing() {
+export interface PricingProps {
+  id?: string;
+  index?: string;
+  title?: string;
+  intro?: string;
+  tiers?: PricingTier[];
+  hideCalculator?: boolean;
+}
+
+export function Pricing({
+  id = "pricing",
+  index,
+  title,
+  intro,
+  tiers,
+  hideCalculator = false,
+}: PricingProps = {}) {
   const { currency, setCurrency, language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
   const [monthlyGmv, setMonthlyGmv] = useState<number>(50000);
+
+  const activeTiers = tiers || PRICING_TIERS;
+  const sectionIndex = index !== undefined ? index : t.pricing.index;
+  const sectionTitle = title || t.pricing.title;
+  const sectionIntro = intro !== undefined ? intro : t.pricing.intro;
+  const showCalculator = !hideCalculator && !tiers;
 
   // Minimal 3-year calculator:
   // Shopify: $399–$2000/mo platform fee + 1.5% transaction fee + $500/mo app plugins
@@ -39,10 +61,10 @@ export function Pricing() {
 
   return (
     <Section
-      id="pricing"
-      index={t.pricing.index}
-      title={t.pricing.title}
-      intro={t.pricing.intro}
+      id={id}
+      index={sectionIndex}
+      title={sectionTitle}
+      intro={sectionIntro}
       wide
       bare
     >
@@ -69,9 +91,9 @@ export function Pricing() {
 
       {/* Tier Cards / Rows with Tactile Hover Physics */}
       <div className="wrap-wide grid gap-6 sm:grid-cols-3">
-        {PRICING_TIERS.map((tier, idx) => {
+        {activeTiers.map((tier, idx) => {
           const price = tier.prices[currency];
-          const translatedTier = t.pricing.tiers[idx] ?? tier;
+          const translatedTier = !tiers && t.pricing.tiers[idx] ? t.pricing.tiers[idx] : tier;
           return (
             <div
               key={tier.id}
@@ -132,12 +154,14 @@ export function Pricing() {
         })}
       </div>
 
-      {/* 3-Year Comparison Table */}
-      <div className="wrap-wide mt-20">
-        <h3 className="text-xl font-semibold tracking-tight">{t.pricing.tco.title}</h3>
-        <p className="mt-1 text-sm text-ink-3">
-          {t.pricing.tco.subtitle}
-        </p>
+      {showCalculator && (
+        <>
+          {/* 3-Year Comparison Table */}
+          <div className="wrap-wide mt-20">
+            <h3 className="text-xl font-semibold tracking-tight">{t.pricing.tco.title}</h3>
+            <p className="mt-1 text-sm text-ink-3">
+              {t.pricing.tco.subtitle}
+            </p>
 
         <div className="mt-6 overflow-x-auto border-t border-line">
           <table className="w-full text-left text-sm">
@@ -247,6 +271,8 @@ export function Pricing() {
           </span>
         </div>
       </div>
-    </Section>
+    </>
+  )}
+</Section>
   );
 }

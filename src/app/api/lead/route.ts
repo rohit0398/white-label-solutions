@@ -37,11 +37,23 @@ export async function POST(request: Request) {
       email: String(email).trim().toLowerCase(),
       phone: phone ? String(phone).trim() : "Not provided",
       company: company ? String(company).trim() : "Not provided",
-      package: tier || "turnkey-setup",
+      package: tier || "launch",
       submittedAt: new Date().toISOString(),
     };
 
     console.log("[LEAD_CAPTURE] New Demo Request received:", leadData);
+
+    const PACKAGE_LABELS: Record<string, string> = {
+      "launch": "🚀 White-Label Launch Package ($4,999)",
+      "source-code-license": "💻 Full Source Code & License ($1,999)",
+      "source-code": "💻 Full Source Code & License ($1,999)",
+      "dedicated-support": "⏱️ Developer Time ($20/hr)",
+      "developer-time": "⏱️ Developer Time ($20/hr)",
+      "ott-streaming": "🎬 White-Label OTT & Short-Drama Platform ($4,999)",
+      "ecommerce": "🛍️ White-Label E-Commerce Platform ($4,999)",
+    };
+
+    const packageLabel = PACKAGE_LABELS[leadData.package] || leadData.package;
 
     // 1. Dispatch alert to Telegram Bot if configured in environment variables
     const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -68,7 +80,7 @@ export async function POST(request: Request) {
           `📧 <b>Email:</b> <code>${escapeHtml(leadData.email)}</code>`,
           `📱 <b>Phone/WA:</b> <code>${escapeHtml(leadData.phone)}</code>`,
           `🏢 <b>Company:</b> ${escapeHtml(leadData.company)}`,
-          `📦 <b>Package:</b> ${escapeHtml(leadData.package)}`,
+          `📦 <b>Package:</b> ${escapeHtml(packageLabel)}`,
           `🕒 <b>Time:</b> ${dateStr} IST`,
         ];
 
@@ -99,7 +111,7 @@ export async function POST(request: Request) {
     if (webhookUrl) {
       try {
         const payload = {
-          text: `🚀 *New White-Label Demo Request!*\n*Name:* ${leadData.name}\n*Email:* ${leadData.email}\n*Phone:* ${leadData.phone}\n*Company:* ${leadData.company}\n*Package:* ${leadData.package}`,
+          text: `🚀 *New White-Label Demo Request!*\n*Name:* ${leadData.name}\n*Email:* ${leadData.email}\n*Phone:* ${leadData.phone}\n*Company:* ${leadData.company}\n*Package:* ${packageLabel}`,
         };
 
         await fetch(webhookUrl, {

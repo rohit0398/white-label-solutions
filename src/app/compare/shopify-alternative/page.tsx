@@ -26,9 +26,21 @@ export const metadata: Metadata = {
     url: "/compare/shopify-alternative",
     images: ["/og-image.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shopify Alternative with No Monthly Fees & Mobile Apps Included | Mechatron Lab",
+    description: "Keep 100% of your revenue. Deploy on your own cloud with native mobile apps and 0% sales cuts.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function ShopifyAlternativePage() {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://white-label-solutions.vercel.app");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -37,13 +49,13 @@ export default function ShopifyAlternativePage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://solutions.mechatronlab.com",
+        item: siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Shopify Alternative",
-        item: "https://solutions.mechatronlab.com/compare/shopify-alternative",
+        item: `${siteUrl}/compare/shopify-alternative`,
       },
     ],
   };

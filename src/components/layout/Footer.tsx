@@ -23,7 +23,9 @@ export function Footer() {
     {
       title: t.footer.colProduct,
       links: [
+        { label: "All Solutions", href: "/solutions" },
         { label: t.footer.whatsIncluded, href: "/solutions/ecommerce" },
+        { label: "OTT & Short Dramas", href: "/solutions/ott-streaming" },
         { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
         { label: t.footer.pricing, href: `${language === "en" ? "/" : `/${language}`}#pricing` },
       ],

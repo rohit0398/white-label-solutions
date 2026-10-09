@@ -5,19 +5,32 @@ import { Section } from "@/components/ui/Section";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
-export function Faq() {
+export interface FaqProps {
+  id?: string;
+  index?: string;
+  title?: string;
+  intro?: string;
+  items?: { q: string; a: string }[];
+}
+
+export function Faq({ id = "faq", index, title, intro, items }: FaqProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
+  const activeItems = items || t.faq.items;
+  const activeIndex = index !== undefined ? index : t.faq.index;
+  const activeTitle = title || t.faq.title;
+  const activeIntro = intro !== undefined ? intro : t.faq.intro;
+
   return (
     <Section
-      id="faq"
-      index={t.faq.index}
-      title={t.faq.title}
-      intro={t.faq.intro}
+      id={id}
+      index={activeIndex}
+      title={activeTitle}
+      intro={activeIntro}
     >
       <div className="divide-y divide-line border-y border-line">
-        {t.faq.items.map((faq, idx) => (
+        {activeItems.map((faq, idx) => (
           <details key={idx} className="group py-5 text-sm cursor-pointer transition-colors">
             <summary className="flex items-center justify-between font-medium text-ink list-none focus:outline-none select-none hover:text-ink/75 active:scale-[0.99] transition-all">
               <span className="pr-4">{faq.q}</span>

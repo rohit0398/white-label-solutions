@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { TRANSLATIONS } from "@/lib/translations";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
@@ -8,13 +9,39 @@ import { Button } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { MessageSquare } from "lucide-react";
 
-export function Hero() {
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+export interface HeroProps {
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+export function Hero({ breadcrumbs }: HeroProps = {}) {
   const { language, openDemo } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
   return (
     <section className="pt-16 sm:pt-28 pb-20">
       <div className="wrap">
+        {breadcrumbs && breadcrumbs.length > 0 && (
+          <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
+            {breadcrumbs.map((b, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && <span>/</span>}
+                {b.href ? (
+                  <Link href={b.href} className="hover:text-ink transition-colors">
+                    {b.label}
+                  </Link>
+                ) : (
+                  <span className="text-ink">{b.label}</span>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+        )}
+
         {/* Ambient Active Status Beacon (Runs quietly without hover with continuous shimmer) */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 mb-6 select-none shimmer-badge hover:border-ink/40 transition-colors">
           <span className="relative flex h-2 w-2">
