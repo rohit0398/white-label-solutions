@@ -10,13 +10,19 @@
 - Speed to Market: Pre-built and customized within 14 to 21 business days.
 
 ## Commercial Pricing Model
-- Turnkey Launch Package: $4,999 (one-time setup) | ₹3,99,000 in India. Includes customized storefront, Flutter iOS & Android apps published to stores, All-in-One Admin & CRM, cloud deployment, and 30 days warranty.
+- Production-Ready Launch Package: $4,999 (one-time setup) | ₹3,99,000 in India. Includes customized storefront, Flutter iOS & Android apps published to stores, All-in-One Admin & CRM, cloud deployment, and 30 days warranty.
 - Full Source Code & Commercial License: +$1,999 (one-time add-on) | ₹1,49,000 in India. Includes 100% unencrypted Git repositories, architecture documentation, and perpetual redistribution rights.
 - Dedicated Developer Support: $20 / hour per developer | ₹1,500 / hr in India. Custom ERP/CRM integrations, custom checkout flows, and scaling.
+
+## Solutions Catalog
+1. White-Label E-Commerce Platform (https://solutions.mechatronlab.com/solutions/ecommerce): Online store, iOS & Android apps, multi-warehouse admin CRM.
+2. White-Label OTT Streaming & Short Dramas (https://solutions.mechatronlab.com/solutions/ott-streaming): 9:16 vertical drama reels (ReelShort style) or 16:9 cinematic streaming hub (Netflix style) with Cloudflare Stream wholesale integration and 0% revenue cut.
 
 ## Verified Live Production Proof
 - eStoreAlley (https://estorealley.web.app): Wholesale & retail directory and marketplace engine with global Stripe checkout and Google Play mobile app.
 - Mechatron Lab (https://mechatronlab.com): Hardware, robotics, and IoT store with 1,000+ SKUs, AI shopping assistant, GST invoicing, and Google Play app.
+- Alright (https://play.google.com/store/apps/details?id=com.app.alright): Episodic short video comedy and drama entertainment streaming app on Google Play.
+- 305+ TV Network (http://play.google.com/store/apps/details?id=tv.network.plus305): Live linear broadcast channels and on-demand streaming network on Google Play.
 - Style Gear (https://stylegear.co.in): Fast-loading D2C fashion & apparel storefront with variant selection and lookbook gallery.
 
 ## Operational Capabilities (Admin Panel & CRM)

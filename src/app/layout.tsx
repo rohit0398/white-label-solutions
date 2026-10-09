@@ -19,11 +19,16 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "https://white-label-solutions.vercel.app");
 
+const googleTagId =
+  process.env.NEXT_PUBLIC_GOOGLE_TAG_ID ||
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ||
+  "AW-18503943905";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
   description:
-    "Pre-built, easily configured white-label e-commerce solution. Fast online store, Android & iPhone mobile apps, and all-in-one Admin Panel & CRM deployed directly onto your private cloud (AWS, GCP, Azure). 100% source code ownership with zero platform fees or revenue cuts.",
+    "Production-ready white-label e-commerce platform & mobile apps. Fast online store, iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
   keywords: [
     "buy readymade ecommerce website and mobile app",
     "white label ecommerce platform with mobile app",
@@ -70,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
     description:
-      "Turnkey online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
+      "Production-ready online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -90,6 +95,16 @@ export const metadata: Metadata = {
       ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
       : undefined,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -105,7 +120,7 @@ export default function RootLayout({
         "@id": `${siteUrl}/#organization`,
         name: "Mechatron Lab",
         url: siteUrl,
-        logo: `${siteUrl}/favicon.ico`,
+        logo: `${siteUrl}/brand/icon-192.png`,
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -173,19 +188,23 @@ export default function RootLayout({
             __html: JSON.stringify(schemaGraph),
           }}
         />
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');`,
-              }}
-            />
-          </>
-        )}
+        {/* Google Consent Mode v2 Default State Initialization */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});(function(){try{var c=localStorage.getItem("cookie_consent");if(c==="granted"){gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});}}catch(e){}})();`,
+          }}
+        />
+
+        {/* Google tag (gtag.js) - Google Ads & Measurement */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleTagId}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${googleTagId}');${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID !== googleTagId ? `gtag('config','${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');` : ""}`,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
         <SiteProvider>{children}</SiteProvider>

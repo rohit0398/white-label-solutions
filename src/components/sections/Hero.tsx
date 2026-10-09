@@ -1,20 +1,48 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { TRANSLATIONS } from "@/lib/translations";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { MessageSquare } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
-export function Hero() {
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+export interface HeroProps {
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+export function Hero({ breadcrumbs }: HeroProps = {}) {
   const { language, openDemo } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
   return (
     <section className="pt-16 sm:pt-28 pb-20">
       <div className="wrap">
+        {breadcrumbs && breadcrumbs.length > 0 && (
+          <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
+            {breadcrumbs.map((b, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && <span>/</span>}
+                {b.href ? (
+                  <Link href={b.href} className="hover:text-ink transition-colors">
+                    {b.label}
+                  </Link>
+                ) : (
+                  <span className="text-ink">{b.label}</span>
+                )}
+              </React.Fragment>
+            ))}
+          </nav>
+        )}
+
         {/* Ambient Active Status Beacon (Runs quietly without hover with continuous shimmer) */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 mb-6 select-none shimmer-badge hover:border-ink/40 transition-colors">
           <span className="relative flex h-2 w-2">
@@ -69,6 +97,7 @@ export function Hero() {
             href={BRAND.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("Hero")}
             className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
           >
             <span className="relative flex h-2 w-2">

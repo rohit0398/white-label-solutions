@@ -11,7 +11,7 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
   en: {
     title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
     description:
-      "Pre-built, easily configured white-label e-commerce solution. Fast online store, Android & iPhone mobile apps, and all-in-one Admin Panel & CRM deployed directly onto your private cloud (AWS, GCP, Azure). 100% source code ownership with zero platform fees or revenue cuts.",
+      "Production-ready white-label e-commerce platform & mobile apps. Fast online store, iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
     keywords: [
       "buy readymade ecommerce website and mobile app",
       "white label ecommerce platform with mobile app",
@@ -43,7 +43,7 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
   de: {
     title: "White-Label E-Commerce-Plattform & Mobile Apps | Eigene Cloud",
     description:
-      "Schlüsselfertige White-Label E-Commerce-Lösung. Schneller Web-Shop, native Android- & iOS-Apps und Admin-Panel/CRM direkt in Ihrer Cloud (AWS, GCP, Azure). 100 % Quellcode-Eigentum, 0 % Umsatzprovision.",
+      "Einsatzbereite White-Label E-Commerce-Lösung. Schneller Web-Shop, native Android- & iOS-Apps und Admin-Panel/CRM direkt in Ihrer Cloud (AWS, GCP, Azure). 100 % Quellcode-Eigentum, 0 % Umsatzprovision.",
     keywords: [
       "fertigen online shop mit app kaufen",
       "white label ecommerce plattform",
@@ -82,6 +82,76 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
       "एंड्रॉयड और आईओएस ऐप के साथ ऑनलाइन स्टोर",
       "बिना कमीशन का ईकॉमर्स प्लेटफॉर्म",
       "मल्टी वेयरहाउस ईकॉमर्स एडमिन पैनल और सीआरएम",
+    ],
+    ogLocale: "hi_IN",
+  },
+};
+
+export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
+  en: {
+    title: "White-Label OTT Platform & Short-Video Drama Apps | Deployed on Your Cloud",
+    description:
+      "Production-ready white-label OTT streaming & 9:16 vertical drama apps. Deployed on your Cloudflare/AWS cloud with zero subscriber fees and full source code custody.",
+    keywords: [
+      "white label ott platform",
+      "short video drama app development",
+      "reelshort clone app with source code",
+      "dramabox white label platform",
+      "ready to deploy streaming app",
+      "ott platform one time payment self hosted",
+      "video streaming app developers",
+    ],
+    ogLocale: "en_US",
+  },
+  es: {
+    title: "Plataforma OTT Marca Blanca y Apps de Series Cortas 9:16 | En Tu Nube",
+    description:
+      "Plataforma de streaming OTT marca blanca lista para producción y apps de micro-dramas verticales 9:16. Desplegado en tu propia nube con 0% comisión y código fuente 100%.",
+    keywords: [
+      "plataforma ott marca blanca",
+      "desarrollo app drama corto vertical",
+      "clon reelshort con codigo fuente",
+      "streaming video autohospedado pago unico",
+      "app de streaming lista para desplegar",
+    ],
+    ogLocale: "es_ES",
+  },
+  de: {
+    title: "White-Label OTT-Streaming-Plattform & Kurzfilm-Apps 9:16 | Eigene Cloud",
+    description:
+      "Einsatzbereite White-Label OTT-Plattform und 9:16 vertikale Kurzserien-Apps. In Ihrer eigenen Cloud gehostet mit 0 % Gebühren pro Abonnent und vollem Quellcode-Eigentum.",
+    keywords: [
+      "white label ott plattform",
+      "kurzdrama serien app entwicklung",
+      "reelshort klon quellcode",
+      "video streaming plattform einmalzahlung",
+      "einsatzbereite streaming app",
+    ],
+    ogLocale: "de_DE",
+  },
+  fr: {
+    title: "Plateforme OTT Marque Blanche & Applications Courts-Métrages 9:16 | Sur Votre Cloud",
+    description:
+      "Solution de streaming OTT marque blanche et applications de mini-séries verticales 9:16. Déployé sur votre cloud avec 0% commission et pleine propriété du code source.",
+    keywords: [
+      "plateforme ott marque blanche",
+      "application mini serie video vertical",
+      "clone reelshort code source",
+      "streaming video heberge paiement unique",
+      "solution streaming prete au deploiement",
+    ],
+    ogLocale: "fr_FR",
+  },
+  hi: {
+    title: "व्हाइट-लेबल ओटीटी प्लेटफ़ॉर्म और शॉर्ट-ड्रामा ऐप्स | आपके अपने क्लाउड पर",
+    description:
+      "रेडी-टू-डिप्लॉय व्हाइट-लेबल ओटीटी स्ट्रीमिंग प्लेटफ़ॉर्म और 9:16 वर्टिकल शॉर्ट-ड्रामा ऐप्स (रीलशॉर्ट स्टाइल)। बिना किसी सब्सक्राइबर कमीशन और 100% सोर्स कोड ओनरशिप के साथ।",
+    keywords: [
+      "व्हाइट लेबल ओटीटी प्लेटफॉर्म",
+      "शॉर्ट वीडियो ड्रामा ऐप डेवलपमेंट",
+      "रीलशॉर्ट क्लोन ऐप सोर्स कोड",
+      "सेल्फ होस्टेड वीडियो स्ट्रीमिंग ऐप",
+      "रेडी टू डिप्लॉय वीडियो ऐप",
     ],
     ogLocale: "hi_IN",
   },

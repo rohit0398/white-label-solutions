@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
+import { MessageSquare } from "lucide-react";
+import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
 
 interface LeadModalProps {
   onClose: () => void;
@@ -16,7 +19,7 @@ const field =
   "w-full h-11 rounded-md border border-line bg-paper px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors";
 const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
-export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadModalProps) {
+export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
   const [submitted, setSubmitted] = useState(false);
@@ -29,6 +32,24 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
     company: "",
     honeypot: "",
   });
+
+  const getPackageBadgeLabel = () => {
+    switch (selectedTierId) {
+      case "ott-streaming":
+        return "🎬 White-Label OTT & Short-Drama Platform ($4,999)";
+      case "ecommerce":
+        return "🛍️ White-Label E-Commerce Architecture ($4,999)";
+      case "source-code-license":
+      case "source-code":
+        return "💻 Full Source Code & Commercial License ($1,999)";
+      case "dedicated-support":
+      case "developer-time":
+        return "⏱️ Dedicated Developer Support ($20/hr)";
+      case "launch":
+      default:
+        return "🚀 White-Label Launch Package ($4,999)";
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,9 +71,14 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
         body: JSON.stringify(payload),
       });
 
+      trackLeadSubmission(
+        selectedTierId,
+        selectedTierId === "source-code" || selectedTierId === "source-code-license" ? 1999 : 4999
+      );
       setSubmitted(true);
     } catch {
       // Graceful fallback: acknowledge lead so user is never blocked
+      trackLeadSubmission(selectedTierId);
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -106,7 +132,7 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
 
             <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-md border border-line bg-wash/50 text-xs font-mono text-ink-2">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span>{t.hero.badge}</span>
+              <span>{getPackageBadgeLabel()}</span>
             </div>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -205,6 +231,13 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
               <Button id="lead-submit" type="submit" disabled={loading} className="w-full h-11 mt-2 text-[15px] font-medium">
                 {loading ? t.leadModal.submitting : t.leadModal.submitBtn}
               </Button>
+
+              <p className="mt-2.5 text-[11px] text-ink-3 text-center leading-normal">
+                By submitting, you agree to our{" "}
+                <Link href="/privacy" target="_blank" className="underline hover:text-ink">Privacy Policy</Link>{" "}
+                and{" "}
+                <Link href="/terms" target="_blank" className="underline hover:text-ink">Terms</Link>.
+              </p>
             </form>
 
             <p className="mt-6 text-sm text-ink-3">
@@ -213,6 +246,7 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("LeadModal-Footer")}
                 className="text-ink underline underline-offset-4 decoration-line hover:decoration-ink"
               >
                 WhatsApp
@@ -221,16 +255,29 @@ export function LeadModal({ onClose, selectedTierId = "turnkey-setup" }: LeadMod
             </p>
           </>
         ) : (
-          <div className="py-6">
+          <div className="py-6 space-y-4">
             <h2 id="lead-modal-title" className="text-2xl font-semibold tracking-tight">
               {t.leadModal.successTitle}, {form.name.split(" ")[0] || ""}.
             </h2>
-            <p className="mt-3 text-ink-2">
+            <p className="text-ink-2 leading-relaxed">
               {t.leadModal.successDesc}
             </p>
-            <Button variant="secondary" className="mt-6" onClick={onClose}>
-              {t.leadModal.closeBtn}
-            </Button>
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href={BRAND.contact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("LeadModal-Success")}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-accent/40 bg-accent text-paper text-sm font-medium hover:bg-accent/90 transition-colors shadow-xs"
+              >
+                <MessageSquare className="h-4 w-4" />
+                <span>Chat on WhatsApp now</span>
+                <span className="text-xs">↗</span>
+              </a>
+              <Button variant="secondary" onClick={onClose}>
+                {t.leadModal.closeBtn}
+              </Button>
+            </div>
           </div>
         )}
       </div>

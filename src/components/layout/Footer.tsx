@@ -14,25 +14,33 @@ export function Footer() {
 
   const columns = [
     {
-      title: t.footer.colWork,
+      title: "Solutions",
       links: [
-        { label: "Mechatron Lab", href: "/case-studies/mechatron-lab" },
-        { label: "eStoreAlley", href: "/case-studies/estorealley" },
-      ],
-    },
-    {
-      title: t.footer.colProduct,
-      links: [
-        { label: t.footer.whatsIncluded, href: "/solutions/ecommerce" },
+        { label: "All Architectures", href: "/solutions" },
+        { label: "E-Commerce Platform", href: "/solutions/ecommerce" },
+        { label: "OTT & Short Dramas", href: "/solutions/ott-streaming" },
         { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
         { label: t.footer.pricing, href: `${language === "en" ? "/" : `/${language}`}#pricing` },
+        { label: t.nav.faq, href: `${language === "en" ? "/" : `/${language}`}#faq` },
       ],
     },
     {
-      title: t.footer.colContact,
+      title: "Company & Work",
       links: [
+        { label: "About Mechatron Lab", href: "/about" },
+        { label: "Contact Engineering", href: "/contact" },
+        { label: "Mechatron Lab Store", href: "/case-studies/mechatron-lab" },
+        { label: "eStoreAlley Case Study", href: "/case-studies/estorealley" },
+      ],
+    },
+    {
+      title: "Trust & Legal",
+      links: [
+        { label: "Privacy Policy", href: "/privacy" },
+        { label: "Terms of Service", href: "/terms" },
+        { label: "Refund Policy", href: "/refund-policy" },
         { label: BRAND.contact.email, href: `mailto:${BRAND.contact.email}` },
-        { label: "WhatsApp", href: BRAND.contact.whatsappUrl, external: true },
+        { label: "WhatsApp Support", href: BRAND.contact.whatsappUrl, external: true },
       ],
     },
   ];
@@ -41,7 +49,16 @@ export function Footer() {
     <footer className="border-t border-line">
       <div className="wrap-wide py-16 grid gap-10 sm:grid-cols-4 text-sm">
         <div>
-          <p className="font-semibold">{BRAND.name}</p>
+          <div className="flex items-center gap-2">
+            <img
+              src="/brand/logo_icon.svg"
+              alt="Mechatron Lab"
+              width={20}
+              height={20}
+              className="h-5 w-5 rounded object-contain shrink-0"
+            />
+            <p className="font-semibold">{BRAND.name}</p>
+          </div>
           <p className="mt-2 text-ink-3 leading-relaxed">
             {t.footer.tagline}
           </p>
@@ -72,8 +89,18 @@ export function Footer() {
           </div>
         ))}
       </div>
-      <div className="wrap-wide pb-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-sm text-ink-3">
-        <p>© 2026 {BRAND.name}. {t.footer.copyright}</p>
+      <div className="wrap-wide pb-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-xs sm:text-sm text-ink-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <p>© 2026 {BRAND.name}. {t.footer.copyright}</p>
+          <span className="hidden sm:inline">·</span>
+          <Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link>
+          <span>·</span>
+          <Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link>
+          <span>·</span>
+          <Link href="/refund-policy" className="hover:text-ink transition-colors">Refund Policy</Link>
+          <span>·</span>
+          <Link href="/contact" className="hover:text-ink transition-colors">Contact Us</Link>
+        </div>
         <div className="flex items-center gap-6">
           <ThemeSwitcher />
           <LanguageSwitcher />

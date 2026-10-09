@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { SHOWCASE_PROJECTS } from "@/lib/constants";
+import { ShowcaseProject } from "@/types";
 import { Section } from "@/components/ui/Section";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
@@ -10,20 +11,33 @@ import { TRANSLATIONS } from "@/lib/translations";
 const linkCls =
   "inline-flex items-center gap-1 text-ink underline underline-offset-4 decoration-line hover:decoration-ink active:opacity-75 transition-colors";
 
-export function Work() {
+export interface WorkProps {
+  id?: string;
+  index?: string;
+  title?: string;
+  intro?: string;
+  projects?: ShowcaseProject[];
+}
+
+export function Work({ id = "work", index, title, intro, projects }: WorkProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
+  const activeProjects = projects || SHOWCASE_PROJECTS;
+  const activeIndex = index !== undefined ? index : t.work.index;
+  const activeTitle = title || t.work.title;
+  const activeIntro = intro !== undefined ? intro : t.work.intro;
+
   return (
     <Section
-      id="work"
-      index={t.work.index}
-      title={t.work.title}
-      intro={t.work.intro}
+      id={id}
+      index={activeIndex}
+      title={activeTitle}
+      intro={activeIntro}
     >
       <ul className="border-t border-line divide-y divide-line">
-        {SHOWCASE_PROJECTS.map((p, idx) => {
-          const translatedProject = t.work.projects[idx] ?? p;
+        {activeProjects.map((p, idx) => {
+          const translatedProject = !projects && t.work.projects[idx] ? t.work.projects[idx] : p;
           return (
             <li
               key={p.id}
@@ -43,12 +57,16 @@ export function Work() {
                 <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translatedProject.description}</p>
                 <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                    <span>{p.url.replace("https://", "")}</span>
+                    <span>
+                      {p.url.includes("play.google.com")
+                        ? "Google Play Store"
+                        : p.url.replace(/^https?:\/\//, "")}
+                    </span>
                     <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                       ↗
                     </span>
                   </a>
-                  {p.playStoreUrl && (
+                  {p.playStoreUrl && p.playStoreUrl !== p.url && (
                     <a href={p.playStoreUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
                       <span>{t.work.androidApp}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

@@ -27,9 +27,15 @@ const TICKER_ITEMS = [
   },
 ];
 
-export function LiveTicker() {
+export interface LiveTickerProps {
+  items?: { title: string; detail: string }[];
+  ariaLabel?: string;
+}
+
+export function LiveTicker({ items, ariaLabel }: LiveTickerProps = {}) {
+  const activeItems = items || TICKER_ITEMS;
   // Duplicate array once for seamless infinite continuous scroll
-  const duplicated = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  const duplicated = [...activeItems, ...activeItems];
 
   return (
     <div

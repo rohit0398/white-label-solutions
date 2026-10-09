@@ -26,9 +26,21 @@ export const metadata: Metadata = {
     url: "/case-studies/mechatron-lab",
     images: ["/showcase/mechatron-store.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Study: Mechatron Lab Technical E-Commerce Store & Android App",
+    description: "1,000+ SKUs, multi-warehouse fulfillment, and native Android app deployed on private cloud.",
+    images: ["/showcase/mechatron-store.png"],
+  },
 };
 
 export default function MechatronLabCaseStudyPage() {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://white-label-solutions.vercel.app");
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -37,19 +49,19 @@ export default function MechatronLabCaseStudyPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://solutions.mechatronlab.com",
+        item: siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Case Studies",
-        item: "https://solutions.mechatronlab.com/#work",
+        item: `${siteUrl}/#work`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: "Mechatron Lab",
-        item: "https://solutions.mechatronlab.com/case-studies/mechatron-lab",
+        item: `${siteUrl}/case-studies/mechatron-lab`,
       },
     ],
   };
@@ -189,7 +201,7 @@ export default function MechatronLabCaseStudyPage() {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Need a setup like Mechatron Lab?</h2>
-              <p className="mt-2 text-sm text-ink-2">Turnkey setup in 2–4 weeks with zero platform commissions.</p>
+              <p className="mt-2 text-sm text-ink-2">Production-ready deployment in 2–4 weeks with zero platform commissions.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
               <DemoButton size="sm">Book a demo</DemoButton>

@@ -4,6 +4,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 import { usePathname, useRouter } from "next/navigation";
 import { Currency, Language } from "@/types";
 import { LeadModal } from "@/components/site/LeadModal";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 export type Theme = "dark" | "light";
 
@@ -117,10 +118,35 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
         document.cookie = `NEXT_LOCALE=${l}; path=/; max-age=31536000; SameSite=Lax`;
       } catch {}
 
-      const targetUrl = l === "en" ? "/" : `/${l}`;
-      router.push(targetUrl);
+      if (!pathname) return;
+
+      const segments = pathname.split("/").filter(Boolean);
+      const isFirstSegmentLocale = ["en", "es", "de", "fr", "hi"].includes(segments[0]);
+
+      const basePath = isFirstSegmentLocale
+        ? "/" + segments.slice(1).join("/")
+        : pathname;
+
+      const cleanBasePath = basePath === "" ? "/" : basePath;
+
+      // Routes that have static sub-path pages
+      const SUPPORTED_LOCALIZED_PATHS = ["/", "/solutions/ecommerce", "/solutions/ott-streaming"];
+
+      if (SUPPORTED_LOCALIZED_PATHS.includes(cleanBasePath)) {
+        const targetUrl =
+          cleanBasePath === "/"
+            ? l === "en"
+              ? "/"
+              : `/${l}`
+            : l === "en"
+            ? cleanBasePath
+            : `/${l}${cleanBasePath}`;
+
+        router.push(targetUrl);
+      }
+      // For any pages without sub-paths, React context updates language in-place without redirecting to home
     },
-    [router]
+    [pathname, router]
   );
 
   const setCurrency = useCallback((c: Currency) => {
@@ -148,7 +174,7 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const openDemo = useCallback((tierId: string = "turnkey-setup") => setDemoTier(tierId), []);
+  const openDemo = useCallback((tierId: string = "launch") => setDemoTier(tierId), []);
 
   const value = useMemo(
     () => ({ theme, setTheme, toggleTheme, currency, setCurrency, language, setLanguage, openDemo }),
@@ -161,6 +187,7 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       {demoTier && (
         <LeadModal key={demoTier} selectedTierId={demoTier} onClose={() => setDemoTier(null)} />
       )}
+      <CookieConsent />
     </SiteContext.Provider>
   );
 }
