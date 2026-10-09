@@ -4,6 +4,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 import { usePathname, useRouter } from "next/navigation";
 import { Currency, Language } from "@/types";
 import { LeadModal } from "@/components/site/LeadModal";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 export type Theme = "dark" | "light";
 
@@ -186,6 +187,7 @@ export function SiteProvider({ children }: { children: React.ReactNode }) {
       {demoTier && (
         <LeadModal key={demoTier} selectedTierId={demoTier} onClose={() => setDemoTier(null)} />
       )}
+      <CookieConsent />
     </SiteContext.Provider>
   );
 }

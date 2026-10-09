@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 import { MessageSquare } from "lucide-react";
+import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
 
 interface LeadModalProps {
   onClose: () => void;
@@ -69,9 +71,14 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
         body: JSON.stringify(payload),
       });
 
+      trackLeadSubmission(
+        selectedTierId,
+        selectedTierId === "source-code" || selectedTierId === "source-code-license" ? 1999 : 4999
+      );
       setSubmitted(true);
     } catch {
       // Graceful fallback: acknowledge lead so user is never blocked
+      trackLeadSubmission(selectedTierId);
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -224,6 +231,13 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               <Button id="lead-submit" type="submit" disabled={loading} className="w-full h-11 mt-2 text-[15px] font-medium">
                 {loading ? t.leadModal.submitting : t.leadModal.submitBtn}
               </Button>
+
+              <p className="mt-2.5 text-[11px] text-ink-3 text-center leading-normal">
+                By submitting, you agree to our{" "}
+                <Link href="/privacy" target="_blank" className="underline hover:text-ink">Privacy Policy</Link>{" "}
+                and{" "}
+                <Link href="/terms" target="_blank" className="underline hover:text-ink">Terms</Link>.
+              </p>
             </form>
 
             <p className="mt-6 text-sm text-ink-3">
@@ -232,6 +246,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("LeadModal-Footer")}
                 className="text-ink underline underline-offset-4 decoration-line hover:decoration-ink"
               >
                 WhatsApp
@@ -252,6 +267,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("LeadModal-Success")}
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-accent/40 bg-accent text-paper text-sm font-medium hover:bg-accent/90 transition-colors shadow-xs"
               >
                 <MessageSquare className="h-4 w-4" />

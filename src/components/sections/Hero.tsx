@@ -8,6 +8,7 @@ import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { MessageSquare } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export interface BreadcrumbItem {
   label: string;
@@ -96,6 +97,7 @@ export function Hero({ breadcrumbs }: HeroProps = {}) {
             href={BRAND.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("Hero")}
             className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
           >
             <span className="relative flex h-2 w-2">

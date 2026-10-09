@@ -7,6 +7,7 @@ import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { MessageSquare, Sun, Moon, Menu, X, ChevronDown } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function Navbar() {
   const { language, openDemo, theme, toggleTheme } = useSite();
@@ -31,17 +32,42 @@ export function Navbar() {
     },
   ];
 
-  const links = [
+  const desktopLinks = [
     { label: t.nav.work, href: `${homeHref}#work` },
     { label: t.nav.pricing, href: `${homeHref}#pricing` },
+  ];
+
+  const mobileLinks = [
+    { label: t.nav.work, href: `${homeHref}#work` },
+    { label: t.nav.pricing, href: `${homeHref}#pricing` },
+    { label: "About Mechatron Lab", href: "/about" },
     { label: t.nav.faq, href: `${homeHref}#faq` },
+    { label: "Contact Engineering", href: "/contact" },
   ];
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
       <div className="wrap-wide h-16 flex items-center justify-between gap-2 sm:gap-6">
-        <Link href={homeHref} id="nav-home" className="text-[15px] font-semibold tracking-tight hover:opacity-85 transition-opacity shrink-0">
-          Mechatron Lab <span className="text-ink-3 font-normal hidden min-[400px]:inline">Solutions</span>
+        <Link
+          href={homeHref}
+          id="nav-home"
+          className="inline-flex items-center gap-2 sm:gap-2.5 hover:opacity-85 transition-opacity shrink-0 group"
+        >
+          <img
+            src="/brand/logo_icon.svg"
+            alt="Mechatron Lab"
+            width={28}
+            height={28}
+            className="h-7 w-7 sm:h-6.5 sm:w-6.5 rounded-md object-contain shadow-2xs transition-transform duration-200 group-hover:scale-105 shrink-0"
+          />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-1.5 leading-tight">
+            <span className="text-[13px] sm:text-[15px] font-semibold tracking-tight text-ink leading-none">
+              Mechatron Lab
+            </span>
+            <span className="text-[10px] sm:text-[15px] font-mono sm:font-normal tracking-wide sm:tracking-normal text-ink-3 uppercase sm:capitalize leading-none mt-1 sm:mt-0">
+              Solutions
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden sm:flex items-center gap-7 text-sm text-ink-2">
@@ -97,7 +123,7 @@ export function Navbar() {
             )}
           </div>
 
-          {links.map((l) => (
+          {desktopLinks.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-ink hover:-translate-y-0.5 transition-all duration-150">
               {l.label}
             </Link>
@@ -105,12 +131,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2.5">
-          {/* Theme Toggle (Dark ↔ Light) with Smooth Micro-Rotation */}
+          {/* Theme Toggle (Dark ↔ Light) - Desktop Only in Header, on Mobile it is in the Drawer */}
           <button
             id="nav-theme-toggle"
             type="button"
             onClick={toggleTheme}
-            className="h-8 w-8 inline-flex items-center justify-center text-ink-2 hover:text-ink hover:bg-wash rounded-md border border-line hover:border-ink/40 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
+            className="hidden sm:inline-flex h-8 w-8 items-center justify-center text-ink-2 hover:text-ink hover:bg-wash rounded-md border border-line hover:border-ink/40 transition-all duration-200 cursor-pointer active:scale-95 shrink-0"
             title={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
             aria-label="Toggle color theme"
           >
@@ -127,6 +153,7 @@ export function Navbar() {
             href={BRAND.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("Navbar")}
             className="group relative h-8 w-8 inline-flex items-center justify-center text-accent bg-accent/5 hover:bg-accent/15 rounded-md border border-accent/30 hover:border-accent hover:scale-105 active:scale-95 transition-all duration-200 shadow-xs animate-pulse-glow shrink-0"
             title="Chat with Us on WhatsApp (Instant Reply)"
             aria-label="Direct WhatsApp live chat"
@@ -192,7 +219,7 @@ export function Navbar() {
             {/* Standard Links */}
             <div className="pt-2 border-t border-line">
               <ul className="space-y-1">
-                {links.map((l) => (
+                {mobileLinks.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
@@ -224,22 +251,35 @@ export function Navbar() {
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  trackWhatsAppClick("Navbar-Mobile");
+                }}
                 className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-md border border-accent/30 bg-accent/10 text-accent font-medium hover:bg-accent/20 text-sm transition-colors"
               >
                 <MessageSquare className="h-4 w-4" />
                 <span>Chat on WhatsApp (Instant Reply)</span>
               </a>
 
-              <div className="flex items-center justify-between py-1.5 px-1 text-xs text-ink-3">
-                <span>Appearance</span>
+              {/* Theme Switcher inside Mobile Side Menu */}
+              <div className="flex items-center justify-between py-2 px-2.5 rounded-lg border border-line bg-wash text-xs text-ink-2">
+                <div className="flex items-center gap-2">
+                  {theme === "dark" ? (
+                    <Moon className="h-4 w-4 text-accent" />
+                  ) : (
+                    <Sun className="h-4 w-4 text-accent" />
+                  )}
+                  <span className="font-mono text-ink">Appearance</span>
+                </div>
                 <button
                   type="button"
+                  id="nav-mobile-theme-toggle"
                   onClick={toggleTheme}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line bg-wash text-xs font-mono text-ink hover:border-ink/40 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line bg-paper text-xs font-mono text-ink hover:border-ink/40 transition-colors cursor-pointer"
+                  aria-label="Toggle theme in mobile menu"
                 >
-                  {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-                  <span>{theme === "dark" ? "Light theme" : "Dark theme"}</span>
+                  <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
+                  <span className="text-[10px] text-ink-3 underline">Change</span>
                 </button>
               </div>
             </div>
