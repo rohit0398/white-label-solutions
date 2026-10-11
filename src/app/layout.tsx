@@ -17,7 +17,7 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://white-label-solutions.vercel.app");
+    : "https://solutions.mechatronlab.com");
 
 const googleTagId =
   process.env.NEXT_PUBLIC_GOOGLE_TAG_ID ||
@@ -26,18 +26,30 @@ const googleTagId =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
+  title: "Pre-Built E-Commerce Store & Mobile Apps | Ready to Launch in 2–4 Weeks",
   description:
-    "Production-ready white-label e-commerce platform & mobile apps. Fast online store, iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
+    "Pre-built, production-ready e-commerce architecture designed for rapid deployment. High-speed Next.js web store, native Flutter iOS & Android apps, and Admin CRM deployed directly to your private cloud with 0% commission.",
   keywords: [
-    "buy readymade ecommerce website and mobile app",
-    "white label ecommerce platform with mobile app",
+    "pre-built ecommerce store",
+    "pre-built ecommerce website",
+    "ready-to-launch ecommerce solution",
+    "white label ecommerce development",
+    "ecommerce website development company",
+    "white label ecommerce website",
+    "white label ecommerce app",
+    "nextjs ecommerce website",
+    "flutter ecommerce app",
+    "headless ecommerce",
+    "ecommerce inventory management",
+    "b2b ecommerce solutions",
+    "ecommerce website development cost",
+    "ecommerce website packages",
+    "ecommerce platforms for small businesses",
+    "pre-built ecommerce solution with payment gateway",
+    "ecommerce website ready to launch",
+    "white label ecommerce platform",
     "self hosted ecommerce platform one time payment",
     "shopify alternative with no monthly fees",
-    "ready made online store with android and ios app",
-    "ecommerce platform you own without revenue cut",
-    "ecommerce admin panel with crm and multi warehouse",
-    "custom ecommerce website development US Europe India",
     "mechatron lab ecommerce solutions",
   ],
   authors: [{ name: "Mechatron Lab Solutions" }],
@@ -57,9 +69,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
+    title: "Pre-Built E-Commerce Store & Mobile Apps | Ready to Launch in 2–4 Weeks",
     description:
-      "Pre-built online store, ready-to-publish Android & iPhone apps, and all-in-one Admin Panel & CRM. 100% source code ownership. Deployed on your private cloud.",
+      "Pre-built, production-ready architecture designed for rapid deployment. High-speed web store, Android & iOS mobile apps, and central operations CRM deployed on your cloud with 0% revenue cuts.",
     siteName: "Mechatron Lab Solutions",
     images: [
       {
@@ -67,15 +79,15 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Mechatron Lab White-Label E-Commerce Platform & Mobile Apps",
+        alt: "Mechatron Lab Pre-Built E-Commerce Store & Mobile Apps",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "White-Label E-Commerce Platform & Mobile Apps | Deployed on Your Cloud",
+    title: "Pre-Built E-Commerce Store & Mobile Apps | Ready to Launch in 2–4 Weeks",
     description:
-      "Production-ready online store, Android & iOS mobile apps, and all-in-one Admin Panel & CRM deployed on your cloud. Zero platform cuts.",
+      "Production-ready pre-built online store, Android & iOS mobile apps, and Admin CRM deployed on your cloud with zero platform fees.",
     images: ["/og-image.png"],
   },
   robots: {

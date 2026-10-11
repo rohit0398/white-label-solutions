@@ -85,6 +85,128 @@ export const PRICING_TIERS: PricingTier[] = [
   },
 ];
 
+export const ECOMMERCE_APP_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "app-launch",
+    name: "Mobile Launch",
+    tagline: "Native iOS & Android apps, branded and published to your developer accounts in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "Native iOS & Android apps built from unified Flutter codebase",
+      "Published under your Apple Developer & Google Play Console accounts",
+      "Free unlimited push notifications (FCM & APNs)",
+      "Native biometric login (Face ID & Touch ID)",
+      "In-app checkout (Apple Pay, Google Pay, Stripe, PayPal, UPI, COD)",
+      "Real-time API sync with your product catalog and inventory",
+      "30 days of post-launch support & store review guarantee",
+    ],
+    ctaText: "Book app demo",
+  },
+  {
+    id: "app-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Flutter mobile app repository with full custody.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Complete Flutter mobile application source code",
+      "iOS and Android build configurations and pipeline scripts",
+      "Unencrypted Git repository access",
+      "Perpetual commercial licence, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "app-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for custom mobile features or backend API sync.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "Custom mobile screens, brand widgets & checkout logic",
+      "Shopify, WooCommerce, ERP, or custom backend API integration",
+      "App Store compliance updates & version releases",
+      "Hourly blocks or a monthly retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+export const ECOMMERCE_WEB_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "web-launch",
+    name: "Web Launch",
+    tagline: "High-speed storefront and Admin CRM, branded and deployed to your cloud in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "Sub-second Next.js web storefront in your branding (< 0.9s load time)",
+      "Operations Admin CRM with multi-warehouse inventory",
+      "Stripe, PayPal, Apple Pay, Google Pay, Razorpay, UPI & COD",
+      "Automatic GST, EU VAT, or US sales-tax invoices",
+      "Deployment to your AWS, Google Cloud or Azure account",
+      "SEO Core Web Vitals optimization & structured data",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book web demo",
+  },
+  {
+    id: "web-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full storefront, backend, and CRM repositories.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Next.js storefront, backend API, and Admin CRM repositories",
+      "Unencrypted Git repository access with architecture docs",
+      "Database schema and cloud deployment scripts",
+      "Perpetual commercial licence, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "web-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for ERP integrations, custom checkout or UI design.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "ERP, accounting, CRM, and warehouse integrations",
+      "B2B pricing, quotations, and custom checkout rules",
+      "Hosting upkeep, backups, and security updates",
+      "Hourly blocks or a monthly retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
 export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
     id: "mechatron-lab",
@@ -148,6 +270,18 @@ export const ADMIN_FEATURES: AdminFeature[] = [
 ];
 
 export const FAQS: Faq[] = [
+  {
+    q: "How much does a pre-built ecommerce website and mobile app package cost?",
+    a: "Our Launch package is a transparent, one-time fee of $4,999 (₹3,99,000). This includes your custom-branded Next.js web store, Flutter iOS and Android apps published to the App Store and Google Play under your developer accounts, central operations CRM with multi-warehouse inventory, and private cloud deployment. There are zero monthly software fees and 0% sales commission.",
+  },
+  {
+    q: "Why is this platform built with Next.js and Flutter?",
+    a: "Next.js delivers sub-second page loads, server-side rendering for top Google SEO rankings, and fast checkout performance. Flutter allows us to deliver high-performance native iOS and Android apps from a single codebase with native biometric login and push notifications.",
+  },
+  {
+    q: "How does the total 3-year cost compare to Shopify?",
+    a: "Over 3 years, a Shopify store typically costs $26,000+ ($10,764 in plan fees, $10,000+ in 2% transaction fees on $500k GMV, plus $5,400+ in app store subscriptions) while you own zero code. With Mechatron Lab, you pay $4,999 once plus raw cloud hosting (~$30/mo = $1,080 over 3 years), saving over $20,000 while owning your platform completely.",
+  },
   {
     q: "Where is the store hosted?",
     a: "In your own AWS, Google Cloud or Azure account. We set it up there and hand you the admin passwords, database keys and domain settings. Your customer data never sits on our servers.",

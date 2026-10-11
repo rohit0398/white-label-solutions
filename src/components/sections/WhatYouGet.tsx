@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { SHOWCASE_PROJECTS } from "@/lib/constants";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { MobileAppScreenshots } from "@/components/ui/MobileAppScreenshots";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
@@ -11,10 +12,30 @@ const appLinks = SHOWCASE_PROJECTS.filter((p) => p.playStoreUrl);
 
 type ModuleKey = "storefront" | "apps" | "admin";
 
-export function WhatYouGet() {
+export interface WhatYouGetProps {
+  mode?: "all" | "web" | "app";
+}
+
+export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
-  const [activeTab, setActiveTab] = useState<ModuleKey>("storefront");
+  
+  const initialTab: ModuleKey = mode === "app" ? "apps" : "storefront";
+  const [activeTab, setActiveTab] = useState<ModuleKey>(initialTab);
+
+  const visibleKeys: ModuleKey[] =
+    mode === "web"
+      ? ["storefront", "admin"]
+      : mode === "app"
+      ? ["apps", "admin"]
+      : ["storefront", "apps", "admin"];
+
+  const introText =
+    mode === "web"
+      ? "Your brand on the modern web. High-speed Next.js web storefront and central operations CRM running on your private cloud."
+      : mode === "app"
+      ? "Your brand on Google Play and the Apple App Store. Native Flutter mobile apps and central operations CRM running on your private cloud."
+      : t.whatYouGet.intro;
 
   const moduleConfigs: Record<
     ModuleKey,
@@ -38,8 +59,8 @@ export function WhatYouGet() {
       highlights: t.whatYouGet.modules.storefront.highlights,
     },
     apps: {
-      n: "02",
-      tabLabel: t.whatYouGet.tabs.apps,
+      n: mode === "app" ? "01" : "02",
+      tabLabel: mode === "app" ? "01 Native Shopping Apps (iOS & Android)" : t.whatYouGet.tabs.apps,
       title: t.whatYouGet.modules.apps.title,
       summary: t.whatYouGet.modules.apps.summary,
       screenshot: "/showcase/estorealley-store.png",
@@ -47,8 +68,8 @@ export function WhatYouGet() {
       highlights: t.whatYouGet.modules.apps.highlights,
     },
     admin: {
-      n: "03",
-      tabLabel: t.whatYouGet.tabs.admin,
+      n: mode === "all" ? "03" : "02",
+      tabLabel: mode === "all" ? t.whatYouGet.tabs.admin : "02 Admin & CRM (Operations)",
       title: t.whatYouGet.modules.admin.title,
       summary: t.whatYouGet.modules.admin.summary,
       screenshot: "/showcase/admin-dashboard.png",
@@ -57,20 +78,20 @@ export function WhatYouGet() {
     },
   };
 
-  const current = moduleConfigs[activeTab];
+  const current = moduleConfigs[activeTab] || moduleConfigs[initialTab];
 
   return (
     <Section
       id="what-you-get"
       index={t.whatYouGet.index}
       title={t.whatYouGet.title}
-      intro={t.whatYouGet.intro}
+      intro={introText}
       bare
     >
       {/* Interactive Segmented Switcher */}
       <div className="wrap mb-10">
         <div className="inline-flex flex-wrap gap-1.5 p-1 rounded-lg border border-line bg-wash w-full sm:w-auto">
-          {(["storefront", "apps", "admin"] as ModuleKey[]).map((key) => {
+          {visibleKeys.map((key) => {
             const isActive = key === activeTab;
             return (
               <button
@@ -166,16 +187,21 @@ export function WhatYouGet() {
         </div>
       </div>
 
-      {/* Dynamic Screenshot Preview with Smooth Transition */}
+      {/* Dynamic Screenshot / App Preview with Smooth Transition */}
       <div className="wrap-wide mt-10 group">
-        <Screenshot
-          key={current.screenshot}
-          src={current.screenshot}
-          alt={current.title}
-          caption={current.caption}
-          className="transition-transform duration-300 group-hover:scale-[1.008]"
-        />
+        {activeTab === "apps" ? (
+          <MobileAppScreenshots />
+        ) : (
+          <Screenshot
+            key={current.screenshot}
+            src={current.screenshot}
+            alt={current.title}
+            caption={current.caption}
+            className="transition-transform duration-300 group-hover:scale-[1.008]"
+          />
+        )}
       </div>
     </Section>
   );
 }
+

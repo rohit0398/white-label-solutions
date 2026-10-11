@@ -17,13 +17,22 @@ export interface WorkProps {
   title?: string;
   intro?: string;
   projects?: ShowcaseProject[];
+  mode?: "all" | "web" | "app";
 }
 
-export function Work({ id = "work", index, title, intro, projects }: WorkProps = {}) {
+export function Work({ id = "work", index, title, intro, projects, mode = "all" }: WorkProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
-  const activeProjects = projects || SHOWCASE_PROJECTS;
+  const activeProjects = (projects || SHOWCASE_PROJECTS).map((p) => {
+    if (mode === "app" && p.id === "mechatron-lab") {
+      return {
+        ...p,
+        screenshotUrl: "/showcase/mechatron-app/screen-1.png",
+      };
+    }
+    return p;
+  });
   const activeIndex = index !== undefined ? index : t.work.index;
   const activeTitle = title || t.work.title;
   const activeIntro = intro !== undefined ? intro : t.work.intro;

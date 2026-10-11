@@ -5,12 +5,22 @@ import { Section } from "@/components/ui/Section";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
-export function HowItWorks() {
+export interface HowItWorksProps {
+  id?: string;
+  index?: string;
+  title?: string;
+}
+
+export function HowItWorks({ id = "how-it-works", index, title }: HowItWorksProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
+  const activeIndex = index !== undefined ? index : t.howItWorks.index;
+  const activeTitle = title || t.howItWorks.title;
+
   return (
-    <Section id="how-it-works" index={t.howItWorks.index} title={t.howItWorks.title}>
+    <Section id={id} index={activeIndex} title={activeTitle}>
+
       <div className="mb-10 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash/60 text-xs font-mono text-ink-2 shadow-2xs">
         <span className="relative flex h-2 w-2">
           <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />

@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
-import { ShoppingBag, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Production-Ready White-Label Software Solutions | E-Commerce, OTT Streaming & Enterprise",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function SolutionsCatalogPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://white-label-solutions.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -61,9 +61,9 @@ export default function SolutionsCatalogPage() {
   const solutions = [
     {
       id: "ecommerce",
-      title: "E-Commerce & Retail Platform",
-      subtitle: "High-speed storefront, Flutter mobile apps & Admin CRM",
-      badge: "Retail & D2C",
+      title: "Pre-Built E-Commerce Store & Mobile Apps",
+      subtitle: "Ready-to-launch Next.js storefront, Flutter mobile apps & Admin CRM",
+      badge: "Complete ($4,999)",
       icon: ShoppingBag,
       href: "/solutions/ecommerce",
       status: "Ready for Deployment",
@@ -73,12 +73,54 @@ export default function SolutionsCatalogPage() {
         { label: "Mobile Apps", val: "iOS & Android" },
       ],
       points: [
+        "Pre-built, production-ready architecture designed for rapid deployment in 2–4 weeks",
         "Sub-second Next.js web storefront with automated tax & inventory sync",
         "Unified Flutter mobile app published directly to your Google Play & App Store accounts",
-        "Comprehensive operational admin panel for orders, catalog, coupons, and staff roles",
-        "Pre-integrated with Stripe, PayPal, Razorpay, Cashfree, UPI, and Cash on Delivery",
+        "Pre-integrated payment gateways (Stripe, PayPal, UPI, COD) with 0% transaction fees",
       ],
-      cta: "Explore E-Commerce Platform →",
+      cta: "Explore E-Commerce Store & Apps →",
+    },
+    {
+      id: "ecommerce-website-development",
+      title: "E-Commerce Website Development",
+      subtitle: "Sub-second Next.js web storefront & central operations CRM",
+      badge: "Web Only ($2,999)",
+      icon: Globe,
+      href: "/solutions/ecommerce-website-development",
+      status: "Ready for Deployment",
+      stats: [
+        { label: "Page Speed", val: "< 0.9s Next.js" },
+        { label: "Platform Cut", val: "0% Commission" },
+        { label: "Deployment", val: "Your Cloud" },
+      ],
+      points: [
+        "Sub-second React Server Components web store optimized for Google Core Web Vitals",
+        "Operations Admin CRM with multi-warehouse stock management and margin tracking",
+        "Automated tax compliance generating GST, EU VAT, or US sales-tax invoices per order",
+        "Pre-integrated payment gateways (Stripe, PayPal, Apple Pay, Google Pay, UPI, COD)",
+      ],
+      cta: "Explore Web Development →",
+    },
+    {
+      id: "ecommerce-app-development",
+      title: "E-Commerce Mobile App Development",
+      subtitle: "Native iOS & Android mobile shopping apps built with Flutter",
+      badge: "Mobile Apps",
+      icon: Smartphone,
+      href: "/solutions/ecommerce-app-development",
+      status: "Ready for Deployment",
+      stats: [
+        { label: "Rendering Speed", val: "60 FPS Flutter" },
+        { label: "App Store Cut", val: "0% (Exempt)" },
+        { label: "Platforms", val: "iOS & Android" },
+      ],
+      points: [
+        "Unified Flutter 3.x codebase compiling directly to native iOS and Android machine code",
+        "100% approval guarantee published directly under your corporate Apple & Google Play accounts",
+        "Free unlimited push notifications (FCM & APNs) for abandoned cart recovery and order tracking",
+        "1-tap fast checkout with Apple Pay, Google Pay, Stripe, PayPal, Razorpay & biometric sign-in",
+      ],
+      cta: "Explore Mobile App Development →",
     },
     {
       id: "ott-streaming",

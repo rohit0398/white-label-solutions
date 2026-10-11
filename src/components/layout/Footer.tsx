@@ -17,7 +17,9 @@ export function Footer() {
       title: "Solutions",
       links: [
         { label: "All Architectures", href: "/solutions" },
-        { label: "E-Commerce Platform", href: "/solutions/ecommerce" },
+        { label: "Pre-Built E-Commerce Store", href: "/solutions/ecommerce" },
+        { label: "E-Commerce Website Development", href: "/solutions/ecommerce-website-development" },
+        { label: "E-Commerce App Development", href: "/solutions/ecommerce-app-development" },
         { label: "OTT & Short Dramas", href: "/solutions/ott-streaming" },
         { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
         { label: t.footer.pricing, href: `${language === "en" ? "/" : `/${language}`}#pricing` },
@@ -27,6 +29,7 @@ export function Footer() {
     {
       title: "Company & Work",
       links: [
+        { label: "Engineering Blog", href: "/blog" },
         { label: "About Mechatron Lab", href: "/about" },
         { label: "Contact Engineering", href: "/contact" },
         { label: "Mechatron Lab Store", href: "/case-studies/mechatron-lab" },
