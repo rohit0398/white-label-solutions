@@ -39,7 +39,7 @@ export default function MechatronLabCaseStudyPage() {
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "https://white-label-solutions.vercel.app");
+      : "https://solutions.mechatronlab.com");
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

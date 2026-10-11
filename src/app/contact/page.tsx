@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://white-label-solutions.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
   const contactSchema = {
     "@context": "https://schema.org",

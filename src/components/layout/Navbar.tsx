@@ -19,18 +19,31 @@ export function Navbar() {
 
   const solutions = [
     {
-      title: "E-Commerce Platform",
-      desc: "Online store, iOS/Android apps & Admin CRM",
+      title: "Pre-Built E-Commerce Store",
+      desc: "Complete online store, mobile apps & CRM",
       href: "/solutions/ecommerce",
-      badge: "Retail",
+      price: "$4,999",
+    },
+    {
+      title: "E-Commerce Website Development",
+      desc: "Next.js web storefront & Admin CRM",
+      href: "/solutions/ecommerce-website-development",
+      price: "$2,999",
+    },
+    {
+      title: "E-Commerce App Development",
+      desc: "Native iOS & Android apps with Flutter",
+      href: "/solutions/ecommerce-app-development",
+      price: "$2,999",
     },
     {
       title: "OTT & Short Video Dramas",
-      desc: "9:16 vertical reels & Netflix-style streaming",
+      desc: "9:16 vertical reels & cinematic streaming",
       href: "/solutions/ott-streaming",
-      badge: "Video",
+      price: "$4,999",
     },
   ];
+
 
   const desktopLinks = [
     { label: t.nav.work, href: `${homeHref}#work` },
@@ -40,6 +53,7 @@ export function Navbar() {
   const mobileLinks = [
     { label: t.nav.work, href: `${homeHref}#work` },
     { label: t.nav.pricing, href: `${homeHref}#pricing` },
+    { label: "Engineering Blog", href: "/blog" },
     { label: "About Mechatron Lab", href: "/about" },
     { label: t.nav.faq, href: `${homeHref}#faq` },
     { label: "Contact Engineering", href: "/contact" },
@@ -87,7 +101,7 @@ export function Navbar() {
             </button>
 
             {solutionsOpen && (
-              <div className="absolute -left-3 top-full pt-1 w-72 z-50 animate-fade-in">
+              <div className="absolute -left-3 top-full pt-1 w-80 z-50 animate-fade-in">
                 <div className="rounded-xl border border-line bg-paper/98 backdrop-blur-md p-2 shadow-xl space-y-1">
                   {solutions.map((s) => (
                     <Link
@@ -96,31 +110,39 @@ export function Navbar() {
                       onClick={() => setSolutionsOpen(false)}
                       className="block p-2.5 rounded-lg hover:bg-wash transition-colors group"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors">
-                          {s.title}
-                        </span>
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line text-ink-3">
-                          {s.badge}
+                      <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block">
+                        {s.title}
+                      </span>
+                      <div className="flex items-center justify-between gap-2 mt-1">
+                        <p className="text-[11px] text-ink-3 leading-snug">
+                          {s.desc}
+                        </p>
+                        <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line/80 text-ink-2 group-hover:border-ink/40 transition-colors">
+                          {s.price}
                         </span>
                       </div>
-                      <p className="text-[11px] text-ink-3 mt-0.5 leading-snug">
-                        {s.desc}
-                      </p>
                     </Link>
                   ))}
-                  <div className="pt-1 mt-1 border-t border-line">
+                  <div className="pt-1.5 mt-1 border-t border-line flex items-center justify-between px-2.5 py-1">
                     <Link
                       href="/solutions"
                       onClick={() => setSolutionsOpen(false)}
-                      className="block px-2.5 py-1 text-[11px] font-mono text-ink-3 hover:text-ink transition-colors"
+                      className="text-[11px] font-mono text-ink-3 hover:text-ink transition-colors"
                     >
-                      Browse all architectures →
+                      All architectures →
+                    </Link>
+                    <Link
+                      href="/blog"
+                      onClick={() => setSolutionsOpen(false)}
+                      className="text-[11px] font-mono text-ink-3 hover:text-accent transition-colors"
+                    >
+                      Blog &amp; Guides →
                     </Link>
                   </div>
                 </div>
               </div>
             )}
+
           </div>
 
           {desktopLinks.map((l) => (
@@ -205,15 +227,18 @@ export function Navbar() {
                   key={s.href}
                   href={s.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between py-2 px-2.5 rounded-md text-ink hover:bg-wash text-sm font-medium transition-colors"
+                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
                 >
-                  <div>
-                    <span className="block">{s.title}</span>
-                    <span className="text-[11px] text-ink-3 block font-normal">{s.desc}</span>
+                  <span className="block text-sm font-medium">{s.title}</span>
+                  <div className="flex items-center justify-between gap-2 mt-0.5">
+                    <span className="text-[11px] text-ink-3 font-normal">{s.desc}</span>
+                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
+                      {s.price}
+                    </span>
                   </div>
-                  <span className="text-xs text-ink-3">→</span>
                 </Link>
               ))}
+
             </div>
 
             {/* Standard Links */}

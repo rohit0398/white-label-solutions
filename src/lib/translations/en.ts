@@ -9,13 +9,13 @@ export const en: TranslationDictionary = {
     bookDemo: "Book a demo",
   },
   hero: {
-    badge: "2–4 Week Delivery · 0% Revenue Cut · Private Cloud (AWS · GCP · Azure)",
+    badge: "Pre-Built & Ready to Launch · 2–4 Week Delivery · 0% Revenue Cut",
     headline: "Own your store, your apps, and your code.",
     subtitle:
-      "We set up a complete online store, Android and iOS apps and an admin panel on your own cloud account. You pay once. You keep every sale.",
+      "Pre-built, production-ready architecture designed for rapid deployment. We set up a complete online store, Android and iOS apps, and an admin panel on your own private cloud account. You pay once. You keep every sale.",
     anchors: {
-      storefront: "01 Storefront",
-      apps: "02 Mobile Apps",
+      storefront: "01 Storefront (Next.js)",
+      apps: "02 Mobile Apps (Flutter)",
       admin: "03 Admin CRM",
     },
     ctaDemo: "Book a demo",

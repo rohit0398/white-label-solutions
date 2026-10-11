@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://white-label-solutions.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
   const aboutSchema = {
     "@context": "https://schema.org",

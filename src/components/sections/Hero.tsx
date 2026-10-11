@@ -17,14 +17,33 @@ export interface BreadcrumbItem {
 
 export interface HeroProps {
   breadcrumbs?: BreadcrumbItem[];
+  badge?: string;
+  headline?: string;
+  subtitle?: string;
+  anchors?: { label: string; href?: string }[];
+  mode?: "all" | "web" | "app";
+  showScreenshot?: boolean;
 }
 
-export function Hero({ breadcrumbs }: HeroProps = {}) {
+export function Hero({
+  breadcrumbs,
+  badge,
+  headline,
+  subtitle,
+  anchors,
+  mode = "all",
+  showScreenshot,
+}: HeroProps = {}) {
   const { language, openDemo } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
+  const badgeText = badge ?? t.hero.badge;
+  const headlineText = headline ?? t.hero.headline;
+  const subtitleText = subtitle ?? t.hero.subtitle;
+  const shouldShowScreenshot = showScreenshot !== undefined ? showScreenshot : mode !== "app";
+
   return (
-    <section className="pt-16 sm:pt-28 pb-20">
+    <section id="hero" className="pt-16 sm:pt-28 pb-20">
       <div className="wrap">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
@@ -49,34 +68,50 @@ export function Hero({ breadcrumbs }: HeroProps = {}) {
             <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
-          <span>{t.hero.badge}</span>
+          <span>{badgeText}</span>
         </div>
 
         <h1 className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]">
-          {t.hero.headline}
+          {headlineText}
         </h1>
-        <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{t.hero.subtitle}</p>
+        <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{subtitleText}</p>
 
         {/* Living Platform Anchors with Gentle Ambient Floating & Tactile Hover */}
         <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-ink-2">
-          <a
-            href="#what-you-get"
-            className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-          >
-            {t.hero.anchors.storefront}
-          </a>
-          <a
-            href="#what-you-get"
-            className="animate-float-reverse px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-          >
-            {t.hero.anchors.apps}
-          </a>
-          <a
-            href="#what-you-get"
-            className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-          >
-            {t.hero.anchors.admin}
-          </a>
+          {anchors && anchors.length > 0 ? (
+            anchors.map((a, idx) => (
+              <a
+                key={idx}
+                href={a.href || "#what-you-get"}
+                className={`${
+                  idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
+                } px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs`}
+              >
+                {a.label}
+              </a>
+            ))
+          ) : (
+            <>
+              <a
+                href="#what-you-get"
+                className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
+              >
+                {t.hero.anchors.storefront}
+              </a>
+              <a
+                href="#what-you-get"
+                className="animate-float-reverse px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
+              >
+                {t.hero.anchors.apps}
+              </a>
+              <a
+                href="#what-you-get"
+                className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
+              >
+                {t.hero.anchors.admin}
+              </a>
+            </>
+          )}
         </div>
 
         {/* Top Banner Action Buttons with Active Living Animation & Tactile Hover */}
@@ -123,15 +158,18 @@ export function Hero({ breadcrumbs }: HeroProps = {}) {
         <p className="mt-10 text-sm text-ink-3">{t.hero.facts}</p>
       </div>
 
-      <div className="wrap-wide mt-16 sm:mt-20 group">
-        <Screenshot
-          src="/showcase/mechatron-store.png"
-          alt="Mechatron Lab online store built on the platform"
-          caption="mechatronlab.com, running on the client's own Google Cloud account."
-          priority
-          className="transition-transform duration-300 group-hover:scale-[1.008]"
-        />
-      </div>
+      {shouldShowScreenshot && (
+        <div className="wrap-wide mt-16 sm:mt-20 group">
+          <Screenshot
+            src="/showcase/mechatron-store.png"
+            alt="Mechatron Lab online store built on the platform"
+            caption="mechatronlab.com, running on the client's own Google Cloud account."
+            priority
+            className="transition-transform duration-300 group-hover:scale-[1.008]"
+          />
+        </div>
+      )}
     </section>
   );
 }
+

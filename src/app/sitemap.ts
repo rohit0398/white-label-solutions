@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "https://white-label-solutions.vercel.app");
+      : "https://solutions.mechatronlab.com");
 
   const homeAlternates = {
     languages: {
@@ -93,6 +93,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    // E-Commerce Website Development Solution
+    {
+      url: `${baseUrl}/solutions/ecommerce-website-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // E-Commerce Mobile App Development Solution
+    {
+      url: `${baseUrl}/solutions/ecommerce-app-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     // E-Commerce Solution (All Languages)
     {
       url: `${baseUrl}/solutions/ecommerce`,
@@ -176,6 +190,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    // Engineering Blog & Growth Guides
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog/ecommerce-website-development-cost`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog/ecommerce-website-development`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog/ecommerce-app-development`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     // Company & Contact
     {

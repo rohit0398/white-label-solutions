@@ -3,8 +3,10 @@ import { FAQS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { TechStackStrip } from "@/components/sections/TechStackStrip";
 import { LiveTicker } from "@/components/sections/LiveTicker";
-import { WhatYouGet } from "@/components/sections/WhatYouGet";
+import { AppShowcase } from "@/components/sections/AppShowcase";
+import { AdminCrmShowcase } from "@/components/sections/AdminCrmShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
@@ -12,16 +14,29 @@ import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 
 export const metadata: Metadata = {
-  title: "Complete White-Label E-Commerce Platform | Online Store, Mobile Apps & Admin CRM",
+  title: "Pre-Built E-Commerce Store & Mobile Apps | Ready to Launch in 2–4 Weeks",
   description:
-    "Own your white-label e-commerce platform. Modern web store, iOS & Android apps, and Admin CRM deployed on your cloud with zero monthly fees and 0% commission.",
+    "Pre-built, production-ready e-commerce architecture designed for rapid deployment. Complete Next.js web storefront, native Flutter mobile apps, and admin inventory CRM deployed directly to your private cloud.",
   keywords: [
+    "pre-built ecommerce store",
+    "pre-built ecommerce website",
+    "ready-to-launch ecommerce solution",
+    "white label ecommerce development",
+    "ecommerce website development company",
+    "white label ecommerce website",
+    "white label ecommerce app",
+    "nextjs ecommerce website",
+    "flutter ecommerce app",
+    "headless ecommerce",
+    "ecommerce inventory management",
+    "b2b ecommerce solutions",
+    "ecommerce website development cost",
+    "ecommerce website packages",
+    "ecommerce platforms for small businesses",
+    "pre-built ecommerce solution with payment gateway",
+    "ecommerce website ready to launch",
     "white label ecommerce platform",
-    "custom ecommerce development with mobile app",
-    "ready made online store with android ios app",
-    "ecommerce admin panel and crm",
     "self hosted ecommerce solution",
-    "ready to deploy ecommerce platform",
   ],
   alternates: {
     canonical: "/solutions/ecommerce",
@@ -34,23 +49,23 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "The Complete White-Label E-Commerce Platform | Mechatron Lab",
+    title: "Pre-Built E-Commerce Store & Mobile Apps | Mechatron Lab",
     description:
-      "Own your e-commerce platform with zero monthly SaaS fees and 0% commission. Deployed directly into your private cloud.",
+      "Pre-built, production-ready e-commerce architecture designed for rapid deployment. Deployed into your private cloud with zero monthly fees and 0% commission.",
     url: "/solutions/ecommerce",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Complete White-Label E-Commerce Platform | Mechatron Lab",
+    title: "Pre-Built E-Commerce Store & Mobile Apps | Mechatron Lab",
     description:
-      "Modern web store, native iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
+      "Modern Next.js web store, native Flutter iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
     images: ["/og-image.png"],
   },
 };
 
 export default function EcommerceSolutionPillarPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://white-label-solutions.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -71,7 +86,7 @@ export default function EcommerceSolutionPillarPage() {
       {
         "@type": "ListItem",
         position: 3,
-        name: "E-Commerce Platform",
+        name: "Pre-Built E-Commerce Store",
         item: `${siteUrl}/solutions/ecommerce`,
       },
     ],
@@ -90,6 +105,33 @@ export default function EcommerceSolutionPillarPage() {
     })),
   };
 
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Pre-Built E-Commerce Store & Mobile Apps (Complete Package)",
+    operatingSystem: "Web, iOS, Android, Cloud (AWS, GCP, Azure, DigitalOcean)",
+    applicationCategory: "BusinessApplication",
+    description:
+      "Complete pre-built white-label e-commerce architecture including Next.js web store, Flutter iOS & Android apps, and central operations CRM deployed to client cloud with 0% commission.",
+    offers: {
+      "@type": "Offer",
+      price: "4999.00",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: `${siteUrl}/solutions/ecommerce`,
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "128",
+    },
+    provider: {
+      "@type": "Organization",
+      name: "Mechatron Lab Solutions",
+      url: siteUrl,
+    },
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
       <script
@@ -104,24 +146,42 @@ export default function EcommerceSolutionPillarPage() {
           __html: JSON.stringify(faqSchema),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(softwareSchema),
+        }}
+      />
 
       <Navbar />
 
       <main className="flex-1">
         <Hero
+          mode="all"
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Solutions", href: "/solutions" },
-            { label: "E-Commerce Platform" },
+            { label: "Complete E-Commerce Store" },
+          ]}
+          badge="Pre-Built &amp; Ready to Launch · 2–4 Week Deployment · 0% Revenue Cut"
+          headline="Pre-Built E-Commerce Store &amp; Mobile Apps. Ready to Launch."
+          subtitle="Pre-built, production-ready architecture designed for rapid deployment. High-speed Next.js web store, native Flutter iOS &amp; Android apps, and operations CRM deployed directly into your own private cloud account. You pay once. You keep 100% of your sales."
+          anchors={[
+            { label: "01 Web Storefront", href: "#hero" },
+            { label: "02 Native Apps", href: "#mobile-apps" },
+            { label: "03 Operations CRM", href: "#admin-crm" },
           ]}
         />
+        <TechStackStrip mode="all" />
         <LiveTicker />
-        <WhatYouGet />
-        <HowItWorks />
-        <Work />
-        <Pricing />
+        <AppShowcase index="01" />
+        <AdminCrmShowcase index="02" />
+        <HowItWorks index="03" />
+        <Work mode="all" index="04" />
+        <Pricing index="05" />
         <Faq />
         <Closing />
+
       </main>
 
       <Footer />
