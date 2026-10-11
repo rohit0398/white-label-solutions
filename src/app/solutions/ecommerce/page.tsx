@@ -12,31 +12,27 @@ import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Pre-Built E-Commerce Store & Mobile Apps | Ready to Launch in 2–4 Weeks",
+  title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
   description:
-    "Pre-built, production-ready e-commerce architecture designed for rapid deployment. Complete Next.js web storefront, native Flutter mobile apps, and admin inventory CRM deployed directly to your private cloud.",
+    "Enterprise e-commerce website & mobile app development company. We engineer custom Next.js online stores, native Flutter iOS & Android apps, and operations CRM deployed directly to your private cloud.",
   keywords: [
-    "pre-built ecommerce store",
-    "pre-built ecommerce website",
-    "ready-to-launch ecommerce solution",
-    "white label ecommerce development",
+    "ecommerce development company",
+    "ecommerce development agency",
     "ecommerce website development company",
-    "white label ecommerce website",
+    "ecommerce app development company",
+    "custom ecommerce development agency",
+    "flutter ecommerce app development",
+    "nextjs ecommerce development company",
+    "pre-built ecommerce store",
+    "white label ecommerce development",
     "white label ecommerce app",
-    "nextjs ecommerce website",
-    "flutter ecommerce app",
-    "headless ecommerce",
-    "ecommerce inventory management",
     "b2b ecommerce solutions",
     "ecommerce website development cost",
-    "ecommerce website packages",
-    "ecommerce platforms for small businesses",
-    "pre-built ecommerce solution with payment gateway",
-    "ecommerce website ready to launch",
-    "white label ecommerce platform",
-    "self hosted ecommerce solution",
+    "self hosted ecommerce platform development",
   ],
   alternates: {
     canonical: "/solutions/ecommerce",
@@ -49,15 +45,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Pre-Built E-Commerce Store & Mobile Apps | Mechatron Lab",
+    title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
     description:
-      "Pre-built, production-ready e-commerce architecture designed for rapid deployment. Deployed into your private cloud with zero monthly fees and 0% commission.",
+      "Enterprise e-commerce development company. High-speed Next.js web store, native Flutter iOS & Android apps, and central operations CRM on your private cloud.",
     url: "/solutions/ecommerce",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pre-Built E-Commerce Store & Mobile Apps | Mechatron Lab",
+    title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
     description:
       "Modern Next.js web store, native Flutter iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
     images: ["/og-image.png"],
@@ -67,91 +63,31 @@ export const metadata: Metadata = {
 export default function EcommerceSolutionPillarPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Solutions",
-        item: `${siteUrl}/solutions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Pre-Built E-Commerce Store",
-        item: `${siteUrl}/solutions/ecommerce`,
-      },
-    ],
-  };
+  const breadcrumbs = [
+    { name: "Home", item: "/" },
+    { name: "Solutions", item: "/solutions" },
+    { name: "Pre-Built E-Commerce Store", item: "/solutions/ecommerce" },
+  ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
-
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
+  const faqSchema = generateFaqSchema(FAQS);
+  const softwareSchema = generateSoftwareSchema({
     name: "Pre-Built E-Commerce Store & Mobile Apps (Complete Package)",
-    operatingSystem: "Web, iOS, Android, Cloud (AWS, GCP, Azure, DigitalOcean)",
-    applicationCategory: "BusinessApplication",
     description:
       "Complete pre-built white-label e-commerce architecture including Next.js web store, Flutter iOS & Android apps, and central operations CRM deployed to client cloud with 0% commission.",
-    offers: {
-      "@type": "Offer",
-      price: "4999.00",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: `${siteUrl}/solutions/ecommerce`,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "128",
-    },
-    provider: {
-      "@type": "Organization",
-      name: "Mechatron Lab Solutions",
-      url: siteUrl,
-    },
-  };
+    price: "4999.00",
+    url: "/solutions/ecommerce",
+    operatingSystem: "Web, iOS, Android, Cloud (AWS, GCP, Azure, DigitalOcean)",
+    applicationCategory: "BusinessApplication",
+    reviewCount: "128",
+    siteUrl,
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareSchema),
-        }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={faqSchema} />
+      <JsonLd schema={softwareSchema} />
 
       <Navbar />
 
@@ -181,7 +117,6 @@ export default function EcommerceSolutionPillarPage() {
         <Pricing index="05" />
         <Faq />
         <Closing />
-
       </main>
 
       <Footer />

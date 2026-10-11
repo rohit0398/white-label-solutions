@@ -37,6 +37,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   };
 
+  const shortDramaAlternates = {
+    languages: {
+      en: `${baseUrl}/solutions/short-drama`,
+      es: `${baseUrl}/es/solutions/short-drama`,
+      de: `${baseUrl}/de/solutions/short-drama`,
+      fr: `${baseUrl}/fr/solutions/short-drama`,
+      hi: `${baseUrl}/hi/solutions/short-drama`,
+    },
+  };
+
   const now = new Date();
 
   return [
@@ -150,6 +160,70 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
       alternates: ottAlternates,
+    },
+    // Short-Drama Base Platform (All Languages)
+    {
+      url: `${baseUrl}/solutions/short-drama`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: shortDramaAlternates,
+    },
+    {
+      url: `${baseUrl}/es/solutions/short-drama`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: shortDramaAlternates,
+    },
+    {
+      url: `${baseUrl}/de/solutions/short-drama`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: shortDramaAlternates,
+    },
+    {
+      url: `${baseUrl}/fr/solutions/short-drama`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: shortDramaAlternates,
+    },
+    {
+      url: `${baseUrl}/hi/solutions/short-drama`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: shortDramaAlternates,
+    },
+    // Short-Drama App Development Solution
+    {
+      url: `${baseUrl}/solutions/short-drama-app-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // Short-Drama Web Platform Solution
+    {
+      url: `${baseUrl}/solutions/short-drama-website-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // Cinematic Video Streaming Development Solution
+    {
+      url: `${baseUrl}/solutions/ott-video-streaming-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    // Cinematic OTT Mobile App Development Solution
+    {
+      url: `${baseUrl}/solutions/ott-app-development`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/es/solutions/ott-streaming`,

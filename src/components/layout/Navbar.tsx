@@ -2,15 +2,14 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { TRANSLATIONS } from "@/lib/translations";
-import { useSite } from "@/components/site/SiteProvider";
-import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
-import { MessageSquare, Sun, Moon, Menu, X, ChevronDown } from "lucide-react";
-import { trackWhatsAppClick } from "@/lib/analytics";
+import { Menu, X, Sun, Moon, MessageSquare, ChevronDown } from "lucide-react";
+import { BRAND } from "@/lib/constants";
+import { useSite } from "@/components/site/SiteProvider";
+import { TRANSLATIONS } from "@/lib/translations";
 
 export function Navbar() {
-  const { language, openDemo, theme, toggleTheme } = useSite();
+  const { openDemo, theme, toggleTheme, language } = useSite();
   const [open, setOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
@@ -18,32 +17,75 @@ export function Navbar() {
   const homeHref = language === "en" ? "/" : `/${language}`;
 
   const solutions = [
+    // E-Commerce
     {
-      title: "Pre-Built E-Commerce Store",
-      desc: "Complete online store, mobile apps & CRM",
+      title: "Complete E-Commerce Store",
+      desc: "Next.js storefront, Flutter apps & CRM",
       href: "/solutions/ecommerce",
       price: "$4,999",
+      group: "ecommerce",
     },
     {
-      title: "E-Commerce Website Development",
-      desc: "Next.js web storefront & Admin CRM",
+      title: "E-Commerce Website",
+      desc: "Web storefront & operations CRM",
       href: "/solutions/ecommerce-website-development",
       price: "$2,999",
+      group: "ecommerce",
     },
     {
-      title: "E-Commerce App Development",
+      title: "E-Commerce Mobile App",
       desc: "Native iOS & Android apps with Flutter",
       href: "/solutions/ecommerce-app-development",
       price: "$2,999",
+      group: "ecommerce",
+    },
+
+    // 9:16 Short-Drama
+    {
+      title: "Complete Short-Drama Suite",
+      desc: "Vertical reels apps, web player & CMS",
+      href: "/solutions/short-drama",
+      price: "$4,999",
+      group: "drama",
     },
     {
-      title: "OTT & Short Video Dramas",
-      desc: "9:16 vertical reels & cinematic streaming",
+      title: "Short-Drama Mobile App",
+      desc: "Native 9:16 apps with VIP passes & ads",
+      href: "/solutions/short-drama-app-development",
+      price: "$2,999",
+      group: "drama",
+    },
+    {
+      title: "Short-Drama Web Platform",
+      desc: "Mobile-first 9:16 web player & CMS",
+      href: "/solutions/short-drama-website-development",
+      price: "$2,999",
+      group: "drama",
+    },
+
+    // 16:9 Cinematic OTT
+    {
+      title: "Complete Cinematic OTT Suite",
+      desc: "16:9 web portal, mobile apps & Video CMS",
       href: "/solutions/ott-streaming",
       price: "$4,999",
+      group: "ott",
+    },
+    {
+      title: "Cinematic Web Streaming",
+      desc: "16:9 widescreen portal & adaptive HLS",
+      href: "/solutions/ott-video-streaming-development",
+      price: "$2,999",
+      group: "ott",
+    },
+    {
+      title: "Cinematic OTT Mobile App",
+      desc: "16:9 streaming apps with TV casting",
+      href: "/solutions/ott-app-development",
+      price: "$2,999",
+      group: "ott",
     },
   ];
-
 
   const desktopLinks = [
     { label: t.nav.work, href: `${homeHref}#work` },
@@ -101,48 +143,110 @@ export function Navbar() {
             </button>
 
             {solutionsOpen && (
-              <div className="absolute -left-3 top-full pt-1 w-80 z-50 animate-fade-in">
-                <div className="rounded-xl border border-line bg-paper/98 backdrop-blur-md p-2 shadow-xl space-y-1">
-                  {solutions.map((s) => (
-                    <Link
-                      key={s.href}
-                      href={s.href}
-                      onClick={() => setSolutionsOpen(false)}
-                      className="block p-2.5 rounded-lg hover:bg-wash transition-colors group"
-                    >
-                      <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block">
-                        {s.title}
-                      </span>
-                      <div className="flex items-center justify-between gap-2 mt-1">
-                        <p className="text-[11px] text-ink-3 leading-snug">
-                          {s.desc}
-                        </p>
-                        <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line/80 text-ink-2 group-hover:border-ink/40 transition-colors">
-                          {s.price}
-                        </span>
+              <div className="absolute -left-20 top-full pt-1 w-[720px] z-50 animate-fade-in">
+                <div className="rounded-xl border border-line bg-paper/98 backdrop-blur-md p-3 shadow-2xl">
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* Column 1: E-Commerce */}
+                    <div className="space-y-1">
+                      <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-ink-3">
+                        E-Commerce
                       </div>
-                    </Link>
-                  ))}
-                  <div className="pt-1.5 mt-1 border-t border-line flex items-center justify-between px-2.5 py-1">
+                      {solutions.filter((s) => s.group === "ecommerce").map((s) => (
+                        <Link
+                          key={s.href}
+                          href={s.href}
+                          onClick={() => setSolutionsOpen(false)}
+                          className="block p-2 rounded-lg hover:bg-wash transition-colors group"
+                        >
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                              {s.title}
+                            </span>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                              {s.price}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
+                            {s.desc}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Column 2: 9:16 Short Drama */}
+                    <div className="space-y-1">
+                      <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-ink-3">
+                        9:16 Short-Drama
+                      </div>
+                      {solutions.filter((s) => s.group === "drama").map((s) => (
+                        <Link
+                          key={s.href}
+                          href={s.href}
+                          onClick={() => setSolutionsOpen(false)}
+                          className="block p-2 rounded-lg hover:bg-wash transition-colors group"
+                        >
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                              {s.title}
+                            </span>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                              {s.price}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
+                            {s.desc}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Column 3: 16:9 Cinematic OTT */}
+                    <div className="space-y-1">
+                      <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-ink-3">
+                        16:9 Cinematic OTT
+                      </div>
+                      {solutions.filter((s) => s.group === "ott").map((s) => (
+                        <Link
+                          key={s.href}
+                          href={s.href}
+                          onClick={() => setSolutionsOpen(false)}
+                          className="block p-2 rounded-lg hover:bg-wash transition-colors group"
+                        >
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                              {s.title}
+                            </span>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                              {s.price}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
+                            {s.desc}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-2.5 mt-2 border-t border-line flex items-center justify-between px-2 text-xs font-mono">
                     <Link
                       href="/solutions"
                       onClick={() => setSolutionsOpen(false)}
-                      className="text-[11px] font-mono text-ink-3 hover:text-ink transition-colors"
+                      className="text-ink-3 hover:text-ink transition-colors"
                     >
-                      All architectures →
+                      All architectures &amp; catalogs →
                     </Link>
                     <Link
                       href="/blog"
                       onClick={() => setSolutionsOpen(false)}
-                      className="text-[11px] font-mono text-ink-3 hover:text-accent transition-colors"
+                      className="text-ink-3 hover:text-accent transition-colors"
                     >
-                      Blog &amp; Guides →
+                      Engineering Guides →
                     </Link>
                   </div>
                 </div>
               </div>
             )}
-
           </div>
 
           {desktopLinks.map((l) => (
@@ -153,7 +257,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2.5">
-          {/* Theme Toggle (Dark ↔ Light) - Desktop Only in Header, on Mobile it is in the Drawer */}
+          {/* Theme Toggle (Dark ↔ Light) */}
           <button
             id="nav-theme-toggle"
             type="button"
@@ -175,20 +279,18 @@ export function Navbar() {
             href={BRAND.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("Navbar")}
             className="group relative h-8 w-8 inline-flex items-center justify-center text-accent bg-accent/5 hover:bg-accent/15 rounded-md border border-accent/30 hover:border-accent hover:scale-105 active:scale-95 transition-all duration-200 shadow-xs animate-pulse-glow shrink-0"
             title="Chat with Us on WhatsApp (Instant Reply)"
             aria-label="Direct WhatsApp live chat"
           >
             <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            {/* Live Online Ping Beacon */}
             <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5 pointer-events-none">
               <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent border-2 border-paper" />
             </span>
           </a>
 
-          {/* Book a Demo Button with Active Living Pulse & Spring Hover Elevation */}
+          {/* Book a Demo Button */}
           <Button
             id="nav-book-demo"
             size="sm"
@@ -198,7 +300,7 @@ export function Navbar() {
             {t.nav.bookDemo}
           </Button>
 
-          {/* Mobile Hamburger Toggle with Active Tactile Micro-Press */}
+          {/* Mobile Hamburger Toggle */}
           <button
             id="nav-menu-toggle"
             type="button"
@@ -217,28 +319,69 @@ export function Navbar() {
       </div>
 
       {open && (
-        <nav id="nav-mobile" className="sm:hidden border-t border-line bg-paper/98 backdrop-blur-md">
-          <div className="wrap-wide py-4 space-y-3">
-            {/* Solutions Section */}
+        <nav id="nav-mobile" className="sm:hidden border-t border-line bg-paper/98 backdrop-blur-md max-h-[85vh] overflow-y-auto">
+          <div className="wrap-wide py-4 space-y-4">
+            {/* E-Commerce Solutions Section */}
             <div className="space-y-1">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">Platform Solutions</p>
-              {solutions.map((s) => (
+              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">E-Commerce Solutions</p>
+              {solutions.filter((s) => s.group === "ecommerce").map((s) => (
                 <Link
                   key={s.href}
                   href={s.href}
                   onClick={() => setOpen(false)}
                   className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
                 >
-                  <span className="block text-sm font-medium">{s.title}</span>
-                  <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <span className="text-[11px] text-ink-3 font-normal">{s.desc}</span>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium">{s.title}</span>
                     <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
                       {s.price}
                     </span>
                   </div>
+                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
                 </Link>
               ))}
+            </div>
 
+            {/* 9:16 Short Drama Solutions Section */}
+            <div className="space-y-1 pt-2 border-t border-line/60">
+              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">9:16 Short-Drama Solutions</p>
+              {solutions.filter((s) => s.group === "drama").map((s) => (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium">{s.title}</span>
+                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
+                      {s.price}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
+                </Link>
+              ))}
+            </div>
+
+            {/* 16:9 Cinematic OTT Solutions Section */}
+            <div className="space-y-1 pt-2 border-t border-line/60">
+              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">16:9 Cinematic OTT Solutions</p>
+              {solutions.filter((s) => s.group === "ott").map((s) => (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium">{s.title}</span>
+                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
+                      {s.price}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
+                </Link>
+              ))}
             </div>
 
             {/* Standard Links */}
@@ -276,37 +419,12 @@ export function Navbar() {
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setOpen(false);
-                  trackWhatsAppClick("Navbar-Mobile");
-                }}
-                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-md border border-accent/30 bg-accent/10 text-accent font-medium hover:bg-accent/20 text-sm transition-colors"
+                onClick={() => setOpen(false)}
+                className="w-full h-10 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 flex items-center justify-center gap-2 text-accent font-medium text-sm transition-colors"
               >
                 <MessageSquare className="h-4 w-4" />
-                <span>Chat on WhatsApp (Instant Reply)</span>
+                <span>Chat on WhatsApp</span>
               </a>
-
-              {/* Theme Switcher inside Mobile Side Menu */}
-              <div className="flex items-center justify-between py-2 px-2.5 rounded-lg border border-line bg-wash text-xs text-ink-2">
-                <div className="flex items-center gap-2">
-                  {theme === "dark" ? (
-                    <Moon className="h-4 w-4 text-accent" />
-                  ) : (
-                    <Sun className="h-4 w-4 text-accent" />
-                  )}
-                  <span className="font-mono text-ink">Appearance</span>
-                </div>
-                <button
-                  type="button"
-                  id="nav-mobile-theme-toggle"
-                  onClick={toggleTheme}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-line bg-paper text-xs font-mono text-ink hover:border-ink/40 transition-colors cursor-pointer"
-                  aria-label="Toggle theme in mobile menu"
-                >
-                  <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
-                  <span className="text-[10px] text-ink-3 underline">Change</span>
-                </button>
-              </div>
             </div>
           </div>
         </nav>

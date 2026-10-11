@@ -308,11 +308,13 @@ export const FAQS: Faq[] = [
   },
 ];
 
-export const OTT_PRICING_TIERS: PricingTier[] = [
+// --- Short-Drama (9:16 Vertical Reels) Pricing Tiers ---
+
+export const SHORT_DRAMA_BASE_PRICING_TIERS: PricingTier[] = [
   {
-    id: "ott-streaming",
-    name: "Launch",
-    tagline: "Apps, web streaming portal and Video CMS, branded and deployed to your cloud in 2–4 weeks.",
+    id: "short-drama-base",
+    name: "Complete Drama Suite",
+    tagline: "Both 9:16 vertical drama mobile apps AND responsive web player + Video CMS in 2–4 weeks.",
     isPopular: true,
     prices: {
       USD: { amount: 4999, period: "one-time" },
@@ -321,21 +323,22 @@ export const OTT_PRICING_TIERS: PricingTier[] = [
       INR: { amount: 399000, period: "one-time" },
     },
     deliverables: [
-      "9:16 vertical drama reels or 16:9 cinematic video player engines",
-      "Android and iOS Flutter apps, published under your developer accounts",
-      "Next.js responsive web streaming portal & series catalog",
-      "Video CMS with retention analytics and automated transcoding pipeline",
-      "SVOD subscriptions (Apple StoreKit, Google Play Billing & Stripe)",
-      "Video Ads (AVOD) integration via Google AdMob & VAST standards",
-      "Deployment to your Cloudflare Stream & AWS accounts",
-      "30 days of support after launch",
+      "9:16 vertical short-drama Flutter iOS & Android apps",
+      "Next.js 16 mobile-first web streaming portal & catalog",
+      "TikTok-style 60FPS vertical swipe player with chapter scrubbers",
+      "Weekly, monthly & annual VIP subscription passes via Stripe & In-App Purchases",
+      "Rewarded video ads (AVOD) integration via Google AdMob & VAST",
+      "Video CMS with teaser episode paywall rules & drop-off analytics",
+      "Cloudflare Stream automated encoding with zero bandwidth markup",
+      "Published under your Apple & Google Play developer accounts",
+      "30 days of post-launch engineering support",
     ],
-    ctaText: "Book a demo",
+    ctaText: "Book drama suite demo",
   },
   {
-    id: "source-code-license",
+    id: "short-drama-source-code",
     name: "Source code",
-    tagline: "Add-on. The full repositories, with the right to change, host or resell them.",
+    tagline: "Add-on. The full Flutter mobile apps, Next.js web player, and Video CMS repositories.",
     prices: {
       USD: { amount: 1999, period: "one-time" },
       EUR: { amount: 1849, period: "one-time" },
@@ -343,42 +346,364 @@ export const OTT_PRICING_TIERS: PricingTier[] = [
       INR: { amount: 149000, period: "one-time" },
     },
     deliverables: [
-      "Mobile apps (Flutter), web portal (Next.js), Video CMS & backend",
-      "Unencrypted Git repositories with architecture documentation",
-      "Cloudflare Stream & AWS encoding pipeline scripts",
-      "Perpetual commercial licence, zero recurring software fees",
+      "Full Flutter apps, Next.js web portal, and Video CMS repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Cloudflare Stream encoding & DRM signed token scripts",
+      "Perpetual commercial license, zero recurring software fees",
     ],
     ctaText: "Ask about the licence",
   },
   {
-    id: "dedicated-support",
+    id: "short-drama-developer-time",
     name: "Developer time",
-    tagline: "Engineers for Smart TV apps, custom DRM or custom feature builds.",
+    tagline: "Engineers for custom payment gateways, ad networks, or creator tooling.",
     prices: {
       USD: { amount: 20, period: "per hour" },
-      EUR: { amount: 19, period: "per hour" },
+      EUR: { amount: 18, period: "per hour" },
       GBP: { amount: 16, period: "per hour" },
       INR: { amount: 1500, period: "per hour" },
     },
     deliverables: [
-      "Smart TV apps (Android TV, Apple TV, FireTV)",
-      "Custom DRM (Google Widevine & Apple FairPlay) integration",
-      "Custom payment gateways, local ad networks & CRM sync",
+      "Custom payment gateway and local wallet integrations",
+      "Rewarded video ad networks (Google AdMob, AppLovin, Unity Ads)",
+      "App Store compliance updates & version releases",
       "Hourly blocks or a dedicated monthly developer retainer",
     ],
     ctaText: "Talk to us",
   },
 ];
 
+export const SHORT_DRAMA_APP_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "short-drama-app-launch",
+    name: "Drama App Launch",
+    tagline: "Native 9:16 vertical drama apps (iOS & Android) and Video CMS deployed in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "9:16 vertical short-drama Flutter iOS & Android apps",
+      "TikTok-style 60FPS vertical swipe player with chapter scrubbers",
+      "Weekly & monthly VIP subscription passes via Apple StoreKit & Google Play",
+      "Rewarded video ads (AVOD) integration via Google AdMob",
+      "Cloudflare Stream automated encoding with zero bandwidth markup",
+      "Video CMS with episode paywall rules & drop-off analytics",
+      "Published under your Apple & Google Play developer accounts",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book drama app demo",
+  },
+  {
+    id: "short-drama-app-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Flutter mobile apps and Video CMS repositories.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Full Flutter mobile apps and Video CMS repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Cloudflare Stream encoding & DRM signed token scripts",
+      "Perpetual commercial license, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "short-drama-app-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for custom payment gateways, ad networks, or creator tooling.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "Custom payment gateway and local wallet integrations",
+      "Rewarded video ad networks (Google AdMob, AppLovin, Unity Ads)",
+      "App Store compliance updates & version releases",
+      "Hourly blocks or a dedicated monthly developer retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+export const SHORT_DRAMA_WEB_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "short-drama-web-launch",
+    name: "Drama Web Launch",
+    tagline: "Mobile-first 9:16 vertical web streaming portal and Video CMS deployed in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "Next.js 16 responsive 9:16 mobile-first web streaming portal",
+      "Sub-second HLS vertical player with continuous autoplay & chapter scrubbers",
+      "Stripe recurring billing for weekly, monthly & annual VIP passes",
+      "Pre-roll & rewarded video ads integration for web browsers",
+      "Video CMS with episode paywall rules & drop-off analytics",
+      "Search-engine-optimized series, episode & synopsis pages",
+      "Deployed directly onto your private cloud with 0% platform cuts",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book drama web demo",
+  },
+  {
+    id: "short-drama-web-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Next.js web portal, Video CMS, and backend repositories.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Next.js web portal, Video CMS, and backend repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Cloudflare Stream encoding & DRM signed token scripts",
+      "Perpetual commercial license, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "short-drama-web-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for custom payment gateways, ad networks, or creator tooling.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "Custom payment gateway and Stripe customer portal setup",
+      "Custom analytics & user retention funnel tracking",
+      "SEO enhancements and international localization",
+      "Hourly blocks or a dedicated monthly developer retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+// Alias for existing imports
+export const SHORT_DRAMA_PRICING_TIERS = SHORT_DRAMA_APP_PRICING_TIERS;
+
+// --- Cinematic OTT (16:9 Widescreen) Pricing Tiers ---
+
+export const CINEMATIC_OTT_BASE_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "cinematic-base",
+    name: "Complete OTT Suite",
+    tagline: "Both 16:9 widescreen web portal AND native mobile apps + Video CMS in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 4999, period: "one-time" },
+      EUR: { amount: 4599, period: "one-time" },
+      GBP: { amount: 3999, period: "one-time" },
+      INR: { amount: 399000, period: "one-time" },
+    },
+    deliverables: [
+      "16:9 widescreen Next.js 16 web portal & series catalog",
+      "Flutter iOS & Android native streaming apps with offline download & TV cast",
+      "Sub-second buffer via HLS.js adaptive bitrates (1080p, 720p, 480p, 360p)",
+      "Stripe recurring billing & In-App Purchase VIP passes (SVOD)",
+      "Video CMS with cloud encoding pipeline (Cloudflare Stream / AWS)",
+      "Video Ads (AVOD) integration via Google AdMob & VAST standards",
+      "Search-engine-optimized series, episode & synopsis title pages",
+      "Deployed directly onto your private cloud with 0% platform cuts",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book complete OTT demo",
+  },
+  {
+    id: "cinematic-base-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Flutter mobile apps, Next.js web portal, and Video CMS repositories.",
+    prices: {
+      USD: { amount: 1999, period: "one-time" },
+      EUR: { amount: 1849, period: "one-time" },
+      GBP: { amount: 1599, period: "one-time" },
+      INR: { amount: 149000, period: "one-time" },
+    },
+    deliverables: [
+      "Full Flutter apps, Next.js web portal, and Video CMS repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Automated cloud transcoding scripts with DRM token security",
+      "Perpetual commercial license, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "cinematic-base-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for Smart TV apps, custom DRM or live linear streaming sync.",
+    prices: {
+      USD: { amount: 20, period: "per hour" },
+      EUR: { amount: 18, period: "per hour" },
+      GBP: { amount: 16, period: "per hour" },
+      INR: { amount: 1500, period: "per hour" },
+    },
+    deliverables: [
+      "Smart TV app builds (Android TV, Apple TV, FireTV)",
+      "Google Widevine & Apple FairPlay DRM integration",
+      "Live 24/7 linear channel stream ingest & HLS transcode sync",
+      "Hourly blocks or a dedicated monthly developer retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+export const CINEMATIC_OTT_WEB_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "cinematic-web-launch",
+    name: "Cinematic Web Launch",
+    tagline: "16:9 widescreen streaming web portal and Video CMS, branded and deployed in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "16:9 widescreen Next.js 16 video portal & series catalog",
+      "Sub-second buffer via HLS.js adaptive bitrates (1080p, 720p, 480p, 360p)",
+      "Multi-language subtitle strips (WebVTT) & audio track selectors",
+      "Stripe recurring billing for monthly, quarterly & annual VIP passes",
+      "Video CMS with cloud encoding pipeline (Cloudflare Stream / AWS)",
+      "Search-engine-optimized series, episode & synopsis title pages",
+      "Deployed directly onto your private cloud with 0% platform cuts",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book web streaming demo",
+  },
+  {
+    id: "cinematic-web-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Next.js video portal, Video CMS, and backend repositories.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Next.js web streaming portal, Video CMS & API repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Automated cloud transcoding scripts with DRM token security",
+      "Perpetual commercial license, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "cinematic-web-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for Smart TV apps, custom DRM or live linear streaming sync.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "Smart TV app builds (Android TV, Apple TV, FireTV)",
+      "Google Widevine & Apple FairPlay DRM integration",
+      "Live 24/7 linear channel stream ingest & HLS transcode sync",
+      "Hourly blocks or a dedicated monthly developer retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+export const CINEMATIC_OTT_APP_PRICING_TIERS: PricingTier[] = [
+  {
+    id: "cinematic-app-launch",
+    name: "Cinematic App Launch",
+    tagline: "Native 16:9 widescreen streaming apps (iOS & Android) and Video CMS in 2–4 weeks.",
+    isPopular: true,
+    prices: {
+      USD: { amount: 2999, period: "one-time" },
+      EUR: { amount: 2749, period: "one-time" },
+      GBP: { amount: 2399, period: "one-time" },
+      INR: { amount: 249000, period: "one-time" },
+    },
+    deliverables: [
+      "Flutter iOS & Android 16:9 cinematic widescreen mobile apps",
+      "Adaptive multi-bitrate HLS playback with picture-in-picture & TV casting",
+      "Apple In-App Purchase & Google Play Billing for VIP subscriptions",
+      "Pre-roll and mid-roll video ads integration (AVOD)",
+      "Offline video download encryption for on-the-go viewing",
+      "Video CMS with cloud encoding pipeline (Cloudflare Stream / AWS)",
+      "Published directly under your Apple & Google Play developer accounts",
+      "30 days of post-launch engineering support",
+    ],
+    ctaText: "Book streaming app demo",
+  },
+  {
+    id: "cinematic-app-source-code",
+    name: "Source code",
+    tagline: "Add-on. The full Flutter mobile apps and Video CMS repositories.",
+    prices: {
+      USD: { amount: 999, period: "one-time" },
+      EUR: { amount: 920, period: "one-time" },
+      GBP: { amount: 799, period: "one-time" },
+      INR: { amount: 79000, period: "one-time" },
+    },
+    deliverables: [
+      "Full Flutter mobile apps and Video CMS repositories",
+      "Unencrypted Git repository access with architecture documentation",
+      "Automated cloud transcoding scripts with DRM token security",
+      "Perpetual commercial license, zero recurring software fees",
+    ],
+    ctaText: "Ask about the licence",
+  },
+  {
+    id: "cinematic-app-developer-time",
+    name: "Developer time",
+    tagline: "Engineers for Smart TV apps, custom DRM or live linear streaming sync.",
+    prices: {
+      USD: { amount: 15, period: "per hour" },
+      EUR: { amount: 14, period: "per hour" },
+      GBP: { amount: 12, period: "per hour" },
+      INR: { amount: 1200, period: "per hour" },
+    },
+    deliverables: [
+      "Smart TV app builds (Android TV, Apple TV, FireTV)",
+      "Google Widevine & Apple FairPlay DRM integration",
+      "Live 24/7 linear channel stream ingest & HLS transcode sync",
+      "Hourly blocks or a dedicated monthly developer retainer",
+    ],
+    ctaText: "Talk to us",
+  },
+];
+
+// Aliases for existing imports
+export const CINEMATIC_OTT_PRICING_TIERS = CINEMATIC_OTT_WEB_PRICING_TIERS;
+export const OTT_PRICING_TIERS = CINEMATIC_OTT_BASE_PRICING_TIERS;
+
+
 export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
-    id: "alright",
-    title: "Alright",
-    industry: "Short Video Series & Comedy Entertainment",
+    id: "episodic-entertainment-app",
+    title: "Episodic Comedy & Short Series App",
+    industry: "Short Video Series & Entertainment",
     description:
-      "Episodic short series and comedy entertainment application with millions of active Android viewers. Low-latency video caching and fast vertical browsing.",
+      "Episodic short series and entertainment application built and deployed by our team, powering millions of active Android viewers with low-latency edge caching and fast vertical browsing.",
     url: "https://play.google.com/store/apps/details?id=com.app.alright&hl=en_IN",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.app.alright&hl=en_IN",
+    screenshotUrl: "/showcase/ott-drama-app.jpg",
   },
   {
     id: "plus305",
@@ -388,7 +713,13 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
       "24/7 linear live TV broadcast stream and on-demand video catalogue. Cross-platform responsive playback with adaptive multi-bitrate HLS streaming.",
     url: "http://play.google.com/store/apps/details?id=tv.network.plus305&hl=en_IN",
     playStoreUrl: "http://play.google.com/store/apps/details?id=tv.network.plus305&hl=en_IN",
+    screenshotUrl: "/showcase/ott-cinematic-web.jpg",
   },
+];
+
+export const ALL_HOME_SHOWCASE_PROJECTS: ShowcaseProject[] = [
+  ...OTT_SHOWCASE_PROJECTS,
+  ...SHOWCASE_PROJECTS.slice(0, 2),
 ];
 
 export const OTT_FAQS: Faq[] = [

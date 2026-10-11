@@ -311,7 +311,7 @@ export const en: TranslationDictionary = {
     closeBtn: "Close",
   },
   footer: {
-    tagline: "E-commerce stores and apps, set up on your own cloud.",
+    tagline: "Software development company & engineering agency. Custom OTT video platforms, 9:16 short-drama apps, and e-commerce stores deployed on your own private cloud.",
     colWork: "Work",
     colProduct: "Product",
     colContact: "Contact",
