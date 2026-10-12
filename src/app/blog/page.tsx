@@ -17,25 +17,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Engineering & Growth Blog | Mechatron Lab",
+  title: "Software Engineering & Growth Blog | Mechatron Lab",
   description:
-    "In-depth guides on e-commerce website development costs, native mobile app architecture, self-hosted infrastructure, and Shopify alternatives.",
+    "In-depth engineering guides on software development costs, video streaming platforms, mobile app architecture, and private cloud infrastructure.",
   keywords: [
-    "ecommerce website development",
+    "software engineering blog",
+    "video streaming architecture",
+    "short drama app development",
     "ecommerce website development cost",
-    "ecommerce web development",
-    "ecommerce app development",
-    "custom ecommerce development",
-    "build ecommerce website",
-    "ecommerce development company",
+    "custom software development guide",
+    "private cloud software architecture",
   ],
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "E-Commerce Engineering & Growth Blog | Mechatron Lab",
+    title: "Software Engineering & Growth Blog | Mechatron Lab",
     description:
-      "Actionable engineering guides, cost breakdowns, and architecture deep dives for brand owners and technical leaders.",
+      "In-depth engineering guides on software development costs, video streaming platforms, mobile app architecture, and private cloud infrastructure.",
     url: "/blog",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -44,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Engineering & Growth Blog | Mechatron Lab",
+    title: "Software Engineering & Growth Blog | Mechatron Lab",
     description:
-      "In-depth guides on e-commerce development costs, mobile apps, and self-hosted cloud architecture.",
+      "Engineering guides on software development costs, video streaming, and private cloud architecture.",
     images: ["/og-image.png"],
   },
 };

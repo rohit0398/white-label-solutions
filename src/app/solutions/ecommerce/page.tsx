@@ -16,23 +16,19 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
+  title: "E-Commerce Website & App Development Company | Mechatron Lab",
   description:
-    "Enterprise e-commerce website & mobile app development company. We engineer custom Next.js online stores, native Flutter iOS & Android apps, and operations CRM deployed directly to your private cloud.",
+    "Launch an online store and native iOS & Android apps in 2–4 weeks. Complete Next.js web store, Flutter apps, and CRM on your cloud with 0% revenue cut.",
   keywords: [
     "ecommerce development company",
-    "ecommerce development agency",
     "ecommerce website development company",
     "ecommerce app development company",
-    "custom ecommerce development agency",
-    "flutter ecommerce app development",
-    "nextjs ecommerce development company",
+    "custom ecommerce development",
+    "flutter ecommerce app",
+    "nextjs ecommerce store",
     "pre-built ecommerce store",
-    "white label ecommerce development",
-    "white label ecommerce app",
-    "b2b ecommerce solutions",
-    "ecommerce website development cost",
-    "self hosted ecommerce platform development",
+    "white label ecommerce platform",
+    "self hosted ecommerce platform",
   ],
   alternates: {
     canonical: "/solutions/ecommerce",
@@ -45,17 +41,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
+    title: "E-Commerce Website & App Development Company | Mechatron Lab",
     description:
-      "Enterprise e-commerce development company. High-speed Next.js web store, native Flutter iOS & Android apps, and central operations CRM on your private cloud.",
+      "Launch an online store and native iOS & Android apps in 2–4 weeks. Complete Next.js web store, Flutter apps, and CRM on your cloud with 0% revenue cut.",
     url: "/solutions/ecommerce",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Website & Mobile App Development Company | Mechatron Lab",
+    title: "E-Commerce Website & App Development Company | Mechatron Lab",
     description:
-      "Modern Next.js web store, native Flutter iOS & Android apps, and Admin CRM deployed on your cloud with 0% revenue cuts.",
+      "Launch an online store and native iOS & Android shopping apps in 2–4 weeks with 0% revenue cuts on your private cloud.",
     images: ["/og-image.png"],
   },
 };

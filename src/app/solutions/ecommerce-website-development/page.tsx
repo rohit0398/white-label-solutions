@@ -16,26 +16,24 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Website Development Company | Next.js Store Agency | Mechatron Lab",
+  title: "E-Commerce Website Development Company | Next.js | Mechatron Lab",
   description:
-    "Custom e-commerce website development company & web engineering agency. We build sub-second Next.js stores, automated tax invoicing, and multi-warehouse CRM on your private cloud.",
+    "High-speed Next.js online stores with sub-second page loads, automated tax invoices, and multi-warehouse CRM deployed on your cloud in 2–4 weeks.",
   keywords: [
     "ecommerce website development company",
-    "ecommerce web development agency",
-    "ecommerce site development company",
-    "custom ecommerce website development agency",
-    "nextjs ecommerce development company",
-    "b2b ecommerce website development agency",
-    "ecommerce development services company",
-    "develop ecommerce website agency",
+    "nextjs ecommerce store",
+    "ecommerce web development",
+    "custom ecommerce website",
+    "b2b ecommerce website development",
+    "self hosted ecommerce store",
   ],
   alternates: {
     canonical: "/solutions/ecommerce-website-development",
   },
   openGraph: {
-    title: "E-Commerce Website Development Company | Next.js Store Agency",
+    title: "E-Commerce Website Development Company | Next.js",
     description:
-      "Enterprise e-commerce website development agency. Sub-second Next.js web storefront and central operations CRM on your private cloud.",
+      "High-speed Next.js online stores with sub-second page loads, automated tax invoices, and multi-warehouse CRM deployed on your cloud in 2–4 weeks.",
     url: "/solutions/ecommerce-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -44,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Website Development Company | Next.js Store Agency",
+    title: "E-Commerce Website Development Company | Next.js",
     description:
-      "High-speed online storefront and operations CRM deployed directly to your private cloud with 0% revenue cut.",
+      "High-speed online storefronts and operations CRM deployed directly to your private cloud with 0% revenue cut.",
     images: ["/og-image.png"],
   },
 };

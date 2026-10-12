@@ -19,26 +19,26 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 import { Smartphone, ShieldCheck, Zap, Download, Tv } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "OTT Mobile App Development Company | iOS, Android & TV Agency | Mechatron Lab",
+  title: "OTT Mobile App Development | iOS, Android & TV | Mechatron Lab",
   description:
-    "Enterprise OTT mobile app development company & engineering agency. We build 16:9 widescreen streaming apps for iOS, Android, and Smart TV with AirPlay, Chromecast, and Video CMS.",
+    "Custom 16:9 video streaming apps for iOS, Android & Smart TV. Includes Chromecast casting, offline viewing, and private cloud deployment with 0% commission.",
   keywords: [
-    "ott mobile app development company",
-    "video streaming app development agency",
-    "netflix clone app development company",
-    "flutter video streaming app developers",
-    "vod mobile app development agency",
-    "smart tv app development company",
-    "white label streaming app development agency",
+    "ott mobile app development",
+    "video streaming app development",
+    "netflix clone app",
+    "flutter video streaming app",
+    "vod mobile app development",
+    "smart tv app development",
+    "white label streaming app",
     "custom ott app developers",
   ],
   alternates: {
     canonical: "/solutions/ott-app-development",
   },
   openGraph: {
-    title: "OTT Mobile App Development Company | iOS, Android & TV Agency",
+    title: "OTT Mobile App Development | iOS, Android & TV",
     description:
-      "Custom 16:9 widescreen OTT streaming app development agency. Native Flutter iOS & Android apps with adaptive HLS playback, TV casting, and Video CMS.",
+      "Custom 16:9 video streaming apps for iOS, Android & Smart TV. Includes Chromecast casting, offline viewing, and private cloud deployment with 0% commission.",
     url: "/solutions/ott-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OTT Mobile App Development Company | iOS, Android & TV Agency",
+    title: "OTT Mobile App Development | iOS, Android & TV",
     description:
-      "Enterprise OTT streaming app development company. Deploy custom Netflix-style video apps on your private cloud.",
+      "Custom 16:9 video streaming apps for iOS, Android & Smart TV deployed on your private cloud with 0% commission.",
     images: ["/showcase/ott-cinematic-web.jpg"],
   },
 };

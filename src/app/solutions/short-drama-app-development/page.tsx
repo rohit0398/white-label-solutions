@@ -19,28 +19,26 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 import { Smartphone, Zap, ShieldCheck, Lock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Short-Drama App Development Company | 9:16 iOS & Android Agency | Mechatron Lab",
+  title: "Short-Drama Mobile App Development | iOS & Android | Mechatron Lab",
   description:
-    "Expert short-drama app development company & mobile engineering agency. We build custom 9:16 vertical streaming apps with 60FPS swipe mechanics, VIP subscriptions, and Video CMS in 2–4 weeks.",
+    "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and in-app ads. Published to App Store & Google Play in 2–4 weeks with 0% fees.",
   keywords: [
+    "short drama mobile app development",
     "short drama app development company",
-    "short drama app development agency",
-    "vertical video app development company",
+    "vertical video streaming app",
     "reelshort clone app developers",
-    "dramabox white label platform agency",
-    "short drama reels app development",
-    "vertical video streaming app agency",
+    "dramabox white label app",
+    "short drama reels app",
+    "flutter video streaming app",
     "short drama app with source code",
-    "micro drama app development company",
-    "flutter video streaming app developers",
   ],
   alternates: {
     canonical: "/solutions/short-drama-app-development",
   },
   openGraph: {
-    title: "Short-Drama App Development Company | 9:16 iOS & Android Agency",
+    title: "Short-Drama Mobile App Development | iOS & Android",
     description:
-      "Custom 9:16 vertical short-drama app development agency. Native iOS & Android Flutter apps with 60FPS vertical swipe gestures and VIP subscription passes.",
+      "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and in-app ads. Published to App Store & Google Play in 2–4 weeks with 0% fees.",
     url: "/solutions/short-drama-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -49,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama App Development Company | 9:16 iOS & Android Agency",
+    title: "Short-Drama Mobile App Development | iOS & Android",
     description:
-      "Enterprise short-drama app development company. Deploy your branded ReelShort-style app on private cloud with 0% commission.",
+      "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and private cloud deployment in 2–4 weeks.",
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };

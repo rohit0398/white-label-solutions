@@ -16,26 +16,25 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Mobile App Development Company | Flutter iOS & Android Agency | Mechatron Lab",
+  title: "E-Commerce Mobile App Development | iOS & Android | Mechatron Lab",
   description:
-    "Custom e-commerce mobile app development company & agency. We build high-conversion Flutter shopping apps for iOS & Android, native checkout, push notifications, and private cloud sync.",
+    "Launch native iOS & Android shopping apps built with Flutter in 2–4 weeks. Fast checkout, push notifications, and 0% app sales cuts on your private cloud.",
   keywords: [
-    "ecommerce mobile app development company",
-    "ecommerce app development agency",
-    "flutter ecommerce app development company",
-    "shopping app development agency",
-    "mobile commerce app development company",
-    "custom shopping app developers",
-    "white label ecommerce app development agency",
-    "ios android ecommerce app agency",
+    "ecommerce mobile app development",
+    "ecommerce app development company",
+    "flutter ecommerce app",
+    "shopping app development",
+    "mobile commerce app development",
+    "white label ecommerce app",
+    "ios android shopping app",
   ],
   alternates: {
     canonical: "/solutions/ecommerce-app-development",
   },
   openGraph: {
-    title: "E-Commerce Mobile App Development Company | Flutter Agency",
+    title: "E-Commerce Mobile App Development | iOS & Android",
     description:
-      "Enterprise e-commerce mobile app development agency. Native iOS & Android shopping apps built with Flutter, published under your corporate accounts.",
+      "Launch native iOS & Android shopping apps built with Flutter in 2–4 weeks. Fast checkout, push notifications, and 0% app sales cuts on your private cloud.",
     url: "/solutions/ecommerce-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -44,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Mobile App Development Company | Flutter Agency",
+    title: "E-Commerce Mobile App Development | iOS & Android",
     description:
-      "Native iOS & Android mobile shopping apps built with Flutter. Deployed under your Apple and Google Play accounts with 0% commission.",
+      "Launch native iOS & Android shopping apps built with Flutter with 0% commission on your private cloud.",
     images: ["/og-image.png"],
   },
 };

@@ -20,20 +20,22 @@ import {
 export const metadata: Metadata = {
   title: "About Mechatron Lab Solutions | Our Engineering Philosophy",
   description:
-    "Learn about Mechatron Lab Solutions. We build enterprise-grade white-label e-commerce and OTT video streaming platforms deployed directly to client cloud infrastructure with zero SaaS rent.",
+    "Learn how Mechatron Lab builds enterprise white-label software for e-commerce and OTT video streaming deployed to client private clouds with zero SaaS rent.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Mechatron Lab Solutions | Engineering Freedom Over SaaS Rent",
-    description: "Production-ready software platforms deployed to your private cloud with unencrypted source code rights.",
+    title: "About Mechatron Lab Solutions | Engineering Freedom",
+    description:
+      "Learn how Mechatron Lab builds enterprise white-label software for e-commerce and OTT video streaming deployed to client private clouds with zero SaaS rent.",
     url: "/about",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Mechatron Lab Solutions",
-    description: "The white-label engineering alternative to monthly SaaS taxes and vendor lock-in.",
+    description:
+      "The white-label engineering alternative to monthly SaaS taxes and vendor lock-in.",
     images: ["/og-image.png"],
   },
 };

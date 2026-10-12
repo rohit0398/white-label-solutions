@@ -16,22 +16,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Book Architecture Demo | Mechatron Lab Solutions",
+  title: "Contact Us & Book Architecture Demo | Mechatron Lab",
   description:
-    "Get in touch with Mechatron Lab software engineers. Schedule a live demonstration of our white-label e-commerce or OTT video platform, ask technical questions, or chat directly via WhatsApp.",
+    "Speak directly with our software engineers. Schedule a live architecture demo of our e-commerce or OTT video platforms, or chat instantly via WhatsApp.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact Engineering & Book Live Demo | Mechatron Lab Solutions",
-    description: "Connect with our engineering team for live software demonstrations and custom quotes.",
+    title: "Contact Us & Book Architecture Demo | Mechatron Lab",
+    description:
+      "Speak directly with our software engineers. Schedule a live architecture demo of our e-commerce or OTT video platforms, or chat instantly via WhatsApp.",
     url: "/contact",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Mechatron Lab Solutions | White-Label Architecture",
-    description: "Direct contact, live WhatsApp chat, and scheduled technical demos.",
+    title: "Contact Us & Book Architecture Demo | Mechatron Lab",
+    description:
+      "Speak directly with our software engineers. Schedule a live demo or chat via WhatsApp.",
     images: ["/og-image.png"],
   },
 };

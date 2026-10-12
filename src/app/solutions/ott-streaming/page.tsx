@@ -20,20 +20,18 @@ import { CINEMATIC_OTT_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS, OTT_FAQS } fro
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "OTT Platform Development Company | Video Streaming App Agency | Mechatron Lab",
+  title: "OTT Platform Development Company | Video Apps | Mechatron Lab",
   description:
-    "Leading OTT platform development company & video streaming agency. We build custom 16:9 widescreen streaming portals, Flutter iOS & Android apps, and Video CMS on your private cloud with 0% revenue cut.",
+    "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your private cloud with 0% fees.",
   keywords: [
     "ott platform development company",
-    "ott app development agency",
-    "video streaming app development company",
-    "custom ott platform development agency",
-    "netflix clone app development company",
-    "vod platform development company",
-    "smart tv app development agency",
-    "white label ott platform developers",
-    "flutter streaming app development agency",
-    "video streaming software development agency",
+    "video streaming app development",
+    "custom ott platform development",
+    "netflix clone app development",
+    "vod platform development",
+    "smart tv app development",
+    "white label ott platform",
+    "flutter streaming app",
   ],
   alternates: {
     canonical: "/solutions/ott-streaming",
@@ -46,9 +44,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "OTT Platform Development Company | Video Streaming App Agency",
+    title: "OTT Platform Development Company | Video Apps",
     description:
-      "Enterprise OTT platform development company. Complete 16:9 cinematic video streaming suite: Next.js web portal, Flutter iOS & Android apps, and Video CMS on your cloud.",
+      "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your private cloud with 0% fees.",
     url: "/solutions/ott-streaming",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -57,9 +55,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OTT Platform Development Company | Video Streaming App Agency",
+    title: "OTT Platform Development Company | Video Apps",
     description:
-      "Production-ready streaming apps and widescreen web portal on your private cloud with 0% platform cuts.",
+      "Launch your branded video streaming platform like Netflix in 2–4 weeks on your private cloud with zero commission.",
     images: ["/showcase/ott-cinematic-web.jpg"],
   },
 };

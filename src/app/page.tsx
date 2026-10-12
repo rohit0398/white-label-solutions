@@ -17,9 +17,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "White-Label Software Platforms | E-Commerce, Short Drama & OTT | Mechatron Lab",
+  title: "White-Label Software Platforms | OTT & Commerce | Mechatron Lab",
   description:
-    "Production-ready white-label software platforms for e-commerce, 9:16 short-drama, and 16:9 cinematic video streaming. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
+    "Production-ready software platforms for 9:16 short drama, OTT video streaming, and e-commerce. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
   keywords: [
     "white label software platforms",
     "pre-built ecommerce store",
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "White-Label Software Platforms | E-Commerce, Short Drama & OTT",
+    title: "White-Label Software Platforms | OTT & Commerce",
     description:
-      "Production-ready platforms deployed to your private cloud. E-Commerce, 9:16 Short Drama, and 16:9 Cinematic Video with 0% commission.",
+      "Production-ready software platforms for 9:16 short drama, OTT video streaming, and e-commerce. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
     url: "/",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "White-Label Software Platforms | E-Commerce, Short Drama & OTT",
+    title: "White-Label Software Platforms | OTT & Commerce",
     description:
-      "Production-ready software platforms deployed to your private cloud with 0% platform cuts.",
+      "Production-ready software platforms for 9:16 short drama, OTT streaming, and e-commerce with 0% revenue cut.",
     images: ["/og-image.png"],
   },
 };
