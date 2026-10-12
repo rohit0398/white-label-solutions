@@ -5,57 +5,96 @@ import { Play, Lock, Sparkles, Smartphone, Monitor, Heart, Share2, Volume2, Film
 
 type FormatMode = "vertical" | "cinematic";
 
-export function OttPlayerPreview() {
-  const [mode, setMode] = useState<FormatMode>("vertical");
+interface OttPlayerPreviewProps {
+  format?: "vertical" | "cinematic" | "both";
+}
+
+export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
+  const [mode, setMode] = useState<FormatMode>(format === "cinematic" ? "cinematic" : "vertical");
   const [unlocked, setUnlocked] = useState(false);
+
+  const activeMode = format === "vertical" ? "vertical" : format === "cinematic" ? "cinematic" : mode;
 
   return (
     <div className="rounded-2xl border border-line bg-wash/50 p-5 sm:p-8 space-y-8">
-      {/* Switcher Header */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-line">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
-            <Sparkles className="h-3 w-3" />
-            <span>Dual-Engine Video Architecture</span>
-          </div>
-          <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
-            One Private Cloud Backend. Two Flagship Viewing Experiences.
-          </h3>
-          <p className="text-xs sm:text-sm text-ink-3">
-            Switch between 9:16 vertical drama reels and 16:9 cinematic widescreen formats below to preview both player engines.
-          </p>
+          {activeMode === "vertical" && format === "vertical" ? (
+            <>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
+                <Smartphone className="h-3 w-3" />
+                <span>Vertical Drama Engine</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
+                Interactive Short-Drama Player Preview (9:16 Format).
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-3">
+                Preview the 60FPS vertical swipe gestures, episode scrubber, and cliffhanger paywall unlock flow built for serialized micro-dramas.
+              </p>
+            </>
+          ) : activeMode === "cinematic" && format === "cinematic" ? (
+            <>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
+                <Monitor className="h-3 w-3" />
+                <span>Cinematic Video Engine</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
+                Interactive Cinematic Video Player Preview (16:9 Widescreen).
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-3">
+                Preview the desktop &amp; smart TV widescreen player with adaptive multi-bitrate HLS, continue-watching timestamps, and subtitle/audio track controls.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
+                <Sparkles className="h-3 w-3" />
+                <span>Video Streaming Architecture</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
+                Private Cloud Video Engines.
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-3">
+                Select a format below to preview the player engine tailored for your content strategy.
+              </p>
+            </>
+          )}
         </div>
 
-        <div className="inline-flex rounded-xl border border-line bg-paper p-1 self-start sm:self-auto shrink-0 shadow-xs">
-          <button
-            type="button"
-            onClick={() => setMode("vertical")}
-            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-              mode === "vertical"
-                ? "bg-ink text-paper font-semibold shadow-xs"
-                : "text-ink-3 hover:text-ink hover:bg-wash"
-            }`}
-          >
-            <Smartphone className="h-3.5 w-3.5" />
-            <span>9:16 Short Dramas (ReelShort)</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setMode("cinematic")}
-            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-              mode === "cinematic"
-                ? "bg-ink text-paper font-semibold shadow-xs"
-                : "text-ink-3 hover:text-ink hover:bg-wash"
-            }`}
-          >
-            <Monitor className="h-3.5 w-3.5" />
-            <span>16:9 Cinematic (Netflix)</span>
-          </button>
-        </div>
+        {/* Switcher tabs (ONLY rendered if format === 'both') */}
+        {format === "both" && (
+          <div className="inline-flex rounded-xl border border-line bg-paper p-1 self-start sm:self-auto shrink-0 shadow-xs">
+            <button
+              type="button"
+              onClick={() => setMode("vertical")}
+              className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                activeMode === "vertical"
+                  ? "bg-ink text-paper font-semibold shadow-xs"
+                  : "text-ink-3 hover:text-ink hover:bg-wash"
+              }`}
+            >
+              <Smartphone className="h-3.5 w-3.5" />
+              <span>9:16 Short Dramas (ReelShort)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("cinematic")}
+              className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                activeMode === "cinematic"
+                  ? "bg-ink text-paper font-semibold shadow-xs"
+                  : "text-ink-3 hover:text-ink hover:bg-wash"
+              }`}
+            >
+              <Monitor className="h-3.5 w-3.5" />
+              <span>16:9 Cinematic (Netflix)</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Main Interactive Screen */}
-      {mode === "vertical" ? (
+      {activeMode === "vertical" ? (
         <div className="grid lg:grid-cols-[1fr_22rem] gap-8 items-center">
           {/* Mock Smartphone Frame with Realistic AI Asset + Interactive Paywall Overlay */}
           <div className="flex justify-center">
@@ -69,11 +108,19 @@ export function OttPlayerPreview() {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-1 pointer-events-none" />
 
-              {/* Top HUD */}
+              {/* Top HUD with Mechatron Short Logo */}
               <div className="relative z-10 flex items-center justify-between text-xs pt-2">
-                <span className="px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-[11px] font-mono border border-white/20">
-                  Ep. 14 of 75
-                </span>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] font-mono border border-white/20">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/brand/logo_icon.svg"
+                    alt="Mechatron Lab"
+                    width={14}
+                    height={14}
+                    className="h-3.5 w-3.5 rounded object-contain shrink-0"
+                  />
+                  <span>Ep. 14 of 75</span>
+                </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-amber-300 border border-amber-300/40 font-mono text-[11px] font-semibold">
                   <Sparkles className="h-3 w-3" />
                   <span>VIP ACCESS</span>
@@ -165,7 +212,7 @@ export function OttPlayerPreview() {
             </span>
 
             <h4 className="text-2xl font-semibold tracking-tight text-ink">
-              9:16 Vertical Short-Drama Reels
+              Vertical Short-Drama Reels Engine (9:16)
             </h4>
             <p className="text-sm text-ink-2 leading-relaxed">
               Engineered specifically for the high-margin micro-drama boom (ReelShort, DramaBox, ShortMax format). 60- to 90-second episodes designed for addictive binge watching and high-LTV subscription &amp; ad funnels.
@@ -212,9 +259,17 @@ export function OttPlayerPreview() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/70 z-1 pointer-events-none" />
 
-            {/* Top Bar */}
+            {/* Top Bar with Mechatron Short Logo */}
             <div className="relative z-10 flex items-center justify-between text-xs p-4 sm:p-5">
               <div className="flex items-center gap-2.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/logo_icon.svg"
+                  alt="Mechatron Lab"
+                  width={20}
+                  height={20}
+                  className="h-5 w-5 rounded object-contain shrink-0"
+                />
                 <span className="font-semibold text-sm sm:text-base tracking-tight text-white drop-shadow-md">
                   CYBER HORIZON
                 </span>
@@ -259,7 +314,7 @@ export function OttPlayerPreview() {
             </span>
 
             <h4 className="text-2xl font-semibold tracking-tight text-ink">
-              16:9 Cinematic Video Streaming
+              Cinematic Widescreen Video Engine (16:9)
             </h4>
             <p className="text-sm text-ink-2 leading-relaxed">
               Designed for high-definition series, movies, documentaries, and live channels. Delivers adaptive multi-bitrate HLS streaming across desktop web, mobile browsers, and connected TV devices.

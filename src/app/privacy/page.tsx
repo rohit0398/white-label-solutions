@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND } from "@/lib/constants";
 import { ShieldCheck, Lock, Eye, FileText } from "lucide-react";
 
@@ -73,9 +74,12 @@ export default function PrivacyPolicyPage() {
               <ShieldCheck className="h-3.5 w-3.5 text-accent" />
               <span>Data Protection &amp; Governance</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-4xl font-semibold tracking-tight"
+            >
               Privacy Policy
-            </h1>
+            </AnimatedHeadline>
             <p className="text-sm font-mono text-ink-3">
               Last Updated: October 2026 · Effective Date: January 1, 2026
             </p>

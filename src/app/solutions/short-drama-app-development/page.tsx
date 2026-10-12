@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { OTT_FAQS, SHORT_DRAMA_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { SHORT_DRAMA_FAQS, SHORT_DRAMA_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SolutionHero } from "@/components/sections/SolutionHero";
@@ -10,7 +10,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { OttPlayerPreview } from "@/components/widgets/OttPlayerPreview";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
@@ -64,7 +64,7 @@ export default function ShortDramaAppDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(OTT_FAQS);
+  const faqSchema = generateFaqSchema(SHORT_DRAMA_FAQS);
   const softwareSchema = generateSoftwareSchema({
     name: "Short-Drama Mobile App Platform (9:16 Vertical Reels)",
     description:
@@ -126,15 +126,14 @@ export default function ShortDramaAppDevelopmentPage() {
             { label: "Short-Drama Apps" },
           ]}
           badge="ReelShort &amp; DramaBox Architecture · 0% Revenue Cut"
-          headline="9:16 Vertical Short-Drama Mobile App Development."
+          headline="Short-Drama Mobile App Development."
           subtitle="Launch your branded vertical micro-drama streaming apps for iOS &amp; Android in 2–4 weeks. Native Flutter apps, addictive 60FPS swipe mechanics, recurring VIP subscriptions, rewarded video ads, cliffhanger episode paywalls, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
           anchors={[
-            { label: "01 Live Player Preview", href: "#interactive-demo" },
-            { label: "02 Revenue Mechanics", href: "#monetization-flow" },
-            { label: "03 Video CMS Console", href: "#video-cms" },
-            { label: "04 4-Week Rollout", href: "#rollout" },
-            { label: "05 Production Proof", href: "#production-apps" },
-            { label: "06 Pricing ($2,999)", href: "#pricing" },
+            { label: "01 Mobile App", href: "#app-architecture" },
+            { label: "02 Video CMS", href: "#video-cms" },
+            { label: "03 4-Week Rollout", href: "#rollout" },
+            { label: "04 Production Proof", href: "#production-apps" },
+            { label: "05 Pricing ($2,999)", href: "#pricing" },
           ]}
           ctaDemoText="Book short-drama demo"
           tierId="ott-streaming"
@@ -151,22 +150,24 @@ export default function ShortDramaAppDevelopmentPage() {
         {/* Live Ticker */}
         <LiveTicker items={tickerItems} ariaLabel="Short-drama streaming capabilities ticker" />
 
-        {/* Interactive Dual-Format Player Preview Section */}
-        <section id="interactive-demo" className="py-16 border-t border-line">
-          <div className="wrap-wide space-y-6">
-            <OttPlayerPreview />
-          </div>
-        </section>
-
         {/* Feature Highlights Grid */}
         <Section
-          id="monetization-flow"
-          index="01 · Revenue Mechanics"
-          title="Engineered for Serialized Bingeing & High-LTV Retention."
-          intro="The vertical micro-drama format achieves higher user retention and ARPU than traditional video apps by turning cliffhangers into seamless subscription and rewarded ad conversions."
+          id="app-architecture"
+          index="01 · Native Mobile App Architecture"
+          title="Native 9:16 Vertical Short-Drama Apps (iOS & Android)."
+          intro="Unified Flutter codebase compiling to native machine code. High-retention 60FPS vertical swipe player engineered for serialized 1–2 minute drama episodes with cliffhanger paywall gates and VIP subscription checkout."
           wide
         >
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-3xl mx-auto w-full group my-8">
+            <Screenshot
+              src="/showcase/ott-drama-app-showcase.jpg"
+              alt="Native 9:16 vertical short-drama mobile app interface"
+              caption="Native Flutter 9:16 Drama App · 60FPS Swipe Physics · VIP Episode Gating · AdMob Rewarded Video"
+              className="transition-transform duration-300"
+            />
+          </div>
+
+          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
             <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
               <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
                 <Smartphone className="h-5 w-5" />
@@ -249,7 +250,7 @@ export default function ShortDramaAppDevelopmentPage() {
           index="06 · Frequently Asked Questions"
           title="Short-Drama Platform Questions"
           intro="Everything you need to know about app publishing, Cloudflare Stream video costs, and source code ownership."
-          items={OTT_FAQS}
+          items={SHORT_DRAMA_FAQS}
         />
 
         {/* Closing Conversion Banner */}

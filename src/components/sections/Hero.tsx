@@ -7,6 +7,7 @@ import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { MessageSquare } from "lucide-react";
 import { trackWhatsAppClick } from "@/lib/analytics";
 
@@ -71,9 +72,12 @@ export function Hero({
           <span>{badgeText}</span>
         </div>
 
-        <h1 className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]">
+        <AnimatedHeadline
+          as="h1"
+          className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]"
+        >
           {headlineText}
-        </h1>
+        </AnimatedHeadline>
         <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{subtitleText}</p>
 
         {/* Living Platform Anchors with Gentle Ambient Floating & Tactile Hover */}

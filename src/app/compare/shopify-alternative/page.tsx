@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 
 export const metadata: Metadata = {
   title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
@@ -126,9 +127,12 @@ export default function ShopifyAlternativePage() {
           </nav>
 
           <p className="font-mono text-xs text-ink-3 mb-3">Comparison guide</p>
-          <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight">
-            The self-hosted Shopify alternative with zero monthly software fees
-          </h1>
+          <AnimatedHeadline
+            as="h1"
+            className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
+          >
+            The Self-Hosted Shopify Alternative with Zero Monthly Software Fees.
+          </AnimatedHeadline>
 
           <p className="mt-6 text-lg text-ink-2 leading-relaxed">
             Stop giving away 2% of your revenue and hundreds every month in app subscriptions.

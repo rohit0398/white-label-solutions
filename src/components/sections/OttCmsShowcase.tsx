@@ -39,7 +39,7 @@ export function OttCmsShowcase({ index = "02" }: OttCmsShowcaseProps) {
       intro="Your centralized administrative console. Manage your content catalog, configure automated cloud encoding pipelines, set episode monetization rules, and track real-time subscriber revenue without recurring SaaS fees."
       wide
     >
-      <div className="wrap-wide group">
+      <div className="max-w-3xl mx-auto w-full group">
         <Screenshot
           src="/showcase/ott-video-cms.jpg"
           alt="Video CMS & Cloud Transcoding Operations Dashboard"

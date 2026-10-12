@@ -249,6 +249,56 @@ body,
   animation: inkPulseGlow 3s ease-in-out infinite;
 }
 
+/* Luminous Headline Animations */
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes heroTitleFade {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-hero-title-1 {
+  animation: heroTitleFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-title-2 {
+  animation: heroTitleFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+
+.text-gradient-shimmer {
+  background: linear-gradient(
+    105deg,
+    var(--color-ink) 0%,
+    var(--color-ink) 30%,
+    var(--color-accent) 50%,
+    var(--color-ink) 70%,
+    var(--color-ink) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 6.5s ease-in-out infinite;
+  display: inline-block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -260,7 +310,11 @@ body,
   .animate-marquee,
   .shimmer-badge,
   .animate-pulse-glow,
-  .animate-pulse-ink {
+  .animate-pulse-ink,
+  .animate-hero-title-1,
+  .animate-hero-title-2,
+  .text-gradient-shimmer {
     animation: none;
+    -webkit-text-fill-color: currentColor;
   }
 }

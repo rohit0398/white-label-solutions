@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND, SHOWCASE_PROJECTS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import {
   ShieldCheck,
@@ -135,9 +136,12 @@ export default function AboutPage() {
               <Sparkles className="h-3.5 w-3.5 text-accent" />
               <span>Our Mission &amp; Engineering Thesis</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-tight">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-tight"
+            >
               Software Ownership Over Monthly SaaS Rent.
-            </h1>
+            </AnimatedHeadline>
             <p className="text-base sm:text-lg text-ink-2 leading-relaxed">
               Mechatron Lab was built on a straightforward conviction: growing businesses should own their core digital infrastructure, not rent it forever under compounding monthly fees and revenue take-rates.
             </p>

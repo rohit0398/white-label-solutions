@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -122,10 +123,10 @@ export default function SolutionsCatalogPage() {
       ],
       cta: "Explore Mobile App Development →",
     },
-    // --- 9:16 Short-Drama Solutions ---
+    // --- Short-Drama Solutions ---
     {
       id: "short-drama",
-      title: "9:16 Short-Drama Streaming Platform",
+      title: "Short-Drama Streaming Platform",
       subtitle: "Complete mobile apps, mobile-web player & central Video CMS",
       badge: "Complete ($4,999)",
       icon: Clapperboard,
@@ -167,7 +168,7 @@ export default function SolutionsCatalogPage() {
     },
     {
       id: "short-drama-website-development",
-      title: "Short-Drama Web Streaming Development",
+      title: "Short-Drama Website Development",
       subtitle: "Mobile-first 9:16 vertical web streaming portal + Video CMS",
       badge: "Web Only ($2,999)",
       icon: Globe,
@@ -184,10 +185,10 @@ export default function SolutionsCatalogPage() {
         "Central Video CMS with episode paywall rules, DRM signed URLs, and viewer drop-off analytics",
         "Search-engine-optimized series, episode & synopsis title pages for viral organic reach",
       ],
-      cta: "Explore Drama Web Platform →",
+      cta: "Explore Drama Website →",
     },
 
-    // --- 16:9 Cinematic OTT Solutions ---
+    // --- Cinematic OTT Solutions ---
     {
       id: "ott-streaming",
       title: "Cinematic OTT Video Platform",
@@ -210,27 +211,6 @@ export default function SolutionsCatalogPage() {
       cta: "Explore Complete OTT Platform →",
     },
     {
-      id: "ott-video-streaming-development",
-      title: "Cinematic Video Streaming Platform",
-      subtitle: "16:9 widescreen streaming web portal & adaptive HLS bitrates",
-      badge: "Web Only ($2,999)",
-      icon: Globe,
-      href: "/solutions/ott-video-streaming-development",
-      status: "Ready for Deployment",
-      stats: [
-        { label: "Resolution", val: "4K HDR / 1080p" },
-        { label: "Monetization", val: "Stripe SVOD" },
-        { label: "Bitrates", val: "Adaptive HLS" },
-      ],
-      points: [
-        "Next.js 16 responsive widescreen web portal for movies, documentaries, and full seasons",
-        "Sub-second initial frame buffer via adaptive HLS bitrates on multi-CDN edge",
-        "Stripe recurring billing for monthly, quarterly, and annual VIP streaming passes",
-        "Search engine optimized series, cast, and episode synopsis pages for organic traffic",
-      ],
-      cta: "Explore Cinematic Streaming Portal →",
-    },
-    {
       id: "ott-app-development",
       title: "Cinematic OTT Mobile App Development",
       subtitle: "Native 16:9 widescreen iOS & Android streaming apps + Video CMS",
@@ -250,6 +230,27 @@ export default function SolutionsCatalogPage() {
         "Apple StoreKit & Google Play Billing integration for recurring monthly/annual VIP passes",
       ],
       cta: "Explore Streaming Mobile Apps →",
+    },
+    {
+      id: "ott-website-development",
+      title: "Cinematic OTT Website Development",
+      subtitle: "16:9 widescreen streaming website & adaptive HLS bitrates",
+      badge: "Web Only ($2,999)",
+      icon: Globe,
+      href: "/solutions/ott-website-development",
+      status: "Ready for Deployment",
+      stats: [
+        { label: "Resolution", val: "4K HDR / 1080p" },
+        { label: "Monetization", val: "Stripe SVOD" },
+        { label: "Bitrates", val: "Adaptive HLS" },
+      ],
+      points: [
+        "Next.js 16 responsive widescreen web portal for movies, documentaries, and full seasons",
+        "Sub-second initial frame buffer via adaptive HLS bitrates on multi-CDN edge",
+        "Stripe recurring billing for monthly, quarterly, and annual VIP streaming passes",
+        "Search engine optimized series, cast, and episode synopsis pages for organic traffic",
+      ],
+      cta: "Explore Cinematic OTT Website →",
     },
   ];
 
@@ -299,9 +300,12 @@ export default function SolutionsCatalogPage() {
             <span>Production Architectures · 100% Cloud Ownership</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight max-w-3xl">
-            Production-Ready White-Label Software Architectures
-          </h1>
+          <AnimatedHeadline
+            as="h1"
+            className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight max-w-3xl"
+          >
+            Production-Ready White-Label Software Architectures.
+          </AnimatedHeadline>
 
           <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
             Production-grade, fully customized digital platforms built for scale. Deployed directly into your company’s private cloud with zero platform cuts and complete Git source code ownership.

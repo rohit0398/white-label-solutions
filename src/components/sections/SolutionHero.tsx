@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { MessageSquare } from "lucide-react";
 
 export interface BreadcrumbItem {
@@ -71,9 +72,12 @@ export function SolutionHero({
         </div>
 
         {/* Primary Page Headline */}
-        <h1 className="text-[2.3rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.06] max-w-4xl text-ink">
+        <AnimatedHeadline
+          as="h1"
+          className="text-[2.3rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.06] max-w-4xl text-ink"
+        >
           {headline}
-        </h1>
+        </AnimatedHeadline>
 
         {/* Subtitle / Value Proposition */}
         <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SolutionHero } from "@/components/sections/SolutionHero";
@@ -10,7 +10,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { OttPlayerPreview } from "@/components/widgets/OttPlayerPreview";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteOttCallout } from "@/components/sections/CompleteOttCallout";
@@ -43,14 +43,14 @@ export const metadata: Metadata = {
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    images: ["/showcase/ott-streaming-app.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "OTT Mobile App Development | iOS, Android & TV",
     description:
       "Custom 16:9 video streaming apps for iOS, Android & Smart TV deployed on your private cloud with 0% commission.",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    images: ["/showcase/ott-streaming-app.jpg"],
   },
 };
 
@@ -64,7 +64,7 @@ export default function OttAppDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(OTT_FAQS);
+  const faqSchema = generateFaqSchema(CINEMATIC_OTT_FAQS);
   const softwareSchema = generateSoftwareSchema({
     name: "Cinematic OTT Mobile App Platform (iOS & Android)",
     description:
@@ -124,16 +124,15 @@ export default function OttAppDevelopmentPage() {
             { label: "Solutions", href: "/solutions" },
             { label: "Cinematic OTT Apps" },
           ]}
-          badge="16:9 Widescreen Mobile Architecture · 0% Revenue Cut"
+          badge="Widescreen Mobile Architecture · 0% Revenue Cut"
           headline="Cinematic OTT Mobile App Development (iOS &amp; Android)."
           subtitle="Launch your branded Netflix-style video streaming apps for iOS &amp; Android in 2–4 weeks. Native Flutter apps, adaptive HLS multi-bitrate streaming, AirPlay &amp; Chromecast TV streaming, In-App Purchase VIP subscriptions, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
           anchors={[
-            { label: "01 Live Streaming Demo", href: "#interactive-demo" },
-            { label: "02 App Capabilities", href: "#app-features" },
-            { label: "03 Video CMS Console", href: "#video-cms" },
-            { label: "04 4-Week Rollout", href: "#rollout" },
-            { label: "05 Production Proof", href: "#production-apps" },
-            { label: "06 Pricing ($2,999)", href: "#pricing" },
+            { label: "01 Mobile App", href: "#app-features" },
+            { label: "02 Video CMS", href: "#video-cms" },
+            { label: "03 4-Week Rollout", href: "#rollout" },
+            { label: "04 Production Proof", href: "#production-apps" },
+            { label: "05 Pricing ($2,999)", href: "#pricing" },
           ]}
           ctaDemoText="Book streaming app demo"
           tierId="ott-streaming"
@@ -150,22 +149,24 @@ export default function OttAppDevelopmentPage() {
         {/* Live Ticker */}
         <LiveTicker items={tickerItems} ariaLabel="Cinematic streaming capabilities ticker" />
 
-        {/* Interactive Dual-Format Player Preview Section */}
-        <section id="interactive-demo" className="py-16 border-t border-line">
-          <div className="wrap-wide space-y-6">
-            <OttPlayerPreview />
-          </div>
-        </section>
-
         {/* Mobile App Feature Grid */}
         <Section
           id="app-features"
-          index="01 · Mobile Streaming Power"
-          title="Engineered for Binge-Watching on Every Screen."
-          intro="Native mobile applications for iOS and Android optimized for smooth video playback, offline downloads, and seamless big-screen TV casting."
+          index="01 · Native Mobile App Architecture"
+          title="Native 16:9 Widescreen Streaming Apps (iOS & Android)."
+          intro="Engineered for binge-watching on smartphones and tablets. Hardware-accelerated 60FPS video playback, offline encrypted downloads, 1-tap TV casting to Chromecast and AirPlay, and native In-App Purchase VIP passes."
           wide
         >
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-3xl mx-auto w-full group my-8">
+            <Screenshot
+              src="/showcase/ott-streaming-app.jpg"
+              alt="Native 16:9 widescreen streaming mobile apps interface"
+              caption="Native Flutter Streaming Apps · 4K HDR & HLS · AirPlay & Chromecast TV Casting"
+              className="transition-transform duration-300"
+            />
+          </div>
+
+          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
             <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
               <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
                 <Smartphone className="h-5 w-5" />
@@ -248,7 +249,7 @@ export default function OttAppDevelopmentPage() {
           index="06 · Frequently Asked Questions"
           title="Cinematic OTT Platform Questions"
           intro="Clear answers on video CDN bandwidth economics, transcoding pipelines, DRM signed URLs, and source code ownership."
-          items={OTT_FAQS}
+          items={CINEMATIC_OTT_FAQS}
         />
 
         {/* Closing Conversion Banner */}

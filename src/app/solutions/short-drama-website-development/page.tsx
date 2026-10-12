@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { OTT_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SolutionHero } from "@/components/sections/SolutionHero";
@@ -10,7 +10,7 @@ import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { OttPlayerPreview } from "@/components/widgets/OttPlayerPreview";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
@@ -63,7 +63,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(OTT_FAQS);
+  const faqSchema = generateFaqSchema(SHORT_DRAMA_FAQS);
   const softwareSchema = generateSoftwareSchema({
     name: "Short-Drama Web Streaming Platform (9:16 Vertical Player)",
     description:
@@ -124,15 +124,14 @@ export default function ShortDramaWebsiteDevelopmentPage() {
             { label: "Short-Drama Web Streaming" },
           ]}
           badge="Mobile-First Web Player · Sub-Second HLS · 0% Revenue Cut"
-          headline="9:16 Vertical Short-Drama Web Streaming Development."
+          headline="Short-Drama Website Development."
           subtitle="Launch your branded vertical micro-drama web streaming portal in 2–4 weeks. Sub-second mobile-first HLS player, zero-install instant playback for TikTok & social traffic, recurring Stripe VIP subscriptions, cliffhanger episode gating, and Video CMS deployed onto your private cloud."
           anchors={[
-            { label: "01 Live Web Player", href: "#interactive-demo" },
-            { label: "02 Web Advantage", href: "#web-mechanics" },
-            { label: "03 Video CMS Console", href: "#video-cms" },
-            { label: "04 4-Week Rollout", href: "#rollout" },
-            { label: "05 Production Proof", href: "#production-apps" },
-            { label: "06 Pricing ($2,999)", href: "#pricing" },
+            { label: "01 Web Player", href: "#web-architecture" },
+            { label: "02 Video CMS", href: "#video-cms" },
+            { label: "03 4-Week Rollout", href: "#rollout" },
+            { label: "04 Production Proof", href: "#production-apps" },
+            { label: "05 Pricing ($2,999)", href: "#pricing" },
           ]}
           ctaDemoText="Book web streaming demo"
           tierId="ott-streaming"
@@ -149,22 +148,24 @@ export default function ShortDramaWebsiteDevelopmentPage() {
         {/* Live Ticker */}
         <LiveTicker items={tickerItems} ariaLabel="Short-drama streaming capabilities ticker" />
 
-        {/* Interactive Dual-Format Player Preview Section */}
-        <section id="interactive-demo" className="py-16 border-t border-line">
-          <div className="wrap-wide space-y-6">
-            <OttPlayerPreview />
-          </div>
-        </section>
-
         {/* Web Mechanics Feature Grid */}
         <Section
-          id="web-mechanics"
-          index="01 · Social Conversion Advantage"
-          title="Frictionless Browser Playback for Viral Traffic."
-          intro="Over 70% of viewers drop off when forced to download an app from social ad campaigns. A high-speed web player captures immediate watch time and converts visitors directly."
+          id="web-architecture"
+          index="01 · Responsive Web Architecture"
+          title="Responsive 9:16 Mobile-First Web Streaming Player."
+          intro="Frictionless browser playback for viral traffic. When viewers tap your ads on TikTok, Instagram, or YouTube, video playback starts within 800ms directly in their mobile browser with instant Stripe VIP checkout."
           wide
         >
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-3xl mx-auto w-full group my-8">
+            <Screenshot
+              src="/showcase/ott-cinematic-web.jpg"
+              alt="Responsive 9:16 mobile-first web streaming player"
+              caption="Next.js 16 Web Player · Instant Mobile Web Playback · Stripe Checkout"
+              className="transition-transform duration-300"
+            />
+          </div>
+
+          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
             <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
               <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
                 <Globe className="h-5 w-5" />
@@ -247,7 +248,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
           index="06 · Frequently Asked Questions"
           title="Short-Drama Platform Questions"
           intro="Everything you need to know about web video players, Cloudflare Stream bandwidth costs, and source code ownership."
-          items={OTT_FAQS}
+          items={SHORT_DRAMA_FAQS}
         />
 
         {/* Closing Conversion Banner */}

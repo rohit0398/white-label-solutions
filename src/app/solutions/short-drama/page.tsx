@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { OTT_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { SHORT_DRAMA_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SolutionHero } from "@/components/sections/SolutionHero";
 import { TechStackStrip } from "@/components/sections/TechStackStrip";
 import { LiveTicker } from "@/components/sections/LiveTicker";
-import { OttPlayerPreview } from "@/components/widgets/OttPlayerPreview";
-import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
@@ -16,7 +14,18 @@ import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { ArrowRight } from "lucide-react";
+import {
+  Smartphone,
+  Lock,
+  CreditCard,
+  Globe,
+  Film,
+  ShieldCheck,
+  Zap,
+  DollarSign,
+  BarChart3,
+  ArrowRight,
+} from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -74,7 +83,7 @@ export default function ShortDramaPlatformPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(OTT_FAQS);
+  const faqSchema = generateFaqSchema(SHORT_DRAMA_FAQS);
   const softwareSchema = generateSoftwareSchema({
     name: "White-Label 9:16 Short-Drama Platform (Apps & Web)",
     description:
@@ -101,55 +110,113 @@ export default function ShortDramaPlatformPage() {
       n: "01",
       badge: "Mobile Apps",
       title: "Native 9:16 Vertical Short-Drama Apps (iOS & Android)",
-      subtitle: "Unified Flutter codebase compiling to native machine code",
+      subtitle: "Unified Flutter codebase compiling to native machine code for iOS & Android",
       description:
-        "High-retention 60FPS vertical swipe gestures with built-in subscription paywalls, chapter scrubbers, rewarded video ads, and automated push notifications when new episodes drop.",
-      points: [
-        "Fluid vertical swipe navigation optimized for 1–2 minute serialized drama episodes",
-        "Granular paywall controls: preview free teaser episodes and gate subsequent cliffhangers",
-        "Native Apple In-App Purchase and Google Play Billing for 1-tap subscription purchases",
-        "Push notifications (FCM & APNs) to re-engage viewers when new seasons release",
-      ],
-      screenshot: {
-        src: "/showcase/ott-drama-app.jpg",
-        alt: "9:16 vertical short-drama mobile app interface",
-        caption: "Native 9:16 Drama Apps · 60FPS Swipe · VIP Access · Cloudflare Stream Ingest",
-      },
+        "High-retention 60FPS vertical swipe player engineered for serialized 1–2 minute drama episodes. Includes seamless cliffhanger episode gates, rewarded video ads, push notification re-engagement, and native In-App Purchases.",
       childLink: {
         href: "/solutions/short-drama-app-development",
         label: "Looking for Mobile Apps only? Explore App-Only Package ($2,999) →",
       },
+      screenshot: {
+        src: "/showcase/ott-drama-app-showcase.jpg",
+        alt: "9:16 vertical short-drama mobile app interface",
+        caption: "Native 9:16 Drama Apps · 60FPS Swipe · VIP Access · Cloudflare Stream Ingest",
+      },
+      capabilities: [
+        {
+          icon: Smartphone,
+          title: "60FPS Vertical Swipe Engine",
+          desc: "TikTok-speed vertical gesture swiping with instant zero-lag next-episode buffering and dual-resolution caching for uninterrupted binge watching.",
+        },
+        {
+          icon: Lock,
+          title: "Cliffhanger Paywall Gates",
+          desc: "Automated teaser logic: stream episodes 1–5 free to build viewer obsession, then trigger high-converting VIP subscription or rewarded ad unlock prompts.",
+        },
+        {
+          icon: CreditCard,
+          title: "In-App VIP Purchases",
+          desc: "Integrated Apple StoreKit & Google Play Billing for 1-tap weekly, monthly, and annual VIP unlimited drama access passes with 0% platform commission.",
+        },
+        {
+          icon: Zap,
+          title: "Automated Push Notifications",
+          desc: "Targeted FCM and APNs push campaigns alerting active viewers the moment new seasons, exclusive episodes, or trending drama releases drop.",
+        },
+      ],
     },
     {
       n: "02",
       badge: "Web Platform",
       title: "Responsive 9:16 Mobile-First Web Streaming Player",
-      subtitle: "Next.js 16 web portal for desktop browsers and mobile web traffic",
+      subtitle: "Next.js 16 web player for desktop browsers and direct social media traffic",
       description:
         "Zero-friction browser streaming for social traffic. When viewers tap links on TikTok, Instagram, or YouTube, they land directly on an instant-play web player without waiting to install an app.",
-      points: [
-        "Sub-second initial frame buffer on Mobile Safari & Chrome via adaptive HLS bitrates",
-        "Stripe recurring billing for weekly, monthly & annual VIP streaming passes",
-        "Pre-roll & rewarded video ads integration for web browsers",
-        "Search-engine-optimized series, episode & synopsis title pages",
-      ],
       childLink: {
         href: "/solutions/short-drama-website-development",
-        label: "Looking for Web Platform only? Explore Web-Only Package ($2,999) →",
+        label: "Looking for Website only? Explore Website Package ($2,999) →",
       },
+      screenshot: {
+        src: "/showcase/ott-cinematic-web.jpg",
+        alt: "Responsive mobile-first web streaming player with episode selector and VIP pass",
+        caption: "Next.js Web Player · Episode Drawer · VIP Subscription · Instant Browser Playback",
+      },
+      capabilities: [
+        {
+          icon: Globe,
+          title: "Sub-Second Social Landing",
+          desc: "Zero app download friction. Social media campaigns route directly to an instant-play web player with under 800ms initial video start time.",
+        },
+        {
+          icon: Film,
+          title: "Slide-Out Episode Drawer",
+          desc: "Full season episode queue with visual lock indicators, episode duration badges, and smooth 1-tap switching between season chapters.",
+        },
+        {
+          icon: CreditCard,
+          title: "Stripe VIP Subscriptions",
+          desc: "Web-native checkout with Apple Pay, Google Pay, and credit cards for recurring weekly and monthly VIP drama streaming passes.",
+        },
+        {
+          icon: ShieldCheck,
+          title: "SEO Series & Episode Pages",
+          desc: "Server-rendered title synopsis pages and schema markup allowing organic search engines to index your drama series titles and character profiles.",
+        },
+      ],
     },
     {
       n: "03",
       badge: "Command Center",
-      title: "Video CMS & Episode Paywall Console",
-      subtitle: "Central cloud operations, subscriber management, and encoding console",
+      title: "Video CMS & Episode Paywall Operations Console",
+      subtitle: "Centralized cloud video encoding, episode teaser rules, and retention analytics",
       description:
-        "Your central administrative dashboard. Upload master video files for automated cloud encoding, configure VIP subscriber access, manage video ad placements, track drop-off curves, and export financial reports.",
-      points: [
-        "Automated transcoding pipeline integration with Cloudflare Stream & AWS MediaConvert",
-        "Flexible monetization controls: SVOD subscription passes and Rewarded Ads (AVOD)",
-        "Real-time viewer retention analytics: see exact drop-off minute curves per show",
-        "Full direct database access and 100% Git repository ownership option",
+        "Your self-hosted administrative operations console. Bulk-upload 100+ drama episodes for automated cloud encoding, configure cliffhanger teaser rules, manage VIP subscriptions, and analyze viewer drop-off minute curves.",
+      screenshot: {
+        src: "/showcase/ott-video-cms.jpg",
+        alt: "Video CMS console with cloud encoding and episode paywall controls",
+        caption: "Video CMS Console · Master Uploads · Cloudflare Stream Ingest · 0% Revenue Cut",
+      },
+      capabilities: [
+        {
+          icon: Zap,
+          title: "Bulk Cloud Transcoding",
+          desc: "Batch upload 50–100 vertical episodes simultaneously. Cloudflare Stream encodes each master into multi-bitrate 9:16 HLS streams with zero egress bandwidth markups.",
+        },
+        {
+          icon: DollarSign,
+          title: "Dynamic Episode Teaser Rules",
+          desc: "Set teaser rules per drama in 1 click. Offer episodes 1–5 free and gate remaining cliffhangers behind recurring VIP subscription passes or rewarded ads.",
+        },
+        {
+          icon: ShieldCheck,
+          title: "Signed DRM Token Authorization",
+          desc: "Time-limited signed token playback prevents stream ripping, URL hotlinking, and piracy across both web players and mobile apps.",
+        },
+        {
+          icon: BarChart3,
+          title: "Cliffhanger Drop-Off Analytics",
+          desc: "Inspect minute-by-minute viewer retention graphs to pinpoint which drama cliffhangers drive the highest VIP subscription conversion rates.",
+        },
       ],
     },
   ];
@@ -194,15 +261,14 @@ export default function ShortDramaPlatformPage() {
             { label: "Short-Drama Platform" },
           ]}
           badge="Complete Short-Drama Suite (App + Web + CMS) · 0% Revenue Cut"
-          headline="9:16 Vertical Short-Drama Streaming Platform."
+          headline="Short-Drama Video Streaming Platform."
           subtitle="Launch your branded vertical micro-drama streaming platform in 2–4 weeks. Complete Flutter iOS & Android apps, responsive Next.js mobile-web player, VIP subscription passes, rewarded video ads, cliffhanger episode paywalls, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
           anchors={[
-            { label: "01 Live Player Demo", href: "#interactive-demo" },
-            { label: "02 Platform Architecture", href: "#architecture" },
-            { label: "03 Video CMS Console", href: "#video-cms" },
-            { label: "04 4-Week Rollout", href: "#rollout" },
-            { label: "05 Production Proof", href: "#production-apps" },
-            { label: "06 Pricing ($4,999)", href: "#pricing" },
+            { label: "01 Platform Architecture", href: "#architecture" },
+            { label: "02 4-Week Rollout", href: "#rollout" },
+            { label: "03 Production Proof", href: "#production-apps" },
+            { label: "04 Pricing ($4,999)", href: "#pricing" },
+            { label: "05 FAQ", href: "#faq" },
           ]}
           ctaDemoText="Book short-drama suite demo"
           tierId="ott-streaming"
@@ -219,44 +285,34 @@ export default function ShortDramaPlatformPage() {
         {/* Live Capabilities Ticker */}
         <LiveTicker items={tickerItems} ariaLabel="Short-drama streaming capabilities ticker" />
 
-        {/* Interactive Dual-Format Player Preview Section */}
-        <section id="interactive-demo" className="py-16 border-t border-line">
-          <div className="wrap-wide space-y-6">
-            <OttPlayerPreview />
-          </div>
-        </section>
-
         {/* Architecture & Modules Breakout */}
         <Section
           id="architecture"
           index="01 · Platform Architecture"
           title="What Is Included in the Flagship Drama Suite"
           intro="A comprehensive 9:16 short-drama software platform. Native mobile apps, responsive mobile-web player, and centralized video operations console deployed inside your cloud."
+          wide
         >
-          <div className="space-y-16">
+          <div className="space-y-24">
             {modules.map((m) => (
-              <div key={m.n} className="border-t border-line pt-10 grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
-                <div className="space-y-4">
+              <div
+                key={m.n}
+                id={m.n === "03" ? "video-cms" : undefined}
+                className="border-t border-line pt-12 space-y-8"
+              >
+                <div className="max-w-3xl space-y-3">
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-sm text-ink-3">{m.n}</span>
                     <span className="text-xs font-mono px-2 py-0.5 rounded bg-wash border border-line text-ink-2">
                       {m.badge}
                     </span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">{m.title}</h3>
+                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{m.title}</h3>
                   <p className="text-xs font-mono text-ink-3">{m.subtitle}</p>
                   <p className="text-sm text-ink-2 leading-relaxed">{m.description}</p>
-                  <ul className="space-y-2 text-xs text-ink-2 pt-2">
-                    {m.points.map((pt, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-ink-3 select-none">—</span>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
 
                   {m.childLink && (
-                    <div className="pt-3">
+                    <div className="pt-1">
                       <Link
                         href={m.childLink.href}
                         className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-accent hover:underline"
@@ -269,12 +325,32 @@ export default function ShortDramaPlatformPage() {
                 </div>
 
                 {m.screenshot && (
-                  <div className="w-full">
+                  <div className="group max-w-3xl mx-auto w-full">
                     <Screenshot
                       src={m.screenshot.src}
                       alt={m.screenshot.alt}
                       caption={m.screenshot.caption}
+                      className="transition-transform duration-300"
                     />
+                  </div>
+                )}
+
+                {m.capabilities && m.capabilities.length > 0 && (
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
+                    {m.capabilities.map((c) => {
+                      const Icon = c.icon;
+                      return (
+                        <div key={c.title} className="space-y-2">
+                          <div className="flex items-center gap-2 text-ink">
+                            <div className="h-7 w-7 rounded-md bg-wash border border-line flex items-center justify-center text-accent">
+                              <Icon className="h-3.5 w-3.5" />
+                            </div>
+                            <h4 className="font-semibold text-sm tracking-tight">{c.title}</h4>
+                          </div>
+                          <p className="text-xs text-ink-2 leading-relaxed">{c.desc}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -282,13 +358,10 @@ export default function ShortDramaPlatformPage() {
           </div>
         </Section>
 
-        {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" />
-
         {/* 4-Week Cloud Rollout Timeline */}
         <HowItWorks
           id="rollout"
-          index="03 · 4-Week Deployment"
+          index="02 · 4-Week Deployment"
           title="From Media Catalog to Production App Launch"
           badge="Rapid 2–4 Week Deployment · Private Cloud VPC"
           steps={rolloutSteps}
@@ -297,7 +370,7 @@ export default function ShortDramaPlatformPage() {
         {/* Work / Production Showcase */}
         <Work
           id="production-apps"
-          index="04 · Production Experience"
+          index="03 · Production Experience"
           title="Battle-Tested Video &amp; Entertainment Platforms"
           intro="Our engineering team has built and deployed entertainment streaming applications operating at multi-million scale."
           projects={OTT_SHOWCASE_PROJECTS}
@@ -306,7 +379,7 @@ export default function ShortDramaPlatformPage() {
         {/* Dedicated Base Pricing ($4,999 / $1,999 / $20/hr) */}
         <Pricing
           id="pricing"
-          index="05 · Pricing &amp; Licensing"
+          index="04 · Pricing &amp; Licensing"
           title="Transparent Short-Drama Platform Pricing"
           intro="Flat one-time fee. No recurring monthly SaaS rent, no subscriber seat fees, and 0% revenue cut."
           tiers={SHORT_DRAMA_BASE_PRICING_TIERS}
@@ -316,10 +389,10 @@ export default function ShortDramaPlatformPage() {
         {/* FAQ */}
         <Faq
           id="faq"
-          index="06 · Frequently Asked Questions"
+          index="05 · Frequently Asked Questions"
           title="Short-Drama Platform Questions"
           intro="Everything you need to know about app publishing, Cloudflare Stream video costs, and source code ownership."
-          items={OTT_FAQS}
+          items={SHORT_DRAMA_FAQS}
         />
 
         {/* Closing Conversion Banner */}

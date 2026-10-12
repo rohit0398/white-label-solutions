@@ -161,6 +161,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
       alternates: ottAlternates,
     },
+    {
+      url: `${baseUrl}/es/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/de/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/fr/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
+    {
+      url: `${baseUrl}/hi/solutions/ott-streaming`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      alternates: ottAlternates,
+    },
     // Short-Drama Base Platform (All Languages)
     {
       url: `${baseUrl}/solutions/short-drama`,
@@ -197,61 +225,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
       alternates: shortDramaAlternates,
     },
-    // Short-Drama App Development Solution
+    // Modular Solution Packages
     {
       url: `${baseUrl}/solutions/short-drama-app-development`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Short-Drama Web Platform Solution
     {
       url: `${baseUrl}/solutions/short-drama-website-development`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Cinematic Video Streaming Development Solution
     {
-      url: `${baseUrl}/solutions/ott-video-streaming-development`,
+      url: `${baseUrl}/solutions/ott-website-development`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Cinematic OTT Mobile App Development Solution
     {
       url: `${baseUrl}/solutions/ott-app-development`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/es/solutions/ott-streaming`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
-      alternates: ottAlternates,
-    },
-    {
-      url: `${baseUrl}/de/solutions/ott-streaming`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
-      alternates: ottAlternates,
-    },
-    {
-      url: `${baseUrl}/fr/solutions/ott-streaming`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
-      alternates: ottAlternates,
-    },
-    {
-      url: `${baseUrl}/hi/solutions/ott-streaming`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
-      alternates: ottAlternates,
     },
     {
       url: `${baseUrl}/case-studies/mechatron-lab`,

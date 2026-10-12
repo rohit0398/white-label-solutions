@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND } from "@/lib/constants";
 import {
   Clock,
@@ -184,9 +185,12 @@ export default function EcommerceCostBlogPage() {
               <span>Pricing Guide &amp; Cost Analysis</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]">
-              E-Commerce Website Development Cost in 2026: Agency Quotes vs. SaaS Taxes vs. Pre-Built Ownership
-            </h1>
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]"
+            >
+              E-Commerce Website Development Cost in 2026: Agency Quotes vs. SaaS Taxes vs. Pre-Built Ownership.
+            </AnimatedHeadline>
 
             <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-ink-3 pt-2">
               <span>By Mechatron Lab Engineering Team</span>

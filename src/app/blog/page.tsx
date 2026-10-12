@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import {
   ArrowRight,
   BookOpen,
@@ -155,9 +156,12 @@ export default function BlogIndexPage() {
               <span>Engineering Guides &amp; Market Insights</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-[-0.035em] leading-[1.08] text-ink">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-[-0.035em] leading-[1.08] text-ink"
+            >
               E-Commerce Architecture, Development Costs &amp; Growth Guides.
-            </h1>
+            </AnimatedHeadline>
 
             <p className="text-base sm:text-lg text-ink-2 leading-relaxed max-w-2xl mx-auto">
               Transparent research, architectural deep dives, and commercial guides to help brand owners and technical founders launch faster without recurring software fees.

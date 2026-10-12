@@ -51,7 +51,12 @@ export function HomeHero() {
 
         {/* Concise Direct Headline */}
         <h1 className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink">
-          Production-Ready Platforms. Deployed Directly to Your Cloud.
+          <span className="inline-block animate-hero-title-1">
+            Production-Ready Platforms.
+          </span>{" "}
+          <span className="inline-block animate-hero-title-2 text-gradient-shimmer">
+            Deployed Directly to Your Cloud.
+          </span>
         </h1>
 
         {/* Minimalist Subtitle */}
