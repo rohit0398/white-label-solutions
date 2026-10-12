@@ -19,26 +19,25 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 import { Globe, ShieldCheck, Zap, Share2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Short-Drama Website Development Agency | 9:16 Web Streaming | Mechatron Lab",
+  title: "Short-Drama Web Player Development | 9:16 Video | Mechatron Lab",
   description:
-    "Specialized short-drama website development agency & engineering company. We build sub-second 9:16 vertical web streaming players with instant social deep-link playback, Stripe VIP subscriptions, and Video CMS.",
+    "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming, social deep-links, and Stripe VIP billing on your cloud in 2–4 weeks.",
   keywords: [
-    "short drama website development company",
-    "short drama web development agency",
-    "vertical video web player development",
-    "reelshort web clone developers",
-    "video streaming web development agency",
-    "mobile first video streaming website agency",
-    "custom web video player development company",
-    "vertical drama web platform agency",
+    "short drama website development",
+    "short drama web player",
+    "vertical video web player",
+    "reelshort web player development",
+    "mobile first video streaming website",
+    "custom web video player development",
+    "vertical drama web platform",
   ],
   alternates: {
     canonical: "/solutions/short-drama-website-development",
   },
   openGraph: {
-    title: "Short-Drama Website Development Agency | 9:16 Web Streaming",
+    title: "Short-Drama Web Player Development | 9:16 Video",
     description:
-      "Web engineering agency for 9:16 vertical drama streaming portals. Sub-second HLS playback, social episode sharing, and Stripe recurring VIP billing.",
+      "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming, social deep-links, and Stripe VIP billing on your cloud in 2–4 weeks.",
     url: "/solutions/short-drama-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -47,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama Website Development Agency | 9:16 Web Streaming",
+    title: "Short-Drama Web Player Development | 9:16 Video",
     description:
-      "Deploy your branded ReelShort-style vertical drama web portal on your private cloud with 0% commission.",
+      "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming and Stripe VIP passes in 2–4 weeks.",
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };

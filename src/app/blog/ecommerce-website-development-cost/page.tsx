@@ -20,27 +20,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Website Development Cost in 2026: Full Pricing Breakdown | Mechatron Lab",
+  title: "E-Commerce Website Development Cost 2026 | Mechatron Lab",
   description:
-    "How much does e-commerce website development really cost? Compare custom agency quotes ($40k-$80k), SaaS platform fees ($26k+ on Shopify), and pre-built private cloud ownership ($4,999).",
+    "How much does e-commerce development really cost? Compare $40k–$80k agency quotes, Shopify's 3-year hidden app fees, and $4,999 private cloud ownership.",
   keywords: [
     "ecommerce website development cost",
     "ecommerce website packages",
-    "build ecommerce website",
-    "ecommerce development company",
-    "custom ecommerce development",
-    "ecommerce web development services",
-    "creating an ecommerce website",
+    "build ecommerce website cost",
     "shopify development cost",
+    "custom ecommerce development cost",
     "how much does an ecommerce website cost",
   ],
   alternates: {
     canonical: "/blog/ecommerce-website-development-cost",
   },
   openGraph: {
-    title: "E-Commerce Website Development Cost in 2026: The True 3-Year Breakdown",
+    title: "E-Commerce Website Development Cost 2026: Pricing Breakdown",
     description:
-      "Avoid hidden SaaS fees and $80k agency quotes. Detailed comparison of custom agencies, Shopify, and pre-built private cloud ownership.",
+      "How much does e-commerce development really cost? Compare $40k–$80k agency quotes, Shopify's 3-year hidden app fees, and $4,999 private cloud ownership.",
     url: "/blog/ecommerce-website-development-cost",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -49,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Website Development Cost in 2026: Complete Comparison",
+    title: "E-Commerce Website Development Cost 2026 | Mechatron Lab",
     description:
       "Real breakdown of upfront and hidden 3-year costs for e-commerce website development.",
     images: ["/og-image.png"],

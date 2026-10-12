@@ -7,9 +7,9 @@ import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Case Study: eStoreAlley Wholesale Directory & Global Marketplace",
+  title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
   description:
-    "See how eStoreAlley built an international wholesale directory and marketplace with Stripe checkout, multi-vendor merchant listings, and a Google Play Android app.",
+    "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout and Google Play mobile app on their private cloud.",
   keywords: [
     "estorealley ecommerce case study",
     "wholesale directory marketplace",
@@ -21,15 +21,17 @@ export const metadata: Metadata = {
     canonical: "/case-studies/estorealley",
   },
   openGraph: {
-    title: "Case Study: eStoreAlley Wholesale Directory & Marketplace",
-    description: "International wholesale directory, multi-vendor listings, Stripe v3 checkout, and Google Play app.",
+    title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
+    description:
+      "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout and Google Play mobile app on their private cloud.",
     url: "/case-studies/estorealley",
     images: ["/showcase/estorealley-store.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Study: eStoreAlley Wholesale Directory & Global Marketplace",
-    description: "International wholesale marketplace with Stripe checkout and Google Play Android app.",
+    title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
+    description:
+      "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout on private cloud.",
     images: ["/showcase/estorealley-store.png"],
   },
 };

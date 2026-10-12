@@ -20,26 +20,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "E-Commerce App Development: Native iOS & Android Guide (2026) | Mechatron Lab",
+  title: "E-Commerce App Development Guide: iOS & Android | Mechatron Lab",
   description:
-    "How to launch branded e-commerce mobile shopping apps for iOS & Android in 2–4 weeks. Flutter architecture, 0% Apple/Google commissions, and free push notification recovery.",
+    "Launch branded mobile shopping apps for iOS & Android in 2–4 weeks. Flutter architecture, 0% app store sales cuts, and automated push notifications.",
   keywords: [
-    "ecommerce app development",
+    "ecommerce app development guide",
     "ecommerce mobile app development",
-    "ecommerce app development company",
-    "custom ecommerce mobile app development",
-    "e commerce app development",
     "flutter ecommerce app",
     "shopping app development",
     "white label ecommerce app",
+    "ios android shopping app development",
   ],
   alternates: {
     canonical: "/blog/ecommerce-app-development",
   },
   openGraph: {
-    title: "E-Commerce App Development: Launch Native iOS & Android Apps in 2–4 Weeks",
+    title: "E-Commerce App Development Guide: iOS & Android",
     description:
-      "A technical and commercial guide to building high-converting mobile shopping apps with Flutter and 0% app store commission.",
+      "Launch branded mobile shopping apps for iOS & Android in 2–4 weeks. Flutter architecture, 0% app store sales cuts, and automated push notifications.",
     url: "/blog/ecommerce-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -48,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce App Development: Native iOS & Android Guide (2026)",
+    title: "E-Commerce App Development Guide: iOS & Android | Mechatron Lab",
     description:
-      "Complete guide to e-commerce mobile app development with Flutter, biometric checkout, and zero platform cuts.",
+      "Launch branded mobile shopping apps for iOS & Android in 2–4 weeks with 0% commission.",
     images: ["/og-image.png"],
   },
 };

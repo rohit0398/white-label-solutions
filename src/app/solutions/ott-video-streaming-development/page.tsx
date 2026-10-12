@@ -20,26 +20,25 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 import { Monitor, Film, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "OTT Video Streaming Website Development Company | 16:9 Web Agency | Mechatron Lab",
+  title: "OTT Video Streaming Website Development | 16:9 Web | Mechatron Lab",
   description:
-    "Custom OTT video streaming website development company & web engineering agency. We build 16:9 widescreen streaming portals with adaptive HLS bitrates, Stripe VIP subscriptions, and Video CMS.",
+    "Custom 16:9 video streaming websites with adaptive HLS playback, Stripe subscriptions, and Video CMS deployed on your private AWS or Cloudflare in 2–4 weeks.",
   keywords: [
-    "ott video streaming website development company",
-    "video streaming web development agency",
-    "cinematic ott platform development company",
-    "netflix clone web development agency",
-    "vod website development company",
-    "custom web streaming platform developers",
-    "hls video streaming web agency",
-    "self hosted ott web development company",
+    "ott video streaming website development",
+    "video streaming website development",
+    "cinematic ott platform web",
+    "netflix clone website",
+    "vod website development",
+    "custom web streaming platform",
+    "hls video streaming web",
   ],
   alternates: {
     canonical: "/solutions/ott-video-streaming-development",
   },
   openGraph: {
-    title: "OTT Video Streaming Website Development Company | 16:9 Web Agency",
+    title: "OTT Video Streaming Website Development | 16:9 Web",
     description:
-      "Enterprise video streaming website development agency. High-speed 16:9 widescreen portals with adaptive HLS bitrates and private cloud Video CMS.",
+      "Custom 16:9 video streaming websites with adaptive HLS playback, Stripe subscriptions, and Video CMS deployed on your private AWS or Cloudflare in 2–4 weeks.",
     url: "/solutions/ott-video-streaming-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -48,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OTT Video Streaming Website Development Company | 16:9 Web Agency",
+    title: "OTT Video Streaming Website Development | 16:9 Web",
     description:
-      "Custom video streaming website development agency. Deploy your branded Netflix-style video portal on your private cloud.",
+      "Custom 16:9 video streaming websites with adaptive HLS playback and Stripe subscriptions deployed in 2–4 weeks.",
     images: ["/showcase/ott-cinematic-web.jpg"],
   },
 };

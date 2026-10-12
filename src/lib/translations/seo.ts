@@ -9,9 +9,9 @@ export interface LocalizedSeo {
 
 export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label Software Platforms | E-Commerce, Short Drama & OTT | Mechatron Lab",
+    title: "White-Label Software Platforms | OTT & Commerce | Mechatron Lab",
     description:
-      "Production-ready white-label software platforms for e-commerce, 9:16 short-drama, and 16:9 cinematic video streaming. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
+      "Production-ready software platforms for 9:16 short drama, OTT video streaming, and e-commerce. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
     keywords: [
       "white label software platforms",
       "pre-built ecommerce store",
@@ -22,14 +22,14 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
       "self hosted ecommerce platform",
       "private cloud software deployment",
       "flutter app development",
-      "nextjs web application development",
+      "nextjs web development",
     ],
     ogLocale: "en_US",
   },
   es: {
-    title: "Plataformas de Software Marca Blanca | E-Commerce, Micro-Dramas y OTT | Mechatron Lab",
+    title: "Plataformas Software Marca Blanca | OTT y E-Commerce | Mechatron Lab",
     description:
-      "Plataformas de software listas para producción: comercio electrónico, micro-dramas 9:16 y streaming de video OTT 16:9. Desplegado en tu propia nube en 2–4 semanas sin comisiones.",
+      "Plataformas de software para micro-dramas 9:16, streaming OTT 16:9 y e-commerce. Desplegado en tu propia nube en 2–4 semanas sin comisiones.",
     keywords: [
       "plataformas software marca blanca",
       "tienda ecommerce marca blanca",
@@ -41,9 +41,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "es_ES",
   },
   de: {
-    title: "White-Label Software-Plattformen | E-Commerce, Kurzserien & OTT | Mechatron Lab",
+    title: "White-Label Software-Plattformen | OTT & E-Commerce | Mechatron Lab",
     description:
-      "Einsatzbereite Software-Plattformen für E-Commerce, 9:16 vertikale Kurzserien und 16:9 Video-Streaming. In 2–4 Wochen in Ihrer privaten Cloud bereitgestellt – 0 % Umsatzprovision.",
+      "Software-Plattformen für 9:16 Kurzserien, OTT Video-Streaming und E-Commerce. In 2–4 Wochen in Ihrer privaten Cloud bereitgestellt – 0 % Provision.",
     keywords: [
       "white label software plattformen",
       "fertiger online shop eigene cloud",
@@ -55,9 +55,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Plateformes Logicielles en Marque Blanche | E-Commerce, Séries Courtes & OTT | Mechatron Lab",
+    title: "Plateformes Logicielles Marque Blanche | OTT & E-Commerce | Mechatron Lab",
     description:
-      "Plateformes logicielles prêtes à l'emploi pour le e-commerce, mini-séries 9:16 et streaming vidéo OTT 16:9. Déployées sur votre cloud privé en 2 à 4 semaines avec 0% commission.",
+      "Plateformes logicielles pour mini-séries 9:16, streaming OTT et e-commerce. Déployées sur votre cloud privé en 2 à 4 semaines avec 0% commission.",
     keywords: [
       "plateformes logicielles marque blanche",
       "boutique ecommerce marque blanche",
@@ -69,9 +69,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "व्हाइट-लेबल सॉफ्टवेयर प्लेटफ़ॉर्म | ई-कॉमर्स, शॉर्ट-ड्रामा और ओटीटी | Mechatron Lab",
+    title: "व्हाइट-लेबल सॉफ्टवेयर प्लेटफ़ॉर्म | OTT और ई-कॉमर्स | Mechatron Lab",
     description:
-      "ई-कॉमर्स, 9:16 वर्टिकल शॉर्ट-ड्रामा और 16:9 सिनेमैटिक वीडियो स्ट्रीमिंग के लिए प्रोडक्शन-रेडी सॉफ्टवेयर प्लेटफ़ॉर्म। 2–4 हफ्तों में आपके प्राइवेट क्लाउड पर डिप्लॉय, 0% कमीशन।",
+      "9:16 शॉर्ट-ड्रामा, OTT वीडियो स्ट्रीमिंग और ई-कॉमर्स सॉफ्टवेयर। 2–4 हफ्तों में आपके प्राइवेट क्लाउड पर डिप्लॉय, 0% कमीशन।",
     keywords: [
       "व्हाइट लेबल सॉफ्टवेयर प्लेटफॉर्म",
       "रेडीमेड ईकॉमर्स स्टोर",
@@ -86,14 +86,14 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label OTT Platform & Short-Video Drama Apps | Deployed on Your Cloud",
+    title: "OTT Platform Development Company | Video Apps | Mechatron Lab",
     description:
-      "Production-ready white-label OTT streaming & 9:16 vertical drama apps. Deployed on your Cloudflare/AWS cloud with zero subscriber fees and full source code custody.",
+      "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your cloud with 0% fees.",
     keywords: [
-      "white label ott platform",
-      "short video drama app development",
+      "ott platform development company",
+      "video streaming app development",
       "reelshort clone app with source code",
-      "dramabox white label platform",
+      "netflix clone app",
       "ready to deploy streaming app",
       "ott platform one time payment self hosted",
       "video streaming app developers",
@@ -101,52 +101,52 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Plataforma OTT Marca Blanca y Apps de Series Cortas 9:16 | En Tu Nube",
+    title: "Desarrollo de Plataforma OTT | Apps de Streaming | Mechatron Lab",
     description:
-      "Plataforma de streaming OTT marca blanca lista para producción y apps de micro-dramas verticales 9:16. Desplegado en tu propia nube con 0% comisión y código fuente 100%.",
+      "Lanza tu plataforma de video como Netflix en 2–4 semanas. Portal web 16:9, apps iOS/Android y Video CMS en tu propia nube con 0% comisión.",
     keywords: [
-      "plataforma ott marca blanca",
-      "desarrollo app drama corto vertical",
-      "clon reelshort con codigo fuente",
+      "desarrollo plataforma ott",
+      "desarrollo app streaming video",
+      "clon netflix con codigo fuente",
       "streaming video autohospedado pago unico",
       "app de streaming lista para desplegar",
     ],
     ogLocale: "es_ES",
   },
   de: {
-    title: "White-Label OTT-Streaming-Plattform & Kurzfilm-Apps 9:16 | Eigene Cloud",
+    title: "OTT Plattform Entwicklung | Video Streaming Apps | Mechatron Lab",
     description:
-      "Einsatzbereite White-Label OTT-Plattform und 9:16 vertikale Kurzserien-Apps. In Ihrer eigenen Cloud gehostet mit 0 % Gebühren pro Abonnent und vollem Quellcode-Eigentum.",
+      "Starten Sie Ihre Video-Streaming-Plattform wie Netflix in 2–4 Wochen. Breitbild-Webportal, iOS/Android-Apps und Video CMS in Ihrer Cloud ohne Provision.",
     keywords: [
-      "white label ott plattform",
-      "kurzdrama serien app entwicklung",
-      "reelshort klon quellcode",
+      "ott plattform entwicklung",
+      "video streaming app entwicklung",
+      "netflix klon quellcode",
       "video streaming plattform einmalzahlung",
       "einsatzbereite streaming app",
     ],
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Plateforme OTT Marque Blanche & Applications Courts-Métrages 9:16 | Sur Votre Cloud",
+    title: "Développement Plateforme OTT | Applications Vidéo | Mechatron Lab",
     description:
-      "Solution de streaming OTT marque blanche et applications de mini-séries verticales 9:16. Déployé sur votre cloud avec 0% commission et pleine propriété du code source.",
+      "Lancez votre plateforme de streaming type Netflix en 2 à 4 semaines. Portail web 16:9, apps iOS/Android et CMS sur votre cloud avec 0% commission.",
     keywords: [
-      "plateforme ott marque blanche",
-      "application mini serie video vertical",
-      "clone reelshort code source",
+      "developpement plateforme ott",
+      "application streaming video",
+      "clone netflix code source",
       "streaming video heberge paiement unique",
       "solution streaming prete au deploiement",
     ],
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "व्हाइट-लेबल ओटीटी प्लेटफ़ॉर्म और शॉर्ट-ड्रामा ऐप्स | आपके अपने क्लाउड पर",
+    title: "ओटीटी प्लेटफ़ॉर्म डेवलपमेंट | वीडियो स्ट्रीमिंग ऐप्स | Mechatron Lab",
     description:
-      "रेडी-टू-डिप्लॉय व्हाइट-लेबल ओटीटी स्ट्रीमिंग प्लेटफ़ॉर्म और 9:16 वर्टिकल शॉर्ट-ड्रामा ऐप्स (रीलशॉर्ट स्टाइल)। बिना किसी सब्सक्राइबर कमीशन और 100% सोर्स कोड ओनरशिप के साथ।",
+      "नेटफ्लिक्स जैसा अपना ब्रांडेड वीडियो स्ट्रीमिंग प्लेटफ़ॉर्म 2–4 हफ्तों में लॉन्च करें। वेब पोर्टल, मोबाइल ऐप्स और CMS बिना किसी कमीशन के।",
     keywords: [
-      "व्हाइट लेबल ओटीटी प्लेटफॉर्म",
-      "शॉर्ट वीडियो ड्रामा ऐप डेवलपमेंट",
-      "रीलशॉर्ट क्लोन ऐप सोर्स कोड",
+      "ओटीटी प्लेटफॉर्म डेवलपमेंट",
+      "वीडियो स्ट्रीमिंग ऐप डेवलपमेंट",
+      "नेटफ्लिक्स क्लोन ऐप सोर्स कोड",
       "सेल्फ होस्टेड वीडियो स्ट्रीमिंग ऐप",
       "रेडी टू डिप्लॉय वीडियो ऐप",
     ],
@@ -156,11 +156,11 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label 9:16 Short-Drama Streaming Platform | Apps & Web | Mechatron Lab",
+    title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
     description:
-      "Launch your branded 9:16 vertical short-drama platform in 2–4 weeks. Complete Flutter iOS & Android apps, Next.js web streaming player, and Video CMS with 0% revenue cut.",
+      "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
     keywords: [
-      "short drama platform",
+      "short drama app development company",
       "reelshort clone app with source code",
       "dramabox white label platform",
       "vertical video streaming platform",
@@ -170,11 +170,11 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Plataforma de Micro-Dramas 9:16 Marca Blanca | Apps y Web | Mechatron Lab",
+    title: "Desarrollo de Apps de Micro-Dramas 9:16 | Streaming | Mechatron Lab",
     description:
-      "Lanza tu plataforma de videos cortos 9:16 en 2–4 semanas. Apps nativas iOS/Android, reproductor web móvil y panel Video CMS en tu propia nube con 0% comisión.",
+      "Lanza tu app de micro-dramas tipo ReelShort en 2–4 semanas. Apps nativas 9:16 iOS/Android, reproductor web y CMS en tu propia nube sin comisiones.",
     keywords: [
-      "plataforma micro drama 9:16",
+      "desarrollo app micro drama 9:16",
       "clon reelshort con codigo fuente",
       "dramabox marca blanca",
       "streaming videos verticales",
@@ -183,9 +183,9 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "es_ES",
   },
   de: {
-    title: "White-Label 9:16 Kurzserien-Streaming-Plattform | Apps & Web | Mechatron Lab",
+    title: "9:16 Kurzserien App Entwicklung | Video Streaming | Mechatron Lab",
     description:
-      "Starten Sie Ihre eigene 9:16 vertikale Kurzserien-Plattform in 2–4 Wochen. Flutter iOS/Android Apps, Next.js Web-Player und Video CMS in Ihrer Cloud ohne Umsatzprovision.",
+      "Starten Sie Ihre Kurzserien-App wie ReelShort in 2–4 Wochen. 9:16 iOS & Android Apps, Web-Player und CMS in Ihrer Cloud ohne Provision.",
     keywords: [
       "kurzdrama plattform white label",
       "reelshort klon app",
@@ -196,11 +196,11 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Plateforme de Mini-Séries 9:16 en Marque Blanche | Apps & Web | Mechatron Lab",
+    title: "Développement d'Apps Mini-Séries 9:16 | Streaming | Mechatron Lab",
     description:
-      "Lancez votre plateforme de courts-métrages verticaux 9:16 en 2–4 semaines. Apps Flutter iOS/Android, lecteur web Next.js et Video CMS sur votre cloud avec 0% commission.",
+      "Lancez votre application de mini-séries type ReelShort en 2 à 4 semaines. Apps 9:16 iOS/Android, lecteur web et CMS sur votre cloud avec 0% commission.",
     keywords: [
-      "plateforme mini serie 9:16",
+      "developpement app mini serie 9:16",
       "clone reelshort code source",
       "dramabox marque blanche",
       "streaming video vertical",
@@ -209,11 +209,11 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "व्हाइट-लेबल 9:16 शॉर्ट-ड्रामा स्ट्रीमिंग प्लेटफ़ॉर्म | ऐप्स और वेब | Mechatron Lab",
+    title: "9:16 शॉर्ट-ड्रामा ऐप डेवलपमेंट | वीडियो स्ट्रीमिंग | Mechatron Lab",
     description:
-      "2–4 हफ्तों में अपना ब्रांडेड 9:16 वर्टिकल शॉर्ट-ड्रामा प्लेटफ़ॉर्म लॉन्च करें। फ्लटर iOS और एंड्रॉइड ऐप्स, Next.js वेब प्लेयर और वीडियो सीएमएस बिना किसी कमीशन के।",
+      "2–4 हफ्तों में रीलशॉर्ट जैसा अपना शॉर्ट-ड्रामा ऐप लॉन्च करें। 9:16 iOS और एंड्रॉइड ऐप्स, वेब प्लेयर और CMS बिना किसी कमीशन के।",
     keywords: [
-      "शॉर्ट ड्रामा प्लेटफॉर्म",
+      "शॉर्ट ड्रामा ऐप डेवलपमेंट",
       "रीलशॉर्ट क्लोन ऐप सोर्स कोड",
       "ड्रामाबॉक्स व्हाइट लेबल",
       "वर्टिकल वीडियो स्ट्रीमिंग",
@@ -222,3 +222,4 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "hi_IN",
   },
 };
+

@@ -21,28 +21,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Complete Guide to E-Commerce Website Development (2026) | Mechatron Lab",
+  title: "E-Commerce Website Development Guide 2026 | Mechatron Lab",
   description:
-    "How to build a modern, high-speed e-commerce website with sub-second page loads, automated tax invoicing, and multi-warehouse inventory without recurring software fees.",
+    "Learn how to build a high-speed e-commerce website with sub-second page loads, automated tax invoicing, and multi-warehouse inventory with zero SaaS fees.",
   keywords: [
     "ecommerce website development",
     "build ecommerce website",
-    "ecommerce web development",
-    "ecommerce site development",
-    "develop e commerce website",
-    "custom ecommerce development",
-    "ecommerce development company",
-    "ecommerce development services",
-    "b2b ecommerce website development",
-    "creating an ecommerce website",
+    "ecommerce web development guide",
+    "custom ecommerce website development",
+    "nextjs ecommerce architecture",
+    "self hosted ecommerce platform",
   ],
   alternates: {
     canonical: "/blog/ecommerce-website-development",
   },
   openGraph: {
-    title: "Complete Guide to E-Commerce Website Development in 2026",
+    title: "E-Commerce Website Development Guide 2026",
     description:
-      "Modern architecture roadmap: sub-second Next.js storefronts, multi-warehouse sync, and self-hosted private cloud deployment.",
+      "Learn how to build a high-speed e-commerce website with sub-second page loads, automated tax invoicing, and multi-warehouse inventory with zero SaaS fees.",
     url: "/blog/ecommerce-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -51,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Complete Guide to E-Commerce Website Development (2026)",
+    title: "E-Commerce Website Development Guide 2026 | Mechatron Lab",
     description:
-      "How to build high-performance e-commerce stores with Next.js and self-hosted cloud infrastructure.",
+      "Learn how to build a high-speed e-commerce website with sub-second page loads and zero SaaS fees.",
     images: ["/og-image.png"],
   },
 };

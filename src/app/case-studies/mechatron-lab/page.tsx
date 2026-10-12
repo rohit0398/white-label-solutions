@@ -7,9 +7,9 @@ import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Case Study: Mechatron Lab Technical E-Commerce Store & Android App",
+  title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
   description:
-    "See how Mechatron Lab scaled to 1,000+ technical hardware SKUs with an AI shopping assistant, multi-warehouse fulfillment, and native Android app on their private cloud.",
+    "How Mechatron Lab scaled to 1,000+ technical SKUs with an AI shopping assistant, multi-warehouse fulfillment, and native Android app on their private cloud.",
   keywords: [
     "mechatron lab ecommerce case study",
     "technical hardware online store",
@@ -21,15 +21,17 @@ export const metadata: Metadata = {
     canonical: "/case-studies/mechatron-lab",
   },
   openGraph: {
-    title: "Case Study: Mechatron Lab Technical Store & Android App",
-    description: "1,000+ SKUs, AI shopping assistant, multi-warehouse inventory, and native Android app on client-owned cloud.",
+    title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
+    description:
+      "How Mechatron Lab scaled to 1,000+ technical SKUs with an AI shopping assistant, multi-warehouse fulfillment, and native Android app on their private cloud.",
     url: "/case-studies/mechatron-lab",
     images: ["/showcase/mechatron-store.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Study: Mechatron Lab Technical E-Commerce Store & Android App",
-    description: "1,000+ SKUs, multi-warehouse fulfillment, and native Android app deployed on private cloud.",
+    title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
+    description:
+      "How Mechatron Lab scaled to 1,000+ technical SKUs with multi-warehouse fulfillment and native Android app.",
     images: ["/showcase/mechatron-store.png"],
   },
 };

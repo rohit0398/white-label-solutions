@@ -20,21 +20,20 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "9:16 Short-Drama App Development Company | Video Streaming Agency | Mechatron Lab",
+  title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
   description:
-    "Premier short-drama app development company & video streaming agency. We engineer custom 9:16 vertical serialized drama apps, responsive web players, and Video CMS on your private cloud with 0% revenue cut.",
+    "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
   keywords: [
     "short drama app development company",
-    "short drama app development agency",
-    "vertical video app development company",
-    "reelshort clone app development company",
-    "dramabox white label platform development",
-    "micro drama software development agency",
-    "short video drama app developers",
-    "custom video streaming development company",
+    "short drama app development",
+    "vertical video streaming app development",
+    "reelshort clone app development",
+    "dramabox white label platform",
+    "micro drama app developers",
+    "short video drama app development",
+    "custom video streaming development",
     "short drama platform",
-    "flutter video streaming development agency",
-    "short drama platform development",
+    "flutter video streaming app",
   ],
   alternates: {
     canonical: "/solutions/short-drama",
@@ -47,9 +46,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "9:16 Short-Drama App Development Company | Video Streaming Agency",
+    title: "Short-Drama App Development Company | Video Streaming",
     description:
-      "Enterprise short-drama app development company. Custom 9:16 vertical streaming apps, mobile web player, and central Video CMS deployed to your private cloud.",
+      "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
     url: "/solutions/short-drama",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -58,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "9:16 Short-Drama App Development Company | Video Streaming Agency",
+    title: "Short-Drama App Development Company | Video Streaming",
     description:
-      "Custom 9:16 vertical short-drama app development agency. Deploy on your private cloud with 0% commission.",
+      "Launch your branded short-drama app like ReelShort in 2–4 weeks with 0% revenue cut on your private cloud.",
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };

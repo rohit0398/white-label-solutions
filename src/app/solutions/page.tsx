@@ -7,9 +7,9 @@ import { buttonClass } from "@/components/ui/Button";
 import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Production-Ready White-Label Software Solutions | E-Commerce, OTT Streaming & Enterprise",
+  title: "White-Label Software Solutions Catalog | Mechatron Lab",
   description:
-    "Production-ready white-label software platforms. E-commerce and OTT streaming apps deployed on your cloud with 100% source code ownership and 0% revenue cuts.",
+    "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Private cloud deployment with 100% code ownership & 0% fees.",
   keywords: [
     "white label software solutions",
     "white label ecommerce platform",
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "Production-ready platforms deployed to your private cloud. E-commerce, OTT video streaming, and native mobile apps.",
+      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Private cloud deployment with 100% code ownership & 0% fees.",
     url: "/solutions",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Production-Ready White-Label Software Solutions | Mechatron Lab",
+    title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "E-commerce and OTT streaming apps deployed on your private cloud with 100% source code ownership and 0% revenue cuts.",
+      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming with 0% fees.",
     images: ["/og-image.png"],
   },
 };

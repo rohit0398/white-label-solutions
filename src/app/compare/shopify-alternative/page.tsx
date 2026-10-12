@@ -6,30 +6,32 @@ import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Shopify Alternative with No Monthly Fees & Mobile Apps Included | Mechatron Lab",
+  title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
   description:
-    "Looking for a self-hosted Shopify alternative? Launch an online store, native Android & iPhone apps, and all-in-one Admin & CRM deployed on your own cloud. Keep 100% of your sales with 0% platform cuts.",
+    "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
   keywords: [
     "shopify alternative no monthly fees",
     "shopify alternative self hosted",
     "shopify alternative with mobile app",
     "white label ecommerce platform",
     "ecommerce website one time cost",
-    "shopify alternative india us europe",
+    "self hosted online store",
   ],
   alternates: {
     canonical: "/compare/shopify-alternative",
   },
   openGraph: {
-    title: "Shopify Alternative with No Monthly Fees & Mobile Apps Included",
-    description: "Keep 100% of your customer revenue. Deploy on your own AWS/GCP/Azure cloud with full code rights.",
+    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    description:
+      "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
     url: "/compare/shopify-alternative",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shopify Alternative with No Monthly Fees & Mobile Apps Included | Mechatron Lab",
-    description: "Keep 100% of your revenue. Deploy on your own cloud with native mobile apps and 0% sales cuts.",
+    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    description:
+      "Tired of monthly Shopify fees? Launch an online store and mobile apps with 0% commission.",
     images: ["/og-image.png"],
   },
 };
