@@ -26,21 +26,21 @@ export function Navbar() {
       group: "ecommerce",
     },
     {
-      title: "E-Commerce Website",
-      desc: "Web storefront & operations CRM",
-      href: "/solutions/ecommerce-website-development",
-      price: "$2,999",
-      group: "ecommerce",
-    },
-    {
       title: "E-Commerce Mobile App",
       desc: "Native iOS & Android apps with Flutter",
       href: "/solutions/ecommerce-app-development",
       price: "$2,999",
       group: "ecommerce",
     },
+    {
+      title: "E-Commerce Website",
+      desc: "Web storefront & operations CRM",
+      href: "/solutions/ecommerce-website-development",
+      price: "$2,999",
+      group: "ecommerce",
+    },
 
-    // 9:16 Short-Drama
+    // Short-Drama
     {
       title: "Complete Short-Drama Suite",
       desc: "Vertical reels apps, web player & CMS",
@@ -56,14 +56,14 @@ export function Navbar() {
       group: "drama",
     },
     {
-      title: "Short-Drama Web Platform",
+      title: "Short-Drama Website",
       desc: "Mobile-first 9:16 web player & CMS",
       href: "/solutions/short-drama-website-development",
       price: "$2,999",
       group: "drama",
     },
 
-    // 16:9 Cinematic OTT
+    // Cinematic OTT
     {
       title: "Complete Cinematic OTT Suite",
       desc: "16:9 web portal, mobile apps & Video CMS",
@@ -72,16 +72,16 @@ export function Navbar() {
       group: "ott",
     },
     {
-      title: "Cinematic Web Streaming",
-      desc: "16:9 widescreen portal & adaptive HLS",
-      href: "/solutions/ott-video-streaming-development",
+      title: "Cinematic OTT Mobile App",
+      desc: "16:9 streaming apps with TV casting",
+      href: "/solutions/ott-app-development",
       price: "$2,999",
       group: "ott",
     },
     {
-      title: "Cinematic OTT Mobile App",
-      desc: "16:9 streaming apps with TV casting",
-      href: "/solutions/ott-app-development",
+      title: "Cinematic OTT Website",
+      desc: "16:9 widescreen portal & adaptive HLS",
+      href: "/solutions/ott-website-development",
       price: "$2,999",
       group: "ott",
     },
@@ -158,25 +158,25 @@ export function Navbar() {
                           onClick={() => setSolutionsOpen(false)}
                           className="block p-2 rounded-lg hover:bg-wash transition-colors group"
                         >
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
-                              {s.title}
-                            </span>
-                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                          <div className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                            {s.title}
+                          </div>
+                          <div className="flex items-center justify-between gap-2 mt-0.5">
+                            <p className="text-[11px] text-ink-3 leading-snug line-clamp-2">
+                              {s.desc}
+                            </p>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line/80 text-ink-2 self-start mt-0.5">
                               {s.price}
                             </span>
                           </div>
-                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
-                            {s.desc}
-                          </p>
                         </Link>
                       ))}
                     </div>
 
-                    {/* Column 2: 9:16 Short Drama */}
+                    {/* Column 2: Short-Drama */}
                     <div className="space-y-1">
                       <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-ink-3">
-                        9:16 Short-Drama
+                        Short-Drama
                       </div>
                       {solutions.filter((s) => s.group === "drama").map((s) => (
                         <Link
@@ -185,25 +185,25 @@ export function Navbar() {
                           onClick={() => setSolutionsOpen(false)}
                           className="block p-2 rounded-lg hover:bg-wash transition-colors group"
                         >
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
-                              {s.title}
-                            </span>
-                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                          <div className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                            {s.title}
+                          </div>
+                          <div className="flex items-center justify-between gap-2 mt-0.5">
+                            <p className="text-[11px] text-ink-3 leading-snug line-clamp-2">
+                              {s.desc}
+                            </p>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line/80 text-ink-2 self-start mt-0.5">
                               {s.price}
                             </span>
                           </div>
-                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
-                            {s.desc}
-                          </p>
                         </Link>
                       ))}
                     </div>
 
-                    {/* Column 3: 16:9 Cinematic OTT */}
+                    {/* Column 3: Cinematic OTT */}
                     <div className="space-y-1">
                       <div className="px-2 pt-1 pb-1 text-[10px] font-mono uppercase tracking-wider text-ink-3">
-                        16:9 Cinematic OTT
+                        Cinematic OTT
                       </div>
                       {solutions.filter((s) => s.group === "ott").map((s) => (
                         <Link
@@ -212,17 +212,17 @@ export function Navbar() {
                           onClick={() => setSolutionsOpen(false)}
                           className="block p-2 rounded-lg hover:bg-wash transition-colors group"
                         >
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
-                              {s.title}
-                            </span>
-                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.2 rounded bg-wash border border-line/80 text-ink-2">
+                          <div className="font-semibold text-xs text-ink group-hover:text-accent transition-colors block truncate">
+                            {s.title}
+                          </div>
+                          <div className="flex items-center justify-between gap-2 mt-0.5">
+                            <p className="text-[11px] text-ink-3 leading-snug line-clamp-2">
+                              {s.desc}
+                            </p>
+                            <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 rounded bg-wash border border-line/80 text-ink-2 self-start mt-0.5">
                               {s.price}
                             </span>
                           </div>
-                          <p className="text-[11px] text-ink-3 leading-snug mt-0.5 line-clamp-2">
-                            {s.desc}
-                          </p>
                         </Link>
                       ))}
                     </div>
@@ -331,20 +331,20 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-medium">{s.title}</span>
+                  <div className="text-sm font-medium">{s.title}</div>
+                  <div className="flex items-center justify-between gap-2 mt-0.5">
+                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
                     <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
                       {s.price}
                     </span>
                   </div>
-                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
                 </Link>
               ))}
             </div>
 
-            {/* 9:16 Short Drama Solutions Section */}
+            {/* Short-Drama Solutions Section */}
             <div className="space-y-1 pt-2 border-t border-line/60">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">9:16 Short-Drama Solutions</p>
+              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">Short-Drama Solutions</p>
               {solutions.filter((s) => s.group === "drama").map((s) => (
                 <Link
                   key={s.href}
@@ -352,20 +352,20 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-medium">{s.title}</span>
+                  <div className="text-sm font-medium">{s.title}</div>
+                  <div className="flex items-center justify-between gap-2 mt-0.5">
+                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
                     <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
                       {s.price}
                     </span>
                   </div>
-                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
                 </Link>
               ))}
             </div>
 
-            {/* 16:9 Cinematic OTT Solutions Section */}
+            {/* Cinematic OTT Solutions Section */}
             <div className="space-y-1 pt-2 border-t border-line/60">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">16:9 Cinematic OTT Solutions</p>
+              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">Cinematic OTT Solutions</p>
               {solutions.filter((s) => s.group === "ott").map((s) => (
                 <Link
                   key={s.href}
@@ -373,13 +373,13 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-sm font-medium">{s.title}</span>
+                  <div className="text-sm font-medium">{s.title}</div>
+                  <div className="flex items-center justify-between gap-2 mt-0.5">
+                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
                     <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
                       {s.price}
                     </span>
                   </div>
-                  <span className="text-[11px] text-ink-3 block mt-0.5">{s.desc}</span>
                 </Link>
               ))}
             </div>

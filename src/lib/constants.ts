@@ -722,7 +722,11 @@ export const ALL_HOME_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   ...SHOWCASE_PROJECTS.slice(0, 2),
 ];
 
-export const OTT_FAQS: Faq[] = [
+export const SHORT_DRAMA_FAQS: Faq[] = [
+  {
+    q: "What is included with the Short-Drama Platform?",
+    a: "You receive a complete 9:16 vertical short-drama suite: native iOS and Android apps (Flutter 60FPS vertical swipe player), responsive 9:16 mobile-first web streaming player (Next.js), and centralized Video CMS with automated episode paywall rules, VIP subscriptions, and rewarded video ad monetization.",
+  },
   {
     q: "How does Cloudflare Stream video pricing work?",
     a: "Cloudflare Stream charges raw wholesale usage fees directly to your account: approximately $1.00 per 1,000 minutes of video viewed, with $0 egress bandwidth markups. You pay Cloudflare directly with zero middleman markup from us.",
@@ -732,12 +736,8 @@ export const OTT_FAQS: Faq[] = [
     a: "Because the platform is deployed in your private cloud, you pay standard wholesale cloud infrastructure costs directly to your providers (e.g. VPS/database hosting typically $30–$80/mo depending on traffic, plus Cloudflare Stream video usage). We charge $0 recurring platform software fees and take 0% of your sales.",
   },
   {
-    q: "How does subscription and video ad monetization work?",
-    a: "You can offer monthly or annual VIP streaming subscriptions (via Stripe, Apple App Store, and Google Play Billing) or offer ad-supported free tiers with video ads integrated via Google AdMob and VAST advertising standards.",
-  },
-  {
-    q: "Can we stream both 9:16 vertical short dramas or 16:9 widescreen films on the same platform?",
-    a: "Yes. The platform includes a dual-engine player. You can configure shows as vertical short dramas (which launch into the 60FPS vertical swipe viewer) or as widescreen movies and series (which launch into the 16:9 cinematic player).",
+    q: "How does monetization work in the short-drama app and website?",
+    a: "You can offer weekly, monthly, and annual VIP streaming subscriptions (via Stripe, Apple App Store, and Google Play Billing) or configure cliffhanger paywalls where free-tier viewers watch 30-second rewarded video ads (Google AdMob / Unity Ads) to unlock subsequent episodes. All revenue flows 100% directly to you.",
   },
   {
     q: "Do you take any percentage cut of our subscriptions or ad earnings?",
@@ -748,3 +748,37 @@ export const OTT_FAQS: Faq[] = [
     a: "Yes. All our tiers include full Git source code rights without obfuscation or encrypted binaries, so your team has total independence.",
   },
 ];
+
+export const CINEMATIC_OTT_FAQS: Faq[] = [
+  {
+    q: "What is included with the Cinematic OTT Platform?",
+    a: "You receive a complete 16:9 widescreen streaming suite: responsive desktop and smart TV web portal (Next.js 16), native iOS and Android mobile streaming apps with 1-tap Chromecast and Apple AirPlay TV casting, and centralized Video CMS for managing movies, multi-season series, subtitle tracks, and SVOD/AVOD monetization.",
+  },
+  {
+    q: "How does Cloudflare Stream video pricing work?",
+    a: "Cloudflare Stream charges raw wholesale usage fees directly to your account: approximately $1.00 per 1,000 minutes of video viewed, with $0 egress bandwidth markups. You pay Cloudflare directly with zero middleman markup from us.",
+  },
+  {
+    q: "What ongoing server and infrastructure costs should I expect?",
+    a: "Because the platform is deployed in your private cloud, you pay standard wholesale cloud infrastructure costs directly to your providers (e.g. VPS/database hosting typically $30–$80/mo depending on traffic, plus Cloudflare Stream video usage). We charge $0 recurring platform software fees and take 0% of your sales.",
+  },
+  {
+    q: "Can viewers cast 16:9 videos to smart TVs?",
+    a: "Yes. The Flutter mobile applications include native Google Chromecast and Apple AirPlay integration, allowing viewers to easily beam 1080p and 4K streams to smart TVs and home entertainment systems with lockscreen playback controls.",
+  },
+  {
+    q: "How does subscription and video ad monetization work?",
+    a: "You can offer monthly or annual VIP streaming subscriptions (via Stripe, Apple App Store, and Google Play Billing) or offer ad-supported tiers with pre-roll and mid-roll video ads integrated via Google AdMob and VAST advertising standards.",
+  },
+  {
+    q: "Do you take any percentage cut of our subscriptions or ad earnings?",
+    a: "Zero. We take 0% commission. Payment processors (Stripe, Apple In-App Purchase, Google Play Billing) and ad networks deposit 100% of your revenue directly into your account.",
+  },
+  {
+    q: "Do I own the source code?",
+    a: "Yes. All our tiers include full Git source code rights without obfuscation or encrypted binaries, so your team has total independence.",
+  },
+];
+
+export const OTT_FAQS: Faq[] = CINEMATIC_OTT_FAQS;
+

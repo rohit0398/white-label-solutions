@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactForm } from "@/components/site/ContactForm";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND } from "@/lib/constants";
 import {
   MessageSquare,
@@ -116,9 +117,12 @@ export default function ContactPage() {
               <Headphones className="h-3.5 w-3.5 text-accent" />
               <span>Direct Engineering Consultation</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink"
+            >
               Let&apos;s Build Your Platform.
-            </h1>
+            </AnimatedHeadline>
             <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
               Have questions about our white-label architectures, source code licensing, or deployment timeline? Talk directly with our core engineering team. No aggressive sales pitches—just technical clarity.
             </p>

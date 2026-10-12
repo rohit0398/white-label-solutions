@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND } from "@/lib/constants";
 import {
   Clock,
@@ -139,9 +140,12 @@ export default function EcommerceAppDevBlogPage() {
               <span>Mobile Engineering &amp; Conversions</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]"
+            >
               E-Commerce App Development: How to Launch Native iOS &amp; Android Shopping Apps in 2–4 Weeks
-            </h1>
+            </AnimatedHeadline>
 
             <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-ink-3 pt-2">
               <span>By Mechatron Lab Engineering Team</span>

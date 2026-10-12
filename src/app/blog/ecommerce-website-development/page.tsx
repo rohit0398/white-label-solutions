@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { BRAND } from "@/lib/constants";
 import {
   Clock,
@@ -163,9 +164,12 @@ export default function EcommerceWebDevBlogPage() {
               <span>Engineering Guide &amp; Best Practices</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]">
+            <AnimatedHeadline
+              as="h1"
+              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]"
+            >
               Complete Guide to E-Commerce Website Development: Modern Architecture, Gateways &amp; Launch Strategy
-            </h1>
+            </AnimatedHeadline>
 
             <div className="flex flex-wrap items-center gap-6 text-xs font-mono text-ink-3 pt-2">
               <span>By Mechatron Lab Engineering Team</span>

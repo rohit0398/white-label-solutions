@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
-import { OttPlayerPreview } from "@/components/widgets/OttPlayerPreview";
 import { ShoppingBag, Smartphone, Tv, ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
 
 export function HomePlatformsDeck() {
@@ -90,17 +89,17 @@ export function HomePlatformsDeck() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href="/solutions/ecommerce-website-development"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
-                >
-                  <span>Only Website ($2,999)</span>
-                  <ExternalLink className="h-3 w-3" />
-                </Link>
-                <Link
                   href="/solutions/ecommerce-app-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
                   <span>Only Mobile App ($2,999)</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+                <Link
+                  href="/solutions/ecommerce-website-development"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
+                >
+                  <span>Only Website ($2,999)</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
@@ -170,14 +169,18 @@ export function HomePlatformsDeck() {
                   href="/solutions/short-drama-website-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Web Player ($2,999)</span>
+                  <span>Only Website ($2,999)</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
             </div>
 
             <div className="w-full">
-              <OttPlayerPreview />
+              <Screenshot
+                src="/showcase/ott-drama-app-showcase.jpg"
+                alt="9:16 vertical short-drama mobile app interface"
+                caption="Native 9:16 Drama Apps · 60FPS Swipe · VIP Access · Cloudflare Stream Ingest"
+              />
             </div>
           </div>
         )}
@@ -225,17 +228,17 @@ export function HomePlatformsDeck() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
-                  href="/solutions/ott-video-streaming-development"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
-                >
-                  <span>Only Web Portal ($2,999)</span>
-                  <ExternalLink className="h-3 w-3" />
-                </Link>
-                <Link
                   href="/solutions/ott-app-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
                   <span>Only Mobile Apps ($2,999)</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+                <Link
+                  href="/solutions/ott-website-development"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
+                >
+                  <span>Only Website ($2,999)</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
