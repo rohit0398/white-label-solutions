@@ -1,6 +1,6 @@
-# Mechatron Lab White-Label E-Commerce Platform
+# Mechatron Lab Solutions — Software Development Company & Engineering Agency
 
-> Complete pre-built, customizable white-label e-commerce platform and mobile apps deployed directly onto the client's own cloud infrastructure.
+> Enterprise software development company and engineering agency specializing in custom white-label OTT video streaming platforms, 9:16 vertical short-drama apps, and high-performance e-commerce architectures deployed directly onto client cloud infrastructure with zero SaaS rent and 0% commission.
 
 ## Core Value Proposition
 - Complete E-Commerce Solution: Includes high-speed Next.js web store, cross-platform Flutter native mobile apps (Android & iOS), and All-in-One E-Commerce Admin Panel & CRM.
@@ -15,10 +15,20 @@
 - Dedicated Developer Support: $20 / hour per developer | ₹1,500 / hr in India. Custom ERP/CRM integrations, custom checkout flows, and scaling.
 
 ## Solutions Catalog
-1. Complete Pre-Built E-Commerce Store & Mobile Apps (https://solutions.mechatronlab.com/solutions/ecommerce): Next.js storefront, Flutter iOS & Android apps, and multi-warehouse admin CRM ($4,999 one-time).
+### E-Commerce Solutions
+1. Complete E-Commerce Store & Mobile Apps (https://solutions.mechatronlab.com/solutions/ecommerce): Next.js storefront, Flutter iOS & Android apps, and multi-warehouse admin CRM ($4,999 one-time).
 2. E-Commerce Website Development (https://solutions.mechatronlab.com/solutions/ecommerce-website-development): High-speed Next.js web storefront and central operations CRM with automated tax invoices ($2,999 one-time).
 3. E-Commerce Mobile App Development (https://solutions.mechatronlab.com/solutions/ecommerce-app-development): Native iOS & Android shopping apps with Flutter published under client accounts ($2,999 one-time).
-4. White-Label OTT Streaming & Short Dramas (https://solutions.mechatronlab.com/solutions/ott-streaming): 9:16 vertical drama reels (ReelShort style) or 16:9 cinematic streaming hub (Netflix style) with Cloudflare Stream wholesale integration and 0% revenue cut ($4,999 one-time).
+
+### 9:16 Short-Drama Solutions (ReelShort / DramaBox Style)
+4. 9:16 Short-Drama Streaming Platform (https://solutions.mechatronlab.com/solutions/short-drama): Complete suite with Flutter iOS & Android apps, Next.js mobile-web player, VIP subscriptions, rewarded video ads, and Video CMS ($4,999 one-time).
+5. Short-Drama Mobile App Development (https://solutions.mechatronlab.com/solutions/short-drama-app-development): Native 9:16 vertical serialized drama apps with In-App Purchase VIP passes, AdMob rewarded video ads, and Video CMS ($2,999 one-time).
+6. Short-Drama Web Streaming Development (https://solutions.mechatronlab.com/solutions/short-drama-website-development): Mobile-first 9:16 vertical web player with instant social deep-link autoplay, Stripe VIP passes, and Video CMS ($2,999 one-time).
+
+### 16:9 Cinematic OTT Solutions (Netflix / Prime Style)
+7. Cinematic OTT Video Platform (https://solutions.mechatronlab.com/solutions/ott-streaming): Complete 16:9 suite with Next.js widescreen web portal, Flutter iOS & Android streaming apps, and Video CMS ($4,999 one-time).
+8. Cinematic Video Streaming Platform (https://solutions.mechatronlab.com/solutions/ott-video-streaming-development): 16:9 widescreen video streaming web & smart TV portal with adaptive HLS playback, Stripe recurring VIP subscriptions, and Video CMS ($2,999 one-time).
+9. Cinematic OTT Mobile App Development (https://solutions.mechatronlab.com/solutions/ott-app-development): Native 16:9 widescreen iOS & Android streaming apps with TV casting, offline downloads, and Video CMS ($2,999 one-time).
 
 ## Engineering Guides & Cost Research
 - E-Commerce Architecture & Cost Insights Blog (https://solutions.mechatronlab.com/blog)
@@ -29,7 +39,7 @@
 ## Verified Live Production Proof
 - eStoreAlley (https://estorealley.web.app): Wholesale & retail directory and marketplace engine with global Stripe checkout and Google Play mobile app.
 - Mechatron Lab (https://mechatronlab.com): Hardware, robotics, and IoT store with 1,000+ SKUs, AI shopping assistant, GST invoicing, and Google Play app.
-- Alright (https://play.google.com/store/apps/details?id=com.app.alright): Episodic short video comedy and drama entertainment streaming app on Google Play.
+- Episodic Comedy & Short Series App (Confidential Client Production): Multi-million viewer episodic comedy and drama entertainment streaming app on Google Play with adaptive HLS playback.
 - 305+ TV Network (http://play.google.com/store/apps/details?id=tv.network.plus305): Live linear broadcast channels and on-demand streaming network on Google Play.
 - Style Gear (https://stylegear.co.in): Fast-loading D2C fashion & apparel storefront with variant selection and lookbook gallery.
 

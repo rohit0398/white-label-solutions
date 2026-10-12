@@ -4,17 +4,7 @@ import { notFound } from "next/navigation";
 import { TRANSLATIONS } from "@/lib/translations";
 import { LOCALIZED_SEO } from "@/lib/translations/seo";
 import { Language } from "@/types";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { LiveTicker } from "@/components/sections/LiveTicker";
-import { AppShowcase } from "@/components/sections/AppShowcase";
-import { AdminCrmShowcase } from "@/components/sections/AdminCrmShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Work } from "@/components/sections/Work";
-import { Pricing } from "@/components/sections/Pricing";
-import { Faq } from "@/components/sections/Faq";
-import { Closing } from "@/components/sections/Closing";
+import HomePage from "@/app/page";
 
 const VALID_LOCALES: Language[] = ["en", "es", "de", "fr", "hi"];
 
@@ -94,54 +84,5 @@ export default async function LocalizedHomePage({
     notFound();
   }
 
-  const lang = locale as Language;
-  const t = TRANSLATIONS[lang] ?? TRANSLATIONS.en;
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: t.faq.items.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-
-      <Navbar />
-
-      <main className="flex-1">
-        <Hero
-          mode="all"
-          anchors={[
-            { label: "01 Web Storefront", href: "#hero" },
-            { label: "02 Native Apps", href: "#mobile-apps" },
-            { label: "03 Operations CRM", href: "#admin-crm" },
-          ]}
-        />
-        <LiveTicker />
-        <AppShowcase index="01" />
-        <AdminCrmShowcase index="02" />
-        <HowItWorks index="03" />
-        <Work mode="all" index="04" />
-        <Pricing index="05" />
-        <Faq />
-        <Closing />
-      </main>
-
-
-      <Footer />
-    </div>
-  );
+  return <HomePage />;
 }

@@ -12,31 +12,30 @@ import { CompleteStoreCallout } from "@/components/sections/CompleteStoreCallout
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "E-Commerce App Development (iOS & Android) | Flutter Shopping Apps | Mechatron Lab",
+  title: "E-Commerce Mobile App Development Company | Flutter iOS & Android Agency | Mechatron Lab",
   description:
-    "Custom white-label e-commerce mobile app development for iOS and Android. High-performance Flutter apps published under your developer accounts with 0% revenue cut.",
+    "Custom e-commerce mobile app development company & agency. We build high-conversion Flutter shopping apps for iOS & Android, native checkout, push notifications, and private cloud sync.",
   keywords: [
-    "ecommerce app development",
-    "white label ecommerce app",
-    "flutter ecommerce app",
-    "custom ecommerce mobile app development",
-    "ios and android ecommerce app",
     "ecommerce mobile app development company",
-    "ready made ecommerce app",
-    "flutter ecommerce",
-    "ecommerce app with payment gateway",
-    "ecommerce app developers",
-    "shopping app development",
+    "ecommerce app development agency",
+    "flutter ecommerce app development company",
+    "shopping app development agency",
+    "mobile commerce app development company",
+    "custom shopping app developers",
+    "white label ecommerce app development agency",
+    "ios android ecommerce app agency",
   ],
   alternates: {
     canonical: "/solutions/ecommerce-app-development",
   },
   openGraph: {
-    title: "E-Commerce Mobile App Development (iOS & Android) | Mechatron Lab",
+    title: "E-Commerce Mobile App Development Company | Flutter Agency",
     description:
-      "High-performance native iOS & Android shopping apps built with Flutter. Published under your developer accounts with 0% platform commissions.",
+      "Enterprise e-commerce mobile app development agency. Native iOS & Android shopping apps built with Flutter, published under your corporate accounts.",
     url: "/solutions/ecommerce-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce App Development (iOS & Android) | Mechatron Lab",
+    title: "E-Commerce Mobile App Development Company | Flutter Agency",
     description:
       "Native iOS & Android mobile shopping apps built with Flutter. Deployed under your Apple and Google Play accounts with 0% commission.",
     images: ["/og-image.png"],
@@ -55,91 +54,31 @@ export const metadata: Metadata = {
 export default function EcommerceAppDevelopmentPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Solutions",
-        item: `${siteUrl}/solutions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "E-Commerce App Development",
-        item: `${siteUrl}/solutions/ecommerce-app-development`,
-      },
-    ],
-  };
+  const breadcrumbs = [
+    { name: "Home", item: "/" },
+    { name: "Solutions", item: "/solutions" },
+    { name: "E-Commerce App Development", item: "/solutions/ecommerce-app-development" },
+  ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
-
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
+  const faqSchema = generateFaqSchema(FAQS);
+  const softwareSchema = generateSoftwareSchema({
     name: "E-Commerce Mobile App Development (Flutter iOS & Android)",
-    operatingSystem: "iOS, Android",
-    applicationCategory: "ShoppingApplication",
     description:
       "Custom white-label e-commerce mobile app development for iOS and Android. High-performance Flutter shopping apps published under your developer accounts with 0% revenue cut.",
-    offers: {
-      "@type": "Offer",
-      price: "2999.00",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: `${siteUrl}/solutions/ecommerce-app-development`,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "128",
-    },
-    provider: {
-      "@type": "Organization",
-      name: "Mechatron Lab Solutions",
-      url: siteUrl,
-    },
-  };
+    price: "2999.00",
+    url: "/solutions/ecommerce-app-development",
+    operatingSystem: "iOS, Android",
+    applicationCategory: "ShoppingApplication",
+    reviewCount: "128",
+    siteUrl,
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareSchema),
-        }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={faqSchema} />
+      <JsonLd schema={softwareSchema} />
 
       <Navbar />
 
@@ -151,11 +90,12 @@ export default function EcommerceAppDevelopmentPage() {
             { label: "Solutions", href: "/solutions" },
             { label: "E-Commerce App Development" },
           ]}
-          badge="Flutter 3.x Engine · iOS &amp; Android · 0% App Store Commission"
-          headline="Branded E-Commerce Mobile App Development."
-          subtitle="Launch native iOS and Android shopping apps in 2–4 weeks. Built from a single high-performance Flutter codebase, published directly under your own Apple App Store and Google Play developer accounts with zero commission."
+          badge="Flutter 3.x Native Apps · 60 FPS Fluid Experience · 0% Revenue Cut"
+          headline="E-Commerce Mobile App Development (iOS &amp; Android)."
+          subtitle="Deploy branded native mobile shopping apps for iOS and Android in 2–4 weeks. Built with Flutter, native 1-tap checkout, push notifications, and private cloud sync with zero monthly platform cuts."
           anchors={[
-            { label: "01 Native Shopping Apps (Flutter)", href: "#mobile-apps" },
+            { label: "01 Mobile Shopping Apps (Flutter)", href: "#mobile-apps" },
+            { label: "02 Push Notifications & Loyalty", href: "#hero" },
           ]}
         />
         <TechStackStrip mode="app" />
@@ -163,15 +103,14 @@ export default function EcommerceAppDevelopmentPage() {
         <AppShowcase index="01" />
         <HowItWorks index="02" />
         <Work mode="app" index="03" />
-        
+
         {/* Child Cross-Sell Callout Box */}
         <CompleteStoreCallout />
-
 
         {/* Child Reduced Pricing ($2,999 / $999 / $15/hr) */}
         <Pricing
           title="Simple, transparent app pricing"
-          intro="Fixed-cost Flutter mobile app launch with zero recurring software fees. Optional unencrypted source code license and dedicated developer hours."
+          intro="Fixed-cost iOS and Android mobile app launch with zero recurring monthly SaaS cuts. Optional unencrypted source code license and dedicated developer hours."
           tiers={ECOMMERCE_APP_PRICING_TIERS}
         />
 

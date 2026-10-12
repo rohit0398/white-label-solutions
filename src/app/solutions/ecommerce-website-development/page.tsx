@@ -12,31 +12,30 @@ import { CompleteStoreCallout } from "@/components/sections/CompleteStoreCallout
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "E-Commerce Website Development | Next.js Online Store & Admin CRM | Mechatron Lab",
+  title: "E-Commerce Website Development Company | Next.js Store Agency | Mechatron Lab",
   description:
-    "Custom e-commerce website development with sub-second page loads, automated tax invoicing, and multi-warehouse CRM. Deployed to your private cloud with 0% commission.",
+    "Custom e-commerce website development company & web engineering agency. We build sub-second Next.js stores, automated tax invoicing, and multi-warehouse CRM on your private cloud.",
   keywords: [
-    "ecommerce website development",
-    "build ecommerce website",
-    "ecommerce web development",
-    "ecommerce site development",
-    "develop e commerce website",
-    "custom ecommerce development",
-    "ecommerce development company",
-    "ecommerce development services",
-    "b2b ecommerce website development",
-    "creating an ecommerce website",
-    "nextjs ecommerce website",
+    "ecommerce website development company",
+    "ecommerce web development agency",
+    "ecommerce site development company",
+    "custom ecommerce website development agency",
+    "nextjs ecommerce development company",
+    "b2b ecommerce website development agency",
+    "ecommerce development services company",
+    "develop ecommerce website agency",
   ],
   alternates: {
     canonical: "/solutions/ecommerce-website-development",
   },
   openGraph: {
-    title: "E-Commerce Website Development | Mechatron Lab",
+    title: "E-Commerce Website Development Company | Next.js Store Agency",
     description:
-      "Sub-second Next.js web storefront and central operations CRM deployed on your own private cloud with zero monthly software fees.",
+      "Enterprise e-commerce website development agency. Sub-second Next.js web storefront and central operations CRM on your private cloud.",
     url: "/solutions/ecommerce-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Website Development | Mechatron Lab",
+    title: "E-Commerce Website Development Company | Next.js Store Agency",
     description:
       "High-speed online storefront and operations CRM deployed directly to your private cloud with 0% revenue cut.",
     images: ["/og-image.png"],
@@ -55,91 +54,31 @@ export const metadata: Metadata = {
 export default function EcommerceWebsiteDevelopmentPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solutions.mechatronlab.com";
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Solutions",
-        item: `${siteUrl}/solutions`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "E-Commerce Website Development",
-        item: `${siteUrl}/solutions/ecommerce-website-development`,
-      },
-    ],
-  };
+  const breadcrumbs = [
+    { name: "Home", item: "/" },
+    { name: "Solutions", item: "/solutions" },
+    { name: "E-Commerce Website Development", item: "/solutions/ecommerce-website-development" },
+  ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
-
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+  const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
+  const faqSchema = generateFaqSchema(FAQS);
+  const softwareSchema = generateSoftwareSchema({
     name: "Custom E-Commerce Website Development (Next.js & Admin CRM)",
-    operatingSystem: "Web, Cloud (AWS, GCP, Azure, DigitalOcean)",
-    applicationCategory: "BusinessApplication",
     description:
       "Custom e-commerce website development with sub-second page loads, automated tax invoicing, and multi-warehouse CRM deployed to private cloud with 0% commission.",
-    offers: {
-      "@type": "Offer",
-      price: "2999.00",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: `${siteUrl}/solutions/ecommerce-website-development`,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "128",
-    },
-    provider: {
-      "@type": "Organization",
-      name: "Mechatron Lab Solutions",
-      url: siteUrl,
-    },
-  };
+    price: "2999.00",
+    url: "/solutions/ecommerce-website-development",
+    operatingSystem: "Web, Cloud (AWS, GCP, Azure, DigitalOcean)",
+    applicationCategory: "BusinessApplication",
+    reviewCount: "128",
+    siteUrl,
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareSchema),
-        }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={faqSchema} />
+      <JsonLd schema={softwareSchema} />
 
       <Navbar />
 
@@ -167,7 +106,6 @@ export default function EcommerceWebsiteDevelopmentPage() {
 
         {/* Child Cross-Sell Callout Box */}
         <CompleteStoreCallout />
-
 
         {/* Child Reduced Pricing ($2,999 / $999 / $15/hr) */}
         <Pricing

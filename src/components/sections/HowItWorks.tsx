@@ -5,32 +5,49 @@ import { Section } from "@/components/ui/Section";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
+export interface StepItem {
+  when: string;
+  title: string;
+  text: string;
+}
+
 export interface HowItWorksProps {
   id?: string;
   index?: string;
   title?: string;
+  badge?: string;
+  intro?: string;
+  steps?: StepItem[];
 }
 
-export function HowItWorks({ id = "how-it-works", index, title }: HowItWorksProps = {}) {
+export function HowItWorks({
+  id = "how-it-works",
+  index,
+  title,
+  badge,
+  intro,
+  steps,
+}: HowItWorksProps = {}) {
   const { language } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
   const activeIndex = index !== undefined ? index : t.howItWorks.index;
   const activeTitle = title || t.howItWorks.title;
+  const activeBadge = badge || t.howItWorks.badge;
+  const activeSteps = steps || t.howItWorks.steps;
 
   return (
-    <Section id={id} index={activeIndex} title={activeTitle}>
-
+    <Section id={id} index={activeIndex} title={activeTitle} intro={intro}>
       <div className="mb-10 inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash/60 text-xs font-mono text-ink-2 shadow-2xs">
         <span className="relative flex h-2 w-2">
           <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
           <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
         </span>
-        <span>{t.howItWorks.badge}</span>
+        <span>{activeBadge}</span>
       </div>
 
       <ol className="relative border-l border-line ml-1 space-y-12">
-        {t.howItWorks.steps.map((s, idx) => (
+        {activeSteps.map((s, idx) => (
           <li key={idx} className="pl-8 relative">
             <span className="absolute -left-[5px] top-2 h-[9px] w-[9px] rounded-full bg-paper border border-ink" />
             <p className="font-mono text-xs text-ink-3">{s.when}</p>
