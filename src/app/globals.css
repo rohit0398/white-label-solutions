@@ -241,6 +241,39 @@ body,
   animation: shimmerSweep 4s infinite linear;
 }
 
+.shimmer-badge-ecommerce {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(52, 211, 153, 0.18) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 4s infinite linear;
+}
+
+.shimmer-badge-drama {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.22) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 4s infinite linear;
+}
+
+.shimmer-badge-ott {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 4s infinite linear;
+}
+
 .animate-pulse-glow {
   animation: glowPulse 3s ease-in-out infinite;
 }
@@ -283,7 +316,9 @@ body,
   animation: heroTitleFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
 }
 
-.text-gradient-shimmer {
+/* Domain-Specific Radiant Headline Shimmers */
+.text-gradient-shimmer,
+.text-shimmer-default {
   background: linear-gradient(
     105deg,
     var(--color-ink) 0%,
@@ -299,6 +334,60 @@ body,
   display: inline-block;
 }
 
+.text-shimmer-ecommerce {
+  background: linear-gradient(
+    105deg,
+    var(--color-ink) 0%,
+    var(--color-ink) 25%,
+    #34d399 45%,
+    #a7f3d0 53%,
+    #10b981 60%,
+    var(--color-ink) 75%,
+    var(--color-ink) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 5.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+.text-shimmer-drama {
+  background: linear-gradient(
+    105deg,
+    var(--color-ink) 0%,
+    var(--color-ink) 25%,
+    #f59e0b 45%,
+    #fb7185 53%,
+    #f43f5e 60%,
+    var(--color-ink) 75%,
+    var(--color-ink) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 5.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+.text-shimmer-ott {
+  background: linear-gradient(
+    105deg,
+    var(--color-ink) 0%,
+    var(--color-ink) 25%,
+    #38bdf8 45%,
+    #818cf8 53%,
+    #6366f1 60%,
+    var(--color-ink) 75%,
+    var(--color-ink) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 5.5s ease-in-out infinite;
+  display: inline-block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -309,11 +398,18 @@ body,
   .animate-radar-ping,
   .animate-marquee,
   .shimmer-badge,
+  .shimmer-badge-ecommerce,
+  .shimmer-badge-drama,
+  .shimmer-badge-ott,
   .animate-pulse-glow,
   .animate-pulse-ink,
   .animate-hero-title-1,
   .animate-hero-title-2,
-  .text-gradient-shimmer {
+  .text-gradient-shimmer,
+  .text-shimmer-default,
+  .text-shimmer-ecommerce,
+  .text-shimmer-drama,
+  .text-shimmer-ott {
     animation: none;
     -webkit-text-fill-color: currentColor;
   }

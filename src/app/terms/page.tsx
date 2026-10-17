@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { BRAND } from "@/lib/constants";
 import { Scale, CheckCircle2, ShieldCheck, Code2 } from "lucide-react";
 
@@ -70,9 +71,10 @@ export default function TermsOfServicePage() {
           </nav>
 
           <header className="space-y-4 border-b border-line pb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-              <Scale className="h-3.5 w-3.5 text-accent" />
-              <span>Commercial Terms &amp; Licensing Agreement</span>
+            <div>
+              <HeadingBadge category="default">
+                Commercial Terms &amp; Licensing Agreement
+              </HeadingBadge>
             </div>
             <AnimatedHeadline
               as="h1"

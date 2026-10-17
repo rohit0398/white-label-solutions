@@ -12,6 +12,7 @@ export function Navbar() {
   const { openDemo, theme, toggleTheme, language } = useSite();
   const [open, setOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [mobileCategory, setMobileCategory] = useState<"ecommerce" | "drama" | "ott">("ecommerce");
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
 
   const homeHref = language === "en" ? "/" : `/${language}`;
@@ -110,7 +111,7 @@ export function Navbar() {
           className="inline-flex items-center gap-2 sm:gap-2.5 hover:opacity-85 transition-opacity shrink-0 group"
         >
           <img
-            src="/brand/logo_icon.svg"
+            src="/brand/favicon.png"
             alt="Mechatron Lab"
             width={28}
             height={28}
@@ -321,67 +322,82 @@ export function Navbar() {
       {open && (
         <nav id="nav-mobile" className="sm:hidden border-t border-line bg-paper/98 backdrop-blur-md max-h-[85vh] overflow-y-auto">
           <div className="wrap-wide py-4 space-y-4">
-            {/* E-Commerce Solutions Section */}
-            <div className="space-y-1">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">E-Commerce Solutions</p>
-              {solutions.filter((s) => s.group === "ecommerce").map((s) => (
+            {/* Solutions Segmented Mobile Category Switcher */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between px-1">
+                <span className="text-[11px] font-mono text-ink-3 uppercase tracking-wider">
+                  Platform Architectures
+                </span>
                 <Link
-                  key={s.href}
-                  href={s.href}
+                  href="/solutions"
                   onClick={() => setOpen(false)}
-                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
+                  className="text-[11px] font-mono text-accent hover:underline flex items-center gap-1"
                 >
-                  <div className="text-sm font-medium">{s.title}</div>
-                  <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
-                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
-                      {s.price}
-                    </span>
-                  </div>
+                  <span>All (9)</span>
+                  <span className="text-[10px]">→</span>
                 </Link>
-              ))}
-            </div>
+              </div>
 
-            {/* Short-Drama Solutions Section */}
-            <div className="space-y-1 pt-2 border-t border-line/60">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">Short-Drama Solutions</p>
-              {solutions.filter((s) => s.group === "drama").map((s) => (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
+              {/* Segmented Category Buttons */}
+              <div className="grid grid-cols-3 gap-1 p-1 rounded-xl bg-wash/80 border border-line">
+                <button
+                  type="button"
+                  onClick={() => setMobileCategory("ecommerce")}
+                  className={`py-1.5 px-2 text-xs rounded-lg transition-all text-center cursor-pointer ${
+                    mobileCategory === "ecommerce"
+                      ? "bg-paper text-ink shadow-xs border border-line/60 font-semibold"
+                      : "text-ink-3 hover:text-ink font-medium"
+                  }`}
                 >
-                  <div className="text-sm font-medium">{s.title}</div>
-                  <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
-                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
-                      {s.price}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  🛍️ Retail
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileCategory("drama")}
+                  className={`py-1.5 px-2 text-xs rounded-lg transition-all text-center cursor-pointer ${
+                    mobileCategory === "drama"
+                      ? "bg-paper text-ink shadow-xs border border-line/60 font-semibold"
+                      : "text-ink-3 hover:text-ink font-medium"
+                  }`}
+                >
+                  🎬 Drama
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMobileCategory("ott")}
+                  className={`py-1.5 px-2 text-xs rounded-lg transition-all text-center cursor-pointer ${
+                    mobileCategory === "ott"
+                      ? "bg-paper text-ink shadow-xs border border-line/60 font-semibold"
+                      : "text-ink-3 hover:text-ink font-medium"
+                  }`}
+                >
+                  📺 OTT
+                </button>
+              </div>
 
-            {/* Cinematic OTT Solutions Section */}
-            <div className="space-y-1 pt-2 border-t border-line/60">
-              <p className="text-[11px] font-mono text-ink-3 uppercase px-2.5">Cinematic OTT Solutions</p>
-              {solutions.filter((s) => s.group === "ott").map((s) => (
-                <Link
-                  key={s.href}
-                  href={s.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 px-2.5 rounded-md text-ink hover:bg-wash transition-colors"
-                >
-                  <div className="text-sm font-medium">{s.title}</div>
-                  <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <span className="text-[11px] text-ink-3 leading-snug">{s.desc}</span>
-                    <span className="text-[10px] font-mono text-ink-3 px-1.5 py-0.5 rounded bg-wash border border-line shrink-0">
-                      {s.price}
-                    </span>
-                  </div>
-                </Link>
-              ))}
+              {/* Active Category Solutions (3 Cards Only) */}
+              <div className="space-y-1.5">
+                {solutions
+                  .filter((s) => s.group === mobileCategory)
+                  .map((s) => (
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      onClick={() => setOpen(false)}
+                      className="block p-2.5 rounded-xl border border-line/70 bg-wash/40 hover:bg-wash hover:border-ink/30 transition-all active:scale-[0.99] group"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-ink group-hover:text-accent transition-colors leading-tight">
+                          {s.title}
+                        </span>
+                        <span className="text-[10px] font-mono font-medium text-ink-2 px-1.5 py-0.5 rounded bg-paper border border-line shrink-0">
+                          {s.price}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-ink-3 mt-1 leading-snug line-clamp-1">{s.desc}</p>
+                    </Link>
+                  ))}
+              </div>
             </div>
 
             {/* Standard Links */}

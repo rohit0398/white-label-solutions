@@ -44,6 +44,7 @@ export function HomeComparison() {
 
   return (
     <Section
+      wide
       id="comparison"
       index="02 · The Ownership Advantage"
       title="Why Deploy on Your Own Private Cloud?"

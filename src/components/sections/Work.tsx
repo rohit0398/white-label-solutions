@@ -65,16 +65,25 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                 </div>
                 <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translatedProject.description}</p>
                 <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                    <span>
-                      {p.url.includes("play.google.com")
-                        ? "Google Play Store"
-                        : p.url.replace(/^https?:\/\//, "")}
-                    </span>
-                    <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                      ↗
-                    </span>
-                  </a>
+                  {p.url.startsWith("/") ? (
+                    <Link href={p.url} className={linkCls}>
+                      <span>Explore Architecture</span>
+                      <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </Link>
+                  ) : (
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                      <span>
+                        {p.url.includes("play.google.com")
+                          ? "Google Play Store"
+                          : p.url.replace(/^https?:\/\//, "")}
+                      </span>
+                      <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                        ↗
+                      </span>
+                    </a>
+                  )}
                   {p.playStoreUrl && p.playStoreUrl !== p.url && (
                     <a href={p.playStoreUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
                       <span>{t.work.androidApp}</span>
@@ -85,7 +94,11 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                   )}
                   {p.caseStudyUrl && (
                     <Link href={p.caseStudyUrl} className={linkCls}>
-                      <span>{t.work.caseStudy}</span>
+                      <span>
+                        {p.caseStudyUrl.includes("/blog/")
+                          ? "Architecture Blueprint"
+                          : t.work.caseStudy}
+                      </span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">
                         →
                       </span>
@@ -95,22 +108,39 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
               </div>
 
               {p.screenshotUrl && (
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                  className="block overflow-hidden rounded-md border border-line bg-wash group-hover:border-ink/60 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={p.screenshotUrl}
-                    alt={`${translatedProject.title} storefront screenshot`}
-                    loading="lazy"
-                    className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </a>
+                p.url.startsWith("/") ? (
+                  <Link
+                    href={p.url}
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="block overflow-hidden rounded-md border border-line bg-wash group-hover:border-ink/60 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.screenshotUrl}
+                      alt={`${translatedProject.title} screenshot`}
+                      loading="lazy"
+                      className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </Link>
+                ) : (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    className="block overflow-hidden rounded-md border border-line bg-wash group-hover:border-ink/60 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.screenshotUrl}
+                      alt={`${translatedProject.title} storefront screenshot`}
+                      loading="lazy"
+                      className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </a>
+                )
               )}
             </li>
           );

@@ -6,6 +6,7 @@ import { Screenshot } from "@/components/ui/Screenshot";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
 
 export const metadata: Metadata = {
   title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
@@ -98,9 +99,14 @@ export default function EStoreAlleyCaseStudyPage() {
             <span className="text-ink">eStoreAlley</span>
           </nav>
 
-          <p className="font-mono text-xs text-ink-3 mb-3">Case study · Retail & wholesale directory</p>
+          <div className="mb-3">
+            <HeadingBadge category="ecommerce">
+              Case study · Retail &amp; Wholesale Directory
+            </HeadingBadge>
+          </div>
           <AnimatedHeadline
             as="h1"
+            variant="ecommerce"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
             How eStoreAlley Built an International Wholesale Directory &amp; Marketplace.

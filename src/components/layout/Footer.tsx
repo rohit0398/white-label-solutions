@@ -26,17 +26,19 @@ export function Footer() {
         { label: "Complete Cinematic OTT Suite", href: "/solutions/ott-streaming" },
         { label: "Cinematic OTT Mobile App", href: "/solutions/ott-app-development" },
         { label: "Cinematic OTT Website", href: "/solutions/ott-website-development" },
-        { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
       ],
     },
     {
       title: "Company & Work",
       links: [
         { label: "Engineering Blog", href: "/blog" },
-        { label: "About Mechatron Lab", href: "/about" },
-        { label: "Contact Engineering", href: "/contact" },
+        { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
+        { label: "2.4M+ Short-Drama App Case Study", href: "/case-studies/short-drama-platform" },
+        { label: "24/7 Linear OTT Network Case Study", href: "/case-studies/ott-streaming-network" },
         { label: "Mechatron Lab Store", href: "/case-studies/mechatron-lab" },
         { label: "eStoreAlley Case Study", href: "/case-studies/estorealley" },
+        { label: "About Mechatron Lab", href: "/about" },
+        { label: "Contact Engineering", href: "/contact" },
       ],
     },
     {
@@ -57,11 +59,11 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-2">
             <img
-              src="/brand/logo_icon.svg"
+              src="/brand/favicon.png"
               alt="Mechatron Lab"
-              width={20}
-              height={20}
-              className="h-5 w-5 rounded object-contain shrink-0"
+              width={22}
+              height={22}
+              className="h-5.5 w-5.5 rounded object-contain shrink-0"
             />
             <p className="font-semibold">{BRAND.name}</p>
           </div>
@@ -95,20 +97,32 @@ export function Footer() {
           </div>
         ))}
       </div>
-      <div className="wrap-wide pb-10 flex flex-col sm:flex-row gap-4 sm:items-center justify-between text-xs sm:text-sm text-ink-3">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <p>© 2026 {BRAND.name}. {t.footer.copyright}</p>
-          <span className="hidden sm:inline">·</span>
-          <Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link>
-          <span>·</span>
-          <Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link>
-          <span>·</span>
-          <Link href="/refund-policy" className="hover:text-ink transition-colors">Refund Policy</Link>
-          <span>·</span>
-          <Link href="/contact" className="hover:text-ink transition-colors">Contact Us</Link>
+      <div className="wrap-wide pb-12 pt-6 border-t border-line/60 flex flex-col md:flex-row gap-6 md:items-center justify-between text-xs text-ink-3">
+        <div className="space-y-2">
+          <p className="font-medium text-ink-2">
+            © 2026 {BRAND.name}. {t.footer.copyright}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-3">
+            <Link href="/privacy" className="hover:text-ink transition-colors">
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true" className="text-line">·</span>
+            <Link href="/terms" className="hover:text-ink transition-colors">
+              Terms of Service
+            </Link>
+            <span aria-hidden="true" className="text-line">·</span>
+            <Link href="/refund-policy" className="hover:text-ink transition-colors">
+              Refund Policy
+            </Link>
+            <span aria-hidden="true" className="text-line">·</span>
+            <Link href="/contact" className="hover:text-ink transition-colors">
+              Contact Us
+            </Link>
+          </div>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5 shrink-0">
           <ThemeSwitcher />
+          <div className="h-4 w-px bg-line" aria-hidden="true" />
           <LanguageSwitcher />
         </div>
       </div>

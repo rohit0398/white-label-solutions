@@ -89,6 +89,7 @@ export default function EcommerceSolutionPillarPage() {
 
       <main className="flex-1">
         <Hero
+          category="ecommerce"
           mode="all"
           breadcrumbs={[
             { label: "Home", href: "/" },

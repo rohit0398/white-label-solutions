@@ -254,6 +254,7 @@ export default function OttStreamingSolutionPage() {
       <main className="flex-1">
         {/* Unified Hero */}
         <SolutionHero
+          category="ott"
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Solutions", href: "/solutions" },

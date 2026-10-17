@@ -262,11 +262,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/case-studies/short-drama-platform`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/case-studies/ott-streaming-network`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     // Engineering Blog & Growth Guides
     {
       url: `${baseUrl}/blog`,
       lastModified: now,
       changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog/short-drama-app-development`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/blog/ott-video-streaming-development`,
+      lastModified: now,
+      changeFrequency: "monthly",
       priority: 0.85,
     },
     {

@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactForm } from "@/components/site/ContactForm";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { BRAND } from "@/lib/constants";
 import {
   MessageSquare,
@@ -113,9 +114,10 @@ export default function ContactPage() {
 
           {/* Page Header */}
           <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-              <Headphones className="h-3.5 w-3.5 text-accent" />
-              <span>Direct Engineering Consultation</span>
+            <div>
+              <HeadingBadge category="default">
+                Direct Engineering Consultation
+              </HeadingBadge>
             </div>
             <AnimatedHeadline
               as="h1"

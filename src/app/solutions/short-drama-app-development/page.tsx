@@ -120,6 +120,7 @@ export default function ShortDramaAppDevelopmentPage() {
       <main className="flex-1">
         {/* Unified Hero */}
         <SolutionHero
+          category="drama"
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Solutions", href: "/solutions" },

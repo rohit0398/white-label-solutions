@@ -6,6 +6,7 @@ import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge, BadgeCategory } from "@/components/ui/HeadingBadge";
 import { MessageSquare } from "lucide-react";
 
 export interface BreadcrumbItem {
@@ -28,6 +29,7 @@ export interface SolutionHeroProps {
   ctaDemoText?: string;
   tierId?: string;
   footerNote?: string;
+  category?: BadgeCategory;
 }
 
 export function SolutionHero({
@@ -40,6 +42,7 @@ export function SolutionHero({
   ctaDemoText = "Book a Live Platform Walkthrough",
   tierId,
   footerNote = "Published under your developer accounts · Full source code option · Keep 100% of revenue",
+  category,
 }: SolutionHeroProps) {
   const { openDemo } = useSite();
 
@@ -62,18 +65,17 @@ export function SolutionHero({
           ))}
         </nav>
 
-        {/* Ambient Active Status Beacon */}
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 select-none shimmer-badge hover:border-ink/40 transition-colors">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-          </span>
-          <span>{badge}</span>
+        {/* Ambient Active Status Beacon (Single existing heading badge with domain identity) */}
+        <div>
+          <HeadingBadge category={category}>
+            {badge}
+          </HeadingBadge>
         </div>
 
         {/* Primary Page Headline */}
         <AnimatedHeadline
           as="h1"
+          variant={category}
           className="text-[2.3rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.06] max-w-4xl text-ink"
         >
           {headline}
