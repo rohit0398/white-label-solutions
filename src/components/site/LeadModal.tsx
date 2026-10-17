@@ -2,17 +2,44 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
 
 interface LeadModalProps {
   onClose: () => void;
   selectedTierId?: string;
+}
+
+const PLATFORM_OPTIONS = [
+  { id: "ecommerce", label: "🛍️ White-Label E-Commerce Platform ($4,999)" },
+  { id: "short-drama", label: "🎬 9:16 Short-Drama Vertical Video Platform ($4,999)" },
+  { id: "ott-streaming", label: "📺 16:9 Cinematic OTT & Live TV Platform ($4,999)" },
+  { id: "source-code", label: "💻 Full Unencrypted Git Source Code License ($1,999)" },
+  { id: "developer-time", label: "⏱️ Dedicated Engineering Support ($20/hr)" },
+  { id: "launch", label: "🚀 Full Custom White-Label Cloud Launch" },
+];
+
+function resolveInitialPackage(tierId?: string, pathname?: string): string {
+  // If explicitly passed a specific platform tier (other than default generic 'launch')
+  if (tierId && tierId !== "launch") {
+    if (tierId === "source-code-license") return "source-code";
+    if (tierId === "dedicated-support") return "developer-time";
+    return tierId;
+  }
+  // Otherwise, dynamically pre-select based on current URL path
+  const path = (pathname || "").toLowerCase();
+  if (path.includes("short-drama")) return "short-drama";
+  if (path.includes("ott") || path.includes("streaming")) return "ott-streaming";
+  if (path.includes("ecommerce") || path.includes("shopify")) return "ecommerce";
+  if (path.includes("source-code")) return "source-code";
+
+  return tierId || "ecommerce";
 }
 
 const field =
@@ -21,35 +48,23 @@ const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
 export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps) {
   const { language } = useSite();
+  const pathname = usePathname();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const [selectedPackage, setSelectedPackage] = useState(() =>
+    resolveInitialPackage(selectedTierId, pathname)
+  );
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     countryCode: "+1",
     phone: "",
     company: "",
+    message: "",
     honeypot: "",
   });
-
-  const getPackageBadgeLabel = () => {
-    switch (selectedTierId) {
-      case "ott-streaming":
-        return "🎬 White-Label OTT & Short-Drama Platform ($4,999)";
-      case "ecommerce":
-        return "🛍️ White-Label E-Commerce Architecture ($4,999)";
-      case "source-code-license":
-      case "source-code":
-        return "💻 Full Source Code & Commercial License ($1,999)";
-      case "dedicated-support":
-      case "developer-time":
-        return "⏱️ Dedicated Developer Support ($20/hr)";
-      case "launch":
-      default:
-        return "🚀 White-Label Launch Package ($4,999)";
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +76,8 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
         email: form.email,
         phone: fullPhone,
         company: form.company,
-        package: selectedTierId,
+        message: form.message.trim() || undefined,
+        package: selectedPackage,
         honeypot: form.honeypot,
       };
 
@@ -72,13 +88,13 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
       });
 
       trackLeadSubmission(
-        selectedTierId,
-        selectedTierId === "source-code" || selectedTierId === "source-code-license" ? 1999 : 4999
+        selectedPackage,
+        selectedPackage === "source-code" || selectedPackage === "source-code-license" ? 1999 : 4999
       );
       setSubmitted(true);
     } catch {
       // Graceful fallback: acknowledge lead so user is never blocked
-      trackLeadSubmission(selectedTierId);
+      trackLeadSubmission(selectedPackage);
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -99,7 +115,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
 
   const set =
     (k: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm((prev) => ({ ...prev, [k]: e.target.value }));
 
   return (
@@ -130,12 +146,28 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               {t.leadModal.subtitle}
             </p>
 
-            <div className="mt-3 inline-flex items-center gap-2 px-2.5 py-1 rounded-md border border-line bg-wash/50 text-xs font-mono text-ink-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              <span>{getPackageBadgeLabel()}</span>
-            </div>
-
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+              {/* Architecture / Platform of Interest (Dynamic & Editable) */}
+              <div>
+                <label htmlFor="lead-package" className={label}>
+                  Platform of Interest
+                </label>
+                <div className="relative">
+                  <select
+                    id="lead-package"
+                    value={selectedPackage}
+                    onChange={(e) => setSelectedPackage(e.target.value)}
+                    className="w-full h-11 rounded-md border border-line bg-wash/50 hover:bg-wash px-3 pr-8 text-xs sm:text-sm font-medium text-ink focus:outline-none focus:border-ink transition-colors cursor-pointer appearance-none"
+                  >
+                    {PLATFORM_OPTIONS.map((opt) => (
+                      <option key={opt.id} value={opt.id}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-3" />
+                </div>
+              </div>
               {/* Spam bot honeypot field */}
               <input
                 type="text"
@@ -178,7 +210,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               {/* Row 2: Phone or WhatsApp with full-width unified Country Code input group */}
               <div>
                 <label htmlFor="lead-phone" className={label}>
-                  {t.leadModal.phoneLabel}
+                  {t.leadModal.phoneLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
                 </label>
                 <div className="flex w-full rounded-md border border-line bg-paper focus-within:border-ink transition-all">
                   <select
@@ -214,18 +246,53 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                 </div>
               </div>
 
-              {/* Row 3: Company (Optional) - Full width */}
-              <div>
-                <label htmlFor="lead-company" className={label}>
-                  {t.leadModal.companyLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
-                </label>
-                <input
-                  id="lead-company"
-                  placeholder={t.leadModal.companyPlaceholder}
-                  value={form.company}
-                  onChange={set("company")}
-                  className={field}
-                />
+              {/* Progressive Disclosure: Optional Company & Project Notes */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => setShowDetails((prev) => !prev)}
+                  className="inline-flex items-center gap-2 text-xs font-mono text-ink-2 hover:text-ink py-1 px-1 -ml-1 rounded hover:bg-wash transition-colors cursor-pointer group select-none"
+                >
+                  <SlidersHorizontal className="h-3.5 w-3.5 text-accent transition-transform group-hover:scale-110" />
+                  <span className="font-medium">
+                    {showDetails ? "Hide company & project details" : "+ Add company & project details (Optional)"}
+                  </span>
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 text-ink-3 transition-transform duration-200 ${
+                      showDetails ? "rotate-180 text-ink" : ""
+                    }`}
+                  />
+                </button>
+
+                {showDetails && (
+                  <div className="space-y-3 pt-3 border-t border-line/60 mt-2 animate-fade-in">
+                    <div>
+                      <label htmlFor="lead-company" className={label}>
+                        {t.leadModal.companyLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
+                      </label>
+                      <input
+                        id="lead-company"
+                        placeholder={t.leadModal.companyPlaceholder}
+                        value={form.company}
+                        onChange={set("company")}
+                        className={field}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lead-message" className={label}>
+                        Project Notes / Specific Questions <span className="text-ink-3 text-xs font-normal">(Optional)</span>
+                      </label>
+                      <textarea
+                        id="lead-message"
+                        rows={2}
+                        placeholder="Target launch date, custom payment gateway, or tech stack requirements..."
+                        value={form.message}
+                        onChange={set("message")}
+                        className="w-full rounded-md border border-line bg-paper px-3 py-2 text-[14px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors resize-none"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
 
               <Button id="lead-submit" type="submit" disabled={loading} className="w-full h-11 mt-2 text-[15px] font-medium">

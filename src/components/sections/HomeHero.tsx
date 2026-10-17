@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { ShoppingBag, Smartphone, Tv, MessageSquare, ArrowRight } from "lucide-react";
 
 export function HomeHero() {
@@ -41,23 +43,20 @@ export function HomeHero() {
     <section id="hero" className="pt-16 sm:pt-28 pb-16 sm:pb-20">
       <div className="wrap space-y-6">
         {/* Subtle Status Beacon */}
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 select-none shimmer-badge hover:border-ink/40 transition-colors">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-          </span>
-          <span>Private Cloud Deployment · 2–4 Weeks · 0% Revenue Cut</span>
+        <div>
+          <HeadingBadge category="default">
+            Private Cloud Deployment · 2–4 Weeks · 0% Revenue Cut
+          </HeadingBadge>
         </div>
 
         {/* Concise Direct Headline */}
-        <h1 className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink">
-          <span className="inline-block animate-hero-title-1">
-            Production-Ready Platforms.
-          </span>{" "}
-          <span className="inline-block animate-hero-title-2 text-gradient-shimmer">
-            Deployed Directly to Your Cloud.
-          </span>
-        </h1>
+        <AnimatedHeadline
+          as="h1"
+          variant="default"
+          className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink"
+        >
+          Production-Ready Platforms. Deployed Directly to Your Cloud.
+        </AnimatedHeadline>
 
         {/* Minimalist Subtitle */}
         <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">

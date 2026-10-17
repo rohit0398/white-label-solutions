@@ -696,23 +696,23 @@ export const OTT_PRICING_TIERS = CINEMATIC_OTT_BASE_PRICING_TIERS;
 
 export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
-    id: "episodic-entertainment-app",
-    title: "Episodic Comedy & Short Series App",
-    industry: "Short Video Series & Entertainment",
+    id: "short-drama-platform",
+    title: "9:16 Short-Drama Mobile & Web Platform",
+    industry: "Vertical Video Series & Cliffhanger Paywalls",
     description:
-      "Episodic short series and entertainment application built and deployed by our team, powering millions of active Android viewers with low-latency edge caching and fast vertical browsing.",
-    url: "https://play.google.com/store/apps/details?id=com.app.alright&hl=en_IN",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.app.alright&hl=en_IN",
+      "Production-grade 60FPS vertical swipe player engine with sub-50ms episode pre-caching, Cloudflare Stream video ingest, and in-app coin & VIP subscription billing.",
+    url: "/solutions/short-drama",
+    caseStudyUrl: "/blog/short-drama-app-development",
     screenshotUrl: "/showcase/ott-drama-app.jpg",
   },
   {
-    id: "plus305",
-    title: "305+ TV Network",
-    industry: "Live TV Channels & Video on Demand",
+    id: "cinematic-ott-portal",
+    title: "16:9 Cinematic Video & Live TV Portal",
+    industry: "Adaptive Multi-Bitrate HLS & Video CMS",
     description:
-      "24/7 linear live TV broadcast stream and on-demand video catalogue. Cross-platform responsive playback with adaptive multi-bitrate HLS streaming.",
-    url: "http://play.google.com/store/apps/details?id=tv.network.plus305&hl=en_IN",
-    playStoreUrl: "http://play.google.com/store/apps/details?id=tv.network.plus305&hl=en_IN",
+      "Widescreen 4K HDR playback pipeline with adaptive bitrate streaming (HLS.js / ExoPlayer), DRM-ready token signing, 24/7 linear channel ingest, and TV casting.",
+    url: "/solutions/ott-streaming",
+    caseStudyUrl: "/blog/ott-video-streaming-development",
     screenshotUrl: "/showcase/ott-cinematic-web.jpg",
   },
 ];

@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { BRAND } from "@/lib/constants";
 import {
   Clock,
@@ -180,13 +181,15 @@ export default function EcommerceCostBlogPage() {
               <span className="text-ink">Development Cost</span>
             </nav>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-              <DollarSign className="h-3.5 w-3.5 text-accent" />
-              <span>Pricing Guide &amp; Cost Analysis</span>
+            <div>
+              <HeadingBadge category="ecommerce">
+                Pricing Guide &amp; Cost Analysis
+              </HeadingBadge>
             </div>
 
             <AnimatedHeadline
               as="h1"
+              variant="ecommerce"
               className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.12]"
             >
               E-Commerce Website Development Cost in 2026: Agency Quotes vs. SaaS Taxes vs. Pre-Built Ownership.

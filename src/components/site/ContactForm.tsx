@@ -4,16 +4,19 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
 import { BRAND } from "@/lib/constants";
-import { CheckCircle2, Send, MessageSquare, Shield, Clock } from "lucide-react";
+import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
+import { CheckCircle2, Send, MessageSquare, Shield, Clock, ChevronDown, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
 
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [countryCode, setCountryCode] = useState("+1");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
-  const [solution, setSolution] = useState("ecommerce");
+  const [solution, setSolution] = useState("");
   const [message, setMessage] = useState("");
+  const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -31,15 +34,16 @@ export function ContactForm() {
     setLoading(true);
 
     try {
+      const fullPhone = phone.trim() ? `${countryCode} ${phone.trim()}` : undefined;
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() || undefined,
+          phone: fullPhone,
           company: company.trim() || undefined,
-          package: solution,
+          package: solution || undefined,
           message: message.trim() || undefined,
           honeypot,
         }),
@@ -50,7 +54,7 @@ export function ContactForm() {
       }
 
       // Track Google Ads Conversion AW-18503943905
-      trackLeadSubmission(`ContactPage - ${solution}`, 4999);
+      trackLeadSubmission(solution ? `ContactPage - ${solution}` : "ContactPage - General", 4999);
 
       setSubmitted(true);
     } catch (err: unknown) {
@@ -91,8 +95,11 @@ export function ContactForm() {
               setName("");
               setEmail("");
               setPhone("");
+              setCountryCode("+1");
               setCompany("");
+              setSolution("");
               setMessage("");
+              setShowAdditionalDetails(false);
             }}
             className="text-xs font-mono text-ink-3 hover:text-ink underline cursor-pointer"
           >
@@ -132,6 +139,7 @@ export function ContactForm() {
         </div>
       )}
 
+      {/* Row 1: Name and Email */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <label htmlFor="contact-name" className="block text-xs font-mono text-ink-2">
@@ -164,66 +172,115 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <label htmlFor="contact-phone" className="block text-xs font-mono text-ink-2">
-            Phone / WhatsApp (Optional)
-          </label>
+      {/* Row 2: Phone with Country Code (Full width, Optional) */}
+      <div className="space-y-1.5 w-full">
+        <label htmlFor="contact-phone" className="block text-xs font-mono text-ink-2">
+          Phone / WhatsApp <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
+        </label>
+        <div className="flex w-full rounded-lg border border-line bg-paper focus-within:border-ink transition-all">
+          <select
+            id="contact-country-code"
+            value={countryCode}
+            onChange={(e) => setCountryCode(e.target.value)}
+            aria-label="Country dial code"
+            className="w-36 sm:w-48 h-10 shrink-0 rounded-l-lg border-r border-line bg-wash/60 hover:bg-wash px-2.5 text-xs text-ink focus:outline-none cursor-pointer font-medium transition-colors"
+          >
+            <optgroup label="Popular">
+              {POPULAR_COUNTRIES.map((c) => (
+                <option key={`pop-${c.iso}-${c.code}`} value={c.code}>
+                  {c.name} ({c.code})
+                </option>
+              ))}
+            </optgroup>
+            <optgroup label="All Countries (A–Z)">
+              {ALL_COUNTRIES.map((c) => (
+                <option key={`all-${c.iso}-${c.name}`} value={c.code}>
+                  {c.name} ({c.code})
+                </option>
+              ))}
+            </optgroup>
+          </select>
           <input
             id="contact-phone"
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+1 555 123 4567"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label htmlFor="contact-company" className="block text-xs font-mono text-ink-2">
-            Company / Brand Name
-          </label>
-          <input
-            id="contact-company"
-            type="text"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            placeholder="Your Brand or Startup"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
+            placeholder="(555) 000-0000"
+            className="flex-1 min-w-0 h-10 bg-transparent px-3 text-sm text-ink placeholder:text-ink-4 focus:outline-none"
           />
         </div>
       </div>
 
-      <div className="space-y-1.5">
+      {/* Row 3: Platform of Interest (Full width, Optional, Nothing Selected by Default) */}
+      <div className="space-y-1.5 w-full">
         <label htmlFor="contact-solution" className="block text-xs font-mono text-ink-2">
-          Platform of Interest
+          Platform of Interest <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
         </label>
         <select
           id="contact-solution"
           value={solution}
           onChange={(e) => setSolution(e.target.value)}
-          className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink focus:outline-none focus:border-ink transition-colors"
+          className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-paper text-ink focus:outline-none focus:border-ink transition-colors cursor-pointer"
         >
+          <option value="">Select a platform of interest (Optional)...</option>
           <option value="ecommerce">E-Commerce Platform (Web, Apps &amp; Admin - $4,999)</option>
-          <option value="ott-streaming">OTT &amp; Short Drama Platform (Reels &amp; Cinema - $4,999)</option>
+          <option value="short-drama">9:16 Short Drama Platform (Reels &amp; Paywalls - $4,999)</option>
+          <option value="ott-streaming">16:9 Cinematic OTT Platform (Widescreen 4K - $4,999)</option>
           <option value="source-code">Full Unencrypted Source Code License ($1,999 Add-on)</option>
           <option value="developer-time">Dedicated Developer Support ($20 / hour)</option>
           <option value="custom">Custom Enterprise Architecture</option>
         </select>
       </div>
 
-      <div className="space-y-1.5">
-        <label htmlFor="contact-message" className="block text-xs font-mono text-ink-2">
-          Project Notes / Specific Questions (Optional)
-        </label>
-        <textarea
-          id="contact-message"
-          rows={3}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Tell us about your target launch date, existing customer database, or specific custom integrations..."
-          className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors resize-none"
-        />
+      {/* Progressive Disclosure: Expandable Company & Project Requirements */}
+      <div className="pt-1">
+        <button
+          type="button"
+          onClick={() => setShowAdditionalDetails((prev) => !prev)}
+          className="inline-flex items-center gap-2 text-xs font-mono text-ink-2 hover:text-ink py-1.5 px-2 -ml-2 rounded hover:bg-wash transition-colors cursor-pointer group select-none"
+        >
+          <SlidersHorizontal className="h-3.5 w-3.5 text-accent transition-transform group-hover:scale-110" />
+          <span className="font-medium">
+            {showAdditionalDetails ? "Hide company & project details" : "+ Add company & project details (Optional)"}
+          </span>
+          <ChevronDown
+            className={`h-3.5 w-3.5 text-ink-3 transition-transform duration-200 ${
+              showAdditionalDetails ? "rotate-180 text-ink" : ""
+            }`}
+          />
+        </button>
+
+        {showAdditionalDetails && (
+          <div className="space-y-4 pt-3 border-t border-line/60 mt-2 animate-fade-in">
+            <div className="space-y-1.5">
+              <label htmlFor="contact-company" className="block text-xs font-mono text-ink-2">
+                Company / Brand Name <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
+              </label>
+              <input
+                id="contact-company"
+                type="text"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="e.g. Acme Retail or Media Studio"
+                className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label htmlFor="contact-message" className="block text-xs font-mono text-ink-2">
+                Project Notes / Specific Questions <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
+              </label>
+              <textarea
+                id="contact-message"
+                rows={3}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tell us about your target launch date, existing customer database, or specific custom integrations..."
+                className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors resize-none"
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       <Button

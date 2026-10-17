@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -292,12 +293,10 @@ export default function SolutionsCatalogPage() {
             <span className="text-ink">Solutions</span>
           </nav>
 
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 select-none shimmer-badge">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-            </span>
-            <span>Production Architectures · 100% Cloud Ownership</span>
+          <div>
+            <HeadingBadge category="default">
+              Production Architectures · 100% Cloud Ownership
+            </HeadingBadge>
           </div>
 
           <AnimatedHeadline
@@ -322,7 +321,7 @@ export default function SolutionsCatalogPage() {
         </div>
 
         {/* Live Flagship Solutions Grid */}
-        <div className="wrap space-y-10">
+        <div className="wrap-wide space-y-10">
           <div className="border-t border-line pt-10">
             <span className="font-mono text-xs text-ink-3 uppercase block mb-1">Flagship Solutions</span>
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -399,7 +398,7 @@ export default function SolutionsCatalogPage() {
         </div>
 
         {/* Why White-Label Architecture */}
-        <div className="wrap">
+        <div className="wrap-wide">
           <div className="rounded-2xl border border-line bg-wash p-8 sm:p-10 space-y-6">
             <span className="font-mono text-xs text-accent uppercase font-semibold">The Architectural Philosophy</span>
             <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
@@ -444,7 +443,7 @@ export default function SolutionsCatalogPage() {
         </div>
 
         {/* Upcoming Pipeline */}
-        <div className="wrap space-y-8">
+        <div className="wrap-wide space-y-8">
           <div className="border-t border-line pt-10">
             <span className="font-mono text-xs text-ink-3 uppercase block mb-1">Roadmap &amp; Custom Inquiries</span>
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -471,7 +470,7 @@ export default function SolutionsCatalogPage() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="wrap border-t border-line pt-16">
+        <div className="wrap-wide border-t border-line pt-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">

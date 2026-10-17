@@ -83,6 +83,7 @@ export default function EcommerceAppDevelopmentPage() {
 
       <main className="flex-1">
         <Hero
+          category="ecommerce"
           mode="app"
           breadcrumbs={[
             { label: "Home", href: "/" },

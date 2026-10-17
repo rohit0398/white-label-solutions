@@ -113,7 +113,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] font-mono border border-white/20">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/brand/logo_icon.svg"
+                    src="/brand/favicon.png"
                     alt="Mechatron Lab"
                     width={14}
                     height={14}
@@ -264,7 +264,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               <div className="flex items-center gap-2.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/brand/logo_icon.svg"
+                  src="/brand/favicon.png"
                   alt="Mechatron Lab"
                   width={20}
                   height={20}

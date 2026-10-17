@@ -18,7 +18,7 @@ function escapeHtml(text: string): string {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, company, package: tier, honeypot } = body;
+    const { name, email, phone, company, package: tier, message, honeypot } = body;
 
     // Silent reject for bot submissions filling hidden honeypot
     if (honeypot) {
@@ -38,6 +38,7 @@ export async function POST(request: Request) {
       phone: phone ? String(phone).trim() : "Not provided",
       company: company ? String(company).trim() : "Not provided",
       package: tier || "launch",
+      message: message ? String(message).trim() : undefined,
       submittedAt: new Date().toISOString(),
     };
 
@@ -81,6 +82,7 @@ export async function POST(request: Request) {
           `📱 <b>Phone/WA:</b> <code>${escapeHtml(leadData.phone)}</code>`,
           `🏢 <b>Company:</b> ${escapeHtml(leadData.company)}`,
           `📦 <b>Package:</b> ${escapeHtml(packageLabel)}`,
+          ...(leadData.message ? [`💬 <b>Notes:</b> ${escapeHtml(leadData.message)}`] : []),
           `🕒 <b>Time:</b> ${dateStr} IST`,
         ];
 

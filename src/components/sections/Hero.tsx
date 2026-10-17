@@ -8,6 +8,7 @@ import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge, BadgeCategory } from "@/components/ui/HeadingBadge";
 import { MessageSquare } from "lucide-react";
 import { trackWhatsAppClick } from "@/lib/analytics";
 
@@ -24,6 +25,7 @@ export interface HeroProps {
   anchors?: { label: string; href?: string }[];
   mode?: "all" | "web" | "app";
   showScreenshot?: boolean;
+  category?: BadgeCategory;
 }
 
 export function Hero({
@@ -34,6 +36,7 @@ export function Hero({
   anchors,
   mode = "all",
   showScreenshot,
+  category,
 }: HeroProps = {}) {
   const { language, openDemo } = useSite();
   const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
@@ -63,17 +66,16 @@ export function Hero({
           </nav>
         )}
 
-        {/* Ambient Active Status Beacon (Runs quietly without hover with continuous shimmer) */}
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2 mb-6 select-none shimmer-badge hover:border-ink/40 transition-colors">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-          </span>
-          <span>{badgeText}</span>
+        {/* Ambient Active Status Beacon (Single existing heading badge with domain identity) */}
+        <div className="mb-6">
+          <HeadingBadge category={category}>
+            {badgeText}
+          </HeadingBadge>
         </div>
 
         <AnimatedHeadline
           as="h1"
+          variant={category}
           className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]"
         >
           {headlineText}

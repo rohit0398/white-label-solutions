@@ -257,15 +257,25 @@ export default function AboutPage() {
                     </p>
                   </div>
                   {p.url && (
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline pt-2"
-                    >
-                      <span>View Live App</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </a>
+                    p.url.startsWith("/") ? (
+                      <Link
+                        href={p.url}
+                        className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline pt-2"
+                      >
+                        <span>Explore Architecture</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    ) : (
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline pt-2"
+                      >
+                        <span>View Live App</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </a>
+                    )
                   )}
                 </div>
               ))}
