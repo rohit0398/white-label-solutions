@@ -14,6 +14,7 @@ import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
+import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Smartphone, Zap, ShieldCheck, Lock } from "lucide-react";
@@ -130,6 +131,7 @@ export default function ShortDramaAppDevelopmentPage() {
           headline="Short-Drama Mobile App Development."
           subtitle="Launch your branded vertical micro-drama streaming apps for iOS &amp; Android in 2–4 weeks. Native Flutter apps, addictive 60FPS swipe mechanics, recurring VIP subscriptions, rewarded video ads, cliffhanger episode paywalls, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
           anchors={[
+            { label: "Live test build", href: "#live-demo" },
             { label: "01 Mobile App", href: "#app-architecture" },
             { label: "02 Video CMS", href: "#video-cms" },
             { label: "03 4-Week Rollout", href: "#rollout" },
@@ -140,6 +142,8 @@ export default function ShortDramaAppDevelopmentPage() {
           tierId="ott-streaming"
           footerNote="Published under your developer accounts · Full source code option · Keep 100% of sales"
         />
+
+        <ShortDramaLiveAccess emphasis="app" />
 
         {/* Engineering Tech Stack Strip */}
         <TechStackStrip

@@ -694,16 +694,39 @@ export const CINEMATIC_OTT_PRICING_TIERS = CINEMATIC_OTT_WEB_PRICING_TIERS;
 export const OTT_PRICING_TIERS = CINEMATIC_OTT_BASE_PRICING_TIERS;
 
 
+export const MICRODRAMA_DEMO = {
+  websiteUrl: "https://microdrama.mechatronlab.com",
+  websiteLabel: "microdrama.mechatronlab.com",
+  apkUrl: "https://d3upvzjgckmuz9.cloudfront.net/apk/micro-drama.apk",
+  apkLabel: "Download test APK",
+  googleLogin: true,
+  phones: [
+    "+91 99999 99999",
+    "+91 99999 99998",
+    "+91 99999 99997",
+    "+91 99999 99996",
+    "+91 99999 99995",
+  ],
+  otp: "999999",
+};
+
 export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
     id: "short-drama-platform",
     title: "9:16 Short-Drama Mobile & Web Platform",
     industry: "Vertical Video Series & Cliffhanger Paywalls",
     description:
-      "Production-grade 60FPS vertical swipe player engine with sub-50ms episode pre-caching, Cloudflare Stream video ingest, and in-app coin & VIP subscription billing.",
-    url: "/solutions/short-drama",
-    caseStudyUrl: "/blog/short-drama-app-development",
+      "Live test build of the 60FPS vertical swipe player, web player, and VIP paywall. Sign in with Google or a test number. Android build is an APK from our server.",
+    url: MICRODRAMA_DEMO.websiteUrl,
+    appDownloadUrl: MICRODRAMA_DEMO.apkUrl,
+    appDownloadLabel: MICRODRAMA_DEMO.apkLabel,
+    caseStudyUrl: "/case-studies/short-drama-platform",
     screenshotUrl: "/showcase/ott-drama-app.jpg",
+    demoAccess: {
+      googleLogin: MICRODRAMA_DEMO.googleLogin,
+      phones: MICRODRAMA_DEMO.phones,
+      otp: MICRODRAMA_DEMO.otp,
+    },
   },
   {
     id: "cinematic-ott-portal",

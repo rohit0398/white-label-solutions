@@ -14,6 +14,12 @@ export interface PricingTier {
   ctaText: string;
 }
 
+export interface DemoAccess {
+  googleLogin: boolean;
+  phones: string[];
+  otp: string;
+}
+
 export interface ShowcaseProject {
   id: string;
   title: string;
@@ -21,8 +27,11 @@ export interface ShowcaseProject {
   description: string;
   url: string;
   playStoreUrl?: string;
+  appDownloadUrl?: string;
+  appDownloadLabel?: string;
   caseStudyUrl?: string;
   screenshotUrl?: string;
+  demoAccess?: DemoAccess;
 }
 
 export interface AdminFeature {
