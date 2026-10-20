@@ -92,6 +92,14 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                       </span>
                     </a>
                   )}
+                  {p.appDownloadUrl && (
+                    <a href={p.appDownloadUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                      <span>{p.appDownloadLabel || "Download test APK"}</span>
+                      <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                        ↗
+                      </span>
+                    </a>
+                  )}
                   {p.caseStudyUrl && (
                     <Link href={p.caseStudyUrl} className={linkCls}>
                       <span>
@@ -105,6 +113,13 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                     </Link>
                   )}
                 </div>
+                {p.demoAccess && (
+                  <p className="mt-3 text-xs text-ink-3 leading-relaxed max-w-xl">
+                    {p.demoAccess.googleLogin ? "Sign in with Google, or use a test number " : "Test numbers "}
+                    <span className="font-mono text-ink-2">{p.demoAccess.phones.join(", ")}</span>
+                    . OTP <span className="font-mono font-semibold text-ink">{p.demoAccess.otp}</span>.
+                  </p>
+                )}
               </div>
 
               {p.screenshotUrl && (

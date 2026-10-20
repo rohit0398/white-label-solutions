@@ -10,6 +10,7 @@ import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -265,6 +266,7 @@ export default function ShortDramaPlatformPage() {
           headline="Short-Drama Video Streaming Platform."
           subtitle="Launch your branded vertical micro-drama streaming platform in 2–4 weeks. Complete Flutter iOS & Android apps, responsive Next.js mobile-web player, VIP subscription passes, rewarded video ads, cliffhanger episode paywalls, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
           anchors={[
+            { label: "Live test build", href: "#live-demo" },
             { label: "01 Platform Architecture", href: "#architecture" },
             { label: "02 4-Week Rollout", href: "#rollout" },
             { label: "03 Production Proof", href: "#production-apps" },
@@ -275,6 +277,8 @@ export default function ShortDramaPlatformPage() {
           tierId="ott-streaming"
           footerNote="Published under your developer accounts · Full source code option · Keep 100% of sales"
         />
+
+        <ShortDramaLiveAccess emphasis="both" />
 
         {/* Engineering Tech Stack Strip */}
         <TechStackStrip

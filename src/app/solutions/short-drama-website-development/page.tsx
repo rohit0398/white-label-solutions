@@ -14,6 +14,7 @@ import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
+import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Globe, ShieldCheck, Zap, Share2 } from "lucide-react";
@@ -128,6 +129,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
           headline="Short-Drama Website Development."
           subtitle="Launch your branded vertical micro-drama web streaming portal in 2–4 weeks. Sub-second mobile-first HLS player, zero-install instant playback for TikTok & social traffic, recurring Stripe VIP subscriptions, cliffhanger episode gating, and Video CMS deployed onto your private cloud."
           anchors={[
+            { label: "Live test build", href: "#live-demo" },
             { label: "01 Web Player", href: "#web-architecture" },
             { label: "02 Video CMS", href: "#video-cms" },
             { label: "03 4-Week Rollout", href: "#rollout" },
@@ -138,6 +140,8 @@ export default function ShortDramaWebsiteDevelopmentPage() {
           tierId="ott-streaming"
           footerNote="Deployed on your private AWS or Cloudflare cloud · Full source code option · Keep 100% of revenue"
         />
+
+        <ShortDramaLiveAccess emphasis="web" />
 
         {/* Engineering Tech Stack Strip */}
         <TechStackStrip

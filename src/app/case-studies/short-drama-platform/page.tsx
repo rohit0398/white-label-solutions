@@ -7,6 +7,7 @@ import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 
 export const metadata: Metadata = {
   title: "Case Study: 2.4M+ Short-Drama Streaming Platform | Mechatron Lab",
@@ -138,6 +139,8 @@ export default function ShortDramaCaseStudyPage() {
             </Link>
           </div>
         </div>
+
+        <ShortDramaLiveAccess emphasis="both" />
 
         {/* Screenshot (Proportionate showcase framing) */}
         <div className="wrap max-w-4xl mx-auto">

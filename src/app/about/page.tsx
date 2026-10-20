@@ -256,27 +256,57 @@ export default function AboutPage() {
                       {p.description}
                     </p>
                   </div>
-                  {p.url && (
-                    p.url.startsWith("/") ? (
-                      <Link
-                        href={p.url}
-                        className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline pt-2"
-                      >
-                        <span>Explore Architecture</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    ) : (
+                  <div className="pt-2 space-y-2">
+                    {p.url && (
+                      p.url.startsWith("/") ? (
+                        <Link
+                          href={p.url}
+                          className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline"
+                        >
+                          <span>Explore Architecture</span>
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      ) : (
+                        <a
+                          href={p.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline"
+                        >
+                          <span>{p.url.replace(/^https?:\/\//, "")}</span>
+                          <ArrowRight className="h-3 w-3" />
+                        </a>
+                      )
+                    )}
+                    {p.appDownloadUrl && (
                       <a
-                        href={p.url}
+                        href={p.appDownloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-mono text-accent hover:underline pt-2"
+                        className="flex items-center gap-1 text-xs font-mono text-accent hover:underline"
                       >
-                        <span>View Live App</span>
+                        <span>{p.appDownloadLabel || "Download test APK"}</span>
                         <ArrowRight className="h-3 w-3" />
                       </a>
-                    )
-                  )}
+                    )}
+                    {p.playStoreUrl && (
+                      <a
+                        href={p.playStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 text-xs font-mono text-accent hover:underline"
+                      >
+                        <span>Google Play</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </a>
+                    )}
+                    {p.demoAccess && (
+                      <p className="text-[11px] text-ink-3 leading-relaxed">
+                        Google sign-in or {p.demoAccess.phones[0]}–{p.demoAccess.phones[p.demoAccess.phones.length - 1].slice(-5)}. OTP{" "}
+                        <span className="font-mono text-ink">{p.demoAccess.otp}</span>.
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
