@@ -1,4 +1,5 @@
 "use client";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
 import { Button } from "@/components/ui/Button";
@@ -20,10 +21,12 @@ export function DemoButton({
   className,
   children = "Book a demo",
 }: DemoButtonProps) {
+  const translateCopy = useMessages();
+
   const { openDemo } = useSite();
   return (
     <Button variant={variant} size={size} className={className} onClick={() => openDemo(tierId)}>
-      {children}
+      {translateCopy(children)}
     </Button>
   );
 }

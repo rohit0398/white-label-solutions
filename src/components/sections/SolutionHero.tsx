@@ -1,7 +1,9 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
@@ -39,15 +41,17 @@ export function SolutionHero({
   headline,
   subtitle,
   anchors,
-  ctaDemoText = "Book a Live Platform Walkthrough",
+  ctaDemoText = englishMessage("SolutionHero.book.a.live.platform.walkthrough.89167e1"),
   tierId,
-  footerNote = "Published under your developer accounts · Full source code option · Keep 100% of revenue",
+  footerNote = englishMessage("SolutionHero.published.under.your.developer.accounts.full.15d416d"),
   category,
 }: SolutionHeroProps) {
+  const translateCopy = useMessages();
+
   const { openDemo } = useSite();
 
   return (
-    <section id={id} className="pt-16 sm:pt-28 pb-16 sm:pb-20">
+    <section id={id} className="pt-16 sm:pt-14 pb-16 sm:pb-20">
       <div className="wrap space-y-6">
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-xs font-mono text-ink-3">
@@ -56,10 +60,10 @@ export function SolutionHero({
               {idx > 0 && <span>/</span>}
               {b.href ? (
                 <Link href={b.href} className="hover:text-ink transition-colors">
-                  {b.label}
+                  {translateCopy(b.label)}
                 </Link>
               ) : (
-                <span className="text-ink">{b.label}</span>
+                <span className="text-ink">{translateCopy(b.label)}</span>
               )}
             </React.Fragment>
           ))}
@@ -83,7 +87,7 @@ export function SolutionHero({
 
         {/* Subtitle / Value Proposition */}
         <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
-          {subtitle}
+          {translateCopy(subtitle)}
         </p>
 
         {/* Living Platform Anchors with Micro-Animations */}
@@ -97,7 +101,7 @@ export function SolutionHero({
                   idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
                 } px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs`}
               >
-                {a.label}
+                {translateCopy(a.label)}
               </a>
             ))}
           </div>
@@ -110,7 +114,7 @@ export function SolutionHero({
             onClick={() => openDemo(tierId)}
             className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
           >
-            <span>{ctaDemoText}</span>
+            <span>{translateCopy(ctaDemoText)}</span>
             <span className="text-paper/70 font-mono text-xs">→</span>
           </Button>
 
@@ -125,7 +129,7 @@ export function SolutionHero({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
             <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            <span>Chat on WhatsApp</span>
+            <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
           </a>
         </div>
@@ -133,7 +137,7 @@ export function SolutionHero({
         {/* Quality Assurances / Footer Note */}
         {footerNote && (
           <p className="pt-4 text-xs font-mono text-ink-3">
-            {footerNote}
+            {translateCopy(footerNote)}
           </p>
         )}
       </div>

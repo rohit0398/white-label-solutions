@@ -1,3 +1,4 @@
+import { priceText } from "@/lib/pricing-catalog";
 import { TranslationDictionary } from "./types";
 
 export const en: TranslationDictionary = {
@@ -20,7 +21,7 @@ export const en: TranslationDictionary = {
     },
     ctaDemo: "Book a demo",
     ctaWork: "See live stores",
-    facts: "From $4,999 one-time · 0% commission · Live in 2–4 weeks",
+    facts: priceText("From {price:launch} one-time · 0% commission · Live in 2–4 weeks", "en"),
   },
   whatYouGet: {
     index: "01",
@@ -119,7 +120,7 @@ export const en: TranslationDictionary = {
       {
         when: "Week 3–4",
         title: "App Store Publishing & Production Handover",
-        text: "Apps are submitted to Apple App Store and Google Play under your corporate developer accounts. You receive all master server keys, database access, and 100% source code.",
+        text: "Apps are submitted to Apple App Store and Google Play under your corporate developer accounts. You receive master server keys and database access. Full source code access is available with the source code license add-on.",
       },
       {
         when: "After launch",

@@ -1,88 +1,17 @@
-import React from "react";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TRANSLATIONS } from "@/lib/translations";
-import { LOCALIZED_SEO } from "@/lib/translations/seo";
-import { Language } from "@/types";
-import HomePage from "@/app/page";
+import PageContent from "@/components/pages/home";
+import { landingMetadata } from "@/lib/localized-metadata";
+import { TRANSLATED_LANGUAGES, type LandingLocale } from "@/lib/site-config";
 
-const VALID_LOCALES: Language[] = ["en", "es", "de", "fr", "hi"];
-
-export function generateStaticParams() {
-  return [
-    { locale: "en" },
-    { locale: "es" },
-    { locale: "de" },
-    { locale: "fr" },
-    { locale: "hi" },
-  ];
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export function generateStaticParams() { return TRANSLATED_LANGUAGES.map(locale => ({ locale })); }
+async function validatedLocale(params: Promise<{ locale: string }>) {
   const { locale } = await params;
-  if (!VALID_LOCALES.includes(locale as Language)) {
-    return {};
-  }
-
-  const lang = locale as Language;
-  const seo = LOCALIZED_SEO[lang] ?? LOCALIZED_SEO.en;
-
-  const canonicalPath = locale === "en" ? "/" : `/${locale}`;
-
-  return {
-    title: seo.title,
-    description: seo.description,
-    keywords: seo.keywords,
-    alternates: {
-      canonical: canonicalPath,
-      languages: {
-        en: "/",
-        es: "/es",
-        de: "/de",
-        fr: "/fr",
-        hi: "/hi",
-        "x-default": "/",
-      },
-    },
-    openGraph: {
-      type: "website",
-      locale: seo.ogLocale,
-      url: canonicalPath,
-      title: seo.title,
-      description: seo.description,
-      siteName: "Mechatron Lab Solutions",
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          type: "image/png",
-          alt: seo.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: seo.title,
-      description: seo.description,
-      images: ["/og-image.png"],
-    },
-  };
+  if (!TRANSLATED_LANGUAGES.includes(locale as LandingLocale)) notFound();
+  return locale as LandingLocale;
 }
-
-export default async function LocalizedHomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  if (!VALID_LOCALES.includes(locale as Language)) {
-    notFound();
-  }
-
-  return <HomePage />;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  return landingMetadata(await validatedLocale(params), "home");
+}
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  return <PageContent language={await validatedLocale(params)} />;
 }

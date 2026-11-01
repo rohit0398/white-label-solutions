@@ -18,5 +18,6 @@ export const TRANSLATIONS: Record<Language, TranslationDictionary> = {
 };
 
 export function getTranslation(lang: Language): TranslationDictionary {
-  return TRANSLATIONS[lang] ?? TRANSLATIONS.en;
+  if (!TRANSLATIONS[lang]) throw new Error(`Unsupported language: ${lang}`);
+  return TRANSLATIONS[lang];
 }

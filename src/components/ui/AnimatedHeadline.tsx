@@ -1,3 +1,5 @@
+"use client";
+import { useMessages } from "@/components/site/useMessages";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -85,6 +87,9 @@ export function AnimatedHeadline({
   variant,
   withAmbientAura = true,
 }: AnimatedHeadlineProps) {
+  const translateCopy = useMessages();
+  children = translateCopy(children);
+
   // If children is not a plain string, render as-is inside the tag
   if (typeof children !== "string") {
     return <Component className={className}>{children}</Component>;
@@ -114,9 +119,9 @@ export function AnimatedHeadline({
     return (
       <Component className={cn("relative", className)}>
         {auraElement}
-        <span className="inline-block animate-hero-title-1">{part1}</span>{" "}
+        <span className="inline-block animate-hero-title-1">{translateCopy(part1)}</span>{" "}
         <span className={cn("inline-block animate-hero-title-2", shimmerClass)}>
-          {part2}
+          {translateCopy(part2)}
         </span>
       </Component>
     );
@@ -131,9 +136,9 @@ export function AnimatedHeadline({
     return (
       <Component className={cn("relative", className)}>
         {auraElement}
-        <span className="inline-block animate-hero-title-1">{part1}</span>{" "}
+        <span className="inline-block animate-hero-title-1">{translateCopy(part1)}</span>{" "}
         <span className={cn("inline-block animate-hero-title-2", shimmerClass)}>
-          {part2}
+          {translateCopy(part2)}
         </span>
       </Component>
     );
@@ -148,7 +153,7 @@ export function AnimatedHeadline({
       <Component className={cn("relative", className)}>
         {auraElement}
         <span className={cn("inline-block animate-hero-title-1", shimmerClass)}>
-          {text}
+          {translateCopy(text)}
         </span>
       </Component>
     );
@@ -162,9 +167,9 @@ export function AnimatedHeadline({
   return (
     <Component className={cn("relative", className)}>
       {auraElement}
-      <span className="inline-block animate-hero-title-1">{part1}</span>{" "}
+      <span className="inline-block animate-hero-title-1">{translateCopy(part1)}</span>{" "}
       <span className={cn("inline-block animate-hero-title-2", shimmerClass)}>
-        {part2}
+        {translateCopy(part2)}
       </span>
     </Component>
   );

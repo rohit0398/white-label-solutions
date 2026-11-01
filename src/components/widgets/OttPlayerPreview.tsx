@@ -1,4 +1,6 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
 import React, { useState } from "react";
 import { Play, Lock, Sparkles, Smartphone, Monitor, Heart, Share2, Volume2, Film, CheckCircle2 } from "lucide-react";
@@ -10,6 +12,8 @@ interface OttPlayerPreviewProps {
 }
 
 export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
+  const translateCopy = useMessages();
+
   const [mode, setMode] = useState<FormatMode>(format === "cinematic" ? "cinematic" : "vertical");
   const [unlocked, setUnlocked] = useState(false);
 
@@ -24,40 +28,28 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
             <>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
                 <Smartphone className="h-3 w-3" />
-                <span>Vertical Drama Engine</span>
+                <span>{translateCopy(englishMessage("OttPlayerPreview.vertical.drama.engine.b0783ad"))}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
-                Interactive Short-Drama Player Preview (9:16 Format).
-              </h3>
-              <p className="text-xs sm:text-sm text-ink-3">
-                Preview the 60FPS vertical swipe gestures, episode scrubber, and cliffhanger paywall unlock flow built for serialized micro-dramas.
-              </p>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("OttPlayerPreview.interactive.short.drama.player.preview.9.16.3b53815"))}</h3>
+              <p className="text-xs sm:text-sm text-ink-3">{translateCopy(englishMessage("OttPlayerPreview.preview.the.60fps.vertical.swipe.gestures.ep.c0f7dba"))}</p>
             </>
           ) : activeMode === "cinematic" && format === "cinematic" ? (
             <>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
                 <Monitor className="h-3 w-3" />
-                <span>Cinematic Video Engine</span>
+                <span>{translateCopy(englishMessage("OttPlayerPreview.cinematic.video.engine.e434c3a"))}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
-                Interactive Cinematic Video Player Preview (16:9 Widescreen).
-              </h3>
-              <p className="text-xs sm:text-sm text-ink-3">
-                Preview the desktop &amp; smart TV widescreen player with adaptive multi-bitrate HLS, continue-watching timestamps, and subtitle/audio track controls.
-              </p>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("OttPlayerPreview.interactive.cinematic.video.player.preview.1.312e830"))}</h3>
+              <p className="text-xs sm:text-sm text-ink-3">{translateCopy(englishMessage("OttPlayerPreview.preview.the.desktop.smart.tv.widescreen.play.39ff0f4"))}</p>
             </>
           ) : (
             <>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-accent/20 bg-accent/10 text-[11px] font-mono text-accent font-semibold">
                 <Sparkles className="h-3 w-3" />
-                <span>Video Streaming Architecture</span>
+                <span>{translateCopy(englishMessage("OttPlayerPreview.video.streaming.architecture.7466060"))}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
-                Private Cloud Video Engines.
-              </h3>
-              <p className="text-xs sm:text-sm text-ink-3">
-                Select a format below to preview the player engine tailored for your content strategy.
-              </p>
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("OttPlayerPreview.private.cloud.video.engines.2e7ae4f"))}</h3>
+              <p className="text-xs sm:text-sm text-ink-3">{translateCopy(englishMessage("OttPlayerPreview.select.a.format.below.to.preview.the.player.5f7fedc"))}</p>
             </>
           )}
         </div>
@@ -75,7 +67,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               }`}
             >
               <Smartphone className="h-3.5 w-3.5" />
-              <span>9:16 Short Dramas (ReelShort)</span>
+              <span>{translateCopy(englishMessage("OttPlayerPreview.9.16.short.dramas.reelshort.752245f"))}</span>
             </button>
             <button
               type="button"
@@ -87,7 +79,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               }`}
             >
               <Monitor className="h-3.5 w-3.5" />
-              <span>16:9 Cinematic (Netflix)</span>
+              <span>{translateCopy(englishMessage("OttPlayerPreview.16.9.cinematic.netflix.0e4299e"))}</span>
             </button>
           </div>
         )}
@@ -103,7 +95,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/showcase/ott-drama-app.jpg"
-                alt="9:16 Short Drama Mobile App Interface"
+                alt={translateCopy(englishMessage("OttPlayerPreview.9.16.short.drama.mobile.app.interface.5cc7807"))}
                 className="absolute inset-0 w-full h-full object-cover z-0"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90 z-1 pointer-events-none" />
@@ -119,11 +111,11 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
                     height={14}
                     className="h-3.5 w-3.5 rounded object-contain shrink-0"
                   />
-                  <span>Ep. 14 of 75</span>
+                  <span>{translateCopy(englishMessage("OttPlayerPreview.ep.14.of.75.1ce0cc5"))}</span>
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-amber-300 border border-amber-300/40 font-mono text-[11px] font-semibold">
                   <Sparkles className="h-3 w-3" />
-                  <span>VIP ACCESS</span>
+                  <span>{translateCopy(englishMessage("OttPlayerPreview.vip.access.dccbb80"))}</span>
                 </div>
               </div>
 
@@ -135,40 +127,30 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
                       <Lock className="h-5 w-5" />
                     </div>
                     <div className="space-y-0.5">
-                      <p className="text-xs font-semibold text-white">
-                        Next Cliffhanger: Episode 15
-                      </p>
-                      <p className="text-[11px] text-white/70">
-                        Free preview complete. Unlock with VIP pass or watch a short video ad.
-                      </p>
+                      <p className="text-xs font-semibold text-white">{translateCopy(englishMessage("OttPlayerPreview.next.cliffhanger.episode.15.bac2ee5"))}</p>
+                      <p className="text-[11px] text-white/70">{translateCopy(englishMessage("OttPlayerPreview.free.preview.complete.unlock.with.vip.pass.o.ba3438f"))}</p>
                     </div>
                     <div className="space-y-1.5 pt-1">
                       <button
                         type="button"
                         onClick={() => setUnlocked(true)}
                         className="w-full py-2.5 px-3 rounded-xl bg-accent text-paper font-semibold text-xs hover:opacity-95 active:scale-95 transition-all shadow-md cursor-pointer"
-                      >
-                        Watch Ad to Unlock Episode (30s) →
-                      </button>
+                      >{translateCopy(englishMessage("OttPlayerPreview.watch.ad.to.unlock.episode.30s.954888f"))}</button>
                     </div>
-                    <p className="text-[10px] text-white/50">Simulate rewarded ad / subscription unlock</p>
+                    <p className="text-[10px] text-white/50">{translateCopy(englishMessage("OttPlayerPreview.simulate.rewarded.ad.subscription.unlock.ef26363"))}</p>
                   </div>
                 ) : (
                   <div className="p-4 rounded-2xl bg-emerald-950/85 backdrop-blur-xl border border-emerald-500/40 space-y-2 animate-fade-in shadow-2xl">
                     <div className="h-10 w-10 mx-auto rounded-full bg-accent text-paper flex items-center justify-center shadow-lg">
                       <Play className="h-5 w-5 fill-current translate-x-0.5" />
                     </div>
-                    <p className="text-xs font-semibold text-emerald-200">Episode 15 Unlocked!</p>
-                    <p className="text-[11px] text-white/80">
-                      Ad verified · Auto-playing 60FPS vertical drama stream...
-                    </p>
+                    <p className="text-xs font-semibold text-emerald-200">{translateCopy(englishMessage("OttPlayerPreview.episode.15.unlocked.ee3eaac"))}</p>
+                    <p className="text-[11px] text-white/80">{translateCopy(englishMessage("OttPlayerPreview.ad.verified.auto.playing.60fps.vertical.dram.8e0e662"))}</p>
                     <button
                       type="button"
                       onClick={() => setUnlocked(false)}
                       className="text-[10px] text-emerald-300 underline underline-offset-2 hover:opacity-80 pt-1 block mx-auto cursor-pointer"
-                    >
-                      Reset simulation
-                    </button>
+                    >{translateCopy(englishMessage("OttPlayerPreview.reset.simulation.a1e7367"))}</button>
                   </div>
                 )}
               </div>
@@ -177,21 +159,17 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               <div className="relative z-10 space-y-3 pb-1">
                 <div className="flex items-end justify-between">
                   <div className="space-y-1 max-w-[78%]">
-                    <p className="text-xs font-semibold text-white truncate drop-shadow-md">
-                      Echoes of Betrayal
-                    </p>
-                    <p className="text-[10px] text-white/80 line-clamp-2 leading-relaxed drop-shadow-xs">
-                      Eliza confronts Julian about the hidden clause in her grandfather&apos;s will.
-                    </p>
+                    <p className="text-xs font-semibold text-white truncate drop-shadow-md">{translateCopy(englishMessage("OttPlayerPreview.echoes.of.betrayal.f62428e"))}</p>
+                    <p className="text-[10px] text-white/80 line-clamp-2 leading-relaxed drop-shadow-xs">{translateCopy(englishMessage("OttPlayerPreview.eliza.confronts.julian.about.the.hidden.clau.01b84b1"))}</p>
                   </div>
                   <div className="flex flex-col items-center gap-2.5 text-white/90">
                     <div className="flex flex-col items-center gap-0.5">
                       <Heart className="h-5 w-5 text-rose-500 fill-rose-500" />
-                      <span className="text-[10px] font-mono">28.4k</span>
+                      <span className="text-[10px] font-mono">{translateCopy(englishMessage("OttPlayerPreview.28.4k.52d7d8b"))}</span>
                     </div>
                     <div className="flex flex-col items-center gap-0.5">
                       <Share2 className="h-4.5 w-4.5" />
-                      <span className="text-[10px] font-mono">Share</span>
+                      <span className="text-[10px] font-mono">{translateCopy(englishMessage("OttPlayerPreview.share.09ca55c"))}</span>
                     </div>
                   </div>
                 </div>
@@ -208,40 +186,32 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
           <div className="space-y-5">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent font-mono text-xs font-semibold">
               <Sparkles className="h-3.5 w-3.5" />
-              <span>Viral Micro-Drama Mechanics</span>
+              <span>{translateCopy(englishMessage("OttPlayerPreview.viral.micro.drama.mechanics.f26fa75"))}</span>
             </span>
 
-            <h4 className="text-2xl font-semibold tracking-tight text-ink">
-              Vertical Short-Drama Reels Engine (9:16)
-            </h4>
-            <p className="text-sm text-ink-2 leading-relaxed">
-              Engineered specifically for the high-margin micro-drama boom (ReelShort, DramaBox, ShortMax format). 60- to 90-second episodes designed for addictive binge watching and high-LTV subscription &amp; ad funnels.
-            </p>
+            <h4 className="text-2xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("OttPlayerPreview.vertical.short.drama.reels.engine.9.16.3d265c3"))}</h4>
+            <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(englishMessage("OttPlayerPreview.engineered.specifically.for.the.high.margin.f675071"))}</p>
 
             <ul className="space-y-3 text-xs font-medium text-ink-2">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Fluid 60FPS Gesture Swiping:</strong> Native vertical swipe transitions on iOS &amp; Android built with Flutter.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.fluid.60fps.gesture.swiping.b3fe8a8"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.native.vertical.swipe.transitions.on.ios.and.4fc3028"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>VIP Subscriptions (SVOD):</strong> Offer weekly, monthly, and annual all-access VIP passes via Apple StoreKit, Google Play Billing &amp; Stripe.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.vip.subscriptions.svod.08c0726"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.offer.weekly.monthly.and.annual.all.access.v.d0494d8"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Rewarded Video Ads (AVOD):</strong> Free-tier viewers watch a short 30s rewarded video ad (Google AdMob / Unity Ads) to unlock subsequent episodes.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.rewarded.video.ads.avod.afc773c"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.free.tier.viewers.watch.a.short.30s.rewarded.cc5d45e"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Automated Episode Paywalls:</strong> Configure free teaser episodes (e.g., Ep 1–5 free) and gate the remaining episodes in the Video CMS.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.automated.episode.paywalls.c4e155a"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.configure.free.teaser.episodes.e.g.ep.1.5.fr.0de2e59"))}</span>
               </li>
             </ul>
           </div>
@@ -254,7 +224,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/showcase/ott-cinematic-web.jpg"
-              alt="16:9 Cinematic Video Streaming Web Interface"
+              alt={translateCopy(englishMessage("OttPlayerPreview.16.9.cinematic.video.streaming.web.interface.7ebdc6e"))}
               className="absolute inset-0 w-full h-full object-cover z-0"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/70 z-1 pointer-events-none" />
@@ -270,15 +240,11 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
                   height={20}
                   className="h-5 w-5 rounded object-contain shrink-0"
                 />
-                <span className="font-semibold text-sm sm:text-base tracking-tight text-white drop-shadow-md">
-                  CYBER HORIZON
-                </span>
-                <span className="px-2 py-0.5 rounded bg-accent/20 border border-accent/40 text-accent text-[10px] font-mono font-semibold">
-                  4K HDR
-                </span>
+                <span className="font-semibold text-sm sm:text-base tracking-tight text-white drop-shadow-md">{translateCopy(englishMessage("OttPlayerPreview.cyber.horizon.da67662"))}</span>
+                <span className="px-2 py-0.5 rounded bg-accent/20 border border-accent/40 text-accent text-[10px] font-mono font-semibold">{translateCopy(englishMessage("OttPlayerPreview.4k.hdr.52998f0"))}</span>
               </div>
               <div className="flex items-center gap-3 text-white/80">
-                <span className="text-[11px] font-mono bg-black/60 px-2 py-0.5 rounded border border-white/10">1080p ABR</span>
+                <span className="text-[11px] font-mono bg-black/60 px-2 py-0.5 rounded border border-white/10">{translateCopy(englishMessage("OttPlayerPreview.1080p.abr.299d66b"))}</span>
                 <Volume2 className="h-4 w-4" />
               </div>
             </div>
@@ -288,7 +254,7 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               <div className="h-12 w-12 sm:h-14 sm:w-14 mx-auto rounded-full bg-accent/95 text-paper flex items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow-xl">
                 <Play className="h-6 w-6 fill-current translate-x-0.5" />
               </div>
-              <p className="text-xs font-mono text-white/80 drop-shadow-md">Click to Resume S2:E1 &ldquo;Neo-Terra&rdquo;</p>
+              <p className="text-xs font-mono text-white/80 drop-shadow-md">{translateCopy(englishMessage("OttPlayerPreview.click.to.resume.s2.e1.ldquo.neo.terra.rdquo.346e7ad"))}</p>
             </div>
 
             {/* Bottom Controls Strip */}
@@ -296,8 +262,8 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
               <div className="flex items-center justify-between text-xs text-white/80">
                 <span className="font-mono text-[11px]">28:14 / 52:00</span>
                 <div className="flex items-center gap-3 text-[11px] font-mono">
-                  <span>Audio: English [5.1]</span>
-                  <span>Subtitles: On (EN/ES/DE)</span>
+                  <span>{translateCopy(englishMessage("OttPlayerPreview.audio.english.5.1.320ed6a"))}</span>
+                  <span>{translateCopy(englishMessage("OttPlayerPreview.subtitles.on.en.es.de.617adad"))}</span>
                 </div>
               </div>
               <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
@@ -310,40 +276,32 @@ export function OttPlayerPreview({ format = "both" }: OttPlayerPreviewProps) {
           <div className="space-y-5">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-line bg-paper text-ink font-mono text-xs font-semibold">
               <Film className="h-3.5 w-3.5" />
-              <span>Netflix / Prime Video Format</span>
+              <span>{translateCopy(englishMessage("OttPlayerPreview.netflix.prime.video.format.0ea64f0"))}</span>
             </span>
 
-            <h4 className="text-2xl font-semibold tracking-tight text-ink">
-              Cinematic Widescreen Video Engine (16:9)
-            </h4>
-            <p className="text-sm text-ink-2 leading-relaxed">
-              Designed for high-definition series, movies, documentaries, and live channels. Delivers adaptive multi-bitrate HLS streaming across desktop web, mobile browsers, and connected TV devices.
-            </p>
+            <h4 className="text-2xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("OttPlayerPreview.cinematic.widescreen.video.engine.16.9.8abe984"))}</h4>
+            <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(englishMessage("OttPlayerPreview.designed.for.high.definition.series.movies.d.8e06316"))}</p>
 
             <ul className="space-y-3 text-xs font-medium text-ink-2">
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>HLS.js Adaptive Bitrates:</strong> Dynamic switching between 1080p, 720p, 480p, and 360p based on viewer bandwidth.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.hls.js.adaptive.bitrates.e57d478"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.dynamic.switching.between.1080p.720p.480p.an.e551845"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Multi-Language Subtitles:</strong> WebVTT subtitle track synchronization for global international viewership.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.multi.language.subtitles.4909f52"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.webvtt.subtitle.track.synchronization.for.gl.c5ea9b9"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Recurring SVOD Subscriptions:</strong> Direct Stripe billing for monthly, quarterly, and annual VIP streaming passes.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.recurring.svod.subscriptions.d77f9b3"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.direct.stripe.billing.for.monthly.quarterly.af8f41c"))}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                 <span>
-                  <strong>Cross-Device Resume:</strong> Seamless continue-watching sync between mobile app and web player.
-                </span>
+                  <strong>{translateCopy(englishMessage("OttPlayerPreview.cross.device.resume.2d1e3dd"))}</strong>{translateCopy(" ")}{translateCopy(englishMessage("OttPlayerPreview.seamless.continue.watching.sync.between.mobi.a8cf775"))}</span>
               </li>
             </ul>
           </div>

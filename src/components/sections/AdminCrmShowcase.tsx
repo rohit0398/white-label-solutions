@@ -1,4 +1,6 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
 import { Section } from "@/components/ui/Section";
@@ -24,11 +26,13 @@ const FEATURE_ICONS: Record<string, React.ReactNode> = {
 export function AdminCrmShowcase({
   id = "admin-crm",
   index = "03",
-  title = "Central Operations CRM & Multi-Warehouse Panel",
-  intro = "Manage stock across multiple locations, dispatch orders, generate automatic GST/VAT tax invoices, and track profit margins per SKU from one unified private cloud dashboard.",
+  title = englishMessage("AdminCrmShowcase.central.operations.crm.multi.warehouse.panel.afa4174"),
+  intro = englishMessage("AdminCrmShowcase.manage.stock.across.multiple.locations.dispa.7fe24bf"),
 }: AdminCrmShowcaseProps = {}) {
+  const translateCopy = useMessages();
+
   return (
-    <Section id={id} index={index} title={title} intro={intro} bare>
+    <Section id={id} index={index} title={translateCopy(title)} intro={intro} bare>
       {/* Operations Features Grid */}
       <div className="wrap mb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -39,9 +43,9 @@ export function AdminCrmShowcase({
             >
               <div className="flex items-center gap-2 mb-2">
                 {FEATURE_ICONS[f.id] || <Layers className="h-4 w-4 text-accent" />}
-                <h4 className="text-sm font-semibold text-ink">{f.title}</h4>
+                <h3 className="text-sm font-semibold text-ink">{translateCopy(f.title)}</h3>
               </div>
-              <p className="text-xs text-ink-2 leading-relaxed">{f.description}</p>
+              <p className="text-xs text-ink-2 leading-relaxed">{translateCopy(f.description)}</p>
             </div>
           ))}
         </div>
@@ -57,8 +61,8 @@ export function AdminCrmShowcase({
                 {FEATURE_ICONS[f.id] || <Layers className="h-4 w-4 text-accent" />}
               </div>
               <div>
-                <h4 className="text-xs font-semibold text-ink">{f.title}</h4>
-                <p className="text-xs text-ink-3 leading-relaxed mt-0.5">{f.description}</p>
+                <h3 className="text-xs font-semibold text-ink">{translateCopy(f.title)}</h3>
+                <p className="text-xs text-ink-3 leading-relaxed mt-0.5">{translateCopy(f.description)}</p>
               </div>
             </div>
           ))}
@@ -69,8 +73,8 @@ export function AdminCrmShowcase({
       <div className="wrap-wide group">
         <Screenshot
           src="/showcase/admin-dashboard.png"
-          alt="Central Operations CRM and Admin Panel"
-          caption="Mechatron Lab central operations panel running on the client's own private cloud account."
+          alt={translateCopy(englishMessage("AdminCrmShowcase.central.operations.crm.and.admin.panel.a9b129e"))}
+          caption={translateCopy(englishMessage("AdminCrmShowcase.mechatron.lab.central.operations.panel.runni.8dbec12"))}
           className="transition-transform duration-300 group-hover:scale-[1.008]"
         />
       </div>

@@ -1,10 +1,18 @@
 "use client";
+import { useMessages } from "@/components/site/useMessages";
 
+import Link from "@/components/ui/LocalizedLink";
 import React, { useEffect, useState } from "react";
 import { ShieldCheck, X } from "lucide-react";
+import { useSite } from "@/components/site/SiteProvider";
+import { INTERFACE_COPY } from "@/lib/translations/interface";
 import { updateGoogleConsent } from "@/lib/analytics";
 
 export function CookieConsent() {
+  const translateCopy = useMessages();
+
+  const { language } = useSite();
+  const ui = INTERFACE_COPY[language];
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -39,7 +47,7 @@ export function CookieConsent() {
   return (
     <div
       role="region"
-      aria-label="Cookie consent banner"
+      aria-label={translateCopy(ui.consentTitle)}
       className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-fade-in"
     >
       <div className="rounded-xl border border-line bg-paper/98 backdrop-blur-md p-5 shadow-2xl space-y-3.5">
@@ -48,14 +56,14 @@ export function CookieConsent() {
             <div className="h-7 w-7 rounded-md bg-accent/10 border border-accent/20 flex items-center justify-center text-accent shrink-0">
               <ShieldCheck className="h-4 w-4" />
             </div>
-            <h4 className="text-sm font-semibold tracking-tight text-ink">
-              Privacy &amp; Cookie Consent
-            </h4>
+            <h2 className="text-sm font-semibold tracking-tight text-ink">
+              {translateCopy(ui.consentTitle)}
+            </h2>
           </div>
           <button
             type="button"
             onClick={handleDecline}
-            aria-label="Close and decline optional cookies"
+            aria-label={translateCopy(ui.decline)}
             className="text-ink-3 hover:text-ink transition-colors p-1 -mr-1 cursor-pointer"
           >
             <X className="h-4 w-4" />
@@ -63,8 +71,8 @@ export function CookieConsent() {
         </div>
 
         <p className="text-xs text-ink-2 leading-relaxed">
-          We use measurement tags to understand traffic, measure ad campaign performance, and improve our services in accordance with EEA &amp; global regulations. Learn more in our{" "}
-          <a href="/privacy" className="text-ink underline underline-offset-2 hover:opacity-80">Privacy Policy</a>.
+          {translateCopy(ui.consentBody)}{" "}
+          <Link href="/privacy" lang="en" className="text-ink underline underline-offset-2 hover:opacity-80">{translateCopy(ui.privacy)}</Link>.
         </p>
 
         <div className="pt-1 flex items-center gap-2.5">
@@ -74,7 +82,7 @@ export function CookieConsent() {
             onClick={handleAccept}
             className="flex-1 py-2 px-3 rounded-md bg-ink text-paper text-xs font-semibold hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-xs"
           >
-            Accept all
+            {translateCopy(ui.accept)}
           </button>
           <button
             type="button"
@@ -82,7 +90,7 @@ export function CookieConsent() {
             onClick={handleDecline}
             className="py-2 px-3 rounded-md border border-line bg-wash text-ink-2 hover:text-ink text-xs font-medium active:scale-95 transition-all cursor-pointer"
           >
-            Decline
+            {translateCopy(ui.decline)}
           </button>
         </div>
       </div>

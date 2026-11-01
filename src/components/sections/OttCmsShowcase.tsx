@@ -1,3 +1,6 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 import React from "react";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
@@ -8,47 +11,49 @@ interface OttCmsShowcaseProps {
 }
 
 export function OttCmsShowcase({ index = "02" }: OttCmsShowcaseProps) {
+  const translateCopy = useMessages();
+
   const capabilities = [
     {
       icon: Zap,
-      title: "Automated Cloud Transcoding",
-      desc: "Connect your Cloudflare Stream or AWS MediaConvert account. Master videos encode automatically into adaptive multi-bitrate HLS streams (1080p, 720p, 480p) with zero egress bandwidth markups.",
+      title: englishMessage("ott-streaming.automated.cloud.transcoding.6e545df"),
+      desc: englishMessage("ott-streaming.connect.your.cloudflare.stream.or.aws.mediac.0d67b3b"),
     },
     {
       icon: DollarSign,
-      title: "Dynamic Episode Paywall Rules",
-      desc: "Configure teaser rules per series in 1 click. Set free preview episodes (e.g., Ep 1–5 free) and lock subsequent cliffhangers behind recurring VIP subscription passes or rewarded video ads.",
+      title: englishMessage("OttCmsShowcase.dynamic.episode.paywall.rules.d14008c"),
+      desc: englishMessage("OttCmsShowcase.configure.teaser.rules.per.series.in.1.click.d603a26"),
     },
     {
       icon: ShieldCheck,
-      title: "DRM Token Authorization",
-      desc: "Signed token playback prevents hotlinking, stream ripping, and unauthorized redistribution. Google Widevine and Apple FairPlay DRM protection available.",
+      title: englishMessage("OttCmsShowcase.drm.token.authorization.4fa99b9"),
+      desc: englishMessage("OttCmsShowcase.signed.token.playback.prevents.hotlinking.st.4ce3165"),
     },
     {
       icon: Server,
-      title: "Real-Time Watch Time & MRR Analytics",
-      desc: "Monitor viewer drop-off minute curves per episode, identify top-converting cliffhangers, track VIP subscription conversion velocity, and export financial subscriber reports.",
+      title: englishMessage("OttCmsShowcase.real.time.watch.time.mrr.analytics.81c8a49"),
+      desc: englishMessage("OttCmsShowcase.monitor.viewer.drop.off.minute.curves.per.ep.0d2309d"),
     },
   ];
 
   return (
     <Section
       id="video-cms"
-      index={`${index} · Video CMS & Operations`}
-      title="Video CMS & Cloud Transcoding Operations Console."
-      intro="Your centralized administrative console. Manage your content catalog, configure automated cloud encoding pipelines, set episode monetization rules, and track real-time subscriber revenue without recurring SaaS fees."
+      index={translateCopy.format("OttCmsShowcase..value0.video.cms.operations.42749f3", { value0: index })}
+      title={translateCopy(englishMessage("OttCmsShowcase.video.cms.cloud.transcoding.operations.conso.45348a4"))}
+      intro={translateCopy(englishMessage("OttCmsShowcase.your.centralized.administrative.console.mana.4035016"))}
       wide
     >
       <div className="max-w-3xl mx-auto w-full group">
         <Screenshot
           src="/showcase/ott-video-cms.jpg"
-          alt="Video CMS & Cloud Transcoding Operations Dashboard"
+          alt={translateCopy(englishMessage("OttCmsShowcase.video.cms.cloud.transcoding.operations.dashb.911ee7a"))}
           caption={
             <span className="flex items-center justify-between text-xs font-mono text-ink-3">
-              <span>Figure 1.0 — Centralized Cloud Video CMS &amp; Episode Paywall Management Console</span>
+              <span>{translateCopy(englishMessage("OttCmsShowcase.figure.1.0.centralized.cloud.video.cms.episo.c123252"))}</span>
               <span className="text-accent flex items-center gap-1">
                 <Sparkles className="h-3 w-3" />
-                <span>Self-hosted AWS / Cloudflare Stream</span>
+                <span>{translateCopy(englishMessage("OttCmsShowcase.self.hosted.aws.cloudflare.stream.f59c8be"))}</span>
               </span>
             </span>
           }
@@ -65,9 +70,9 @@ export function OttCmsShowcase({ index = "02" }: OttCmsShowcaseProps) {
                 <div className="h-7 w-7 rounded-md bg-wash border border-line flex items-center justify-center text-accent">
                   <Icon className="h-3.5 w-3.5" />
                 </div>
-                <h3 className="font-semibold text-sm tracking-tight">{c.title}</h3>
+                <h3 className="font-semibold text-sm tracking-tight">{translateCopy(c.title)}</h3>
               </div>
-              <p className="text-xs text-ink-2 leading-relaxed">{c.desc}</p>
+              <p className="text-xs text-ink-2 leading-relaxed">{translateCopy(c.desc)}</p>
             </div>
           );
         })}

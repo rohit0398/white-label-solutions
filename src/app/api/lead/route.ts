@@ -1,3 +1,4 @@
+import { priceText } from "@/lib/pricing-catalog";
 import { NextResponse } from "next/server";
 import dns from "node:dns";
 
@@ -22,10 +23,11 @@ export async function POST(request: Request) {
 
     // Silent reject for bot submissions filling hidden honeypot
     if (honeypot) {
-      return NextResponse.json({ success: true, message: "Received" }, { status: 200 });
+      return NextResponse.json({ success: true, accepted: false, message: "Received" }, { status: 200 });
     }
 
-    if (!name || !email) {
+    if (typeof name !== "string" || !name.trim() || name.length > 200 ||
+        typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) || email.length > 254) {
       return NextResponse.json(
         { success: false, error: "Name and email are required" },
         { status: 400 }
@@ -42,16 +44,16 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     };
 
-    console.log("[LEAD_CAPTURE] New Demo Request received:", leadData);
+    let delivered = false;
 
     const PACKAGE_LABELS: Record<string, string> = {
-      "launch": "🚀 White-Label Launch Package ($4,999)",
-      "source-code-license": "💻 Full Source Code & License ($1,999)",
-      "source-code": "💻 Full Source Code & License ($1,999)",
+      "launch": priceText("🚀 White-Label Launch Package ({price:launch})"),
+      "source-code-license": priceText("💻 Full Source Code & License ({price:source-code-license})"),
+      "source-code": priceText("💻 Full Source Code & License ({price:source-code-license})"),
       "dedicated-support": "⏱️ Developer Time ($20/hr)",
       "developer-time": "⏱️ Developer Time ($20/hr)",
-      "ott-streaming": "🎬 White-Label OTT & Short-Drama Platform ($4,999)",
-      "ecommerce": "🛍️ White-Label E-Commerce Platform ($4,999)",
+      "ott-streaming": priceText("🎬 White-Label OTT & Short-Drama Platform ({price:launch})"),
+      "ecommerce": priceText("🛍️ White-Label E-Commerce Platform ({price:launch})"),
     };
 
     const packageLabel = PACKAGE_LABELS[leadData.package] || leadData.package;
@@ -92,7 +94,7 @@ export async function POST(request: Request) {
 
         const telegramText = lines.join("\n");
 
-        await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+        const telegramResponse = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -103,8 +105,10 @@ export async function POST(request: Request) {
           }),
           signal: AbortSignal.timeout(5000),
         });
-      } catch (tgErr) {
-        console.error("[LEAD_CAPTURE] Error dispatching to Telegram:", tgErr);
+        const telegramResult = await telegramResponse.json();
+        delivered = telegramResponse.ok && telegramResult.ok === true;
+      } catch {
+        console.error("[LEAD_CAPTURE] Telegram delivery failed");
       }
     }
 
@@ -116,20 +120,24 @@ export async function POST(request: Request) {
           text: `🚀 *New White-Label Demo Request!*\n*Name:* ${leadData.name}\n*Email:* ${leadData.email}\n*Phone:* ${leadData.phone}\n*Company:* ${leadData.company}\n*Package:* ${packageLabel}`,
         };
 
-        await fetch(webhookUrl, {
+        const webhookResponse = await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
           signal: AbortSignal.timeout(5000),
         });
-      } catch (err) {
-        console.error("[LEAD_CAPTURE] Error dispatching webhook alert:", err);
+        delivered = webhookResponse.ok || delivered;
+      } catch {
+        console.error("[LEAD_CAPTURE] Webhook delivery failed");
       }
     }
 
-    return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error("[LEAD_CAPTURE] API route error:", error);
+    if (!delivered) {
+      return NextResponse.json({ success: false, accepted: false, error: "Unable to deliver inquiry. Please try again or contact us directly." }, { status: 503 });
+    }
+    return NextResponse.json({ success: true, accepted: true }, { status: 200 });
+  } catch {
+    console.error("[LEAD_CAPTURE] Invalid request or processing failure");
     return NextResponse.json(
       { success: false, error: "Failed to process request" },
       { status: 500 }

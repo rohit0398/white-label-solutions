@@ -1,30 +1,37 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+
+import { priceText } from "@/lib/pricing-catalog";
 import React from "react";
 import { Smartphone, Globe, Clapperboard } from "lucide-react";
 import { CompletePackageCallout } from "@/components/sections/CompletePackageCallout";
 
 export function CompleteShortDramaCallout() {
+  const translateCopy = useMessages();
+
   return (
     <CompletePackageCallout
-      badge="All-in-One Short-Drama Suite"
-      title="Looking for the Complete Short-Drama Solution?"
-      subtitle="Need both the native mobile apps AND the responsive mobile-web streaming portal? Launch the unified 9:16 vertical drama platform on your private cloud with shared subscriber sync and zero recurring platform cuts."
-      price="$4,999"
+      badge={translateCopy(englishMessage("CompleteShortDramaCallout.all.in.one.short.drama.suite.b8cf31a"))}
+      title={translateCopy(englishMessage("CompleteShortDramaCallout.looking.for.the.complete.short.drama.solutio.46c7dc7"))}
+      subtitle={translateCopy(englishMessage("CompleteShortDramaCallout.need.both.the.native.mobile.apps.and.the.res.48084a8"))}
+      price={priceText(englishMessage("CompleteOttCallout..price.launch.6843b00"))}
       priceLabel="one-time investment"
       pillars={[
         {
           icon: Smartphone,
-          title: "Native Flutter Apps (iOS & Android)",
-          desc: "60FPS vertical swipe gestures, In-App Purchase VIP passes, and Google AdMob rewarded video ads.",
+          title: englishMessage("CompleteShortDramaCallout.native.flutter.apps.ios.android.8b02328"),
+          desc: englishMessage("CompleteShortDramaCallout.60fps.vertical.swipe.gestures.in.app.purchas.31838e1"),
         },
         {
           icon: Globe,
-          title: "Next.js 16 Web Streaming Player",
-          desc: "Mobile-first vertical web portal with sub-second HLS playback, social episode sharing, and Stripe VIP checkout.",
+          title: englishMessage("CompleteShortDramaCallout.next.js.16.web.streaming.player.c593441"),
+          desc: englishMessage("CompleteShortDramaCallout.mobile.first.vertical.web.portal.with.sub.se.c082104"),
         },
         {
           icon: Clapperboard,
-          title: "Video CMS & Encoding Console",
-          desc: "Automated Cloudflare Stream transcoding, dynamic teaser paywall rules, and viewer drop-off analytics.",
+          title: englishMessage("CompleteShortDramaCallout.video.cms.encoding.console.1588be0"),
+          desc: englishMessage("CompleteShortDramaCallout.automated.cloudflare.stream.transcoding.dyna.d20cd34"),
         },
       ]}
       guarantees={[
@@ -32,7 +39,7 @@ export function CompleteShortDramaCallout() {
         "100% Subscriber & Video Custody",
         "0% Platform Commission",
       ]}
-      ctaText="Explore Complete Drama Package ($4,999)"
+      ctaText={priceText(englishMessage("CompleteShortDramaCallout.explore.complete.drama.package.price.launch.81bb298"))}
       ctaHref="/solutions/short-drama"
     />
   );

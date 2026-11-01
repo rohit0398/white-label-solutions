@@ -1,4 +1,5 @@
 "use client";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -93,6 +94,8 @@ export function HeadingBadge({
   className,
   showIcon = true,
 }: HeadingBadgeProps) {
+  const translateCopy = useMessages();
+
   // Infer category from children if string and category not explicitly passed
   const activeCategory: BadgeCategory =
     category ||
@@ -103,7 +106,7 @@ export function HeadingBadge({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono select-none cursor-default transition-all duration-300 hover:scale-[1.015] hover:-translate-y-0.5 active:scale-[0.99] backdrop-blur-md",
+        "inline-flex max-w-full items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-xs font-mono select-none cursor-default transition-all duration-300 hover:scale-[1.015] hover:-translate-y-0.5 active:scale-[0.99] backdrop-blur-md",
         style.container,
         className
       )}
@@ -127,7 +130,7 @@ export function HeadingBadge({
       </span>
 
       {/* Existing badge text */}
-      <span className="truncate">{children}</span>
+      <span className="min-w-0 break-words">{translateCopy(children)}</span>
     </div>
   );
 }

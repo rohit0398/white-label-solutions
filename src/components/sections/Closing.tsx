@@ -1,5 +1,7 @@
 "use client";
+import { useMessages } from "@/components/site/useMessages";
 
+import { trackWhatsAppClick } from "@/lib/analytics";
 import React from "react";
 import { BRAND } from "@/lib/constants";
 import { DemoButton } from "@/components/site/DemoButton";
@@ -14,8 +16,10 @@ export interface ClosingProps {
 }
 
 export function Closing({ headline, description, ctaDemo, tierId }: ClosingProps = {}) {
+  const translateCopy = useMessages();
+
   const { language } = useSite();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
 
   const activeHeadline = headline || t.closing.headline;
   const activeDesc = description || t.closing.description;
@@ -25,20 +29,20 @@ export function Closing({ headline, description, ctaDemo, tierId }: ClosingProps
     <section className="border-t border-line py-20 sm:py-28 bg-wash">
       <div className="wrap text-center space-y-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">
-          {activeHeadline}
+          {translateCopy(activeHeadline)}
         </h2>
         <p className="text-base text-ink-2 max-w-lg mx-auto leading-relaxed">
-          {activeDesc}
+          {translateCopy(activeDesc)}
         </p>
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <DemoButton size="md" tierId={tierId}>{activeCta}</DemoButton>
+          <DemoButton size="md" tierId={tierId}>{translateCopy(activeCta)}</DemoButton>
           <a
-            href={BRAND.contact.whatsappUrl}
+            href={BRAND.contact.whatsappUrl} onClick={() => trackWhatsAppClick("Closing")}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-ink-2 hover:text-ink underline underline-offset-4 decoration-line hover:decoration-ink"
           >
-            {t.closing.whatsappText} ({BRAND.contact.whatsappDisplay})
+            {translateCopy(t.closing.whatsappText)} ({translateCopy(BRAND.contact.whatsappDisplay)})
           </a>
         </div>
       </div>

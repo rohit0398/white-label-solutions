@@ -1,3 +1,5 @@
+import { SITE_URL } from "@/lib/site-config";
+
 export interface BreadcrumbItem {
   name: string;
   item: string;
@@ -38,8 +40,6 @@ export interface SoftwareSchemaOptions {
   url: string;
   operatingSystem?: string;
   applicationCategory?: string;
-  ratingValue?: string;
-  reviewCount?: string;
   siteUrl?: string;
 }
 
@@ -50,9 +50,7 @@ export function generateSoftwareSchema({
   url,
   operatingSystem = "iOS, Android, Web, Cloud",
   applicationCategory = "BusinessApplication",
-  ratingValue = "4.9",
-  reviewCount = "48",
-  siteUrl = "https://solutions.mechatronlab.com",
+  siteUrl = SITE_URL,
 }: SoftwareSchemaOptions) {
   const fullUrl = url.startsWith("http") ? url : `${siteUrl}${url}`;
   return {
@@ -68,11 +66,6 @@ export function generateSoftwareSchema({
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: fullUrl,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue,
-      reviewCount,
     },
     provider: {
       "@type": ["Organization", "ProfessionalService"],
