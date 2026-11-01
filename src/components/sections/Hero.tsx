@@ -1,7 +1,9 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { TRANSLATIONS } from "@/lib/translations";
 import { useSite } from "@/components/site/SiteProvider";
 import { BRAND } from "@/lib/constants";
@@ -38,8 +40,10 @@ export function Hero({
   showScreenshot,
   category,
 }: HeroProps = {}) {
+  const translateCopy = useMessages();
+
   const { language, openDemo } = useSite();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
 
   const badgeText = badge ?? t.hero.badge;
   const headlineText = headline ?? t.hero.headline;
@@ -47,7 +51,7 @@ export function Hero({
   const shouldShowScreenshot = showScreenshot !== undefined ? showScreenshot : mode !== "app";
 
   return (
-    <section id="hero" className="pt-16 sm:pt-28 pb-20">
+    <section id="hero" className="pt-16 sm:pt-14 pb-20">
       <div className="wrap">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
@@ -56,10 +60,10 @@ export function Hero({
                 {idx > 0 && <span>/</span>}
                 {b.href ? (
                   <Link href={b.href} className="hover:text-ink transition-colors">
-                    {b.label}
+                    {translateCopy(b.label)}
                   </Link>
                 ) : (
-                  <span className="text-ink">{b.label}</span>
+                  <span className="text-ink">{translateCopy(b.label)}</span>
                 )}
               </React.Fragment>
             ))}
@@ -80,7 +84,7 @@ export function Hero({
         >
           {headlineText}
         </AnimatedHeadline>
-        <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{subtitleText}</p>
+        <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{translateCopy(subtitleText)}</p>
 
         {/* Living Platform Anchors with Gentle Ambient Floating & Tactile Hover */}
         <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-ink-2">
@@ -93,7 +97,7 @@ export function Hero({
                   idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
                 } px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs`}
               >
-                {a.label}
+                {translateCopy(a.label)}
               </a>
             ))
           ) : (
@@ -102,19 +106,19 @@ export function Hero({
                 href="#what-you-get"
                 className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
               >
-                {t.hero.anchors.storefront}
+                {translateCopy(t.hero.anchors.storefront)}
               </a>
               <a
                 href="#what-you-get"
                 className="animate-float-reverse px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
               >
-                {t.hero.anchors.apps}
+                {translateCopy(t.hero.anchors.apps)}
               </a>
               <a
                 href="#what-you-get"
                 className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
               >
-                {t.hero.anchors.admin}
+                {translateCopy(t.hero.anchors.admin)}
               </a>
             </>
           )}
@@ -128,7 +132,7 @@ export function Hero({
             onClick={() => openDemo()}
             className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
           >
-            <span>{t.hero.ctaDemo}</span>
+            <span>{translateCopy(t.hero.ctaDemo)}</span>
             <span className="text-paper/70 font-mono text-xs">→</span>
           </Button>
 
@@ -146,7 +150,7 @@ export function Hero({
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
             <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            <span>Chat on WhatsApp</span>
+            <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
           </a>
 
@@ -156,20 +160,20 @@ export function Hero({
             href="#work"
             className="group inline-flex items-center gap-1.5 text-sm font-semibold tracking-tight text-ink underline underline-offset-4 decoration-line hover:decoration-ink active:opacity-75 transition-colors sm:ml-2"
           >
-            <span>{t.hero.ctaWork}</span>
+            <span>{translateCopy(t.hero.ctaWork)}</span>
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
           </a>
         </div>
 
-        <p className="mt-10 text-sm text-ink-3">{t.hero.facts}</p>
+        <p className="mt-10 text-sm text-ink-3">{translateCopy(t.hero.facts)}</p>
       </div>
 
       {shouldShowScreenshot && (
         <div className="wrap-wide mt-16 sm:mt-20 group">
           <Screenshot
             src="/showcase/mechatron-store.png"
-            alt="Mechatron Lab online store built on the platform"
-            caption="mechatronlab.com, running on the client's own Google Cloud account."
+            alt={translateCopy(englishMessage("Hero.mechatron.lab.online.store.built.on.the.plat.0e5abc6"))}
+            caption={translateCopy(englishMessage("Hero.mechatronlab.com.running.on.the.client.s.own.a8abced"))}
             priority
             className="transition-transform duration-300 group-hover:scale-[1.008]"
           />

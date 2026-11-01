@@ -1,52 +1,57 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+import { priceText } from "@/lib/pricing-catalog";
+
 
 import React from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { useSite } from "@/components/site/SiteProvider";
+import { trackWhatsAppClick } from "@/lib/analytics";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { ShoppingBag, Smartphone, Tv, MessageSquare, ArrowRight } from "lucide-react";
 
-export function HomeHero() {
+export function HomeHero({ copy }: { copy?: { title: string; intro: string } } = {}) {
+  const translateCopy = useMessages();
+
   const { openDemo } = useSite();
 
   const platformCards = [
     {
-      title: "E-Commerce",
-      badge: "Next.js + Flutter + CRM",
-      desc: "Sub-second web store, native shopping apps, and multi-warehouse inventory CRM.",
+      title: englishMessage("HomeHero.e.commerce.d395b71"),
+      badge: englishMessage("HomeHero.next.js.flutter.crm.4472767"),
+      desc: englishMessage("HomeHero.sub.second.web.store.native.shopping.apps.an.a1cfee5"),
       href: "/solutions/ecommerce",
-      price: "$4,999",
+      price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
       icon: ShoppingBag,
     },
     {
-      title: "9:16 Short Drama",
-      badge: "ReelShort & DramaBox Style",
-      desc: "60FPS vertical swipe apps, mobile-first web player, and cliffhanger paywalls.",
+      title: englishMessage("HomeHero.9.16.short.drama.ee60b4a"),
+      badge: englishMessage("HomeHero.reelshort.dramabox.style.2d592f0"),
+      desc: englishMessage("HomeHero.60fps.vertical.swipe.apps.mobile.first.web.p.2c1d4cc"),
       href: "/solutions/short-drama",
-      price: "$4,999",
+      price: priceText(englishMessage("HomeHero..price.short.drama.base.dccb5b9")),
       icon: Smartphone,
     },
     {
-      title: "16:9 Cinematic OTT",
-      badge: "Netflix & Prime Style",
-      desc: "Widescreen 4K HDR web portal, TV-ready mobile apps, and central Video CMS.",
+      title: englishMessage("HomeHero.16.9.cinematic.ott.ed0dd39"),
+      badge: englishMessage("HomeHero.netflix.prime.style.a5a9c4d"),
+      desc: englishMessage("HomeHero.widescreen.4k.hdr.web.portal.tv.ready.mobile.977006c"),
       href: "/solutions/ott-streaming",
-      price: "$4,999",
+      price: priceText(englishMessage("HomeHero..price.cinematic.base.f47cdac")),
       icon: Tv,
     },
   ];
 
   return (
-    <section id="hero" className="pt-16 sm:pt-28 pb-16 sm:pb-20">
+    <section id="hero" className="pt-16 sm:pt-14 pb-16 sm:pb-20">
       <div className="wrap space-y-6">
         {/* Subtle Status Beacon */}
         <div>
-          <HeadingBadge category="default">
-            Private Cloud Deployment · 2–4 Weeks · 0% Revenue Cut
-          </HeadingBadge>
+          <HeadingBadge category="default">{""}{translateCopy(englishMessage("HomeHero.private.cloud.deployment.2.4.weeks.0.revenue.52d57e9"))}{""}</HeadingBadge>
         </div>
 
         {/* Concise Direct Headline */}
@@ -55,12 +60,12 @@ export function HomeHero() {
           variant="default"
           className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink"
         >
-          Production-Ready Platforms. Deployed Directly to Your Cloud.
+          {copy?.title ?? englishMessage("HomeHero.production.ready.platforms.deployed.directly.1aaa551")}
         </AnimatedHeadline>
 
         {/* Minimalist Subtitle */}
         <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
-          High-performance Next.js web applications, native Flutter iOS &amp; Android apps, and backoffice management consoles for E-Commerce, 9:16 Short Drama, and 16:9 Cinematic Video. Pay once. You keep 100% of your revenue.
+          {translateCopy(copy?.intro ?? englishMessage("HomeHero.high.performance.next.js.web.applications.na.fa119f6"))}
         </p>
 
         {/* Dual Action Buttons */}
@@ -70,12 +75,13 @@ export function HomeHero() {
             onClick={() => openDemo()}
             className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
           >
-            <span>Book a platform walkthrough</span>
+            <span>{translateCopy(englishMessage("HomeHero.book.a.platform.walkthrough.b209190"))}</span>
             <span className="text-paper/70 font-mono text-xs">→</span>
           </Button>
 
           <a
             href={BRAND.contact.whatsappUrl}
+            onClick={() => trackWhatsAppClick("HomeHero")}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
@@ -85,14 +91,12 @@ export function HomeHero() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
             <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            <span>Chat on WhatsApp</span>
+            <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
           </a>
         </div>
 
-        <p className="pt-2 text-xs font-mono text-ink-3">
-          Deployed to your AWS / GCP / Cloudflare account · Full source code option · Keep 100% of sales
-        </p>
+        <p className="pt-2 text-xs font-mono text-ink-3">{translateCopy(englishMessage("HomeHero.deployed.to.your.aws.gcp.cloudflare.account.6e5a617"))}</p>
 
         {/* 3 Quick-Launch Platform Cards */}
         <div className="pt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -109,22 +113,22 @@ export function HomeHero() {
                     <Icon className="h-4 w-4" />
                   </div>
                   <span className="text-xs font-mono font-semibold text-ink group-hover:text-accent transition-colors">
-                    {card.price}
+                    {translateCopy(card.price)}
                   </span>
                 </div>
 
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-semibold text-base text-ink group-hover:text-accent transition-colors">
-                      {card.title}
-                    </h3>
+                    <h2 className="font-semibold text-base text-ink group-hover:text-accent transition-colors">
+                      {translateCopy(card.title)}
+                    </h2>
                   </div>
-                  <p className="text-[11px] font-mono text-ink-3 mt-0.5">{card.badge}</p>
-                  <p className="text-xs text-ink-2 leading-relaxed mt-2">{card.desc}</p>
+                  <p className="text-[11px] font-mono text-ink-3 mt-0.5">{translateCopy(card.badge)}</p>
+                  <p className="text-xs text-ink-2 leading-relaxed mt-2">{translateCopy(card.desc)}</p>
                 </div>
 
                 <div className="pt-2 flex items-center gap-1.5 text-xs font-mono font-semibold text-accent group-hover:underline">
-                  <span>Explore Architecture</span>
+                  <span>{translateCopy(englishMessage("HomeHero.explore.architecture.5cb3740"))}</span>
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                 </div>
               </Link>

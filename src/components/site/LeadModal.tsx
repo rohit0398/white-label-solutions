@@ -1,12 +1,18 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+import { priceText } from "@/lib/pricing-catalog";
+
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { usePathname } from "next/navigation";
+import { submitLead } from "@/lib/submit-lead";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { useSite } from "@/components/site/SiteProvider";
+import { INTERFACE_COPY } from "@/lib/translations/interface";
 import { TRANSLATIONS } from "@/lib/translations";
 import { MessageSquare, ChevronDown, SlidersHorizontal } from "lucide-react";
 import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
@@ -17,12 +23,12 @@ interface LeadModalProps {
 }
 
 const PLATFORM_OPTIONS = [
-  { id: "ecommerce", label: "🛍️ White-Label E-Commerce Platform ($4,999)" },
-  { id: "short-drama", label: "🎬 9:16 Short-Drama Vertical Video Platform ($4,999)" },
-  { id: "ott-streaming", label: "📺 16:9 Cinematic OTT & Live TV Platform ($4,999)" },
-  { id: "source-code", label: "💻 Full Unencrypted Git Source Code License ($1,999)" },
-  { id: "developer-time", label: "⏱️ Dedicated Engineering Support ($20/hr)" },
-  { id: "launch", label: "🚀 Full Custom White-Label Cloud Launch" },
+  { id: "ecommerce", label: priceText(englishMessage("LeadModal..white.label.e.commerce.platform.price.launc.661f078")) },
+  { id: "short-drama", label: priceText(englishMessage("LeadModal..9.16.short.drama.vertical.video.platform.pr.ead9b69")) },
+  { id: "ott-streaming", label: priceText(englishMessage("LeadModal..16.9.cinematic.ott.live.tv.platform.price.l.dc97011")) },
+  { id: "source-code", label: priceText(englishMessage("LeadModal..full.unencrypted.git.source.code.license.pr.7366f5d")) },
+  { id: "developer-time", label: englishMessage("LeadModal..dedicated.engineering.support.20.hr.c9f5793") },
+  { id: "launch", label: englishMessage("LeadModal..full.custom.white.label.cloud.launch.2bf35ab") },
 ];
 
 function resolveInitialPackage(tierId?: string, pathname?: string): string {
@@ -47,14 +53,19 @@ const field =
 const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
 export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps) {
+  const translateCopy = useMessages();
+
   const { language } = useSite();
   const pathname = usePathname();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
+  const ui = INTERFACE_COPY[language];
   const [selectedPackage, setSelectedPackage] = useState(() =>
     resolveInitialPackage(selectedTierId, pathname)
   );
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const submittingRef = React.useRef(false);
   const [showDetails, setShowDetails] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -68,6 +79,9 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    setError(null);
     setLoading(true);
     try {
       const fullPhone = form.phone.trim() ? `${form.countryCode} ${form.phone.trim()}` : "";
@@ -81,22 +95,14 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
         honeypot: form.honeypot,
       };
 
-      await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      await submitLead(payload);
 
-      trackLeadSubmission(
-        selectedPackage,
-        selectedPackage === "source-code" || selectedPackage === "source-code-license" ? 1999 : 4999
-      );
-      setSubmitted(true);
-    } catch {
-      // Graceful fallback: acknowledge lead so user is never blocked
       trackLeadSubmission(selectedPackage);
       setSubmitted(true);
+    } catch {
+      setError(ui.error);
     } finally {
+      submittingRef.current = false;
       setLoading(false);
     }
   };
@@ -131,7 +137,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close modal"
+          aria-label={translateCopy(t.leadModal.closeBtn)}
           className="absolute right-4 top-4 h-8 w-8 inline-flex items-center justify-center rounded-md text-ink-3 hover:text-ink hover:bg-wash transition-colors cursor-pointer"
         >
           ✕
@@ -140,17 +146,18 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
         {!submitted ? (
           <>
             <h2 id="lead-modal-title" className="text-2xl font-semibold tracking-tight text-ink">
-              {t.leadModal.title}
+              {translateCopy(t.leadModal.title)}
             </h2>
             <p className="mt-2 text-ink-2 text-sm sm:text-[15px] leading-relaxed">
-              {t.leadModal.subtitle}
+              {translateCopy(t.leadModal.subtitle)}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+              {error && <p role="alert" className="text-sm text-ink">{translateCopy(error)}</p>}
               {/* Architecture / Platform of Interest (Dynamic & Editable) */}
               <div>
                 <label htmlFor="lead-package" className={label}>
-                  Platform of Interest
+                  {translateCopy(ui.platform)}
                 </label>
                 <div className="relative">
                   <select
@@ -161,7 +168,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                   >
                     {PLATFORM_OPTIONS.map((opt) => (
                       <option key={opt.id} value={opt.id}>
-                        {opt.label}
+                        {translateCopy(opt.label)}
                       </option>
                     ))}
                   </select>
@@ -183,23 +190,23 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               {/* Row 1: Name and Email side-by-side on desktop */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="lead-name" className={label}>{t.leadModal.nameLabel}</label>
+                  <label htmlFor="lead-name" className={label}>{translateCopy(t.leadModal.nameLabel)}</label>
                   <input
                     id="lead-name"
                     required
-                    placeholder={t.leadModal.namePlaceholder}
+                    placeholder={translateCopy(t.leadModal.namePlaceholder)}
                     value={form.name}
                     onChange={set("name")}
                     className={field}
                   />
                 </div>
                 <div>
-                  <label htmlFor="lead-email" className={label}>{t.leadModal.emailLabel}</label>
+                  <label htmlFor="lead-email" className={label}>{translateCopy(t.leadModal.emailLabel)}</label>
                   <input
                     id="lead-email"
                     type="email"
                     required
-                    placeholder={t.leadModal.emailPlaceholder}
+                    placeholder={translateCopy(t.leadModal.emailPlaceholder)}
                     value={form.email}
                     onChange={set("email")}
                     className={field}
@@ -210,27 +217,27 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               {/* Row 2: Phone or WhatsApp with full-width unified Country Code input group */}
               <div>
                 <label htmlFor="lead-phone" className={label}>
-                  {t.leadModal.phoneLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
+                  {translateCopy(t.leadModal.phoneLabel)} <span className="text-ink-3 text-xs font-normal">{translateCopy(t.leadModal.optional)}</span>
                 </label>
                 <div className="flex w-full rounded-md border border-line bg-paper focus-within:border-ink transition-all">
                   <select
                     id="lead-country-code"
                     value={form.countryCode}
                     onChange={set("countryCode")}
-                    aria-label="Country dial code"
+                    aria-label={translateCopy(ui.country)}
                     className="w-40 sm:w-48 h-11 shrink-0 rounded-l-md border-r border-line bg-wash/60 hover:bg-wash px-2.5 sm:px-3 text-xs sm:text-[13px] text-ink focus:outline-none cursor-pointer font-medium transition-colors"
                   >
-                    <optgroup label="Popular">
+                    <optgroup label={ui.popular}>
                       {POPULAR_COUNTRIES.map((c) => (
                         <option key={`pop-${c.iso}-${c.code}`} value={c.code}>
-                          {c.name} ({c.code})
+                          {translateCopy(c.name)} ({translateCopy(c.code)})
                         </option>
                       ))}
                     </optgroup>
-                    <optgroup label="All Countries (A–Z)">
+                    <optgroup label={ui.allCountries}>
                       {ALL_COUNTRIES.map((c) => (
-                        <option key={`all-${c.iso}-${c.name}`} value={c.code}>
-                          {c.name} ({c.code})
+                        <option key={`all-${c.iso}-${new Intl.DisplayNames([language], { type: "region" }).of(c.iso) || c.iso}`} value={c.code}>
+                          {translateCopy(c.name)} ({translateCopy(c.code)})
                         </option>
                       ))}
                     </optgroup>
@@ -238,7 +245,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                   <input
                     id="lead-phone"
                     type="tel"
-                    placeholder={t.leadModal.phonePlaceholder}
+                    placeholder={translateCopy(t.leadModal.phonePlaceholder)}
                     value={form.phone}
                     onChange={set("phone")}
                     className="flex-1 min-w-0 h-11 bg-transparent px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none"
@@ -255,7 +262,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                 >
                   <SlidersHorizontal className="h-3.5 w-3.5 text-accent transition-transform group-hover:scale-110" />
                   <span className="font-medium">
-                    {showDetails ? "Hide company & project details" : "+ Add company & project details (Optional)"}
+                    {translateCopy(showDetails ? ui.hideDetails : ui.addDetails)}
                   </span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 text-ink-3 transition-transform duration-200 ${
@@ -268,11 +275,11 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                   <div className="space-y-3 pt-3 border-t border-line/60 mt-2 animate-fade-in">
                     <div>
                       <label htmlFor="lead-company" className={label}>
-                        {t.leadModal.companyLabel} <span className="text-ink-3 text-xs font-normal">{t.leadModal.optional}</span>
+                        {translateCopy(t.leadModal.companyLabel)} <span className="text-ink-3 text-xs font-normal">{translateCopy(t.leadModal.optional)}</span>
                       </label>
                       <input
                         id="lead-company"
-                        placeholder={t.leadModal.companyPlaceholder}
+                        placeholder={translateCopy(t.leadModal.companyPlaceholder)}
                         value={form.company}
                         onChange={set("company")}
                         className={field}
@@ -280,12 +287,12 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                     </div>
                     <div>
                       <label htmlFor="lead-message" className={label}>
-                        Project Notes / Specific Questions <span className="text-ink-3 text-xs font-normal">(Optional)</span>
+                        {translateCopy(ui.notes)} <span className="text-ink-3 text-xs font-normal">{translateCopy(t.leadModal.optional)}</span>
                       </label>
                       <textarea
                         id="lead-message"
                         rows={2}
-                        placeholder="Target launch date, custom payment gateway, or tech stack requirements..."
+                        placeholder={translateCopy(ui.notesPlaceholder)}
                         value={form.message}
                         onChange={set("message")}
                         className="w-full rounded-md border border-line bg-paper px-3 py-2 text-[14px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors resize-none"
@@ -296,38 +303,35 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               </div>
 
               <Button id="lead-submit" type="submit" disabled={loading} className="w-full h-11 mt-2 text-[15px] font-medium">
-                {loading ? t.leadModal.submitting : t.leadModal.submitBtn}
+                {translateCopy(loading ? t.leadModal.submitting : t.leadModal.submitBtn)}
               </Button>
 
               <p className="mt-2.5 text-[11px] text-ink-3 text-center leading-normal">
-                By submitting, you agree to our{" "}
-                <Link href="/privacy" target="_blank" className="underline hover:text-ink">Privacy Policy</Link>{" "}
-                and{" "}
-                <Link href="/terms" target="_blank" className="underline hover:text-ink">Terms</Link>.
+                {translateCopy(ui.formPrivacy)}{" "}
+                <Link href="/privacy" target="_blank" lang="en" className="underline hover:text-ink">{translateCopy(ui.privacy)}</Link>{translateCopy(" · ")}
+                <Link href="/terms" target="_blank" lang="en" className="underline hover:text-ink">{translateCopy(ui.terms)}</Link>.
               </p>
             </form>
 
             <p className="mt-6 text-sm text-ink-3">
-              {t.leadModal.whatsappText}{" "}
+              {translateCopy(t.leadModal.whatsappText)}{" "}
               <a
                 href={BRAND.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick("LeadModal-Footer")}
                 className="text-ink underline underline-offset-4 decoration-line hover:decoration-ink"
-              >
-                WhatsApp
-              </a>{" "}
-              ({BRAND.contact.whatsappDisplay}).
+              >{translateCopy(englishMessage("LeadModal.whatsapp.b336fc5"))}</a>{" "}
+              ({translateCopy(BRAND.contact.whatsappDisplay)}).
             </p>
           </>
         ) : (
           <div className="py-6 space-y-4">
             <h2 id="lead-modal-title" className="text-2xl font-semibold tracking-tight">
-              {t.leadModal.successTitle}, {form.name.split(" ")[0] || ""}.
+              {translateCopy(t.leadModal.successTitle)}, {form.name.split(" ")[0] || ""}.
             </h2>
             <p className="text-ink-2 leading-relaxed">
-              {t.leadModal.successDesc}
+              {translateCopy(t.leadModal.successDesc)}
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <a
@@ -338,11 +342,11 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-accent/40 bg-accent text-paper text-sm font-medium hover:bg-accent/90 transition-colors shadow-xs"
               >
                 <MessageSquare className="h-4 w-4" />
-                <span>Chat on WhatsApp now</span>
+                <span>{translateCopy(ui.chat)}</span>
                 <span className="text-xs">↗</span>
               </a>
               <Button variant="secondary" onClick={onClose}>
-                {t.leadModal.closeBtn}
+                {translateCopy(t.leadModal.closeBtn)}
               </Button>
             </div>
           </div>

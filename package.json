@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test tests/seo.test.mjs",
+    "test:seo": "node tests/seo.integration.mjs",
+    "images:dimensions": "node scripts/generate-image-dimensions.mjs",
+    "i18n:check": "node scripts/check-translations.mjs",
+    "prebuild": "npm run i18n:check"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

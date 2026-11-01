@@ -1,0 +1,230 @@
+import { SITE_URL } from "@/lib/site-config";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { DemoButton } from "@/components/site/DemoButton";
+import { buttonClass } from "@/components/ui/Button";
+import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
+import { HeadingBadge } from "@/components/ui/HeadingBadge";
+
+export const metadata: Metadata = {
+  title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+  description:
+    "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
+  keywords: [
+    "shopify alternative no monthly fees",
+    "shopify alternative self hosted",
+    "shopify alternative with mobile app",
+    "white label ecommerce platform",
+    "ecommerce website one time cost",
+    "self hosted online store",
+  ],
+  alternates: {
+    canonical: "/compare/shopify-alternative",
+  },
+  openGraph: {
+    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    description:
+      "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
+    url: "/compare/shopify-alternative",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    description:
+      "Tired of monthly Shopify fees? Launch an online store and mobile apps with 0% commission.",
+    images: ["/og-image.png"],
+  },
+};
+
+export default function ShopifyAlternativePage() {
+  const siteUrl = SITE_URL;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Shopify Alternative",
+        item: `${siteUrl}/compare/shopify-alternative`,
+      },
+    ],
+  };
+
+  const comparisonRows = [
+    {
+      feature: "Monthly software fees",
+      mechatron: "$0 / month (private cloud hosting only)",
+      shopify: "Plan and billing term determine the subscription; see current pricing",
+    },
+    {
+      feature: "Sales commission / GMV cut",
+      mechatron: "0% (keep 100% of your revenue)",
+      shopify: "Third-party transaction fees depend on plan, region and payment provider",
+    },
+    {
+      feature: "Native Android & iPhone apps",
+      mechatron: "Included in launch package",
+      shopify: "Customer-facing native apps may require a separate service or integration",
+    },
+    {
+      feature: "Source code ownership",
+      mechatron: "Full unrestricted Git repos option ($1,999)",
+      shopify: "0% (Proprietary platform; lock-in)",
+    },
+    {
+      feature: "Customer data & servers",
+      mechatron: "100% private on your AWS, GCP, or Azure account",
+      shopify: "Hosted on Shopify shared multi-tenant servers",
+    },
+    {
+      feature: "Multi-warehouse management",
+      mechatron: "Built-in with automated routing by postal code",
+      shopify: "Inventory locations are supported; advanced routing needs vary",
+    },
+    {
+      feature: "Order profit & margin tracking",
+      mechatron: "Built-in: matches supplier costs against each order",
+      shopify: "Reporting and accounting requirements depend on plan and integrations",
+    },
+    {
+      feature: "Custom logic & gateways",
+      mechatron: "Direct source code modification",
+      shopify: "Restricted by Shopify Liquid & Checkout limits",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-paper text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
+      <Navbar />
+
+      <main className="flex-1 py-16 sm:pt-12 sm:pb-24 space-y-20">
+        {/* Intro */}
+        <div className="wrap">
+          <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
+            <Link href="/" className="hover:text-ink">Home</Link>
+            <span>/</span>
+            <span className="text-ink">Shopify Alternative</span>
+          </nav>
+
+          <div className="mb-3">
+            <HeadingBadge category="ecommerce">
+              Comparison Guide · Self-Hosted Commerce
+            </HeadingBadge>
+          </div>
+          <AnimatedHeadline
+            as="h1"
+            variant="ecommerce"
+            className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
+          >
+            The Self-Hosted Shopify Alternative with Zero Monthly Software Fees.
+          </AnimatedHeadline>
+
+          <p className="mt-6 text-lg text-ink-2 leading-relaxed">
+            Compare subscription fees, payment costs, integrations, and source code access for your own business.
+            Launch a customized online store, native mobile apps, and an all-in-one Admin & CRM
+            deployed directly on your private cloud account.
+          </p>
+        </div>
+
+        {/* 2 Models Contrast */}
+        <div className="wrap">
+          <div className="grid sm:grid-cols-2 gap-8 border-y border-line py-10">
+            <div className="space-y-3">
+              <span className="font-mono text-xs text-ink-3 uppercase">Traditional SaaS</span>
+              <h2 className="text-xl font-semibold tracking-tight">The recurring SaaS model</h2>
+              <p className="text-sm text-ink-2 leading-relaxed">
+                Your total SaaS cost depends on the plan, billing term, country, payment provider, and optional apps you select. Compare those costs against private-cloud deployment, maintenance, and licensing rather than assuming one fee applies to every merchant.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <span className="font-mono text-xs text-accent uppercase font-medium">Your private cloud</span>
+              <h2 className="text-xl font-semibold tracking-tight">The white-label model</h2>
+              <p className="text-sm text-ink-2 leading-relaxed">
+                A fixed setup of $4,999 deploys your store, native mobile apps, and admin directly onto your AWS, GCP, or Azure account. Cloud hosting is billed separately and varies with traffic, storage, backups, and integrations. We charge no platform revenue share; payment-provider fees still apply.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparison Table */}
+        <div className="wrap">
+          <h2 className="text-2xl font-semibold tracking-tight mb-6">Detailed comparison</h2>
+          <p className="text-sm text-ink-2 mb-6">Reviewed 1 November 2026. Consult <a className="underline" href="https://www.shopify.com/pricing">Shopify’s current pricing</a> and <a className="underline" href="https://help.shopify.com/en/manual/your-account/manage-billing/billing-charges">billing documentation</a> for your country, payment setup, and billing term. This is a scope comparison, not a personalized cost quotation.</p>
+          <div className="overflow-x-auto border-t border-line">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-line text-xs font-mono text-ink-3">
+                  <th className="py-3 pr-4 font-normal">Capability</th>
+                  <th className="py-3 px-4 font-semibold text-ink">Mechatron White-Label</th>
+                  <th className="py-3 pl-4 font-normal">Shopify / SaaS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line text-xs sm:text-sm">
+                {comparisonRows.map((row, idx) => (
+                  <tr key={idx}>
+                    <td className="py-3.5 pr-4 font-medium text-ink">{row.feature}</td>
+                    <td className="py-3.5 px-4 font-medium text-accent">{row.mechatron}</td>
+                    <td className="py-3.5 pl-4 text-ink-3">{row.shopify}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Live Proof Callout */}
+        <div className="wrap p-8 rounded-lg border border-line bg-wash space-y-4">
+          <h3 className="text-lg font-semibold tracking-tight">Active stores running on this model</h3>
+          <p className="text-sm text-ink-2 leading-relaxed">
+            Mechatron Lab powers over 1,000 SKUs with an Android app and multi-warehouse routing. eStoreAlley operates an international marketplace directory with Stripe checkout and Google Play app.
+          </p>
+          <div className="flex flex-wrap gap-4 pt-2">
+            <Link href="/case-studies/mechatron-lab" className={buttonClass("link", "sm")}>
+              Mechatron Lab case study →
+            </Link>
+            <Link href="/case-studies/estorealley" className={buttonClass("link", "sm")}>
+              eStoreAlley case study →
+            </Link>
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="wrap border-t border-line pt-16">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight">Ready to migrate away from SaaS lock-in?</h2>
+              <p className="mt-2 text-sm text-ink-2">Schedule a walkthrough with our solution architects.</p>
+            </div>
+            <div className="flex items-center gap-4 shrink-0">
+              <DemoButton size="sm">Book a demo</DemoButton>
+              <Link href="/#pricing" className={buttonClass("link", "sm")}>
+                View pricing plans →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

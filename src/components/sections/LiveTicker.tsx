@@ -1,29 +1,32 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 import React from "react";
 
 const TICKER_ITEMS = [
   {
     title: "Mechatron Lab",
-    detail: "1,000+ Hardware SKUs Live · Android App Active",
+    detail: englishMessage("LiveTicker.1.000.hardware.skus.live.android.app.active.4de9e88"),
   },
   {
     title: "eStoreAlley",
-    detail: "B2B Wholesale Marketplace · Stripe Checkout Active",
+    detail: englishMessage("LiveTicker.b2b.wholesale.marketplace.stripe.checkout.ac.b571d59"),
   },
   {
     title: "Style Gear",
-    detail: "D2C Fashion Store · Native Mobile App Active",
+    detail: englishMessage("LiveTicker.d2c.fashion.store.native.mobile.app.active.c66e800"),
   },
   {
-    title: "0% Commission",
-    detail: "Keep 100% of Sales Profit on Your Private Cloud",
+    title: englishMessage("LiveTicker.0.commission.e1f4858"),
+    detail: englishMessage("LiveTicker.keep.100.of.sales.profit.on.your.private.clo.8bc0473"),
   },
   {
-    title: "Cloud Native",
-    detail: "Deployed to AWS · Google Cloud · Azure",
+    title: englishMessage("LiveTicker.cloud.native.1c57266"),
+    detail: englishMessage("LiveTicker.deployed.to.aws.google.cloud.azure.213439b"),
   },
   {
-    title: "Code Ownership",
-    detail: "100% Git Repository Access · Zero Vendor Lock-In",
+    title: englishMessage("LiveTicker.code.ownership.80ca3ae"),
+    detail: englishMessage("ott-streaming.100.git.repository.access.zero.vendor.lock.i.b74b4d8"),
   },
 ];
 
@@ -33,13 +36,15 @@ export interface LiveTickerProps {
 }
 
 export function LiveTicker({ items, ariaLabel }: LiveTickerProps = {}) {
+  const translateCopy = useMessages();
+
   const activeItems = items || TICKER_ITEMS;
   // Duplicate array once for seamless infinite continuous scroll
   const duplicated = [...activeItems, ...activeItems];
 
   return (
     <div
-      aria-label="Live platform status and production stores ticker"
+      aria-label={translateCopy(englishMessage("LiveTicker.live.platform.status.and.production.stores.t.2abc1a3"))}
       className="border-y border-line bg-wash/60 py-3 overflow-hidden select-none"
     >
       <div className="animate-marquee flex items-center gap-10 text-xs font-mono text-ink-2">
@@ -49,8 +54,8 @@ export function LiveTicker({ items, ariaLabel }: LiveTickerProps = {}) {
               <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
-            <span className="font-semibold text-ink">{item.title}:</span>
-            <span className="text-ink-2">{item.detail}</span>
+            <span className="font-semibold text-ink">{translateCopy(item.title)}:</span>
+            <span className="text-ink-2">{translateCopy(item.detail)}</span>
             <span className="text-line ml-4">/</span>
           </div>
         ))}

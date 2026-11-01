@@ -1,3 +1,4 @@
+import { priceText } from "@/lib/pricing-catalog";
 import { TranslationDictionary } from "./types";
 
 export const es: TranslationDictionary = {
@@ -20,7 +21,7 @@ export const es: TranslationDictionary = {
     },
     ctaDemo: "Reservar demo",
     ctaWork: "Ver tiendas activas",
-    facts: "Desde $4,999 pago único · 0% comisión · Lista en 2–4 semanas",
+    facts: priceText("Desde {price:launch} pago único · 0% comisión · Lista en 2–4 semanas", "es"),
   },
   whatYouGet: {
     index: "01",

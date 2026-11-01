@@ -50,7 +50,7 @@ This platform provides growing retailers, enterprise merchants, and agencies wit
 ### 🚀 Complete SEO & Social Media Infrastructure
 - **Dynamic `metadataBase`**: Works across custom domains and Vercel environments without broken relative links.
 - **Dedicated 1200×630 Open Graph Images**: Lightweight (~48 KB) branded social share banners for WhatsApp, Twitter/X, LinkedIn, and iMessage.
-- **Structured Data**: Complete JSON-LD schema graph for `Organization`, `WebSite`, `SoftwareApplication`, and `AggregateRating` (4.9 / 128 reviews).
+- **Structured Data**: Shared `Organization` and `WebSite` identities, with page-specific software, breadcrumb, and article data. Ratings are not emitted without supporting review records.
 - **Auto-Generated Sitemaps**: Dynamic [`/sitemap.xml`](/sitemap.xml) and [`/robots.txt`](/robots.txt).
 
 ---
@@ -170,3 +170,14 @@ Since this is a standard Next.js application, it can be run via Node.js (`npm st
 ## 📄 License & Commercial Rights
 
 Copyright © 2026 Mechatron Lab. All rights reserved. Commercial licenses for full source code deployment, rebranding, and redistribution are provided under enterprise agreement.
+
+## SEO validation
+
+English routes use `src/app/(english)`; the four supported translated page families use `src/app/[locale]` with server-rendered language-specific content. Public URLs remain unchanged. `src/lib/site-config.ts` centralizes the canonical origin and language routes.
+
+- `npm test`: regression checks with all notification requests mocked.
+- `npm run test:seo`: read-only checks against a running production server, default `http://localhost:3100`; set `SEO_TEST_ORIGIN` to use a different local address.
+- `npm run images:dimensions`: regenerate screenshot dimensions after adding or replacing public images.
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` enables GA4 event reporting. `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` configures a specific Ads conversion action. An accepted inquiry is not assigned a fabricated purchase value.
+
+The lead endpoint confirms acceptance only when a configured Telegram or webhook destination accepts the notification. Missing or failed delivery returns a recoverable error instead of a successful lead. Temporary audit artifacts in `scratch/` and planning notes in `docs/` are ignored by Git.

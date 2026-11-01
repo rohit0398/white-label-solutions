@@ -1,5 +1,10 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+
+import { priceText } from "@/lib/pricing-catalog";
 import React from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export interface PillarItem {
@@ -21,10 +26,10 @@ export interface CompletePackageCalloutProps {
 }
 
 export function CompletePackageCallout({
-  badge = "All-in-One Package",
+  badge = englishMessage("CompletePackageCallout.all.in.one.package.a1ef02a"),
   title,
   subtitle,
-  price = "$4,999",
+  price = priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
   priceLabel = "one-time investment",
   pillars,
   guarantees = [
@@ -35,6 +40,8 @@ export function CompletePackageCallout({
   ctaText,
   ctaHref,
 }: CompletePackageCalloutProps) {
+  const translateCopy = useMessages();
+
   return (
     <section className="py-14 border-y border-line bg-wash">
       <div className="wrap">
@@ -44,19 +51,19 @@ export function CompletePackageCallout({
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-accent">
                 <Sparkles className="h-3.5 w-3.5" />
-                <span className="font-semibold uppercase tracking-wider">{badge}</span>
+                <span className="font-semibold uppercase tracking-wider">{translateCopy(badge)}</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-ink">
-                {title}
+                {translateCopy(title)}
               </h3>
               <p className="text-sm text-ink-2 max-w-2xl leading-relaxed">
-                {subtitle}
+                {translateCopy(subtitle)}
               </p>
             </div>
 
             <div className="shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-              <span className="font-bold text-accent font-mono">{price}</span>
-              <span className="text-ink-3">{priceLabel}</span>
+              <span className="font-bold text-accent font-mono">{translateCopy(price)}</span>
+              <span className="text-ink-3">{translateCopy(priceLabel)}</span>
             </div>
           </div>
 
@@ -71,10 +78,10 @@ export function CompletePackageCallout({
                 >
                   <div className="flex items-center gap-2 text-ink text-sm font-semibold mb-1.5">
                     <Icon className="h-4 w-4 text-accent shrink-0" />
-                    <span>{p.title}</span>
+                    <span>{translateCopy(p.title)}</span>
                   </div>
                   <p className="text-xs text-ink-2 leading-relaxed">
-                    {p.desc}
+                    {translateCopy(p.desc)}
                   </p>
                 </div>
               );
@@ -86,7 +93,7 @@ export function CompletePackageCallout({
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1.5 text-xs text-ink-3 font-mono">
               {guarantees.map((g, idx) => (
                 <span key={idx} className="inline-flex items-center gap-1">
-                  ✓ {g}
+                  ✓ {translateCopy(g)}
                 </span>
               ))}
             </div>
@@ -95,7 +102,7 @@ export function CompletePackageCallout({
               href={ctaHref}
               className="w-full md:w-auto shrink-0 whitespace-nowrap inline-flex items-center justify-center gap-2.5 px-7 h-12 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-sm transition-all shadow-sm cursor-pointer active:scale-[0.99]"
             >
-              <span>{ctaText}</span>
+              <span>{translateCopy(ctaText)}</span>
               <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </div>

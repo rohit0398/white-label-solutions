@@ -22,7 +22,7 @@
   --theme-wash: #141414;
   --theme-ink: #f4f4f5;
   --theme-ink-2: #a1a1aa;
-  --theme-ink-3: #71717a;
+  --theme-ink-3: #a1a1aa;
   --theme-line: #262626;
   --theme-accent: #34d399;
   --theme-scrollbar-thumb: rgba(255, 255, 255, 0.2);
@@ -38,7 +38,7 @@
   --theme-wash: #f1f0ed;
   --theme-ink: #161616;
   --theme-ink-2: #55534e;
-  --theme-ink-3: #8b8984;
+  --theme-ink-3: #625f59;
   --theme-line: #e4e2dd;
   --theme-accent: #1e5b45;
   --theme-scrollbar-thumb: rgba(22, 22, 22, 0.2);
@@ -413,4 +413,11 @@ body,
     animation: none;
     -webkit-text-fill-color: currentColor;
   }
+}
+
+/* Make small footer links comfortable on touch screens. */
+footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

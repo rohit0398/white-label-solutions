@@ -1,26 +1,31 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+import { priceText } from "@/lib/pricing-catalog";
 
 import React, { useState } from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { ShoppingBag, Smartphone, Tv, ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
 
 export function HomePlatformsDeck() {
+  const translateCopy = useMessages();
+
   const [activeTab, setActiveTab] = useState<"ecommerce" | "short-drama" | "ott">("ecommerce");
 
   const tabs = [
-    { id: "ecommerce" as const, label: "01 E-Commerce Architecture", icon: ShoppingBag },
-    { id: "short-drama" as const, label: "02 9:16 Short Drama Reels", icon: Smartphone },
-    { id: "ott" as const, label: "03 16:9 Cinematic Video", icon: Tv },
+    { id: "ecommerce" as const, label: englishMessage("HomePlatformsDeck.01.e.commerce.architecture.17c10e7"), icon: ShoppingBag },
+    { id: "short-drama" as const, label: englishMessage("HomePlatformsDeck.02.9.16.short.drama.reels.8aa469c"), icon: Smartphone },
+    { id: "ott" as const, label: englishMessage("HomePlatformsDeck.03.16.9.cinematic.video.a39039f"), icon: Tv },
   ];
 
   return (
     <Section
       id="platforms"
-      index="01 · Production Platforms"
-      title="Three Pre-Built Foundations. Deployed in Weeks."
-      intro="Every system is battle-tested under real user traffic and customized for your brand. Deployed directly into your private cloud account with zero recurring software rent."
+      index={translateCopy(englishMessage("HomePlatformsDeck.01.production.platforms.c4770e5"))}
+      title={translateCopy(englishMessage("HomePlatformsDeck.three.pre.built.foundations.deployed.in.week.1186e44"))}
+      intro={translateCopy(englishMessage("HomePlatformsDeck.every.system.is.battle.tested.under.real.use.d3401fe"))}
       wide
     >
       <div className="wrap-wide space-y-8">
@@ -40,7 +45,7 @@ export function HomePlatformsDeck() {
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" />
-                <span>{tab.label}</span>
+                <span>{translateCopy(tab.label)}</span>
               </button>
             );
           })}
@@ -51,32 +56,28 @@ export function HomePlatformsDeck() {
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-                <span>Flagship Suite · $4,999</span>
-                <span className="text-ink-3">· Modular from $2,999</span>
+                <span>{translateCopy(englishMessage("HomePlatformsDeck.flagship.suite.0812fed"))}{" "}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))}</span>
+                <span className="text-ink-3">{translateCopy(englishMessage("HomePlatformsDeck..modular.from.d4a0d49"))}{" "}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
-                High-Speed Online Storefront &amp; Native Shopping Apps
-              </h3>
-              <p className="text-sm text-ink-2 leading-relaxed">
-                A unified omnichannel retail stack. Next.js 16 web storefront with sub-second page loads, cross-platform Flutter mobile apps for iOS and Android, and an operations CRM managing multi-warehouse stock and automated tax invoices.
-              </p>
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("HomePlatformsDeck.high.speed.online.storefront.native.shopping.e41ca42"))}</h3>
+              <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(englishMessage("HomePlatformsDeck.a.unified.omnichannel.retail.stack.next.js.1.241b8df"))}</p>
 
               <ul className="space-y-2.5 text-xs text-ink-2 pt-1">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Sub-second page speeds with headless checkout and instant inventory reservation</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.sub.second.page.speeds.with.headless.checkou.f02a121"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Native Flutter iOS &amp; Android shopping apps published under your developer accounts</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.native.flutter.ios.android.shopping.apps.pub.7e1c3ae"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Central CRM with real P&amp;L margin tracking and automated dispatch routing</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.central.crm.with.real.p.l.margin.tracking.an.0eab5b0"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>0% GMV commission · You keep 100% of customer payments directly via Stripe / UPI</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.0.gmv.commission.you.keep.100.of.customer.pa.9645409"))}</span>
                 </li>
               </ul>
 
@@ -85,21 +86,21 @@ export function HomePlatformsDeck() {
                   href="/solutions/ecommerce"
                   className="inline-flex items-center gap-2 px-5 h-11 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-xs font-mono transition-all shadow-xs"
                 >
-                  <span>Explore E-Commerce Suite ($4,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.explore.e.commerce.suite.fa022db"))}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))})</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href="/solutions/ecommerce-app-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Mobile App ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.mobile.app.f214c27"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
                 <Link
                   href="/solutions/ecommerce-website-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Website ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.website.682c7b8"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
@@ -108,8 +109,8 @@ export function HomePlatformsDeck() {
             <div className="w-full">
               <Screenshot
                 src="/showcase/mechatron-store.png"
-                alt="Mechatron Lab e-commerce store running on private cloud"
-                caption="Production Next.js Storefront · Sub-Second Page Speeds · Real-time Cloud Inventory"
+                alt={translateCopy(englishMessage("HomePlatformsDeck.mechatron.lab.e.commerce.store.running.on.pr.47957db"))}
+                caption={translateCopy(englishMessage("HomePlatformsDeck.production.next.js.storefront.sub.second.pag.b710403"))}
                 priority
               />
             </div>
@@ -121,32 +122,28 @@ export function HomePlatformsDeck() {
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-                <span>Flagship Suite · $4,999</span>
-                <span className="text-ink-3">· Modular from $2,999</span>
+                <span>{translateCopy(englishMessage("HomePlatformsDeck.flagship.suite.0812fed"))}{" "}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))}</span>
+                <span className="text-ink-3">{translateCopy(englishMessage("HomePlatformsDeck..modular.from.d4a0d49"))}{" "}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
-                9:16 Vertical Short-Drama Streaming Platform
-              </h3>
-              <p className="text-sm text-ink-2 leading-relaxed">
-                Launch your branded ReelShort &amp; DramaBox-style streaming platform. Addictive 60FPS vertical swipe gestures on mobile apps, instant-play mobile web player for social traffic, cliffhanger episode paywalls, VIP subscriptions, and Video CMS.
-              </p>
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("HomePlatformsDeck.9.16.vertical.short.drama.streaming.platform.182355e"))}</h3>
+              <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(englishMessage("HomePlatformsDeck.launch.your.branded.reelshort.dramabox.style.6510935"))}</p>
 
               <ul className="space-y-2.5 text-xs text-ink-2 pt-1">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Native Flutter vertical swiper with zero-buffering pre-cached episode transitions</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.native.flutter.vertical.swiper.with.zero.buf.cf4498b"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Mobile-first Next.js web player capturing instant play from TikTok &amp; Instagram links</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.mobile.first.next.js.web.player.capturing.in.8606ca2"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Pure SVOD &amp; AVOD monetization: Weekly/Monthly VIP passes and rewarded video ads</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.pure.svod.avod.monetization.weekly.monthly.v.d25330f"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Automated Cloudflare Stream transcoding with zero bandwidth markups</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.automated.cloudflare.stream.transcoding.with.cc231d4"))}</span>
                 </li>
               </ul>
 
@@ -155,21 +152,21 @@ export function HomePlatformsDeck() {
                   href="/solutions/short-drama"
                   className="inline-flex items-center gap-2 px-5 h-11 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-xs font-mono transition-all shadow-xs"
                 >
-                  <span>Explore Short-Drama Suite ($4,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.explore.short.drama.suite.85ba4f7"))}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))})</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href="/solutions/short-drama-app-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Mobile Apps ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.mobile.apps.c745225"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
                 <Link
                   href="/solutions/short-drama-website-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Website ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.website.682c7b8"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
@@ -178,8 +175,8 @@ export function HomePlatformsDeck() {
             <div className="w-full">
               <Screenshot
                 src="/showcase/ott-drama-app-showcase.jpg"
-                alt="9:16 vertical short-drama mobile app interface"
-                caption="Native 9:16 Drama Apps · 60FPS Swipe · VIP Access · Cloudflare Stream Ingest"
+                alt={translateCopy(englishMessage("short-drama.9.16.vertical.short.drama.mobile.app.interfa.3939b91"))}
+                caption={translateCopy(englishMessage("short-drama.native.9.16.drama.apps.60fps.swipe.vip.acces.90dfd5d"))}
               />
             </div>
           </div>
@@ -190,32 +187,28 @@ export function HomePlatformsDeck() {
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-                <span>Flagship Suite · $4,999</span>
-                <span className="text-ink-3">· Modular from $2,999</span>
+                <span>{translateCopy(englishMessage("HomePlatformsDeck.flagship.suite.0812fed"))}{" "}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))}</span>
+                <span className="text-ink-3">{translateCopy(englishMessage("HomePlatformsDeck..modular.from.d4a0d49"))}{" "}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
-                16:9 Cinematic Video Streaming (Netflix &amp; Prime Style)
-              </h3>
-              <p className="text-sm text-ink-2 leading-relaxed">
-                A cinema-grade video streaming service for movies, documentaries, and episodic seasons. Responsive Next.js widescreen web portal, native mobile streaming apps with 1-tap TV casting (Chromecast &amp; AirPlay), and administrative Video CMS.
-              </p>
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("HomePlatformsDeck.16.9.cinematic.video.streaming.netflix.prime.362d5b8"))}</h3>
+              <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(englishMessage("HomePlatformsDeck.a.cinema.grade.video.streaming.service.for.m.cbb801e"))}</p>
 
               <ul className="space-y-2.5 text-xs text-ink-2 pt-1">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Sub-second adaptive HLS bitrates (4K, 1080p, 720p, 480p) via multi-CDN edge</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.sub.second.adaptive.hls.bitrates.4k.1080p.72.76d8942"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>1-tap TV casting via Google Chromecast &amp; Apple AirPlay with lockscreen playback controls</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.1.tap.tv.casting.via.google.chromecast.apple.791823f"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Encrypted local video downloads for offline viewing during air travel and commutes</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.encrypted.local.video.downloads.for.offline.33c9246"))}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                  <span>Direct SVOD recurring VIP subscriptions via Stripe, Apple StoreKit &amp; Google Play</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.direct.svod.recurring.vip.subscriptions.via.557feee"))}</span>
                 </li>
               </ul>
 
@@ -224,21 +217,21 @@ export function HomePlatformsDeck() {
                   href="/solutions/ott-streaming"
                   className="inline-flex items-center gap-2 px-5 h-11 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-xs font-mono transition-all shadow-xs"
                 >
-                  <span>Explore Cinematic Suite ($4,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.explore.cinematic.suite.e969ae8"))}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))})</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   href="/solutions/ott-app-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Mobile Apps ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.mobile.apps.c745225"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
                 <Link
                   href="/solutions/ott-website-development"
                   className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-2 hover:text-ink underline underline-offset-4"
                 >
-                  <span>Only Website ($2,999)</span>
+                  <span>{translateCopy(englishMessage("HomePlatformsDeck.only.website.682c7b8"))}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))})</span>
                   <ExternalLink className="h-3 w-3" />
                 </Link>
               </div>
@@ -247,8 +240,8 @@ export function HomePlatformsDeck() {
             <div className="w-full">
               <Screenshot
                 src="/showcase/ott-cinematic-web.jpg"
-                alt="16:9 cinematic video streaming web portal interface"
-                caption="Next.js 16:9 Widescreen Streaming Hub · Continue Watching · Genre Carousels"
+                alt={translateCopy(englishMessage("HomePlatformsDeck.16.9.cinematic.video.streaming.web.portal.in.6322ea5"))}
+                caption={translateCopy(englishMessage("ott-streaming.next.js.16.9.widescreen.streaming.hub.contin.3eed242"))}
               />
             </div>
           </div>

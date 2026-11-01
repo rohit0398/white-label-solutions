@@ -1,4 +1,6 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
 import React, { useState } from "react";
 import { SHOWCASE_PROJECTS } from "@/lib/constants";
@@ -17,8 +19,10 @@ export interface WhatYouGetProps {
 }
 
 export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
+  const translateCopy = useMessages();
+
   const { language } = useSite();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
   
   const initialTab: ModuleKey = mode === "app" ? "apps" : "storefront";
   const [activeTab, setActiveTab] = useState<ModuleKey>(initialTab);
@@ -84,7 +88,7 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
     <Section
       id="what-you-get"
       index={t.whatYouGet.index}
-      title={t.whatYouGet.title}
+      title={translateCopy(t.whatYouGet.title)}
       intro={introText}
       bare
     >
@@ -104,7 +108,7 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
                     : "text-ink-3 hover:text-ink hover:bg-paper/60 hover:-translate-y-0.5"
                 }`}
               >
-                {moduleConfigs[key].tabLabel}
+                {translateCopy(moduleConfigs[key].tabLabel)}
               </button>
             );
           })}
@@ -116,9 +120,9 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
         <div className="border border-line rounded-lg p-6 sm:p-8 bg-paper hover:border-ink/40 transition-all duration-300 hover:shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-4 border-b border-line">
             <div>
-              <span className="font-mono text-xs text-ink-3">{current.n}</span>
+              <span className="font-mono text-xs text-ink-3">{translateCopy(current.n)}</span>
               <h3 className="text-2xl font-semibold tracking-tight text-ink mt-0.5">
-                {current.title}
+                {translateCopy(current.title)}
               </h3>
             </div>
             <span className="inline-flex items-center gap-1.5 text-xs font-mono text-accent">
@@ -126,12 +130,12 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
                 <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
-              <span>Active module</span>
+              <span>{translateCopy(englishMessage("WhatYouGet.active.module.20e89c9"))}</span>
             </span>
           </div>
 
           <p className="mt-4 text-ink-2 leading-relaxed text-[15px]">
-            {current.summary}
+            {translateCopy(current.summary)}
           </p>
 
           {/* Interactive Highlights Strip */}
@@ -142,17 +146,16 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
                 className="p-3 rounded-md bg-wash/40 border border-line/50 hover:border-ink/40 hover:bg-wash transition-all duration-200 group/box"
               >
                 <span className="text-[11px] font-mono text-ink-3 uppercase block group-hover/box:text-ink-2">
-                  {h.label}
+                  {translateCopy(h.label)}
                 </span>
-                <p className="text-xs font-medium text-ink mt-0.5">{h.value}</p>
+                <p className="text-xs font-medium text-ink mt-0.5">{translateCopy(h.value)}</p>
               </div>
             ))}
           </div>
 
           {activeTab === "apps" && (
-            <p className="mt-6 pt-4 border-t border-line text-xs text-ink-3">
-              Live published apps:{" "}
-              {appLinks.map((p, i) => (
+            <p className="mt-6 pt-4 border-t border-line text-xs text-ink-3">{translateCopy(englishMessage("AppShowcase.live.published.apps.7838a8d"))}{" "}
+              {translateCopy(appLinks.map((p, i) => (
                 <React.Fragment key={p.id}>
                   {i > 0 && ", "}
                   <a
@@ -161,18 +164,16 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
                     rel="noopener noreferrer"
                     className="text-ink underline underline-offset-4 decoration-line hover:decoration-ink font-medium"
                   >
-                    {p.title}
+                    {translateCopy(p.title)}
                   </a>
                 </React.Fragment>
-              ))}{" "}
-              on Google Play.
-            </p>
+              )))}{" "}{translateCopy(englishMessage("AppShowcase.on.google.play.7d5ff20"))}</p>
           )}
 
           {activeTab === "admin" && (
             <div className="mt-6 pt-4 border-t border-line">
               <h4 className="text-xs font-mono uppercase text-ink-3 mb-3">
-                {t.whatYouGet.adminHeading}
+                {translateCopy(t.whatYouGet.adminHeading)}
               </h4>
               <dl className="divide-y divide-line">
                 {t.whatYouGet.adminFeatures.map((f, idx) => (
@@ -195,7 +196,7 @@ export function WhatYouGet({ mode = "all" }: WhatYouGetProps = {}) {
           <Screenshot
             key={current.screenshot}
             src={current.screenshot}
-            alt={current.title}
+            alt={translateCopy(current.title)}
             caption={current.caption}
             className="transition-transform duration-300 group-hover:scale-[1.008]"
           />

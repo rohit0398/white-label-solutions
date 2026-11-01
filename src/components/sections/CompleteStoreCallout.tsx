@@ -1,30 +1,37 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+
+import { priceText } from "@/lib/pricing-catalog";
 import React from "react";
 import { Store, Globe, Smartphone, ShieldCheck } from "lucide-react";
 import { CompletePackageCallout } from "@/components/sections/CompletePackageCallout";
 
 export function CompleteStoreCallout() {
+  const translateCopy = useMessages();
+
   return (
     <CompletePackageCallout
-      badge="All-in-One Package"
-      title="Looking for the Complete E-Commerce Solution?"
-      subtitle="Need both the web storefront and mobile shopping apps? Launch the unified stack on your private cloud with shared real-time inventory and zero recurring platform cuts."
-      price="$4,999"
+      badge={translateCopy(englishMessage("CompletePackageCallout.all.in.one.package.a1ef02a"))}
+      title={translateCopy(englishMessage("CompleteStoreCallout.looking.for.the.complete.e.commerce.solution.d0fc478"))}
+      subtitle={translateCopy(englishMessage("CompleteStoreCallout.need.both.the.web.storefront.and.mobile.shop.ec80da2"))}
+      price={priceText(englishMessage("CompleteOttCallout..price.launch.6843b00"))}
       priceLabel="one-time investment"
       pillars={[
         {
           icon: Globe,
-          title: "Next.js 16 Web Storefront",
-          desc: "Sub-second page speeds, headless checkout, dynamic SEO metadata, and custom domain branding.",
+          title: englishMessage("CompleteStoreCallout.next.js.16.web.storefront.27975e3"),
+          desc: englishMessage("CompleteStoreCallout.sub.second.page.speeds.headless.checkout.dyn.2aa2cdd"),
         },
         {
           icon: Smartphone,
-          title: "Native iOS & Android Apps",
-          desc: "Flutter 3.x native binaries published under your developer accounts with push notification engine.",
+          title: englishMessage("CompleteStoreCallout.native.ios.android.apps.433bd0f"),
+          desc: englishMessage("CompleteStoreCallout.flutter.3.x.native.binaries.published.under.29ffc51"),
         },
         {
           icon: ShieldCheck,
-          title: "Central Operations CRM",
-          desc: "Multi-warehouse stock, automated GST/VAT tax invoices, order routing, and customer analytics.",
+          title: englishMessage("CompleteStoreCallout.central.operations.crm.0482e78"),
+          desc: englishMessage("CompleteStoreCallout.multi.warehouse.stock.automated.gst.vat.tax.c61f64d"),
         },
       ]}
       guarantees={[
@@ -32,7 +39,7 @@ export function CompleteStoreCallout() {
         "100% Data & User Ownership",
         "0% Platform Commission",
       ]}
-      ctaText="Explore Complete Store Package ($4,999)"
+      ctaText={priceText(englishMessage("CompleteStoreCallout.explore.complete.store.package.price.launch.87a5a05"))}
       ctaHref="/solutions/ecommerce"
     />
   );

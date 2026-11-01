@@ -1,5 +1,9 @@
+"use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
+import { imageDimensions } from "@/lib/image-dimensions";
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/LocalizedImage";
 import { ExternalLink, Smartphone } from "lucide-react";
 
 interface AppScreen {
@@ -11,27 +15,29 @@ interface AppScreen {
 const SCREENS: AppScreen[] = [
   {
     src: "/showcase/mechatron-app/screen-2.png",
-    title: "Storefront & Catalog",
-    subtitle: "Instant search, sub-category tabs & live stock",
+    title: englishMessage("MobileAppScreenshots.storefront.catalog.79138b3"),
+    subtitle: englishMessage("MobileAppScreenshots.instant.search.sub.category.tabs.live.stock.8199619"),
   },
   {
     src: "/showcase/mechatron-app/screen-3.png",
-    title: "Product Specifications",
-    subtitle: "Pinouts, datasheets, wholesale tiers & add-to-cart",
+    title: englishMessage("MobileAppScreenshots.product.specifications.afb326c"),
+    subtitle: englishMessage("MobileAppScreenshots.pinouts.datasheets.wholesale.tiers.add.to.ca.c330fc5"),
   },
   {
     src: "/showcase/mechatron-app/screen-4.png",
-    title: "1-Tap Checkout",
-    subtitle: "UPI, Cards, COD & automated tax invoice routing",
+    title: englishMessage("MobileAppScreenshots.1.tap.checkout.97f041f"),
+    subtitle: englishMessage("MobileAppScreenshots.upi.cards.cod.automated.tax.invoice.routing.e2be60b"),
   },
   {
     src: "/showcase/mechatron-app/screen-5.png",
-    title: "Order Tracking & Alerts",
-    subtitle: "Real-time dispatch status, airway bill & push alerts",
+    title: englishMessage("MobileAppScreenshots.order.tracking.alerts.ce718e0"),
+    subtitle: englishMessage("MobileAppScreenshots.real.time.dispatch.status.airway.bill.push.a.426c43e"),
   },
 ];
 
 export function MobileAppScreenshots() {
+  const translateCopy = useMessages();
+
   return (
     <div className="space-y-4">
       {/* Top Header Bar */}
@@ -41,12 +47,8 @@ export function MobileAppScreenshots() {
             <Smartphone className="h-4 w-4" />
           </div>
           <div>
-            <h4 className="text-xs font-semibold text-ink uppercase tracking-wider font-mono">
-              Live Production Build · Android &amp; iOS
-            </h4>
-            <p className="text-xs text-ink-3">
-              Actual application screens from Mechatron Lab on Google Play Store
-            </p>
+            <h3 className="text-xs font-semibold text-ink uppercase tracking-wider font-mono">{translateCopy(englishMessage("MobileAppScreenshots.live.production.build.android.ios.97e6e3f"))}</h3>
+            <p className="text-xs text-ink-3">{translateCopy(englishMessage("MobileAppScreenshots.actual.application.screens.from.mechatron.la.daf92ea"))}</p>
           </div>
         </div>
 
@@ -56,7 +58,7 @@ export function MobileAppScreenshots() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-line bg-paper text-xs font-mono text-ink hover:border-ink/60 transition-colors shadow-2xs self-start sm:self-auto"
         >
-          <span>View on Google Play</span>
+          <span>{translateCopy(englishMessage("MobileAppScreenshots.view.on.google.play.5733cc6"))}</span>
           <ExternalLink className="h-3.5 w-3.5 text-ink-3" />
         </a>
       </div>
@@ -70,10 +72,11 @@ export function MobileAppScreenshots() {
           >
             {/* Phone Screen Frame */}
             <div className="relative aspect-[9/19] w-full bg-wash/40 overflow-hidden border-b border-line/50">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={screen.src}
-                alt={screen.title}
+                {...imageDimensions(screen.src)}
+                sizes="(max-width: 640px) 45vw, 260px"
+                alt={translateCopy(screen.title)}
                 loading="lazy"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
               />
@@ -82,10 +85,10 @@ export function MobileAppScreenshots() {
             {/* Label */}
             <div className="p-3 bg-paper space-y-0.5">
               <span className="text-[11px] font-mono text-accent font-semibold block">
-                0{idx + 1} · {screen.title}
+                0{translateCopy(idx + 1)} · {translateCopy(screen.title)}
               </span>
               <p className="text-[11px] text-ink-3 line-clamp-2 leading-relaxed">
-                {screen.subtitle}
+                {translateCopy(screen.subtitle)}
               </p>
             </div>
           </div>

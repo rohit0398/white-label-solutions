@@ -1,7 +1,11 @@
 "use client";
+import { englishMessage } from "@/lib/messages";
+import { useMessages } from "@/components/site/useMessages";
 
+import Image from "@/components/ui/LocalizedImage";
+import { imageDimensions } from "@/lib/image-dimensions";
 import React from "react";
-import Link from "next/link";
+import Link from "@/components/ui/LocalizedLink";
 import { SHOWCASE_PROJECTS } from "@/lib/constants";
 import { ShowcaseProject } from "@/types";
 import { Section } from "@/components/ui/Section";
@@ -21,8 +25,10 @@ export interface WorkProps {
 }
 
 export function Work({ id = "work", index, title, intro, projects, mode = "all" }: WorkProps = {}) {
+  const translateCopy = useMessages();
+
   const { language } = useSite();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
 
   const activeProjects = (projects || SHOWCASE_PROJECTS).map((p) => {
     if (mode === "app" && p.id === "mechatron-lab") {
@@ -41,7 +47,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
     <Section
       id={id}
       index={activeIndex}
-      title={activeTitle}
+      title={translateCopy(activeTitle)}
       intro={activeIntro}
     >
       <ul className="border-t border-line divide-y divide-line">
@@ -55,19 +61,19 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
               <div>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <h3 className="text-xl font-semibold tracking-tight text-ink group-hover:text-ink transition-colors">
-                    {translatedProject.title}
+                    {translateCopy(translatedProject.title)}
                   </h3>
-                  <span className="relative flex h-2 w-2" title="Live production deployment">
+                  <span className="relative flex h-2 w-2" title={translateCopy(englishMessage("Work.live.production.deployment.069cb54"))}>
                     <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
                   </span>
-                  <span className="text-xs font-mono text-ink-3">{translatedProject.industry}</span>
+                  <span className="text-xs font-mono text-ink-3">{translateCopy(translatedProject.industry)}</span>
                 </div>
-                <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translatedProject.description}</p>
+                <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translateCopy(translatedProject.description)}</p>
                 <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
                   {p.url.startsWith("/") ? (
                     <Link href={p.url} className={linkCls}>
-                      <span>Explore Architecture</span>
+                      <span>{translateCopy(englishMessage("HomeHero.explore.architecture.5cb3740"))}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
                         →
                       </span>
@@ -75,9 +81,9 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                   ) : (
                     <a href={p.url} target="_blank" rel="noopener noreferrer" className={linkCls}>
                       <span>
-                        {p.url.includes("play.google.com")
-                          ? "Google Play Store"
-                          : p.url.replace(/^https?:\/\//, "")}
+                        {translateCopy(p.url.includes(englishMessage("Work.play.google.com.c43b840"))
+                          ? englishMessage("Work.google.play.store.4afdf34")
+                          : p.url.replace(/^https?:\/\//, ""))}
                       </span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                         ↗
@@ -86,7 +92,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                   )}
                   {p.playStoreUrl && p.playStoreUrl !== p.url && (
                     <a href={p.playStoreUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                      <span>{t.work.androidApp}</span>
+                      <span>{translateCopy(t.work.androidApp)}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                         ↗
                       </span>
@@ -94,7 +100,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                   )}
                   {p.appDownloadUrl && (
                     <a href={p.appDownloadUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
-                      <span>{p.appDownloadLabel || "Download test APK"}</span>
+                      <span>{translateCopy(p.appDownloadLabel || englishMessage("ShortDramaLiveAccess.download.test.apk.6e41328"))}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                         ↗
                       </span>
@@ -103,9 +109,9 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                   {p.caseStudyUrl && (
                     <Link href={p.caseStudyUrl} className={linkCls}>
                       <span>
-                        {p.caseStudyUrl.includes("/blog/")
-                          ? "Architecture Blueprint"
-                          : t.work.caseStudy}
+                        {translateCopy(p.caseStudyUrl.includes("/blog/")
+                          ? englishMessage("Work.architecture.blueprint.67170f1")
+                          : t.work.caseStudy)}
                       </span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">
                         →
@@ -115,14 +121,13 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                 </div>
                 {p.demoAccess && (
                   <p className="mt-3 text-xs text-ink-3 leading-relaxed max-w-xl">
-                    {p.demoAccess.googleLogin ? "Sign in with Google, or use a test number " : "Test numbers "}
-                    <span className="font-mono text-ink-2">{p.demoAccess.phones.join(", ")}</span>
-                    . OTP <span className="font-mono font-semibold text-ink">{p.demoAccess.otp}</span>.
+                    {translateCopy(p.demoAccess.googleLogin ? englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8") : englishMessage("Work.test.numbers.c8964e5"))}
+                    <span className="font-mono text-ink-2">{translateCopy(p.demoAccess.phones.join(", "))}</span>{translateCopy(englishMessage("Work..otp.75375bb"))}{" "}<span className="font-mono font-semibold text-ink">{translateCopy(p.demoAccess.otp)}</span>.
                   </p>
                 )}
               </div>
 
-              {p.screenshotUrl && (
+              {translateCopy(p.screenshotUrl && (
                 p.url.startsWith("/") ? (
                   <Link
                     href={p.url}
@@ -130,10 +135,11 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                     aria-hidden="true"
                     className="block overflow-hidden rounded-md border border-line bg-wash group-hover:border-ink/60 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={p.screenshotUrl}
-                      alt={`${translatedProject.title} screenshot`}
+                      {...imageDimensions(p.screenshotUrl)}
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      alt={translateCopy.format("media.screenshot", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />
@@ -147,16 +153,17 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                     aria-hidden="true"
                     className="block overflow-hidden rounded-md border border-line bg-wash group-hover:border-ink/60 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={p.screenshotUrl}
-                      alt={`${translatedProject.title} storefront screenshot`}
+                      {...imageDimensions(p.screenshotUrl)}
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      alt={translateCopy.format("Work..value0.storefront.screenshot.a572497", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   </a>
                 )
-              )}
+              ))}
             </li>
           );
         })}

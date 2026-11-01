@@ -1,4 +1,5 @@
 "use client";
+import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
 import { Section } from "@/components/ui/Section";
@@ -14,8 +15,10 @@ export interface FaqProps {
 }
 
 export function Faq({ id = "faq", index, title, intro, items }: FaqProps = {}) {
+  const translateCopy = useMessages();
+
   const { language } = useSite();
-  const t = TRANSLATIONS[language] ?? TRANSLATIONS.en;
+  const t = TRANSLATIONS[language];
 
   const activeItems = items || t.faq.items;
   const activeIndex = index !== undefined ? index : t.faq.index;
@@ -26,20 +29,20 @@ export function Faq({ id = "faq", index, title, intro, items }: FaqProps = {}) {
     <Section
       id={id}
       index={activeIndex}
-      title={activeTitle}
+      title={translateCopy(activeTitle)}
       intro={activeIntro}
     >
       <div className="divide-y divide-line border-y border-line">
         {activeItems.map((faq, idx) => (
           <details key={idx} className="group py-5 text-sm cursor-pointer transition-colors">
             <summary className="flex items-center justify-between font-medium text-ink list-none focus:outline-none select-none hover:text-ink/75 active:scale-[0.99] transition-all">
-              <span className="pr-4">{faq.q}</span>
+              <span className="pr-4">{translateCopy(faq.q)}</span>
               <span className="font-mono text-ink-3 transition-transform duration-200 group-open:rotate-45 shrink-0 text-base leading-none">
                 +
               </span>
             </summary>
             <p className="mt-3.5 text-ink-2 leading-relaxed pr-6 text-[14px]">
-              {faq.a}
+              {translateCopy(faq.a)}
             </p>
           </details>
         ))}

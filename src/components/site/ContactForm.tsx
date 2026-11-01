@@ -1,8 +1,10 @@
 "use client";
+import { priceText } from "@/lib/pricing-catalog";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
+import { submitLead } from "@/lib/submit-lead";
 import { BRAND } from "@/lib/constants";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { CheckCircle2, Send, MessageSquare, Shield, Clock, ChevronDown, SlidersHorizontal } from "lucide-react";
@@ -19,6 +21,7 @@ export function ContactForm() {
   const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [loading, setLoading] = useState(false);
+  const submittingRef = React.useRef(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,14 +34,13 @@ export function ContactForm() {
       return;
     }
 
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setLoading(true);
 
     try {
       const fullPhone = phone.trim() ? `${countryCode} ${phone.trim()}` : undefined;
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await submitLead({
           name: name.trim(),
           email: email.trim(),
           phone: fullPhone,
@@ -46,21 +48,17 @@ export function ContactForm() {
           package: solution || undefined,
           message: message.trim() || undefined,
           honeypot,
-        }),
       });
 
-      if (!res.ok) {
-        throw new Error("Unable to send inquiry. Please try again or WhatsApp us directly.");
-      }
-
       // Track Google Ads Conversion AW-18503943905
-      trackLeadSubmission(solution ? `ContactPage - ${solution}` : "ContactPage - General", 4999);
+      trackLeadSubmission(solution ? `ContactPage - ${solution}` : "ContactPage - General");
 
       setSubmitted(true);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Submission failed. Please reach out via WhatsApp.";
       setError(msg);
     } finally {
+      submittingRef.current = false;
       setLoading(false);
     }
   };
@@ -223,10 +221,10 @@ export function ContactForm() {
           className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-paper text-ink focus:outline-none focus:border-ink transition-colors cursor-pointer"
         >
           <option value="">Select a platform of interest (Optional)...</option>
-          <option value="ecommerce">E-Commerce Platform (Web, Apps &amp; Admin - $4,999)</option>
-          <option value="short-drama">9:16 Short Drama Platform (Reels &amp; Paywalls - $4,999)</option>
-          <option value="ott-streaming">16:9 Cinematic OTT Platform (Widescreen 4K - $4,999)</option>
-          <option value="source-code">Full Unencrypted Source Code License ($1,999 Add-on)</option>
+          <option value="ecommerce">E-Commerce Platform (Web, Apps &amp; Admin - {priceText("{price:launch}")})</option>
+          <option value="short-drama">9:16 Short Drama Platform (Reels &amp; Paywalls - {priceText("{price:launch}")})</option>
+          <option value="ott-streaming">16:9 Cinematic OTT Platform (Widescreen 4K - {priceText("{price:launch}")})</option>
+          <option value="source-code">Full Unencrypted Source Code License ({priceText("{price:source-code-license}")} Add-on)</option>
           <option value="developer-time">Dedicated Developer Support ($20 / hour)</option>
           <option value="custom">Custom Enterprise Architecture</option>
         </select>
