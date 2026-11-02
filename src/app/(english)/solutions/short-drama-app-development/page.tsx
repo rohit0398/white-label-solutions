@@ -236,6 +236,7 @@ export default function ShortDramaAppDevelopmentPage() {
           title="Battle-Tested Video &amp; Entertainment Applications"
           intro="Our engineering team has built and deployed entertainment streaming applications operating at multi-million scale."
           projects={OTT_SHOWCASE_PROJECTS}
+          demoPlatforms="app"
         />
 
         {/* Cross-Sell Callout Box to Base Short-Drama Package */}

@@ -22,9 +22,10 @@ export interface WorkProps {
   intro?: string;
   projects?: ShowcaseProject[];
   mode?: "all" | "web" | "app";
+  demoPlatforms?: "all" | "web" | "app";
 }
 
-export function Work({ id = "work", index, title, intro, projects, mode = "all" }: WorkProps = {}) {
+export function Work({ id = "work", index, title, intro, projects, mode = "all", demoPlatforms = "all" }: WorkProps = {}) {
   const translateCopy = useMessages();
 
   const { language } = useSite();
@@ -71,7 +72,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                 </div>
                 <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translateCopy(translatedProject.description)}</p>
                 <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-mono">
-                  {p.url.startsWith("/") ? (
+                  {demoPlatforms !== "app" && (p.url.startsWith("/") ? (
                     <Link href={p.url} className={linkCls}>
                       <span>{translateCopy(englishMessage("HomeHero.explore.architecture.5cb3740"))}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
@@ -89,8 +90,14 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                         ↗
                       </span>
                     </a>
+                  ))}
+                  {demoPlatforms !== "web" && p.iosBetaUrl && (
+                    <a href={p.iosBetaUrl} target="_blank" rel="noopener noreferrer" className={`${linkCls} font-semibold text-amber-700 dark:text-amber-300`}>
+                      <span>{translateCopy(englishMessage("ShortDramaLiveAccess.ios.beta.testflight"))}</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
                   )}
-                  {p.playStoreUrl && p.playStoreUrl !== p.url && (
+                  {demoPlatforms !== "web" && p.playStoreUrl && p.playStoreUrl !== p.url && (
                     <a href={p.playStoreUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
                       <span>{translateCopy(t.work.androidApp)}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -98,7 +105,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all" 
                       </span>
                     </a>
                   )}
-                  {p.appDownloadUrl && (
+                  {demoPlatforms !== "web" && p.appDownloadUrl && (
                     <a href={p.appDownloadUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
                       <span>{translateCopy(p.appDownloadLabel || englishMessage("ShortDramaLiveAccess.download.test.apk.6e41328"))}</span>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

@@ -29,6 +29,7 @@ export interface ShowcaseProject {
   playStoreUrl?: string;
   appDownloadUrl?: string;
   appDownloadLabel?: string;
+  iosBetaUrl?: string;
   caseStudyUrl?: string;
   screenshotUrl?: string;
   demoAccess?: DemoAccess;

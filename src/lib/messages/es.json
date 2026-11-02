@@ -446,7 +446,7 @@
   "ShortDramaLiveAccess.install.on.android.869ae2b": "Instalar en Android",
   "ShortDramaLiveAccess.hosted.on.our.server.for.review.ahead.of.goo.29cfdad": "Alojado en nuestro servidor para revisión, antes de Google Play.",
   "ShortDramaLiveAccess.download.test.apk.6e41328": "Descargar prueba APK",
-  "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6": "Pruebe Micro Drama en la web y Android",
+  "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6": "Pruebe Micro Drama en la web, iOS y Android",
   "ShortDramaLiveAccess.open.the.player.then.sign.in.with.google.or.bbff9da": "Abra el reproductor, luego inicie sesión con Google o toque un número de prueba. El OTP copia con un solo clic.",
   "ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8": "Inicie sesión con Google o utilice un número de prueba",
   "ShortDramaLiveAccess.tap.to.copy.ab4e649": "Toca para copiar",
@@ -868,5 +868,12 @@
   "constants.fashion.4706640": "Moda",
   "constants.vertical.video.series.cliffhanger.paywalls.87a9171": "Serie de videos verticales y muros de pago de suspenso",
   "constants.adaptive.multi.bitrate.hls.video.cms.440f54a": "Velocidad de bits múltiple adaptativa HLS y vídeo CMS",
-  "media.screenshot": "Captura de pantalla de {value0}"
+  "media.screenshot": "Captura de pantalla de {value0}",
+  "ShortDramaLiveAccess.ios.beta": "Beta de iOS",
+  "ShortDramaLiveAccess.try.on.ios": "Probar en iOS",
+  "ShortDramaLiveAccess.install.through.testflight": "Instala la beta a través de Apple TestFlight. Se requiere TestFlight.",
+  "ShortDramaLiveAccess.open.testflight": "Abrir TestFlight",
+  "ShortDramaLiveAccess.ios.beta.testflight": "Beta de iOS (TestFlight)",
+  "ShortDramaLiveAccess.heading.web": "Pruebe Micro Drama en la web",
+  "ShortDramaLiveAccess.heading.apps": "Pruebe Micro Drama en iOS y Android"
 }
