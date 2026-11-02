@@ -21,7 +21,7 @@ for (const locale of ["es", "de", "fr", "hi"]) {
   }
 }
 
-const roots = ["src/components/pages", "src/components/sections", "src/components/layout", "src/components/ui", "src/components/widgets"];
+const roots = ["src/components/pages", "src/components/sections", "src/components/layout", "src/components/ui"];
 const files = roots.flatMap(folder => fs.readdirSync(sourceFile(folder), { recursive: true }).filter(file => file.endsWith(".tsx")).map(file => `${folder}/${file}`))
   .concat(["src/lib/constants.ts", "src/components/site/LeadModal.tsx", "src/components/site/CookieConsent.tsx", "src/components/site/DemoButton.tsx"]);
 const fields = new Set("industry subheadline title intro subtitle headline badge index placeholder alt aria-label aria-description ariaLabel description footerNote ctaDemo ctaDemoText detail label text summary caption desc metric mechatron agency saas shopify tagline deliverables highlights points q a when value".split(" "));

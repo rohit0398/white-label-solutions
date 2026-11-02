@@ -1,3 +1,4 @@
+import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -96,18 +97,7 @@ export default function BlogIndexPage() {
   };
 
   const posts: BlogPost[] = [
-    {
-      slug: "short-drama-app-development",
-      category: "Short Drama",
-      pillar: "short-drama",
-      title: "Complete Guide to 9:16 Short-Drama App Development: 60FPS Swipe Player, Micro-Episode Monetization & Cloudflare Stream Ingest",
-      excerpt:
-        "Learn how to build and launch high-engagement 9:16 vertical short-drama apps (ReelShort & DramaBox style). Covers sub-50ms episode lookahead buffering, coin paywalls, and wholesale Cloudflare Stream CDN economics.",
-      readTime: "11 min read",
-      date: "October 2026",
-      featured: true,
-      tags: ["Flutter", "Short Drama", "Cloudflare Stream", "Paywalls"],
-    },
+    ...DRAMA_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "Short Drama", pillar: "short-drama", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", featured: article.slug === "short-drama-app-development", tags: ["Short Drama", "Launch Planning", "Monetization"] })),
     {
       slug: "ott-video-streaming-development",
       category: "Cinematic OTT",
