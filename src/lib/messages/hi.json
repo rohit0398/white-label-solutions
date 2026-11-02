@@ -446,7 +446,7 @@
   "ShortDramaLiveAccess.install.on.android.869ae2b": "Android पर इंस्टॉल करें",
   "ShortDramaLiveAccess.hosted.on.our.server.for.review.ahead.of.goo.29cfdad": "Google Play से पहले, समीक्षा के लिए हमारे सर्वर पर होस्ट किया गया।",
   "ShortDramaLiveAccess.download.test.apk.6e41328": "परीक्षण एपीके डाउनलोड करें",
-  "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6": "वेब और Android पर माइक्रो ड्रामा आज़माएँ",
+  "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6": "वेब, iOS और Android पर माइक्रो ड्रामा आज़माएँ",
   "ShortDramaLiveAccess.open.the.player.then.sign.in.with.google.or.bbff9da": "प्लेयर खोलें, फिर Google से साइन इन करें या किसी परीक्षण नंबर पर टैप करें। OTP एक क्लिक में कॉपी हो जाती है।",
   "ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8": "Google से साइन इन करें, या परीक्षण नंबर का उपयोग करें",
   "ShortDramaLiveAccess.tap.to.copy.ab4e649": "कॉपी करने के लिए टैप करें",
@@ -868,5 +868,12 @@
   "constants.fashion.4706640": "फ़ैशन",
   "constants.vertical.video.series.cliffhanger.paywalls.87a9171": "वर्टिकल वीडियो सीरीज़ और क्लिफहैंगर पेवॉल्स",
   "constants.adaptive.multi.bitrate.hls.video.cms.440f54a": "अनुकूली मल्टी-बिटरेट HLS और वीडियो CMS",
-  "media.screenshot": "{value0} का स्क्रीनशॉट"
+  "media.screenshot": "{value0} का स्क्रीनशॉट",
+  "ShortDramaLiveAccess.ios.beta": "iOS बीटा",
+  "ShortDramaLiveAccess.try.on.ios": "iOS पर आज़माएँ",
+  "ShortDramaLiveAccess.install.through.testflight": "Apple TestFlight से बीटा इंस्टॉल करें। TestFlight आवश्यक है।",
+  "ShortDramaLiveAccess.open.testflight": "TestFlight खोलें",
+  "ShortDramaLiveAccess.ios.beta.testflight": "iOS बीटा (TestFlight)",
+  "ShortDramaLiveAccess.heading.web": "वेब पर माइक्रो ड्रामा आज़माएँ",
+  "ShortDramaLiveAccess.heading.apps": "iOS और Android पर माइक्रो ड्रामा आज़माएँ"
 }

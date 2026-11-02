@@ -568,6 +568,7 @@ export const MICRODRAMA_DEMO = {
   websiteLabel: "microdrama.mechatronlab.com",
   apkUrl: "https://d3upvzjgckmuz9.cloudfront.net/apk/micro-drama.apk",
   apkLabel: "Download test APK",
+  iosBetaUrl: "https://testflight.apple.com/join/gNeTbCKH",
   googleLogin: true,
   phones: [
     "+91 99999 99999",
@@ -589,6 +590,7 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
     url: MICRODRAMA_DEMO.websiteUrl,
     appDownloadUrl: MICRODRAMA_DEMO.apkUrl,
     appDownloadLabel: MICRODRAMA_DEMO.apkLabel,
+    iosBetaUrl: MICRODRAMA_DEMO.iosBetaUrl,
     caseStudyUrl: "/case-studies/short-drama-platform",
     screenshotUrl: "/showcase/ott-drama-app.jpg",
     demoAccess: {

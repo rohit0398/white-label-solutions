@@ -4,7 +4,7 @@ import { useMessages } from "@/components/site/useMessages";
 
 import React, { useState } from "react";
 import { MICRODRAMA_DEMO } from "@/lib/constants";
-import { Check, Copy, Download, Globe } from "lucide-react";
+import { Check, Copy, Download, Globe, Smartphone } from "lucide-react";
 
 export function ShortDramaLiveAccess({
   emphasis = "both",
@@ -14,7 +14,7 @@ export function ShortDramaLiveAccess({
   const translateCopy = useMessages();
 
   const [copied, setCopied] = useState<string | null>(null);
-  const websiteFirst = emphasis !== "app";
+  const prioritizeIos = emphasis === "app";
 
   function copy(value: string, id: string) {
     const mark = () => {
@@ -58,11 +58,7 @@ export function ShortDramaLiveAccess({
       href={MICRODRAMA_DEMO.websiteUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative flex flex-col justify-between gap-4 rounded-xl border p-4 sm:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_-18px_rgba(245,158,11,0.65)] ${
-        websiteFirst
-          ? "border-amber-500/45 bg-amber-500/[0.06] hover:border-amber-500/70"
-          : "border-line bg-paper hover:border-amber-500/50"
-      }`}
+      className={`group relative flex min-w-0 flex-col justify-between gap-4 rounded-xl border p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_-18px_rgba(245,158,11,0.65)] sm:p-5 ${prioritizeIos ? "border-line bg-paper hover:border-amber-500/50" : "border-amber-500/45 bg-amber-500/[0.06] hover:border-amber-500/70"}`} 
     >
       <div className="flex items-start justify-between gap-3">
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-500/30 bg-paper text-amber-600 dark:text-amber-300">
@@ -72,7 +68,7 @@ export function ShortDramaLiveAccess({
       </div>
       <div>
         <p className="text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.open.the.website.899b705"))}</p>
-        <p className="mt-1 font-mono text-[11px] text-ink-3">{translateCopy(MICRODRAMA_DEMO.websiteLabel)}</p>
+        <p className="mt-1 font-mono text-[11px] text-ink-3 [overflow-wrap:anywhere]">{translateCopy(MICRODRAMA_DEMO.websiteLabel)}</p>
         <p className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
           <span>{translateCopy(englishMessage("ShortDramaLiveAccess.launch.player.04aed41"))}</span>
           <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -88,11 +84,7 @@ export function ShortDramaLiveAccess({
       href={MICRODRAMA_DEMO.apkUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative flex flex-col justify-between gap-4 rounded-xl border p-4 sm:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_-18px_rgba(245,158,11,0.65)] ${
-        websiteFirst
-          ? "border-line bg-paper hover:border-amber-500/50"
-          : "border-amber-500/45 bg-amber-500/[0.06] hover:border-amber-500/70"
-      }`}
+      className="group relative flex flex-col justify-between gap-4 rounded-xl border border-line bg-paper p-4 transition-all duration-200 hover:-translate-y-1 hover:border-amber-500/50 hover:shadow-[0_16px_40px_-18px_rgba(245,158,11,0.65)] sm:p-5"
     >
       <div className="flex items-start justify-between gap-3">
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-500/30 bg-paper text-amber-600 dark:text-amber-300">
@@ -113,6 +105,30 @@ export function ShortDramaLiveAccess({
     </a>
   );
 
+  const iosCard = (
+    <a
+      href={MICRODRAMA_DEMO.iosBetaUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative flex min-w-0 flex-col justify-between gap-4 rounded-xl border p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_40px_-18px_rgba(245,158,11,0.65)] sm:p-5 ${prioritizeIos ? "border-amber-500/60 bg-amber-500/[0.08] shadow-[0_0_0_1px_rgba(245,158,11,0.12)] hover:border-amber-500/80" : "border-line bg-paper hover:border-amber-500/50"}`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-500/30 bg-paper text-amber-600 dark:text-amber-300">
+          <Smartphone aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-hover:rotate-6" />
+        </span>
+        <span className="rounded-full border border-line bg-wash px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.ios.beta"))}</span>
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.try.on.ios"))}</p>
+        <p className="mt-1 text-[11px] leading-relaxed text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.install.through.testflight"))}</p>
+        <p className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
+          <span>{translateCopy(englishMessage("ShortDramaLiveAccess.open.testflight"))}</span>
+          <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </p>
+      </div>
+    </a>
+  );
+
   return (
     <section id="live-demo" className="pb-8 sm:pb-12">
       <div className="wrap">
@@ -125,21 +141,13 @@ export function ShortDramaLiveAccess({
                 <LiveDot />{translateCopy(englishMessage("short-drama.live.test.build.c215c43"))}</span>
             </div>
 
-            <h2 className="mt-3 text-xl font-semibold tracking-tight text-ink sm:text-2xl">{translateCopy(englishMessage("ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6"))}</h2>
+            <h2 className="mt-3 text-xl font-semibold tracking-tight text-ink sm:text-2xl">{translateCopy(englishMessage(emphasis === "web" ? "ShortDramaLiveAccess.heading.web" : emphasis === "app" ? "ShortDramaLiveAccess.heading.apps" : "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6"))}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">{translateCopy(englishMessage("ShortDramaLiveAccess.open.the.player.then.sign.in.with.google.or.bbff9da"))}</p>
 
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {websiteFirst ? (
-                <>
-                  {websiteCard}
-                  {apkCard}
-                </>
-              ) : (
-                <>
-                  {apkCard}
-                  {websiteCard}
-                </>
-              )}
+            <div className={`mt-5 grid gap-3 ${emphasis === "both" ? "md:grid-cols-3" : emphasis === "app" ? "sm:grid-cols-2" : ""}`}>
+              {emphasis !== "app" && websiteCard}
+              {emphasis !== "web" && iosCard}
+              {emphasis !== "web" && apkCard}
             </div>
 
             <div className="mt-5 rounded-xl border border-line bg-paper p-4 sm:p-5">
@@ -149,7 +157,7 @@ export function ShortDramaLiveAccess({
               </div>
 
               <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-line bg-wash px-3 py-2 text-xs text-ink-2">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-line bg-paper text-[10px] font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.g.a36a671"))}</span>{""}{translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.on.the.website.or.in.the.57da404"))}{""}</div>
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-line bg-paper text-[10px] font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.g.a36a671"))}</span>{""}{translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8"))}{""}</div>
 
               <ul className="mt-3 flex flex-wrap gap-2">
                 {MICRODRAMA_DEMO.phones.map((phone, index) => {
