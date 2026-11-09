@@ -12,6 +12,7 @@ export function CompleteStoreCallout() {
 
   return (
     <CompletePackageCallout
+      wide
       badge={translateCopy(englishMessage("CompletePackageCallout.all.in.one.package.a1ef02a"))}
       title={translateCopy(englishMessage("CompleteStoreCallout.looking.for.the.complete.e.commerce.solution.d0fc478"))}
       subtitle={translateCopy(englishMessage("CompleteStoreCallout.need.both.the.web.storefront.and.mobile.shop.ec80da2"))}

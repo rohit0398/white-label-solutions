@@ -1,38 +1,23 @@
 import { createLocalizer, englishMessage } from "@/lib/messages";
 import { getLocaleMessages } from "@/lib/locale-messages";
 
-import { priceText } from "@/lib/pricing-catalog";
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { SHORT_DRAMA_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { SHORT_DRAMA_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
-import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Work } from "@/components/sections/Work";
+import { StreamingRollout } from "@/components/sections/StreamingRollout";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { Screenshot } from "@/components/ui/Screenshot";
+import { ArchitectureModule } from "@/components/sections/ArchitectureModule";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import {
-  Smartphone,
-  Lock,
-  CreditCard,
-  Globe,
-  Film,
-  ShieldCheck,
-  Zap,
-  DollarSign,
-  BarChart3,
-  ArrowRight,
-} from "lucide-react";
-import Link from "@/components/ui/LocalizedLink";
 
 import { LOCALIZED_SHORT_DRAMA_SEO } from "@/lib/translations/seo";
 
@@ -106,140 +91,62 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
 
   const modules = [
     {
-      n: "01",
-      badge: translateCopy(englishMessage("ott-streaming.mobile.apps.a1fd88e")),
-      title: translateCopy(englishMessage("short-drama.native.9.16.vertical.short.drama.apps.ios.an.ed3a29e")),
-      subtitle: translateCopy(englishMessage("ott-streaming.unified.flutter.codebase.compiling.to.native.92cfa02")),
-      description:
-        translateCopy(englishMessage("short-drama.high.retention.60fps.vertical.swipe.player.e.e11dd91")),
-      childLink: {
-        href: "/solutions/short-drama-app-development",
-        label: priceText(translateCopy(englishMessage("short-drama.looking.for.mobile.apps.only.explore.app.onl.24d4b24"))),
-      },
-      screenshot: {
-        src: "/showcase/microdrama-mobile-feed.webp",
-        alt: englishMessage("ShortDrama.top.app.feedImage"),
-        caption: englishMessage("ShortDrama.top.app.previewCaption"),
-        portrait: true,
-      },
-      capabilities: [
-        {
-          icon: Smartphone,
-          title: translateCopy(englishMessage("short-drama.60fps.vertical.swipe.engine.2500230")),
-          desc: translateCopy(englishMessage("short-drama.tiktok.speed.vertical.gesture.swiping.with.i.9986ee1")),
-        },
-        {
-          icon: Lock,
-          title: translateCopy(englishMessage("short-drama.cliffhanger.paywall.gates.96ac307")),
-          desc: translateCopy(englishMessage("short-drama.automated.teaser.logic.stream.episodes.1.5.f.a3b774f")),
-        },
-        {
-          icon: CreditCard,
-          title: translateCopy(englishMessage("short-drama.in.app.vip.purchases.936b627")),
-          desc: translateCopy(englishMessage("short-drama.integrated.apple.storekit.google.play.billin.76b522c")),
-        },
-        {
-          icon: Zap,
-          title: translateCopy(englishMessage("short-drama.automated.push.notifications.70a9b24")),
-          desc: translateCopy(englishMessage("short-drama.targeted.fcm.and.apns.push.campaigns.alertin.7ca1392")),
-        },
+      id: "architecture-apps",
+      title: englishMessage("ShortDrama.architecture.app.title"),
+      intro: englishMessage("ShortDrama.architecture.app.intro"),
+      points: [
+        englishMessage("ShortDrama.top.app.playback"),
+        englishMessage("ShortDrama.architecture.app.vip"),
+        englishMessage("ShortDrama.architecture.app.publish"),
+      ],
+      link: { href: "/solutions/short-drama-app-development", label: englishMessage("ShortDrama.architecture.app.link") },
+      portrait: true,
+      galleryLabel: englishMessage("ShortDrama.top.app.previewCaption"),
+      images: [
+        { src: "/showcase/microdrama-mobile-feed.webp", alt: englishMessage("ShortDrama.top.app.feedImage") },
+        { src: "/showcase/microdrama-mobile-catalog.webp", alt: englishMessage("ShortDrama.top.app.catalogImage") },
+        { src: "/showcase/microdrama-mobile-player.webp", alt: englishMessage("ShortDrama.media.mobilePlayer") },
       ],
     },
     {
-      n: "02",
-      badge: translateCopy(englishMessage("short-drama.web.platform.5392cbe")),
-      title: translateCopy(englishMessage("short-drama.responsive.9.16.mobile.first.web.streaming.p.9825cae")),
-      subtitle: translateCopy(englishMessage("short-drama.next.js.16.web.player.for.desktop.browsers.a.ac009c7")),
-      description:
-        translateCopy(englishMessage("short-drama.zero.friction.browser.streaming.for.social.t.ae6d9a6")),
-      childLink: {
-        href: "/solutions/short-drama-website-development",
-        label: priceText(translateCopy(englishMessage("short-drama.looking.for.website.only.explore.website.pac.1e8102c"))),
-      },
-      screenshot: {
-        src: "/showcase/microdrama-web-player.webp",
-        alt: englishMessage("ShortDrama.top.web.image"),
-      },
-      capabilities: [
-        {
-          icon: Globe,
-          title: translateCopy(englishMessage("short-drama.sub.second.social.landing.66d5490")),
-          desc: translateCopy(englishMessage("short-drama.zero.app.download.friction.social.media.camp.dfc0bfc")),
-        },
-        {
-          icon: Film,
-          title: translateCopy(englishMessage("short-drama.slide.out.episode.drawer.c3d606d")),
-          desc: translateCopy(englishMessage("short-drama.full.season.episode.queue.with.visual.lock.i.cee826b")),
-        },
-        {
-          icon: CreditCard,
-          title: translateCopy(englishMessage("short-drama.stripe.vip.subscriptions.2dd450d")),
-          desc: translateCopy(englishMessage("short-drama.web.native.checkout.with.apple.pay.google.pa.ba93c24")),
-        },
-        {
-          icon: ShieldCheck,
-          title: translateCopy(englishMessage("short-drama.seo.series.episode.pages.27d47a0")),
-          desc: translateCopy(englishMessage("short-drama.server.rendered.title.synopsis.pages.and.sch.a2336e9")),
-        },
+      id: "architecture-web",
+      title: englishMessage("ShortDrama.architecture.web.title"),
+      intro: englishMessage("ShortDrama.architecture.web.intro"),
+      points: [
+        englishMessage("ShortDrama.top.web.sharing"),
+        englishMessage("ShortDrama.architecture.web.browse"),
+        englishMessage("ShortDrama.top.web.checkout"),
+      ],
+      link: { href: "/solutions/short-drama-website-development", label: englishMessage("ShortDrama.architecture.web.link") },
+      images: [
+        { src: "/showcase/microdrama-web-player.webp", alt: englishMessage("ShortDrama.top.web.image") },
+        { src: "/showcase/microdrama-catalog.webp", alt: englishMessage("ShortDrama.top.platform.image") },
+        { src: "/showcase/microdrama-web-ranked.webp", alt: englishMessage("ShortDrama.media.webRanked") },
+        { src: "/showcase/microdrama-web-genres.webp", alt: englishMessage("OttOverview.web.genresImage") },
+        { src: "/showcase/microdrama-web-discovery.webp", alt: englishMessage("ShortDrama.media.webDiscovery") },
+        { src: "/showcase/microdrama-web-sign-in.webp", alt: englishMessage("ShortDrama.media.webSignIn") },
+        { src: "/showcase/microdrama-web-vip-pass.webp", alt: englishMessage("ShortDrama.media.webVip") },
+        { src: "/showcase/microdrama-web-account.webp", alt: englishMessage("ShortDrama.media.webAccount") },
       ],
     },
     {
-      n: "03",
-      badge: translateCopy(englishMessage("ott-streaming.command.center.26abab6")),
-      title: translateCopy(englishMessage("short-drama.video.cms.episode.paywall.operations.console.fb94060")),
-      subtitle: translateCopy(englishMessage("short-drama.centralized.cloud.video.encoding.episode.tea.8890559")),
-      description:
-        translateCopy(englishMessage("short-drama.your.self.hosted.administrative.operations.c.bee8d68")),
-      screenshot: {
-        src: "/showcase/microdrama-admin-series.webp",
-        alt: englishMessage("ShortDrama.media.series"),
-        caption: englishMessage("ShortDrama.media.series"),
-      },
-      capabilities: [
-        {
-          icon: Zap,
-          title: translateCopy(englishMessage("short-drama.bulk.cloud.transcoding.acf8a79")),
-          desc: translateCopy(englishMessage("short-drama.batch.upload.50.100.vertical.episodes.simult.678c5c9")),
-        },
-        {
-          icon: DollarSign,
-          title: translateCopy(englishMessage("short-drama.dynamic.episode.teaser.rules.277a247")),
-          desc: translateCopy(englishMessage("short-drama.set.teaser.rules.per.drama.in.1.click.offer.c3a9bab")),
-        },
-        {
-          icon: ShieldCheck,
-          title: translateCopy(englishMessage("short-drama.signed.drm.token.authorization.6090a4c")),
-          desc: translateCopy(englishMessage("short-drama.time.limited.signed.token.playback.prevents.4feb962")),
-        },
-        {
-          icon: BarChart3,
-          title: translateCopy(englishMessage("short-drama.cliffhanger.drop.off.analytics.005a37f")),
-          desc: translateCopy(englishMessage("short-drama.inspect.minute.by.minute.viewer.retention.gr.b4bb6ed")),
-        },
+      id: "video-cms",
+      title: englishMessage("ShortDrama.top.platform.admin"),
+      intro: englishMessage("ShortDrama.architecture.admin.intro"),
+      points: [
+        englishMessage("ShortDrama.architecture.admin.publish"),
+        englishMessage("ShortDrama.architecture.admin.access"),
+        englishMessage("ShortDrama.top.platform.analytics"),
       ],
-    },
-  ];
-
-  const rolloutSteps = [
-    {
-      when: translateCopy(englishMessage("home.week.1.23a8b7f")),
-      title: translateCopy(englishMessage("short-drama.brand.identity.paywall.strategy.ingest.confi.c3b311e")),
-      text: translateCopy(englishMessage("short-drama.we.configure.your.custom.branding.logo.color.0198a94")),
-    },
-    {
-      when: translateCopy(englishMessage("home.week.2.ad14f06")),
-      title: translateCopy(englishMessage("short-drama.private.cloud.transcoding.video.cms.setup.57d4e78")),
-      text: translateCopy(englishMessage("short-drama.we.deploy.automated.multi.bitrate.hls.transc.69deffe")),
-    },
-    {
-      when: translateCopy(englishMessage("home.week.3.6c532cf")),
-      title: translateCopy(englishMessage("short-drama.flutter.mobile.apps.next.js.web.player.9afd2b8")),
-      text: translateCopy(englishMessage("short-drama.native.android.and.ios.mobile.apps.are.compi.6f64a3b")),
-    },
-    {
-      when: translateCopy(englishMessage("home.week.4.d0b7b34")),
-      title: translateCopy(englishMessage("short-drama.store.submissions.performance.audits.handove.6ce34fe")),
-      text: translateCopy(englishMessage("short-drama.we.guide.your.team.through.apple.app.store.a.db2923a")),
+      images: [
+        { src: "/showcase/microdrama-admin-series.webp", alt: englishMessage("ShortDrama.media.series") },
+        { src: "/showcase/microdrama-admin-episodes.webp", alt: englishMessage("ShortDrama.media.episodes") },
+        { src: "/showcase/microdrama-admin-home-sections.webp", alt: englishMessage("ShortDrama.media.adminHomeSections") },
+        { src: "/showcase/microdrama-admin-ranked-series.webp", alt: englishMessage("ShortDrama.media.adminRankedSeries") },
+        { src: "/showcase/microdrama-admin-overview.webp", alt: englishMessage("ShortDrama.media.adminOverview") },
+        { src: "/showcase/microdrama-admin-analytics.webp", alt: englishMessage("ShortDrama.media.analytics") },
+        { src: "/showcase/microdrama-admin-sign-in.webp", alt: englishMessage("ShortDrama.media.adminSignIn") },
+      ],
     },
   ];
 
@@ -258,104 +165,18 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         {/* Architecture & Modules Breakout */}
         <Section
           id="architecture"
-          index={translateCopy(translateCopy(englishMessage("ott-streaming.01.platform.architecture.1f19a4d")))}
-          title={translateCopy(translateCopy(englishMessage("short-drama.what.is.included.in.the.flagship.drama.suite.d2f0e6f")))}
-          intro={translateCopy(translateCopy(englishMessage("short-drama.a.comprehensive.9.16.short.drama.software.pl.f3f1aea")))}
+          title={englishMessage("ShortDrama.architecture.title")}
+          intro={englishMessage("ShortDrama.architecture.intro")}
           wide
         >
-          <div className="space-y-32 sm:space-y-40">
-            {modules.map((m) => (
-              <div
-                key={m.n}
-                id={m.n === "03" ? "video-cms" : undefined}
-                className="border-t border-line pt-12 space-y-8"
-              >
-                <div className={translateCopy(translateCopy(englishMessage("ott-streaming.max.w.3xl.space.y.3.70ddb3d")))}>
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm text-ink-3">{translateCopy(m.n)}</span>
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-wash border border-line text-ink-2">
-                      {translateCopy(m.badge)}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(m.title)}</h3>
-                  <p className="text-xs font-mono text-ink-3">{translateCopy(m.subtitle)}</p>
-                  <p className="text-sm text-ink-2 leading-relaxed">{translateCopy(m.description)}</p>
-
-                  {m.childLink && (
-                    <div className="pt-1">
-                      <Link
-                        href={m.childLink.href}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-accent hover:underline"
-                      >
-                        <span>{translateCopy(m.childLink.label)}</span>
-                        <ArrowRight className={translateCopy(translateCopy(englishMessage("ott-streaming.h.3.w.3.a9546f0")))} />
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
-                {m.screenshot && (
-                  <div className={`group mx-auto w-full ${m.screenshot.portrait ? "max-w-[15rem]" : "max-w-3xl"}`}>
-                    <Screenshot
-                      sizes={m.screenshot.portrait ? "240px" : SHORT_DRAMA_SCREENSHOT_SIZES}
-                      src={m.screenshot.src}
-                      alt={translateCopy(m.screenshot.alt)}
-                      caption={m.screenshot.caption}
-                      className={translateCopy(translateCopy(englishMessage("ott-streaming.transition.transform.duration.300.0e49470")))}
-                    />
-                  </div>
-                )}
-
-                {m.n === "03" && (
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    {(["episodes", "analytics"] as const).map((capture) => {
-                      const label = englishMessage(`ShortDrama.media.${capture}`);
-                      return <Screenshot key={capture} src={`/showcase/microdrama-admin-${capture}.webp`} alt={label} caption={label}
-                        sizes="(min-width: 1088px) 508px, (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 48px)" />;
-                    })}
-                  </div>
-                )}
-
-                {m.capabilities && m.capabilities.length > 0 && (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
-                    {m.capabilities.map((c) => {
-                      const Icon = c.icon;
-                      return (
-                        <div key={c.title} className="space-y-2">
-                          <div className="flex items-center gap-2 text-ink">
-                            <div className="h-7 w-7 rounded-md bg-wash border border-line flex items-center justify-center text-accent">
-                              <Icon className="h-3.5 w-3.5" />
-                            </div>
-                            <h4 className="font-semibold text-sm tracking-tight">{translateCopy(c.title)}</h4>
-                          </div>
-                          <p className="text-xs text-ink-2 leading-relaxed">{translateCopy(c.desc)}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+          <div className="space-y-24 sm:space-y-32">
+            {modules.map((module) => (
+              <ArchitectureModule key={module.id} {...module} />
             ))}
           </div>
         </Section>
 
-        {/* 4-Week Cloud Rollout Timeline */}
-        <HowItWorks
-          id="rollout"
-          index={translateCopy(translateCopy(englishMessage("ott-streaming.02.4.week.deployment.d57b8fc")))}
-          title={translateCopy(englishMessage("short-drama.from.media.catalog.to.production.app.launch.1b5ac12"))}
-          badge={translateCopy(translateCopy(englishMessage("home.rapid.2.4.week.deployment.private.cloud.vpc.6ba557f")))}
-          steps={translateCopy(rolloutSteps)}
-        />
-
-        {/* Work / Production Showcase */}
-        <Work
-          id="production-apps"
-          index={translateCopy(translateCopy(englishMessage("home.03.production.experience.cb464c0")))}
-          title={translateCopy(englishMessage("ott-streaming.battle.tested.video.entertainment.platforms.02a1fbc"))}
-          intro={translateCopy(translateCopy(englishMessage("ott-streaming.our.engineering.team.has.built.and.deployed.e0d983e")))}
-          projects={OTT_SHOWCASE_PROJECTS}
-        />
+        <StreamingRollout family="short-drama" offer="platform" />
 
         {/* Dedicated Base Pricing ($4,999 / $1,999 / $20/hr) */}
         <Pricing

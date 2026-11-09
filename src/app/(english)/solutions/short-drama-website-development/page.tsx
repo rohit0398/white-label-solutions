@@ -1,24 +1,22 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
-import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
-import { englishMessage } from "@/lib/messages";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { Screenshot } from "@/components/ui/Screenshot";
+import { ArchitectureModule } from "@/components/sections/ArchitectureModule";
+import { shortDramaWebModule } from "@/components/sections/streaming-architecture";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
+import { StreamingRollout } from "@/components/sections/StreamingRollout";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { Globe, ShieldCheck, Zap, Share2 } from "lucide-react";
 
 const searchTitle = "Short Drama Website Development for Vertical Video";
 const searchDescription =
@@ -78,29 +76,6 @@ export default function ShortDramaWebsiteDevelopmentPage() {
     siteUrl,
   });
 
-  const webRolloutSteps = [
-    {
-      when: "Week 1",
-      title: "Web Portal Theming, Domain Setup & Ingest Pipeline",
-      text: "We configure your custom domain, SSL certificates, brand CSS tokens, VIP subscription packages, and Cloudflare Stream credentials.",
-    },
-    {
-      when: "Week 2",
-      title: "Video CMS & Automated Adaptive Transcoding",
-      text: "We deploy the Video CMS admin console on your private cloud, configure multi-bitrate HLS transcoding, and set up paywall rules.",
-    },
-    {
-      when: "Week 3",
-      title: "Next.js Web Streaming Player & Stripe Integration",
-      text: "We build your mobile-first responsive web portal with instant-play HLS streaming, social deep-link metadata, and Stripe recurring VIP billing.",
-    },
-    {
-      when: "Week 4",
-      title: "SEO Audits, Production Stress-Testing & Delivery",
-      text: "We perform Core Web Vitals optimizations, verify automated sitemaps and series schema, and hand over 100% unencrypted Git repository source code.",
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
       <JsonLd schema={breadcrumbSchema} />
@@ -113,87 +88,13 @@ export default function ShortDramaWebsiteDevelopmentPage() {
         {/* Unified Hero */}
         <ShortDramaOverview offer="web" />
 
-        {/* Web Mechanics Feature Grid */}
-        <Section
-          id="web-architecture"
-          index="01 · Responsive Web Architecture"
-          title="Responsive 9:16 Mobile-First Web Streaming Player."
-          intro="Frictionless browser playback for viral traffic. When viewers tap your ads on TikTok, Instagram, or YouTube, video playback starts within 800ms directly in their mobile browser with instant Stripe VIP checkout."
-          wide
-        >
-          <div className="max-w-3xl mx-auto w-full group my-8">
-            <Screenshot
-              sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
-              src="/showcase/microdrama-web-player.webp"
-              alt={englishMessage("ShortDrama.top.web.image")}
-              className="transition-transform duration-300"
-            />
-          </div>
-
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Globe className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Zero-Install Instant Play</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                When users tap your ads on TikTok, Instagram, or YouTube, video playback starts within 800ms in their mobile web browser.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Stripe VIP Recurring Pass</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Direct credit card, Apple Pay, and Google Pay billing via Stripe with zero Apple/Google 30% store commission cuts.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Share2 className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Deep-Link Social Sharing</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Every episode has unique indexable OpenGraph tags. Viewers share direct episode links with rich preview thumbnails on WhatsApp.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Zap className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Rewarded Web Video Ads</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Integrated with Google Ad Manager &amp; VAST video advertising. Non-subscribers watch pre-roll or mid-roll video ads to unlock episodes.
-              </p>
-            </div>
-          </div>
+        <Section id="web-architecture" wide>
+          <ArchitectureModule heading="h2" {...shortDramaWebModule} />
         </Section>
 
-        {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" shortDramaCapture="series" />
+        <OttCmsShowcase />
 
-        {/* 4-Week Rollout */}
-        <HowItWorks
-          id="rollout"
-          index="03 · 4-Week Deployment"
-          title="From Media Library to Production Web Portal"
-          badge="Rapid 2–4 Week Web Platform Rollout"
-          steps={webRolloutSteps}
-        />
-
-        {/* Work / Production Showcase */}
-        <Work
-          id="production-apps"
-          index="04 · Production Experience"
-          title="Battle-Tested Video &amp; Entertainment Platforms"
-          intro="Our engineering team has built and deployed entertainment streaming applications operating at multi-million scale."
-          projects={OTT_SHOWCASE_PROJECTS}
-          demoPlatforms="web"
-        />
+        <StreamingRollout family="short-drama" offer="web" />
 
         {/* Cross-Sell Callout Box to Base Short-Drama Package */}
         <CompleteShortDramaCallout />

@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { LaunchSteps } from "@/components/ui/LaunchSteps";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { displayPackagePrice } from "@/lib/pricing-catalog";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
@@ -349,6 +350,19 @@ export default function OttVideoStreamingDevelopmentPage() {
               alt="MicroDrama admin catalog with series records and publishing controls"
               caption="MicroDrama’s admin panel shows how a video team can organize and publish a series catalog."
             />
+          </section>
+
+          <section className="space-y-4">
+            <h2 className="text-2xl font-semibold tracking-tight text-ink">6. OTT launch checklist</h2>
+            <p className="text-ink-2 leading-relaxed">
+              Use a few real titles to check the whole path from upload to playback. If you’re launching mobile apps, plan for store review after submission.
+            </p>
+            <LaunchSteps compact steps={[
+              { title: "Prepare the first titles", text: "Gather master files, captions, artwork, and release dates. Confirm where and on which devices each title can play." },
+              { title: "Set up access and billing", text: "Check which titles viewers can watch for free or with a subscription. Test purchase, renewal, and cancellation." },
+              { title: "Test on launch devices", text: "Try playback and resume on real browsers and phones. Test casting or offline downloads if they’re part of your package." },
+              { title: "Assign launch responsibilities", text: "Confirm who publishes the site, submits apps, monitors streaming costs, and responds to playback or payment problems." },
+            ]} />
           </section>
 
           {/* Bottom Conversion Box */}

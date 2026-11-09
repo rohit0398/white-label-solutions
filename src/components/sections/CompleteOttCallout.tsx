@@ -12,6 +12,7 @@ export function CompleteOttCallout() {
 
   return (
     <CompletePackageCallout
+      wide
       badge={translateCopy(englishMessage("CompleteOttCallout.unified.entertainment.stack.73d544a"))}
       title={translateCopy(englishMessage("CompleteOttCallout.looking.for.the.complete.ott.short.drama.sol.abdc4ab"))}
       subtitle={translateCopy(englishMessage("CompleteOttCallout.need.both.9.16.vertical.drama.reels.and.16.9.9ecf0f5"))}

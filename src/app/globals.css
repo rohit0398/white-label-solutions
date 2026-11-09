@@ -122,6 +122,17 @@ body,
   background: var(--theme-scrollbar-thumb-hover);
 }
 
+/* Keep screenshot tracks swipeable without the site-wide scrollbar. */
+.screenshot-gallery-track {
+  scrollbar-width: none;
+}
+
+.screenshot-gallery-track::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 /* Keyframe animations for living ambient dynamics and tactile motion */
 @keyframes breathingPulse {
   0%, 100% {
@@ -415,8 +426,6 @@ body,
   }
 }
 
-/* Make small footer links comfortable on touch screens. */
-footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

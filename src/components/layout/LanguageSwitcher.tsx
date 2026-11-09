@@ -59,7 +59,7 @@ export function LanguageSwitcher() {
         aria-expanded={open}
         aria-haspopup="true"
         aria-label={translateCopy(currentLang?.label || "English")}
-        className="inline-flex items-center gap-1.5 px-2.5 py-2.5 rounded-md border border-line bg-wash/50 hover:bg-wash hover:border-ink/30 text-xs font-mono text-ink-2 hover:text-ink transition-all cursor-pointer select-none"
+        className="inline-flex min-h-11 items-center gap-1.5 px-2.5 py-2 rounded-md border border-line bg-wash/50 hover:bg-wash hover:border-ink/30 text-xs font-mono text-ink-2 hover:text-ink transition-all cursor-pointer select-none md:min-h-9"
       >
         <Globe className="h-3.5 w-3.5 text-accent shrink-0" aria-hidden="true" />
         <span className="font-medium text-ink">{translateCopy(currentLang?.label || "English")}</span>
@@ -91,7 +91,7 @@ export function LanguageSwitcher() {
                 onClick={() => {
                   setOpen(false);
                 }}
-                className={`w-full flex items-center justify-between px-2.5 py-3 text-xs rounded-lg transition-colors cursor-pointer text-left ${
+                className={`w-full min-h-11 flex items-center justify-between px-2.5 py-2 text-xs rounded-lg transition-colors cursor-pointer text-left md:min-h-9 ${
                   isSelected
                     ? "bg-accent/10 text-accent font-semibold"
                     : "text-ink-2 hover:bg-wash hover:text-ink"
