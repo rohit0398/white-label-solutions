@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { MicroDramaAppPreview } from "@/components/sections/MicroDramaAppPreview";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { LaunchSteps } from "@/components/ui/LaunchSteps";
 import { DemoButton } from "@/components/site/DemoButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { DRAMA_ARTICLES, dramaArticle } from "@/lib/content/short-drama-articles";
@@ -83,6 +84,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
           {section.paragraphs.map((paragraph, i) => <p key={i} className="text-ink-2 leading-relaxed">{paragraph}</p>)}
           {section.bullets && <ul className="list-disc pl-5 space-y-2 text-ink-2 leading-relaxed">{section.bullets.map(item => <li key={item}>{item}</li>)}</ul>}
+          {section.checklist && <LaunchSteps steps={section.checklist} compact />}
           {section.id === previewSection && (
             <div className="space-y-3">
               <p className="text-sm text-ink-3">MicroDrama’s mobile website shows how viewers browse the catalog and preview an episode.</p>

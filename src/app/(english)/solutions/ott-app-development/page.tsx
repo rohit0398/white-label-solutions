@@ -1,24 +1,22 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS, OTT_SOLUTION_PROJECTS } from "@/lib/constants";
-import { englishMessage } from "@/lib/messages";
+import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { OttOverview } from "@/components/sections/OttOverview";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { Screenshot } from "@/components/ui/Screenshot";
+import { ArchitectureModule } from "@/components/sections/ArchitectureModule";
+import { ottAppModule } from "@/components/sections/streaming-architecture";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
+import { StreamingRollout } from "@/components/sections/StreamingRollout";
 import { CompleteOttCallout } from "@/components/sections/CompleteOttCallout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { Smartphone, ShieldCheck, Download, Tv } from "lucide-react";
 
 const searchTitle = "OTT App Development for iOS & Android";
 const searchDescription =
@@ -79,29 +77,6 @@ export default function OttAppDevelopmentPage() {
     siteUrl,
   });
 
-  const ottAppRolloutSteps = [
-    {
-      when: "Week 1",
-      title: "Mobile App UI Design, Theming & Encoding Pipeline",
-      text: "We configure your brand logo, app splash screen, dark cinematic theme tokens, and Cloudflare Stream video credentials.",
-    },
-    {
-      when: "Week 2",
-      title: "Private Cloud Video CMS & Multi-Bitrate Ingest",
-      text: "We deploy the Video CMS console on your cloud, set up automated HLS encoding, and configure DRM signed playback tokens.",
-    },
-    {
-      when: "Week 3",
-      title: "Flutter iOS & Android Compiles + TV Casting",
-      text: "We compile native Flutter apps with Apple StoreKit and Google Play Billing for VIP passes, and integrate AirPlay & Chromecast support.",
-    },
-    {
-      when: "Week 4",
-      title: "App Store Submissions & Production Delivery",
-      text: "We submit both apps under your corporate developer accounts, assist through store approval review, and deliver 100% unencrypted Git repository source code.",
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
       <JsonLd schema={breadcrumbSchema} />
@@ -113,87 +88,13 @@ export default function OttAppDevelopmentPage() {
       <main className="ott-page flex-1">
         <OttOverview offer="app" />
 
-        {/* Mobile App Feature Grid */}
-        <Section
-          id="app-features"
-          index="01 · Native Mobile App Architecture"
-          title="Native 16:9 Widescreen Streaming Apps (iOS & Android)."
-          intro="Engineered for binge-watching on smartphones and tablets. Hardware-accelerated 60FPS video playback, offline encrypted downloads, 1-tap TV casting to Chromecast and AirPlay, and native In-App Purchase VIP passes."
-          wide
-        >
-          <div className="max-w-[14rem] mx-auto w-full group my-8">
-            <Screenshot
-              src="/showcase/microdrama-mobile-feed.webp"
-              sizes="224px"
-              alt={englishMessage("ShortDrama.top.app.feedImage")}
-              caption={englishMessage("ShortDrama.top.app.previewCaption")}
-              className="transition-transform duration-300"
-            />
-          </div>
-
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Smartphone className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Native 60FPS Player</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Hardware-accelerated video decoding with gesture brightness/volume controls, double-tap seek, and picture-in-picture mode.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Tv className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Chromecast &amp; AirPlay</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                1-tap casting to smart TVs, Apple TV, Google TV, and Roku with lockscreen audio controls and remote playback sync.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Download className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Encrypted Downloads</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Offline video playback for flights and commutes. Encrypted local storage protects video assets from extraction.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">In-App VIP Subscriptions</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Native Apple StoreKit and Google Play Billing for monthly and annual VIP passes with zero middleman SaaS rent.
-              </p>
-            </div>
-          </div>
+        <Section id="app-features" wide>
+          <ArchitectureModule heading="h2" {...ottAppModule} />
         </Section>
 
-        {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" shortDramaCapture="episodes" />
+        <OttCmsShowcase ott />
 
-        {/* 4-Week Rollout */}
-        <HowItWorks
-          id="rollout"
-          index="03 · 4-Week Deployment"
-          title="From Raw Assets to Live App Store Binaries"
-          badge="Rapid 2–4 Week Mobile App Rollout"
-          steps={ottAppRolloutSteps}
-        />
-
-        {/* Work / Production Showcase */}
-        <Work
-          id="production-apps"
-          index="04 · Production Experience"
-          title="Battle-Tested Video &amp; Entertainment Platforms"
-          intro="Our engineering team has built and deployed entertainment streaming applications operating at multi-million scale."
-          projects={OTT_SOLUTION_PROJECTS}
-        />
+        <StreamingRollout family="ott" offer="app" />
 
         {/* Cross-Sell Callout Box to Complete Package */}
         <CompleteOttCallout />

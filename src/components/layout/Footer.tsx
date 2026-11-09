@@ -4,8 +4,8 @@ import { useMessages } from "@/components/site/useMessages";
 
 import Image from "@/components/ui/LocalizedImage";
 import { trackWhatsAppClick } from "@/lib/analytics";
-import { localizedPath } from "@/lib/site-config";
-import React from "react";
+import { ChevronDown } from "lucide-react";
+import { useId, useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
 import { BRAND } from "@/lib/constants";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
@@ -13,8 +13,12 @@ import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
+const footerLinkClass = "flex min-h-11 items-center py-1 text-ink-2 transition-colors [overflow-wrap:anywhere] hover:text-ink md:min-h-7";
+
 export function Footer() {
   const translateCopy = useMessages();
+  const groupId = useId();
+  const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
 
   const { language } = useSite();
   const t = TRANSLATIONS[language];
@@ -45,7 +49,6 @@ export function Footer() {
         { label: englishMessage("Footer.mechatron.lab.store.c3f3334"), href: "/case-studies/mechatron-lab" },
         { label: englishMessage("Footer.estorealley.case.study.99a7857"), href: "/case-studies/estorealley" },
         { label: englishMessage("Footer.about.mechatron.lab.1d844e8"), href: "/about" },
-        { label: englishMessage("Footer.contact.engineering.e0ef092"), href: "/contact" },
       ],
     },
     {
@@ -61,9 +64,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-line">
-      <div className="wrap-wide py-16 grid gap-10 sm:grid-cols-4 text-sm">
-        <div>
+    <footer className="border-t border-line bg-wash/30">
+      <div className="wrap-wide grid gap-y-4 py-5 text-sm md:grid-cols-[1.1fr_1.15fr_1fr_1fr] md:gap-x-5 md:py-8 lg:gap-x-8">
+        <div className="min-w-0">
           <div className="flex items-center gap-2">
             <Image
               src="/brand/favicon.png"
@@ -75,56 +78,67 @@ export function Footer() {
             />
             <p className="font-semibold">{translateCopy(BRAND.name)}</p>
           </div>
-          <p className="mt-2 text-ink-3 leading-relaxed">
+          <p className="mt-2 max-w-sm text-xs leading-relaxed text-ink-3 md:text-sm">
             {translateCopy(t.footer.tagline)}
           </p>
+          <Link href="/contact" className="mt-1 inline-flex min-h-11 items-center text-sm font-medium text-ink underline-offset-4 hover:underline md:min-h-7">
+            {translateCopy(englishMessage("Footer.contact.us.9ad0ccf"))}
+          </Link>
         </div>
-        {columns.map((col) => (
-          <div key={col.title}>
-            <p className="text-ink-3">{translateCopy(col.title)}</p>
-            <ul className="mt-3 space-y-2">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  {translateCopy("external" in l && l.external ? (
-                    <a
-                      href={l.href.startsWith("/") ? localizedPath(l.href, language) : l.href}
-                      onClick={() => trackWhatsAppClick("Footer")}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink-2 hover:text-ink"
-                    >
-                      {translateCopy(l.label)}
-                    </a>
-                  ) : (
-                    <Link href={l.href.startsWith("/") ? localizedPath(l.href, language) : l.href} className="text-ink-2 hover:text-ink">
-                      {translateCopy(l.label)}
-                    </Link>
+        <div className="divide-y divide-line border-y border-line md:contents md:divide-y-0">
+          {columns.map((col, index) => {
+            const panelId = `${groupId}-${index}`;
+            const expanded = expandedGroup === col.title;
+            const label = translateCopy(col.title);
+
+            return (
+              <div key={col.title} className="min-w-0">
+                <h2 className="text-sm font-semibold text-ink">
+                  <span className="hidden md:block">{label}</span>
+                  <button
+                    type="button"
+                    aria-expanded={expanded}
+                    aria-controls={panelId}
+                    onClick={() => setExpandedGroup(expanded ? null : col.title)}
+                    className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 text-start md:hidden"
+                  >
+                    {label}
+                    <ChevronDown aria-hidden="true" className={`size-4 shrink-0 text-ink-3 motion-safe:transition-transform ${expanded ? "rotate-180" : ""}`} />
+                  </button>
+                </h2>
+                <ul id={panelId} className={`${expanded ? "block" : "hidden"} pb-2 md:mt-2 md:block md:pb-0`}>
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      {"external" in link && link.external ? (
+                        <a
+                          href={link.href}
+                          onClick={() => trackWhatsAppClick("Footer")}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={footerLinkClass}
+                        >
+                          {translateCopy(link.label)}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className={footerLinkClass}>{link.label}</Link>
+                      )}
+                    </li>
                   ))}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="wrap-wide pb-12 pt-6 border-t border-line/60 flex flex-col md:flex-row gap-6 md:items-center justify-between text-xs text-ink-3">
-        <div className="space-y-2">
-          <p className="font-medium text-ink-2">
+      <div className="border-t border-line/60">
+        <div className="wrap-wide flex flex-col gap-2 py-3 text-xs text-ink-3 md:flex-row md:items-center md:justify-between md:gap-4">
+          <p className="leading-relaxed">
             © 2026 {translateCopy(BRAND.name)}. {translateCopy(t.footer.copyright)}
           </p>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-3">
-            <Link href="/privacy" className="hover:text-ink transition-colors">{translateCopy(englishMessage("Footer.privacy.policy.9db108b"))}</Link>
-            <span aria-hidden="true" className="text-line">·</span>
-            <Link href="/terms" className="hover:text-ink transition-colors">{translateCopy(englishMessage("Footer.terms.of.service.0c8a9a9"))}</Link>
-            <span aria-hidden="true" className="text-line">·</span>
-            <Link href="/refund-policy" className="hover:text-ink transition-colors">{translateCopy(englishMessage("Footer.refund.policy.d5527d0"))}</Link>
-            <span aria-hidden="true" className="text-line">·</span>
-            <Link href="/contact" className="hover:text-ink transition-colors">{translateCopy(englishMessage("Footer.contact.us.9ad0ccf"))}</Link>
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 md:shrink-0 md:justify-end">
+            <ThemeSwitcher />
+            <LanguageSwitcher />
           </div>
-        </div>
-        <div className="flex items-center gap-5 shrink-0">
-          <ThemeSwitcher />
-          <div className="h-4 w-px bg-line" aria-hidden="true" />
-          <LanguageSwitcher />
         </div>
       </div>
     </footer>

@@ -1,24 +1,22 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_WEB_PRICING_TIERS, OTT_SOLUTION_PROJECTS } from "@/lib/constants";
-import { englishMessage } from "@/lib/messages";
+import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_WEB_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { OttOverview } from "@/components/sections/OttOverview";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
-import { Screenshot } from "@/components/ui/Screenshot";
+import { ArchitectureModule } from "@/components/sections/ArchitectureModule";
+import { ottWebModule } from "@/components/sections/streaming-architecture";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
+import { StreamingRollout } from "@/components/sections/StreamingRollout";
 import { CompleteOttCallout } from "@/components/sections/CompleteOttCallout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { Monitor, Film, ShieldCheck, Zap } from "lucide-react";
 
 const searchTitle = "OTT Website Development for Movies & Series";
 const searchDescription =
@@ -78,29 +76,6 @@ export default function OttWebsiteDevelopmentPage() {
     siteUrl,
   });
 
-  const ottWebRolloutSteps = [
-    {
-      when: "Week 1",
-      title: "Streaming Architecture, UI Design & Domain Configuration",
-      text: "We configure your custom streaming domain, SSL certificates, dark cinema color tokens, and Cloudflare Stream credentials.",
-    },
-    {
-      when: "Week 2",
-      title: "Private Cloud Video CMS & Multi-Bitrate Transcoding",
-      text: "We deploy the Video CMS administrative portal, configure adaptive HLS encoding profiles, and setup signed DRM playback tokens.",
-    },
-    {
-      when: "Week 3",
-      title: "Next.js Web Streaming Portal & Stripe Checkout",
-      text: "We build your widescreen streaming portal with hero billboard video trailers, continue watching sync, and Stripe recurring VIP billing.",
-    },
-    {
-      when: "Week 4",
-      title: "SEO Audits, Video Stress-Testing & Handover",
-      text: "We verify Core Web Vitals, validate schema markup for movies and series, and deliver 100% unencrypted Git repository source code.",
-    },
-  ];
-
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
       <JsonLd schema={breadcrumbSchema} />
@@ -112,87 +87,13 @@ export default function OttWebsiteDevelopmentPage() {
       <main className="ott-page flex-1">
         <OttOverview offer="web" />
 
-        {/* Web Experience Highlights */}
-        <Section
-          id="web-experience"
-          index="01 · Cinema-Grade Web Architecture"
-          title="16:9 Cinematic Streaming Hub & Smart TV Web Portal."
-          intro="A desktop and smart TV web interface designed for immersive viewing. Hero billboard video teasers, curated genre rails, episode list drawers, and instant resume playback."
-          wide
-        >
-          <div className="max-w-3xl mx-auto w-full group my-8">
-            <Screenshot
-              src="/showcase/microdrama-web-player.webp"
-              sizes="(min-width: 816px) 768px, calc(100vw - 48px)"
-              alt={englishMessage("ShortDrama.top.web.image")}
-              caption={englishMessage("OttOverview.microdramaExample")}
-              className="transition-transform duration-300"
-            />
-          </div>
-
-          <div className="wrap-wide grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-line">
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Film className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Adaptive 1080p / 4K HLS</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Adaptive bitrate switching auto-scales resolution based on viewer network speed, ensuring instant playback without buffering spinners.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Stripe VIP Subscriptions</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Direct credit card, Apple Pay, and Google Pay billing via Stripe. Configure monthly, quarterly, and annual VIP streaming passes.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Monitor className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Continue Watching Sync</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Persistent playback timestamps across sessions. Viewers resume exactly where they paused movies and series episodes.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-line bg-wash/40 space-y-3">
-              <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/30 text-accent flex items-center justify-center">
-                <Zap className="h-5 w-5" />
-              </div>
-              <h3 className="font-semibold text-base text-ink">Instant Social Deep-Links</h3>
-              <p className="text-xs text-ink-2 leading-relaxed">
-                Shareable links load immediately in mobile browser webviews when clicked from YouTube, Reddit, or X with zero install barriers.
-              </p>
-            </div>
-          </div>
+        <Section id="web-experience" wide>
+          <ArchitectureModule heading="h2" {...ottWebModule} />
         </Section>
 
-        {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" shortDramaCapture="series" />
+        <OttCmsShowcase ott />
 
-        {/* 4-Week Rollout Timeline */}
-        <HowItWorks
-          id="rollout"
-          index="03 · 4-Week Deployment"
-          title="From Media Catalog to Production Website Launch"
-          badge="Rapid 2–4 Week Deployment · Private Cloud VPC"
-          steps={ottWebRolloutSteps}
-        />
-
-        {/* Work / Production Showcase */}
-        <Work
-          id="production-apps"
-          index="04 · Production Experience"
-          title="Battle-Tested Video &amp; Entertainment Platforms"
-          intro="Our engineering team has built and deployed entertainment streaming platforms operating at multi-million scale."
-          projects={OTT_SOLUTION_PROJECTS}
-        />
+        <StreamingRollout family="ott" offer="web" />
 
         {/* Cross-Sell Callout Box to Complete OTT Package */}
         <CompleteOttCallout />

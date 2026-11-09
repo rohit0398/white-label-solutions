@@ -1,21 +1,21 @@
 "use client";
 import { englishMessage } from "@/lib/messages";
-import { useMessages } from "@/components/site/useMessages";
-
-import { priceText } from "@/lib/pricing-catalog";
+import { useSite } from "@/components/site/SiteProvider";
+import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import React from "react";
 import { Smartphone, Globe, Clapperboard } from "lucide-react";
 import { CompletePackageCallout } from "@/components/sections/CompletePackageCallout";
 
 export function CompleteShortDramaCallout() {
-  const translateCopy = useMessages();
+  const { language, currency } = useSite();
 
   return (
     <CompletePackageCallout
-      badge={translateCopy(englishMessage("CompleteShortDramaCallout.all.in.one.short.drama.suite.b8cf31a"))}
-      title={translateCopy(englishMessage("CompleteShortDramaCallout.looking.for.the.complete.short.drama.solutio.46c7dc7"))}
-      subtitle={translateCopy(englishMessage("CompleteShortDramaCallout.need.both.the.native.mobile.apps.and.the.res.48084a8"))}
-      price={priceText(englishMessage("CompleteOttCallout..price.launch.6843b00"))}
+      wide
+      badge={englishMessage("CompleteShortDramaCallout.all.in.one.short.drama.suite.b8cf31a")}
+      title={englishMessage("CompleteShortDramaCallout.looking.for.the.complete.short.drama.solutio.46c7dc7")}
+      subtitle={englishMessage("CompleteShortDramaCallout.need.both.the.native.mobile.apps.and.the.res.48084a8")}
+      price={displayPackagePrice(FAMILY_PACKAGE["short-drama"], language, currency)}
       priceLabel="one-time investment"
       pillars={[
         {
@@ -39,7 +39,7 @@ export function CompleteShortDramaCallout() {
         "100% Subscriber & Video Custody",
         "0% Platform Commission",
       ]}
-      ctaText={priceText(englishMessage("CompleteShortDramaCallout.explore.complete.drama.package.price.launch.81bb298"))}
+      ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
       ctaHref="/solutions/short-drama"
     />
   );

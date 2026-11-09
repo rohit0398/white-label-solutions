@@ -16,7 +16,7 @@ export function ThemeSwitcher() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="inline-flex items-center gap-1.5 text-xs font-mono text-ink-3 hover:text-ink transition-colors cursor-pointer select-none"
+      className="inline-flex min-h-11 items-center gap-1.5 text-xs font-mono text-ink-3 hover:text-ink transition-colors cursor-pointer select-none md:min-h-9"
       title={translateCopy(theme === "dark" ? ui.light : ui.dark)}
     >
       {translateCopy(theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />)}

@@ -14,6 +14,7 @@ export interface PillarItem {
 }
 
 export interface CompletePackageCalloutProps {
+  wide?: boolean;
   badge?: string;
   title: string;
   subtitle: string;
@@ -26,6 +27,7 @@ export interface CompletePackageCalloutProps {
 }
 
 export function CompletePackageCallout({
+  wide = false,
   badge = englishMessage("CompletePackageCallout.all.in.one.package.a1ef02a"),
   title,
   subtitle,
@@ -44,8 +46,8 @@ export function CompletePackageCallout({
 
   return (
     <section className="py-14 border-y border-line bg-wash">
-      <div className="wrap">
-        <div className="p-8 sm:p-10 rounded-2xl border border-line bg-paper shadow-xs transition-all duration-300 hover:border-ink/40">
+      <div className={wide ? "wrap-wide" : "wrap"}>
+        <div className={`rounded-2xl border border-line bg-paper shadow-xs transition-all duration-300 hover:border-ink/40 sm:p-10 ${wide ? "p-5" : "p-8"}`}>
           {/* Top Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-line">
             <div className="space-y-1.5">

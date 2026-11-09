@@ -612,10 +612,6 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   },
 ];
 
-export const OTT_SOLUTION_PROJECTS = OTT_SHOWCASE_PROJECTS.map((project) =>
-  project.productPreview ? { ...project, screenshotUrl: undefined } : project
-);
-
 export const ALL_HOME_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   ...OTT_SHOWCASE_PROJECTS,
   ...SHOWCASE_PROJECTS.slice(0, 2),
