@@ -1,7 +1,8 @@
 "use client";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
-import { priceText } from "@/lib/pricing-catalog";
+import { useSite } from "@/components/site/SiteProvider";
+import { displayPackagePrice, FAMILY_PACKAGE, priceText } from "@/lib/pricing-catalog";
 
 import React, { useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
@@ -11,6 +12,7 @@ import { ShoppingBag, Smartphone, Tv, ArrowRight, CheckCircle2, ExternalLink } f
 
 export function HomePlatformsDeck() {
   const translateCopy = useMessages();
+  const { language } = useSite();
 
   const [activeTab, setActiveTab] = useState<"ecommerce" | "short-drama" | "ott">("ecommerce");
 
@@ -122,7 +124,7 @@ export function HomePlatformsDeck() {
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-                <span>{translateCopy(englishMessage("HomePlatformsDeck.flagship.suite.0812fed"))}{" "}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))}</span>
+                <span>{translateCopy(englishMessage("ShortDrama.top.pricing"))} · {displayPackagePrice(FAMILY_PACKAGE["short-drama"], language)}</span>
                 <span className="text-ink-3">{translateCopy(englishMessage("HomePlatformsDeck..modular.from.d4a0d49"))}{" "}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("HomePlatformsDeck.9.16.vertical.short.drama.streaming.platform.182355e"))}</h3>
@@ -152,7 +154,7 @@ export function HomePlatformsDeck() {
                   href="/solutions/short-drama"
                   className="inline-flex items-center gap-2 px-5 h-11 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-xs font-mono transition-all shadow-xs"
                 >
-                  <span>{translateCopy(englishMessage("HomePlatformsDeck.explore.short.drama.suite.85ba4f7"))}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))})</span>
+                  <span>{translateCopy(englishMessage("ShortDrama.top.platform.title"))}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
@@ -174,9 +176,9 @@ export function HomePlatformsDeck() {
 
             <div className="w-full">
               <Screenshot
-                src="/showcase/ott-drama-app-showcase.jpg"
-                alt={translateCopy(englishMessage("short-drama.9.16.vertical.short.drama.mobile.app.interfa.3939b91"))}
-                caption={translateCopy(englishMessage("short-drama.native.9.16.drama.apps.60fps.swipe.vip.acces.90dfd5d"))}
+                src="/showcase/microdrama-web-player.webp"
+                alt={englishMessage("ShortDrama.top.web.image")}
+                sizes="(min-width: 1088px) 530px, (min-width: 1024px) 50vw, calc(100vw - 48px)"
               />
             </div>
           </div>
@@ -187,7 +189,7 @@ export function HomePlatformsDeck() {
           <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-line bg-wash text-xs font-mono text-ink-2">
-                <span>{translateCopy(englishMessage("HomePlatformsDeck.flagship.suite.0812fed"))}{" "}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))}</span>
+                <span>{translateCopy(englishMessage("ShortDrama.top.pricing"))} · {displayPackagePrice(FAMILY_PACKAGE["ott-streaming"], language)}</span>
                 <span className="text-ink-3">{translateCopy(englishMessage("HomePlatformsDeck..modular.from.d4a0d49"))}{" "}{translateCopy(priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")))}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">{translateCopy(englishMessage("HomePlatformsDeck.16.9.cinematic.video.streaming.netflix.prime.362d5b8"))}</h3>
@@ -217,7 +219,7 @@ export function HomePlatformsDeck() {
                   href="/solutions/ott-streaming"
                   className="inline-flex items-center gap-2 px-5 h-11 rounded-xl bg-ink text-paper hover:bg-ink/90 font-medium text-xs font-mono transition-all shadow-xs"
                 >
-                  <span>{translateCopy(englishMessage("HomePlatformsDeck.explore.cinematic.suite.e969ae8"))}{translateCopy(priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")))})</span>
+                  <span>{translateCopy(englishMessage("OttOverview.platform.title"))}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
@@ -239,9 +241,10 @@ export function HomePlatformsDeck() {
 
             <div className="w-full">
               <Screenshot
-                src="/showcase/ott-cinematic-web.jpg"
-                alt={translateCopy(englishMessage("HomePlatformsDeck.16.9.cinematic.video.streaming.web.portal.in.6322ea5"))}
-                caption={translateCopy(englishMessage("ott-streaming.next.js.16.9.widescreen.streaming.hub.contin.3eed242"))}
+                src="/showcase/microdrama-web-genres.webp"
+                alt={englishMessage("OttOverview.web.genresImage")}
+                caption={englishMessage("OttOverview.microdramaExample")}
+                sizes="(min-width: 1088px) 530px, (min-width: 1024px) 50vw, calc(100vw - 48px)"
               />
             </div>
           </div>

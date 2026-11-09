@@ -36,9 +36,11 @@ import Link from "@/components/ui/LocalizedLink";
 
 import { LOCALIZED_SHORT_DRAMA_SEO } from "@/lib/translations/seo";
 
+const { title, description } = LOCALIZED_SHORT_DRAMA_SEO.en;
+
 export const metadata: Metadata = {
-  title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
-  description: LOCALIZED_SHORT_DRAMA_SEO.en.description,
+  title,
+  description,
   keywords: [
     "short drama app development company",
     "short drama app development",
@@ -62,8 +64,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Short-Drama App Development Company | Video Streaming",
-    description: LOCALIZED_SHORT_DRAMA_SEO.en.description,
+    title,
+    description,
     url: "/solutions/short-drama",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -72,8 +74,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama App Development Company | Video Streaming",
-    description: LOCALIZED_SHORT_DRAMA_SEO.en.description,
+    title,
+    description,
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };
@@ -115,9 +117,10 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         label: priceText(translateCopy(englishMessage("short-drama.looking.for.mobile.apps.only.explore.app.onl.24d4b24"))),
       },
       screenshot: {
-        src: "/showcase/ott-drama-app-showcase.jpg",
-        alt: translateCopy(englishMessage("short-drama.9.16.vertical.short.drama.mobile.app.interfa.3939b91")),
-        caption: translateCopy(englishMessage("short-drama.native.9.16.drama.apps.60fps.swipe.vip.acces.90dfd5d")),
+        src: "/showcase/microdrama-mobile-feed.webp",
+        alt: englishMessage("ShortDrama.top.app.feedImage"),
+        caption: englishMessage("ShortDrama.top.app.previewCaption"),
+        portrait: true,
       },
       capabilities: [
         {
@@ -154,9 +157,8 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         label: priceText(translateCopy(englishMessage("short-drama.looking.for.website.only.explore.website.pac.1e8102c"))),
       },
       screenshot: {
-        src: "/showcase/ott-cinematic-web.jpg",
-        alt: translateCopy(englishMessage("short-drama.responsive.mobile.first.web.streaming.player.6ea8284")),
-        caption: translateCopy(englishMessage("short-drama.next.js.web.player.episode.drawer.vip.subscr.3a964e7")),
+        src: "/showcase/microdrama-web-player.webp",
+        alt: englishMessage("ShortDrama.top.web.image"),
       },
       capabilities: [
         {
@@ -189,9 +191,9 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
       description:
         translateCopy(englishMessage("short-drama.your.self.hosted.administrative.operations.c.bee8d68")),
       screenshot: {
-        src: "/showcase/ott-video-cms.jpg",
-        alt: translateCopy(englishMessage("short-drama.video.cms.console.with.cloud.encoding.and.ep.c17c030")),
-        caption: translateCopy(englishMessage("ott-streaming.video.cms.console.master.uploads.cloudflare.a11f1bb")),
+        src: "/showcase/microdrama-admin-series.webp",
+        alt: englishMessage("ShortDrama.media.series"),
+        caption: englishMessage("ShortDrama.media.series"),
       },
       capabilities: [
         {
@@ -293,14 +295,24 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
                 </div>
 
                 {m.screenshot && (
-                  <div className="group max-w-3xl mx-auto w-full">
+                  <div className={`group mx-auto w-full ${m.screenshot.portrait ? "max-w-[15rem]" : "max-w-3xl"}`}>
                     <Screenshot
-                      sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
+                      sizes={m.screenshot.portrait ? "240px" : SHORT_DRAMA_SCREENSHOT_SIZES}
                       src={m.screenshot.src}
                       alt={translateCopy(m.screenshot.alt)}
                       caption={m.screenshot.caption}
                       className={translateCopy(translateCopy(englishMessage("ott-streaming.transition.transform.duration.300.0e49470")))}
                     />
+                  </div>
+                )}
+
+                {m.n === "03" && (
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {(["episodes", "analytics"] as const).map((capture) => {
+                      const label = englishMessage(`ShortDrama.media.${capture}`);
+                      return <Screenshot key={capture} src={`/showcase/microdrama-admin-${capture}.webp`} alt={label} caption={label}
+                        sizes="(min-width: 1088px) 508px, (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 48px)" />;
+                    })}
                   </div>
                 )}
 

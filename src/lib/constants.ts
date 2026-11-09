@@ -592,7 +592,7 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
     appDownloadLabel: MICRODRAMA_DEMO.apkLabel,
     iosBetaUrl: MICRODRAMA_DEMO.iosBetaUrl,
     caseStudyUrl: "/case-studies/short-drama-platform",
-    screenshotUrl: "/showcase/ott-drama-app.jpg",
+    screenshotUrl: "/showcase/microdrama-web-player.webp",
     demoAccess: {
       googleLogin: MICRODRAMA_DEMO.googleLogin,
       phones: MICRODRAMA_DEMO.phones,
@@ -606,10 +606,15 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
     description:
       englishMessage("constants.widescreen.4k.hdr.playback.pipeline.with.ada.1d13bc5"),
     url: "/solutions/ott-streaming",
-    caseStudyUrl: "/blog/ott-video-streaming-development",
-    screenshotUrl: "/showcase/ott-cinematic-web.jpg",
+    caseStudyUrl: "/case-studies/ott-streaming-network",
+    screenshotUrl: "/showcase/ott-cinematic-web.webp",
+    productPreview: true,
   },
 ];
+
+export const OTT_SOLUTION_PROJECTS = OTT_SHOWCASE_PROJECTS.map((project) =>
+  project.productPreview ? { ...project, screenshotUrl: undefined } : project
+);
 
 export const ALL_HOME_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   ...OTT_SHOWCASE_PROJECTS,

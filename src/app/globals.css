@@ -450,50 +450,49 @@ footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
   82%, 100% { transform: translateX(100%); }
 }
 
-.short-drama-page > [data-page-section] {
+:is(.short-drama-page, .ott-page) > [data-page-section] {
   padding-block: 7rem;
 }
 
-.short-drama-page > [data-page-section] > header {
+:is(.short-drama-page, .ott-page) > [data-page-section] > header {
   margin-bottom: 2rem;
 }
 
 @media (min-width: 40rem) {
-  .short-drama-page > [data-page-section] {
+  :is(.short-drama-page, .ott-page) > [data-page-section] {
     padding-block: 9rem;
   }
 
-  .short-drama-page > [data-page-section] > header {
+  :is(.short-drama-page, .ott-page) > [data-page-section] > header {
     margin-bottom: 2.5rem;
   }
 }
 
-.short-drama-capabilities-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem 1.25rem;
-  font-size: 0.75rem;
-  color: var(--color-ink-2);
-}
-
-.short-drama-capabilities-list[aria-hidden],
-.short-drama-capabilities-list > [aria-hidden] {
-  display: none;
-}
-
-@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
-  .short-drama-capabilities-track {
+@layer components {
+  .short-drama-capabilities-list {
     display: flex;
-    width: max-content;
-    animation: marqueeContinuous 50s linear infinite;
+    flex-wrap: wrap;
+    gap: 0.375rem 1.25rem;
+    font-size: 0.75rem;
+    color: var(--color-ink-2);
   }
 
-  .short-drama-capabilities-track[data-paused="true"] {
+  .short-drama-capabilities-list[aria-hidden],
+  .short-drama-capabilities-list > [aria-hidden] {
+    display: none;
+  }
+}
+
+@utility capabilities-motion {
+  display: flex;
+  width: max-content;
+  animation: marqueeContinuous 50s linear infinite;
+
+  &[data-paused="true"] {
     animation-play-state: paused;
   }
 
-  .short-drama-capabilities-list,
-  .short-drama-capabilities-list[aria-hidden] {
+  & > .short-drama-capabilities-list {
     display: flex;
     flex-shrink: 0;
     flex-wrap: nowrap;
@@ -501,7 +500,7 @@ footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
     white-space: nowrap;
   }
 
-  .short-drama-capabilities-list > [aria-hidden] {
+  & > .short-drama-capabilities-list > [aria-hidden] {
     display: flex;
   }
 }
@@ -524,5 +523,15 @@ footer a { display: inline-flex; align-items: center; min-height: 2.75rem; }
   [data-theme="light"] .short-drama-title-accent {
     --short-drama-amber: #92400e;
     --short-drama-rose: #9f1239;
+  }
+
+  [data-streaming-theme="ott"] .short-drama-title-accent {
+    --short-drama-amber: #22d3ee;
+    --short-drama-rose: #a5b4fc;
+  }
+
+  [data-theme="light"] [data-streaming-theme="ott"] .short-drama-title-accent {
+    --short-drama-amber: #0e7490;
+    --short-drama-rose: #4338ca;
   }
 }

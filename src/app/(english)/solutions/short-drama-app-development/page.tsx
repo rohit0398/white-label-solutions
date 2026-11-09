@@ -3,7 +3,8 @@ import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
-import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
+import { englishMessage } from "@/lib/messages";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Work } from "@/components/sections/Work";
@@ -19,11 +20,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Smartphone, Zap, ShieldCheck, Lock } from "lucide-react";
 
+const searchTitle = "Short Drama App Development for iOS & Android";
 const searchDescription =
   "Develop branded iOS and Android apps for vertical short drama. Manage episodes and VIP access from one admin panel, and publish under your own developer accounts.";
 
 export const metadata: Metadata = {
-  title: "Short-Drama Mobile App Development | iOS & Android | Mechatron Lab",
+  title: searchTitle,
   description: searchDescription,
   keywords: [
     "short drama mobile app development",
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     canonical: "/solutions/short-drama-app-development",
   },
   openGraph: {
-    title: "Short-Drama Mobile App Development | iOS & Android",
+    title: searchTitle,
     description: searchDescription,
     url: "/solutions/short-drama-app-development",
     siteName: "Mechatron Lab Solutions",
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama Mobile App Development | iOS & Android",
+    title: searchTitle,
     description: searchDescription,
     images: ["/showcase/ott-drama-app.jpg"],
   },
@@ -120,12 +122,12 @@ export default function ShortDramaAppDevelopmentPage() {
           intro="Unified Flutter codebase compiling to native machine code. High-retention 60FPS vertical swipe player engineered for serialized 1–2 minute drama episodes with cliffhanger paywall gates and VIP subscription checkout."
           wide
         >
-          <div className="max-w-3xl mx-auto w-full group my-8">
+          <div className="max-w-[15rem] mx-auto w-full group my-8">
             <Screenshot
-              sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
-              src="/showcase/ott-drama-app-showcase.jpg"
-              alt="Native 9:16 vertical short-drama mobile app interface"
-              caption="Native Flutter 9:16 Drama App · 60FPS Swipe Physics · VIP Episode Gating · AdMob Rewarded Video"
+              sizes="240px"
+              src="/showcase/microdrama-mobile-feed.webp"
+              alt={englishMessage("ShortDrama.top.app.feedImage")}
+              caption={englishMessage("ShortDrama.top.app.previewCaption")}
               className="transition-transform duration-300"
             />
           </div>
@@ -174,7 +176,7 @@ export default function ShortDramaAppDevelopmentPage() {
         </Section>
 
         {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" />
+        <OttCmsShowcase index="02" shortDramaCapture="episodes" />
 
         {/* 4-Week Rollout */}
         <HowItWorks

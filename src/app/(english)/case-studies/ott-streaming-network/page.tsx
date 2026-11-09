@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
@@ -131,8 +132,8 @@ export default function OttStreamingCaseStudyPage() {
           </p>
 
           <div className="pt-2 flex flex-wrap gap-4 items-center">
-            <DemoButton size="sm">
-              Schedule Cinematic OTT architecture demo →
+            <DemoButton size="sm" tierId={OTT_PACKAGES.platform}>
+              Book an OTT walkthrough
             </DemoButton>
             <Link href="/solutions/ott-streaming" className={buttonClass("secondary", "sm")}>
               View OTT platform specs
@@ -143,9 +144,9 @@ export default function OttStreamingCaseStudyPage() {
         {/* Screenshot */}
         <div className="wrap-wide">
           <Screenshot
-            src="/showcase/ott-cinematic-web.jpg"
-            alt="16:9 Cinematic OTT web streaming portal featuring film showcase and live channels"
-            caption="Cinematic 16:9 widescreen web streaming portal with adaptive bitrate HLS player."
+            src="/showcase/ott-cinematic-web.webp"
+            alt="Widescreen OTT product preview featuring a movie catalog"
+            caption="Product preview of the widescreen OTT website."
           />
         </div>
 
@@ -207,7 +208,7 @@ export default function OttStreamingCaseStudyPage() {
               <p className="mt-2 text-sm text-ink-2">Deploy in 2–4 weeks onto your private cloud with 100% code ownership.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
-              <DemoButton size="sm">Book a live demo</DemoButton>
+              <DemoButton size="sm" tierId={OTT_PACKAGES.platform}>Book a walkthrough</DemoButton>
               <Link href="/solutions/ott-streaming" className={buttonClass("link", "sm")}>
                 Platform overview →
               </Link>

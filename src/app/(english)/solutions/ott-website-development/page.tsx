@@ -1,16 +1,15 @@
-import { priceText } from "@/lib/pricing-catalog";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_WEB_PRICING_TIERS, OTT_SOLUTION_PROJECTS } from "@/lib/constants";
+import { englishMessage } from "@/lib/messages";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
+import { OttOverview } from "@/components/sections/OttOverview";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
@@ -21,10 +20,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Monitor, Film, ShieldCheck, Zap } from "lucide-react";
 
+const searchTitle = "OTT Website Development for Movies & Series";
+const searchDescription =
+  "Launch a branded OTT website with a browsable catalog, widescreen playback, and Stripe subscriptions. Manage movies and series from one admin panel.";
+
 export const metadata: Metadata = {
-  title: "Cinematic OTT Website Development | Video Streaming | Mechatron Lab",
-  description:
-    "Custom video streaming websites with adaptive HLS playback, Stripe subscriptions, and Video CMS deployed on your private AWS or Cloudflare in 2–4 weeks.",
+  title: searchTitle,
+  description: searchDescription,
   keywords: [
     "ott video streaming website development",
     "video streaming website development",
@@ -38,21 +40,19 @@ export const metadata: Metadata = {
     canonical: "/solutions/ott-website-development",
   },
   openGraph: {
-    title: "Cinematic OTT Website Development | Video Streaming",
-    description:
-      "Custom video streaming websites with adaptive HLS playback, Stripe subscriptions, and Video CMS deployed on your private AWS or Cloudflare in 2–4 weeks.",
+    title: searchTitle,
+    description: searchDescription,
     url: "/solutions/ott-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    images: ["/showcase/microdrama-web-genres.webp"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cinematic OTT Website Development | Video Streaming",
-    description:
-      "Custom video streaming websites with adaptive HLS playback and Stripe subscriptions deployed in 2–4 weeks.",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    title: searchTitle,
+    description: searchDescription,
+    images: ["/showcase/microdrama-web-genres.webp"],
   },
 };
 
@@ -77,14 +77,6 @@ export default function OttWebsiteDevelopmentPage() {
     applicationCategory: "MultimediaApplication",
     siteUrl,
   });
-
-  const tickerItems = [
-    { title: "Adaptive HLS Bitrates", detail: "Sub-Second Buffer · 1080p, 720p, 480p Auto-Scale" },
-    { title: "SVOD Subscriptions", detail: "Direct Stripe Recurring Billing · 0% Revenue Cut" },
-    { title: "SEO Title Pages", detail: "Indexable Series, Season & Cast Synopsis Pages" },
-    { title: "Wholesale CDN", detail: "Cloudflare Stream / AWS MediaConvert · Raw Cost Billing" },
-    { title: "Private Cloud", detail: "Deployed to Your AWS / Cloudflare Account in 2–4 Weeks" },
-  ];
 
   const ottWebRolloutSteps = [
     {
@@ -117,39 +109,8 @@ export default function OttWebsiteDevelopmentPage() {
 
       <Navbar />
 
-      <main className="flex-1">
-        {/* Unified Hero */}
-        <SolutionHero
-          category="ott"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: "Cinematic OTT Website" },
-          ]}
-          badge="Cinematic Video Portal · 4K HDR &amp; HLS · 0% Sales Cut"
-          headline="Cinematic OTT Website Development."
-          subtitle="Launch your branded Netflix-style video streaming website in 2–4 weeks. Next.js widescreen portal, adaptive multi-bitrate HLS playback, continue-watching sync, recurring Stripe VIP subscriptions, and Video CMS deployed onto your private cloud with zero monthly software license fees."
-          anchors={[
-            { label: "01 Web Portal", href: "#web-experience" },
-            { label: "02 Video CMS", href: "#video-cms" },
-            { label: "03 4-Week Rollout", href: "#rollout" },
-            { label: "04 Production Proof", href: "#production-apps" },
-            { label: priceText("05 Pricing ({price:cinematic-web-launch})"), href: "#pricing" },
-          ]}
-          ctaDemoText="Book streaming walkthrough"
-          tierId="ott-streaming"
-          footerNote="Deployed on your private AWS or Cloudflare cloud · Full source code option · Keep 100% of revenue"
-        />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="ott-web"
-          headline="Next.js Widescreen Video Architecture &amp; HLS Streaming"
-          subheadline="Optimized for desktop browsers and smart TV web clients"
-        />
-
-        {/* Live Ticker */}
-        <LiveTicker items={tickerItems} ariaLabel="Cinematic streaming capabilities ticker" />
+      <main className="ott-page flex-1">
+        <OttOverview offer="web" />
 
         {/* Web Experience Highlights */}
         <Section
@@ -161,9 +122,10 @@ export default function OttWebsiteDevelopmentPage() {
         >
           <div className="max-w-3xl mx-auto w-full group my-8">
             <Screenshot
-              src="/showcase/ott-cinematic-web.jpg"
-              alt="16:9 cinematic streaming web portal preview"
-              caption="Next.js 16 Widescreen Streaming Portal · Adaptive HLS Player · Auto Continue Watching"
+              src="/showcase/microdrama-web-player.webp"
+              sizes="(min-width: 816px) 768px, calc(100vw - 48px)"
+              alt={englishMessage("ShortDrama.top.web.image")}
+              caption={englishMessage("OttOverview.microdramaExample")}
               className="transition-transform duration-300"
             />
           </div>
@@ -212,7 +174,7 @@ export default function OttWebsiteDevelopmentPage() {
         </Section>
 
         {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" />
+        <OttCmsShowcase index="02" shortDramaCapture="series" />
 
         {/* 4-Week Rollout Timeline */}
         <HowItWorks
@@ -229,7 +191,7 @@ export default function OttWebsiteDevelopmentPage() {
           index="04 · Production Experience"
           title="Battle-Tested Video &amp; Entertainment Platforms"
           intro="Our engineering team has built and deployed entertainment streaming platforms operating at multi-million scale."
-          projects={OTT_SHOWCASE_PROJECTS}
+          projects={OTT_SOLUTION_PROJECTS}
         />
 
         {/* Cross-Sell Callout Box to Complete OTT Package */}
@@ -259,7 +221,7 @@ export default function OttWebsiteDevelopmentPage() {
           headline="Ready to launch your video streaming website?"
           description="Talk directly with our solutions engineering team. We’ll demonstrate the Next.js widescreen player, the Stripe VIP checkout, and the Video CMS console."
           ctaDemo="Book website walkthrough →"
-          tierId="ott-streaming"
+          tierId={OTT_PACKAGES.web}
         />
       </main>
 

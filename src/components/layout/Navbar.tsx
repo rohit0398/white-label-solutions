@@ -53,7 +53,7 @@ export function Navbar() {
 
     // Short-Drama
     {
-      title: englishMessage("Footer.complete.short.drama.suite.2191d19"),
+      title: englishMessage("ShortDrama.top.platform.title"),
       desc: englishMessage("Navbar.vertical.reels.apps.web.player.cms.ed6db0f"),
       href: "/solutions/short-drama",
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
@@ -76,7 +76,7 @@ export function Navbar() {
 
     // Cinematic OTT
     {
-      title: englishMessage("Footer.complete.cinematic.ott.suite.8180988"),
+      title: englishMessage("OttOverview.platform.title"),
       desc: englishMessage("Navbar.16.9.web.portal.mobile.apps.video.cms.c017d6a"),
       href: "/solutions/ott-streaming",
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),

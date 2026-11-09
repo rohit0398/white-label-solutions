@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
 import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
+import { englishMessage } from "@/lib/messages";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Work } from "@/components/sections/Work";
@@ -19,11 +20,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Globe, ShieldCheck, Zap, Share2 } from "lucide-react";
 
+const searchTitle = "Short Drama Website Development for Vertical Video";
 const searchDescription =
   "Launch a branded short drama website with browser playback, shareable episode links and VIP subscriptions. Publish shows and episodes from one admin panel.";
 
 export const metadata: Metadata = {
-  title: "Short-Drama Web Player Development | 9:16 Video | Mechatron Lab",
+  title: searchTitle,
   description: searchDescription,
   keywords: [
     "short drama website development",
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
     canonical: "/solutions/short-drama-website-development",
   },
   openGraph: {
-    title: "Short-Drama Web Player Development | 9:16 Video",
+    title: searchTitle,
     description: searchDescription,
     url: "/solutions/short-drama-website-development",
     siteName: "Mechatron Lab Solutions",
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama Web Player Development | 9:16 Video",
+    title: searchTitle,
     description: searchDescription,
     images: ["/showcase/ott-drama-app.jpg"],
   },
@@ -122,9 +124,8 @@ export default function ShortDramaWebsiteDevelopmentPage() {
           <div className="max-w-3xl mx-auto w-full group my-8">
             <Screenshot
               sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
-              src="/showcase/ott-cinematic-web.jpg"
-              alt="Responsive 9:16 mobile-first web streaming player"
-              caption="Next.js 16 Web Player · Instant Mobile Web Playback · Stripe Checkout"
+              src="/showcase/microdrama-web-player.webp"
+              alt={englishMessage("ShortDrama.top.web.image")}
               className="transition-transform duration-300"
             />
           </div>
@@ -173,7 +174,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
         </Section>
 
         {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" />
+        <OttCmsShowcase index="02" shortDramaCapture="series" />
 
         {/* 4-Week Rollout */}
         <HowItWorks

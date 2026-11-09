@@ -64,10 +64,14 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                   <h3 className="text-xl font-semibold tracking-tight text-ink group-hover:text-ink transition-colors">
                     {translateCopy(translatedProject.title)}
                   </h3>
-                  <span className="relative flex h-2 w-2" title={translateCopy(englishMessage("Work.live.production.deployment.069cb54"))}>
-                    <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-                  </span>
+                  {p.productPreview ? (
+                    <span className="rounded border border-line px-1.5 py-0.5 text-xs text-ink-3">{translateCopy(englishMessage("OttOverview.preview"))}</span>
+                  ) : (
+                    <span className="relative flex h-2 w-2" title={translateCopy(englishMessage("Work.live.production.deployment.069cb54"))}>
+                      <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+                    </span>
+                  )}
                   <span className="text-xs font-mono text-ink-3">{translateCopy(translatedProject.industry)}</span>
                 </div>
                 <p className="mt-2 text-ink-2 leading-relaxed text-sm">{translateCopy(translatedProject.description)}</p>
@@ -145,7 +149,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                     <Image
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
-                      sizes="(max-width: 768px) 100vw, 600px"
+                      sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
                       alt={translateCopy.format("media.screenshot", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
@@ -163,7 +167,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                     <Image
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
-                      sizes="(max-width: 768px) 100vw, 600px"
+                      sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
                       alt={translateCopy.format("Work..value0.storefront.screenshot.a572497", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"

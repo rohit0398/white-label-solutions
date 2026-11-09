@@ -73,7 +73,6 @@ export function TechStackStrip({
   children,
 }: TechStackStripProps) {
   const translateCopy = useMessages();
-  const isShortDrama = mode.startsWith("short-drama");
   const hlsStream = {
     name: englishMessage("ShortDrama.top.stack.hls"),
     desc: englishMessage("ShortDrama.top.stack.hlsDescription"),
@@ -176,10 +175,10 @@ export function TechStackStrip({
 
   const stack = stackMap[mode] ?? ecommerceAllStack;
 
-  const isVideo = isShortDrama || mode.startsWith("ott");
+  const isVideo = mode.startsWith("short-drama") || mode.startsWith("ott");
   const stackLabel = translateCopy(englishMessage("TechStackStrip.modern.engineering.stack.4f4abf1"));
   const cards = stack.map(({ name, desc, icon }) => (
-    <EngineeringCard key={name} icon={icon} title={translateCopy(name)} description={translateCopy(desc)} compact={!isShortDrama} />
+    <EngineeringCard key={name} icon={icon} title={translateCopy(name)} description={translateCopy(desc)} compact={!isVideo} />
   ));
 
   const assurances = isVideo
@@ -187,15 +186,11 @@ export function TechStackStrip({
         { label: englishMessage("TechStackStrip.mutual.nda.on.request.ee5b3d3"), icon: Lock },
         { label: englishMessage("TechStackStrip.100.private.cloud.vpc.aws.cloudflare.9448706"), icon: Server },
         {
-          label: isShortDrama
-            ? englishMessage("ShortDrama.top.stack.signed")
-            : englishMessage("TechStackStrip.signed.drm.url.video.stream.protection.751c48e"),
+          label: englishMessage("ShortDrama.top.stack.signed"),
           icon: ShieldCheck,
         },
         {
-          label: isShortDrama
-            ? englishMessage("ShortDrama.top.stack.source")
-            : englishMessage("TechStackStrip.unencrypted.git.repositories.delivered.30b5811"),
+          label: englishMessage("ShortDrama.top.stack.source"),
           icon: Code2,
         },
       ]
@@ -210,33 +205,33 @@ export function TechStackStrip({
     <section
       id={id}
       aria-labelledby={id ? `${id}-heading` : undefined}
-      className={isShortDrama ? "border-t border-line bg-wash pt-10 pb-16 sm:pt-12 sm:pb-20" : "border-y border-line bg-wash py-10"}
+      className={isVideo ? "border-t border-line bg-wash pt-10 pb-16 sm:pt-12 sm:pb-20" : "border-y border-line bg-wash py-10"}
     >
-      <div className={isShortDrama ? "wrap-wide space-y-8" : "wrap space-y-8"}>
-        <div className={isShortDrama ? "space-y-2" : "flex flex-col justify-between gap-4 sm:flex-row sm:items-center"}>
+      <div className={isVideo ? "wrap-wide space-y-8" : "wrap space-y-8"}>
+        <div className={isVideo ? "space-y-2" : "flex flex-col justify-between gap-4 sm:flex-row sm:items-center"}>
           <div>
             <p className="text-xs font-mono text-accent uppercase tracking-wider font-semibold">{stackLabel}</p>
             <h2
               id={id ? `${id}-heading` : undefined}
-              className={isShortDrama ? "mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl" : "text-lg font-semibold tracking-tight text-ink mt-0.5"}
+              className={isVideo ? "mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl" : "text-lg font-semibold tracking-tight text-ink mt-0.5"}
             >
               {translateCopy(headline)}
             </h2>
           </div>
-          <p className={isShortDrama ? "text-sm font-mono text-ink-3" : "text-xs font-mono text-ink-3 hidden sm:inline"}>
+          <p className={isVideo ? "text-sm font-mono text-ink-3" : "text-xs font-mono text-ink-3 hidden sm:inline"}>
             {translateCopy(subheadline)}
           </p>
         </div>
 
         {/* 6-Technology Grid */}
-        {isShortDrama ? (
+        {isVideo ? (
           <ShortDramaCardRail label={stackLabel} desktopColumns="md:grid-cols-3 lg:grid-cols-6">{cards}</ShortDramaCardRail>
         ) : (
           <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">{cards}</ul>
         )}
 
         {/* 4 Guarantees Strip */}
-        <div className={isShortDrama
+        <div className={isVideo
           ? "grid gap-4 border-t border-line/60 pt-5 text-xs font-mono text-ink-3 sm:grid-cols-2"
           : "pt-2 border-t border-line/60 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-3"}
         >

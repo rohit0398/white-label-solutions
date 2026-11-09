@@ -1,5 +1,6 @@
 import { priceText } from "@/lib/pricing-catalog";
 import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { NextResponse } from "next/server";
 import dns from "node:dns";
 
@@ -56,6 +57,9 @@ export async function POST(request: Request) {
       [SHORT_DRAMA_PACKAGES.platform]: "Short drama platform",
       [SHORT_DRAMA_PACKAGES.app]: "Short drama app development",
       [SHORT_DRAMA_PACKAGES.web]: "Short drama website development",
+      [OTT_PACKAGES.platform]: "OTT streaming platform",
+      [OTT_PACKAGES.app]: "OTT app development",
+      [OTT_PACKAGES.web]: "OTT website development",
       "ott-streaming": priceText("🎬 White-Label OTT & Short-Drama Platform ({price:launch})"),
       "ecommerce": priceText("🛍️ White-Label E-Commerce Platform ({price:launch})"),
     };
