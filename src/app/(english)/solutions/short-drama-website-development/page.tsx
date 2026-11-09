@@ -1,13 +1,11 @@
-import { priceText } from "@/lib/pricing-catalog";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
+import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
@@ -17,15 +15,16 @@ import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
-import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Globe, ShieldCheck, Zap, Share2 } from "lucide-react";
 
+const searchDescription =
+  "Launch a branded short drama website with browser playback, shareable episode links and VIP subscriptions. Publish shows and episodes from one admin panel.";
+
 export const metadata: Metadata = {
   title: "Short-Drama Web Player Development | 9:16 Video | Mechatron Lab",
-  description:
-    "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming, social deep-links, and Stripe VIP billing on your cloud in 2–4 weeks.",
+  description: searchDescription,
   keywords: [
     "short drama website development",
     "short drama web player",
@@ -40,8 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Short-Drama Web Player Development | 9:16 Video",
-    description:
-      "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming, social deep-links, and Stripe VIP billing on your cloud in 2–4 weeks.",
+    description: searchDescription,
     url: "/solutions/short-drama-website-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -51,8 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Short-Drama Web Player Development | 9:16 Video",
-    description:
-      "Launch a mobile-first 9:16 vertical web drama player with sub-second HLS streaming and Stripe VIP passes in 2–4 weeks.",
+    description: searchDescription,
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };
@@ -78,14 +75,6 @@ export default function ShortDramaWebsiteDevelopmentPage() {
     applicationCategory: "MultimediaApplication",
     siteUrl,
   });
-
-  const tickerItems = [
-    { title: "Mobile-First Web", detail: "Sub-Second Next.js 16 Vertical Web Player" },
-    { title: "Stripe VIP Subscriptions", detail: "Direct Recurring Billing · 0% Revenue Cut" },
-    { title: "Deep-Link Sharing", detail: "Shareable TikTok / IG Episode Links with Instant Play" },
-    { title: "Wholesale CDN", detail: "Cloudflare Stream Video Ingest · Zero Egress Fees" },
-    { title: "Private Cloud", detail: "Deployed to Your AWS / Cloudflare Account in 2–4 Weeks" },
-  ];
 
   const webRolloutSteps = [
     {
@@ -118,42 +107,9 @@ export default function ShortDramaWebsiteDevelopmentPage() {
 
       <Navbar />
 
-      <main className="flex-1">
+      <main className="short-drama-page flex-1">
         {/* Unified Hero */}
-        <SolutionHero
-          category="drama"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: "Short-Drama Web Streaming" },
-          ]}
-          badge="Mobile-First Web Player · Sub-Second HLS · 0% Revenue Cut"
-          headline="Short-Drama Website Development."
-          subtitle="Launch your branded vertical micro-drama web streaming portal in 2–4 weeks. Sub-second mobile-first HLS player, zero-install instant playback for TikTok & social traffic, recurring Stripe VIP subscriptions, cliffhanger episode gating, and Video CMS deployed onto your private cloud."
-          anchors={[
-            { label: "Live test build", href: "#live-demo" },
-            { label: "01 Web Player", href: "#web-architecture" },
-            { label: "02 Video CMS", href: "#video-cms" },
-            { label: "03 4-Week Rollout", href: "#rollout" },
-            { label: "04 Production Proof", href: "#production-apps" },
-            { label: priceText("05 Pricing ({price:short-drama-web-launch})"), href: "#pricing" },
-          ]}
-          ctaDemoText="Book web streaming demo"
-          tierId="ott-streaming"
-          footerNote="Deployed on your private AWS or Cloudflare cloud · Full source code option · Keep 100% of revenue"
-        />
-
-        <ShortDramaLiveAccess emphasis="web" />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="short-drama-web"
-          headline="Sub-Second Mobile-First Web Streaming Stack (Next.js &amp; HLS.js)"
-          subheadline="Optimized for instant play and viral social traffic acquisition"
-        />
-
-        {/* Live Ticker */}
-        <LiveTicker items={tickerItems} ariaLabel="Short-drama streaming capabilities ticker" />
+        <ShortDramaOverview offer="web" />
 
         {/* Web Mechanics Feature Grid */}
         <Section
@@ -165,6 +121,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
         >
           <div className="max-w-3xl mx-auto w-full group my-8">
             <Screenshot
+              sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
               src="/showcase/ott-cinematic-web.jpg"
               alt="Responsive 9:16 mobile-first web streaming player"
               caption="Next.js 16 Web Player · Instant Mobile Web Playback · Stripe Checkout"
@@ -264,7 +221,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
           headline="Ready to launch your 9:16 short-drama web portal?"
           description="Talk directly with our solutions engineering team. We’ll demonstrate the mobile web player, the Stripe VIP checkout, and the Cloudflare Stream video pipeline."
           ctaDemo="Book web streaming walkthrough →"
-          tierId="ott-streaming"
+          tierId={SHORT_DRAMA_PACKAGES.web}
         />
       </main>
 

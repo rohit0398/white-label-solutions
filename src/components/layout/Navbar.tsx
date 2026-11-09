@@ -11,12 +11,13 @@ import React, { useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
 import { Button } from "@/components/ui/Button";
 import { Menu, X, Sun, Moon, MessageSquare, ChevronDown } from "lucide-react";
-import { BRAND } from "@/lib/constants";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
 export function Navbar() {
   const translateCopy = useMessages();
+  const whatsappUrl = useContactWhatsApp();
 
   const { openDemo, theme, toggleTheme, language } = useSite();
   const [open, setOpen] = useState(false);
@@ -275,7 +276,7 @@ export function Navbar() {
           {/* Direct WhatsApp Live Chat Button with Active Radar Ping & Hover Physics */}
           <a
             id="nav-whatsapp-chat"
-            href={BRAND.contact.whatsappUrl} onClick={() => trackWhatsAppClick("Navbar")}
+            href={whatsappUrl} onClick={() => trackWhatsAppClick("Navbar")}
             target="_blank"
             rel="noopener noreferrer"
             className="group relative h-8 w-8 inline-flex items-center justify-center text-accent bg-accent/5 hover:bg-accent/15 rounded-md border border-accent/30 hover:border-accent hover:scale-105 active:scale-95 transition-all duration-200 shadow-xs animate-pulse-glow shrink-0"
@@ -422,7 +423,7 @@ export function Navbar() {
               </Button>
 
               <a
-                href={BRAND.contact.whatsappUrl}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => { trackWhatsAppClick("Navbar"); setOpen(false); }}

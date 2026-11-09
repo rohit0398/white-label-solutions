@@ -158,7 +158,7 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   en: {
     title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
     description:
-      "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
+      "Launch a branded short drama platform with iOS and Android apps, a website, and one admin panel. Deploy it to your own cloud account.",
     keywords: [
       "short drama app development company",
       "reelshort clone app with source code",
@@ -172,7 +172,7 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   es: {
     title: "Desarrollo de Apps de Micro-Dramas 9:16 | Streaming | Mechatron Lab",
     description:
-      "Lanza tu app de micro-dramas tipo ReelShort en 2–4 semanas. Apps nativas 9:16 iOS/Android, reproductor web y CMS en tu propia nube sin comisiones.",
+      "Lanza una plataforma de microdramas con tu marca, apps para iOS y Android, sitio web y un solo panel de administración. Instálala en tu propia nube.",
     keywords: [
       "desarrollo app micro drama 9:16",
       "clon reelshort con codigo fuente",
@@ -185,7 +185,7 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   de: {
     title: "9:16 Kurzserien App Entwicklung | Video Streaming | Mechatron Lab",
     description:
-      "Starten Sie Ihre Kurzserien-App wie ReelShort in 2–4 Wochen. 9:16 iOS & Android Apps, Web-Player und CMS in Ihrer Cloud ohne Provision.",
+      "Starten Sie eine Plattform für Kurzserien unter Ihrer Marke mit iOS- und Android-Apps, Website und zentraler Verwaltung in Ihrer eigenen Cloud.",
     keywords: [
       "kurzdrama plattform white label",
       "reelshort klon app",
@@ -198,7 +198,7 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   fr: {
     title: "Développement d'Apps Mini-Séries 9:16 | Streaming | Mechatron Lab",
     description:
-      "Lancez votre application de mini-séries type ReelShort en 2 à 4 semaines. Apps 9:16 iOS/Android, lecteur web et CMS sur votre cloud avec 0% commission.",
+      "Lancez une plateforme de mini-séries à votre marque avec des apps iOS et Android, un site et une interface de gestion, sur votre propre cloud.",
     keywords: [
       "developpement app mini serie 9:16",
       "clone reelshort code source",
@@ -211,7 +211,7 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   hi: {
     title: "9:16 शॉर्ट-ड्रामा ऐप डेवलपमेंट | वीडियो स्ट्रीमिंग | Mechatron Lab",
     description:
-      "2–4 हफ्तों में रीलशॉर्ट जैसा अपना शॉर्ट-ड्रामा ऐप लॉन्च करें। 9:16 iOS और एंड्रॉइड ऐप्स, वेब प्लेयर और CMS बिना किसी कमीशन के।",
+      "अपने ब्रांड का शॉर्ट ड्रामा प्लेटफ़ॉर्म लॉन्च करें। iOS और Android ऐप, वेबसाइट और एक एडमिन पैनल, सब आपके अपने क्लाउड खाते में।",
     keywords: [
       "शॉर्ट ड्रामा ऐप डेवलपमेंट",
       "रीलशॉर्ट क्लोन ऐप सोर्स कोड",

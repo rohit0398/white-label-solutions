@@ -1,13 +1,11 @@
-import { priceText } from "@/lib/pricing-catalog";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
+import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
@@ -17,15 +15,16 @@ import { Screenshot } from "@/components/ui/Screenshot";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteShortDramaCallout } from "@/components/sections/CompleteShortDramaCallout";
-import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 import { Smartphone, Zap, ShieldCheck, Lock } from "lucide-react";
 
+const searchDescription =
+  "Develop branded iOS and Android apps for vertical short drama. Manage episodes and VIP access from one admin panel, and publish under your own developer accounts.";
+
 export const metadata: Metadata = {
   title: "Short-Drama Mobile App Development | iOS & Android | Mechatron Lab",
-  description:
-    "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and in-app ads. Published to App Store & Google Play in 2–4 weeks with 0% fees.",
+  description: searchDescription,
   keywords: [
     "short drama mobile app development",
     "short drama app development company",
@@ -41,8 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Short-Drama Mobile App Development | iOS & Android",
-    description:
-      "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and in-app ads. Published to App Store & Google Play in 2–4 weeks with 0% fees.",
+    description: searchDescription,
     url: "/solutions/short-drama-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -52,8 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Short-Drama Mobile App Development | iOS & Android",
-    description:
-      "Build a custom 9:16 short-drama mobile app with 60FPS vertical swipe, VIP passes, and private cloud deployment in 2–4 weeks.",
+    description: searchDescription,
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };
@@ -79,15 +76,6 @@ export default function ShortDramaAppDevelopmentPage() {
     applicationCategory: "EntertainmentApplication",
     siteUrl,
   });
-
-  const tickerItems = [
-    { title: "Vertical Swiper", detail: "Native 60FPS Flutter Gesture Mechanics" },
-    { title: "VIP Subscriptions", detail: "Apple StoreKit & Google Play In-App Purchases" },
-    { title: "Rewarded Video Ads", detail: "Google AdMob & Unity Ads for Free-Tier Unlocks" },
-    { title: "Wholesale CDN", detail: "Cloudflare Stream Video Ingest · Zero Egress Fees" },
-    { title: "0% Revenue Cut", detail: "Keep 100% of Subscription & Ad Revenue" },
-    { title: "Deployment Speed", detail: "Production App Store Launch in 2–4 Weeks" },
-  ];
 
   const appRolloutSteps = [
     {
@@ -120,42 +108,9 @@ export default function ShortDramaAppDevelopmentPage() {
 
       <Navbar />
 
-      <main className="flex-1">
+      <main className="short-drama-page flex-1">
         {/* Unified Hero */}
-        <SolutionHero
-          category="drama"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: "Short-Drama Apps" },
-          ]}
-          badge="ReelShort &amp; DramaBox Architecture · 0% Revenue Cut"
-          headline="Short-Drama Mobile App Development."
-          subtitle="Launch your branded vertical micro-drama streaming apps for iOS &amp; Android in 2–4 weeks. Native Flutter apps, addictive 60FPS swipe mechanics, recurring VIP subscriptions, rewarded video ads, cliffhanger episode paywalls, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
-          anchors={[
-            { label: "Live test build", href: "#live-demo" },
-            { label: "01 Mobile App", href: "#app-architecture" },
-            { label: "02 Video CMS", href: "#video-cms" },
-            { label: "03 4-Week Rollout", href: "#rollout" },
-            { label: "04 Production Proof", href: "#production-apps" },
-            { label: priceText("05 Pricing ({price:short-drama-app-launch})"), href: "#pricing" },
-          ]}
-          ctaDemoText="Book short-drama demo"
-          tierId="ott-streaming"
-          footerNote="Published under your developer accounts · Full source code option · Keep 100% of sales"
-        />
-
-        <ShortDramaLiveAccess emphasis="app" />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="short-drama-app"
-          headline="Native Mobile App Architecture (Flutter &amp; Cloudflare Stream)"
-          subheadline="Native 60FPS rendering on iOS and Android devices"
-        />
-
-        {/* Live Ticker */}
-        <LiveTicker items={tickerItems} ariaLabel="Short-drama streaming capabilities ticker" />
+        <ShortDramaOverview offer="app" />
 
         {/* Feature Highlights Grid */}
         <Section
@@ -167,6 +122,7 @@ export default function ShortDramaAppDevelopmentPage() {
         >
           <div className="max-w-3xl mx-auto w-full group my-8">
             <Screenshot
+              sizes={SHORT_DRAMA_SCREENSHOT_SIZES}
               src="/showcase/ott-drama-app-showcase.jpg"
               alt="Native 9:16 vertical short-drama mobile app interface"
               caption="Native Flutter 9:16 Drama App · 60FPS Swipe Physics · VIP Episode Gating · AdMob Rewarded Video"
@@ -266,7 +222,7 @@ export default function ShortDramaAppDevelopmentPage() {
           headline="Ready to launch your 9:16 short-drama streaming app?"
           description="Talk directly with our solutions engineering team. We’ll demonstrate the mobile swipe player, the VIP subscription checkout, and the Cloudflare Stream video pipeline."
           ctaDemo="Book short-drama walkthrough →"
-          tierId="ott-streaming"
+          tierId={SHORT_DRAMA_PACKAGES.app}
         />
       </main>
 

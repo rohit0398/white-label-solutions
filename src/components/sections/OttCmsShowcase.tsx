@@ -47,6 +47,7 @@ export function OttCmsShowcase({ index = "02" }: OttCmsShowcaseProps) {
       <div className="max-w-3xl mx-auto w-full group">
         <Screenshot
           src="/showcase/ott-video-cms.jpg"
+          sizes="(min-width: 816px) 768px, calc(100vw - 48px)"
           alt={translateCopy(englishMessage("OttCmsShowcase.video.cms.cloud.transcoding.operations.dashb.911ee7a"))}
           caption={
             <span className="flex items-center justify-between text-xs font-mono text-ink-3">

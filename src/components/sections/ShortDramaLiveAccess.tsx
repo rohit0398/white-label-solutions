@@ -3,18 +3,81 @@ import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { MICRODRAMA_DEMO } from "@/lib/constants";
-import { Check, Copy, Download, Globe, Smartphone } from "lucide-react";
+import { Check, ChevronDown, Copy, Download, Globe, Smartphone } from "lucide-react";
+
+const demoCards = {
+  web: {
+    url: MICRODRAMA_DEMO.websiteUrl,
+    artwork: "/showcase/microdrama-catalog.webp",
+    icon: Globe,
+    title: englishMessage("ShortDramaLiveAccess.open.the.website.899b705"),
+    description: MICRODRAMA_DEMO.websiteLabel,
+    action: englishMessage("ShortDramaLiveAccess.launch.player.04aed41"),
+  },
+  ios: {
+    url: MICRODRAMA_DEMO.iosBetaUrl,
+    artwork: "/showcase/microdrama-mobile-feed.webp",
+    icon: Smartphone,
+    title: englishMessage("ShortDramaLiveAccess.try.on.ios"),
+    description: englishMessage("ShortDramaLiveAccess.install.through.testflight"),
+    action: englishMessage("ShortDramaLiveAccess.open.testflight"),
+  },
+  android: {
+    url: MICRODRAMA_DEMO.apkUrl,
+    artwork: "/showcase/microdrama-mobile-catalog.webp",
+    icon: Download,
+    title: englishMessage("ShortDramaLiveAccess.install.on.android.869ae2b"),
+    description: englishMessage("ShortDrama.top.androidInstall"),
+    action: englishMessage("ShortDramaLiveAccess.download.test.apk.6e41328"),
+  },
+};
+
+const demoCardGroups = {
+  both: ["web", "ios", "android"],
+  app: ["ios", "android"],
+  web: ["web"],
+} as const;
 
 export function ShortDramaLiveAccess({
   emphasis = "both",
+  landing = false,
+  children,
 }: {
   emphasis?: "both" | "web" | "app";
+  landing?: boolean;
+  children?: React.ReactNode;
 }) {
   const translateCopy = useMessages();
 
   const [copied, setCopied] = useState<string | null>(null);
-  const prioritizeIos = emphasis === "app";
+  const prioritizeIos = !landing && emphasis === "app";
+  const landingCopy = {
+    both: {
+      title: englishMessage("ShortDrama.top.platform.demoTitle"),
+      intro: englishMessage("ShortDrama.top.platform.demoIntro"),
+      badge: englishMessage("ShortDrama.top.platform.demoBadge"),
+    },
+    app: {
+      title: englishMessage("ShortDrama.top.app.demoTitle"),
+      intro: englishMessage("ShortDrama.top.app.demoIntro"),
+      badge: englishMessage("ShortDrama.top.app.demoBadge"),
+    },
+    web: {
+      title: englishMessage("ShortDrama.top.web.demoTitle"),
+      intro: englishMessage("ShortDrama.top.web.demoIntro"),
+      badge: englishMessage("ShortDrama.top.web.demoBadge"),
+    },
+  }[emphasis];
+  const LoginContainer = landing ? "details" : "div";
+  const heading = landing ? landingCopy.title : englishMessage(
+    emphasis === "web"
+      ? "ShortDramaLiveAccess.heading.web"
+      : emphasis === "app"
+        ? "ShortDramaLiveAccess.heading.apps"
+        : "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6"
+  );
 
   function copy(value: string, id: string) {
     const mark = () => {
@@ -64,7 +127,7 @@ export function ShortDramaLiveAccess({
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-amber-500/30 bg-paper text-amber-600 dark:text-amber-300">
           <Globe className="h-4 w-4 transition-transform duration-200 group-hover:rotate-6 group-hover:scale-110" />
         </span>
-        <LiveDot />
+        {!landing && <LiveDot />}
       </div>
       <div>
         <p className="text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.open.the.website.899b705"))}</p>
@@ -94,7 +157,7 @@ export function ShortDramaLiveAccess({
       </div>
       <div>
         <p className="text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.install.on.android.869ae2b"))}</p>
-        <p className="mt-1 text-[11px] leading-relaxed text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.hosted.on.our.server.for.review.ahead.of.goo.29cfdad"))}</p>
+        <p className="mt-1 text-[11px] leading-relaxed text-ink-3">{translateCopy(landing ? englishMessage("ShortDrama.top.androidInstall") : englishMessage("ShortDramaLiveAccess.hosted.on.our.server.for.review.ahead.of.goo.29cfdad"))}</p>
         <p className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-300">
           <span>{translateCopy(englishMessage("ShortDramaLiveAccess.download.test.apk.6e41328"))}</span>
           <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
@@ -131,89 +194,154 @@ export function ShortDramaLiveAccess({
 
   return (
     <section id="live-demo" className="pb-8 sm:pb-12">
-      <div className="wrap">
+      <div className={landing ? "wrap-wide" : "wrap"}>
         <div className="relative overflow-hidden rounded-2xl border border-amber-500/35 bg-wash/40 shadow-[0_0_0_1px_rgba(245,158,11,0.06),0_20px_50px_-28px_rgba(245,158,11,0.55)]">
           <div className="shimmer-badge-drama absolute inset-x-0 top-0 h-0.5" aria-hidden="true" />
 
           <div className="p-5 sm:p-7">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/[0.08] px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider text-amber-700 dark:text-amber-300">
-                <LiveDot />{translateCopy(englishMessage("short-drama.live.test.build.c215c43"))}</span>
+                <LiveDot />
+                {translateCopy(landing ? landingCopy.badge : englishMessage("short-drama.live.test.build.c215c43"))}
+              </span>
             </div>
 
-            <h2 className="mt-3 text-xl font-semibold tracking-tight text-ink sm:text-2xl">{translateCopy(englishMessage(emphasis === "web" ? "ShortDramaLiveAccess.heading.web" : emphasis === "app" ? "ShortDramaLiveAccess.heading.apps" : "ShortDramaLiveAccess.try.micro.drama.on.the.web.and.android.107ceb6"))}</h2>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">{translateCopy(englishMessage("ShortDramaLiveAccess.open.the.player.then.sign.in.with.google.or.bbff9da"))}</p>
+            <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">{translateCopy(heading)}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">{translateCopy(landing ? landingCopy.intro : englishMessage("ShortDramaLiveAccess.open.the.player.then.sign.in.with.google.or.bbff9da"))}</p>
 
             <div className={`mt-5 grid gap-3 ${emphasis === "both" ? "md:grid-cols-3" : emphasis === "app" ? "sm:grid-cols-2" : ""}`}>
-              {emphasis !== "app" && websiteCard}
-              {emphasis !== "web" && iosCard}
-              {emphasis !== "web" && apkCard}
+              {landing ? demoCardGroups[emphasis].map((platform) => {
+                const { url, artwork, icon: Icon, title, description, action } = demoCards[platform];
+                return (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative isolate flex min-h-48 min-w-0 flex-col items-start justify-between gap-4 overflow-hidden rounded-xl border border-amber-500/30 bg-zinc-950 p-4 text-white transition-colors hover:border-amber-500/70 sm:p-5"
+                  >
+                    <Image
+                      src={artwork}
+                      alt=""
+                      fill
+                      loading="lazy"
+                      sizes={platform === "web" ? "(min-width: 640px) 420px, calc(100vw - 88px)" : "112px"}
+                      className="-z-20 object-contain"
+                    />
+                    <span aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-b from-black/60 via-black/65 to-black/95" />
+                    <span className="inline-flex size-9 items-center justify-center rounded-lg border border-white/25 bg-black/60 text-amber-200">
+                      <Icon className="size-4" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0 [text-shadow:0_1px_4px_#000,0_1px_8px_#000]">
+                      <p className="text-base font-semibold">{translateCopy(title)}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-zinc-200 [overflow-wrap:anywhere]">{translateCopy(description)}</p>
+                      <p className="mt-3 flex items-center gap-1 text-xs font-semibold text-amber-200">
+                        {translateCopy(action)} <span aria-hidden="true">↗</span>
+                      </p>
+                    </div>
+                  </a>
+                );
+              }) : (
+                <>
+                  {emphasis !== "app" && websiteCard}
+                  {emphasis !== "web" && iosCard}
+                  {emphasis !== "web" && apkCard}
+                </>
+              )}
             </div>
 
-            <div className="mt-5 rounded-xl border border-line bg-paper p-4 sm:p-5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-medium text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8"))}</p>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.tap.to.copy.ab4e649"))}</span>
-              </div>
+            {landing && <h3 className="mt-5 text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDrama.top.testLogin"))}</h3>}
+            <div className={landing ? "mt-2 grid items-start gap-3 sm:grid-cols-2" : undefined}>
+              {landing && MICRODRAMA_DEMO.googleLogin && (
+                <div className="flex min-h-20 items-start gap-3 rounded-lg border border-line bg-paper p-3">
+                  <span aria-hidden="true" className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-wash text-sm font-semibold text-ink">{englishMessage("ShortDramaLiveAccess.g.a36a671")}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-ink">{translateCopy(englishMessage("ShortDrama.top.googleSignIn"))}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-ink-2">{translateCopy(englishMessage("ShortDrama.top.googleSignInInstructions"))}</p>
+                  </div>
+                </div>
+              )}
+              <LoginContainer className={landing ? "group min-w-0 rounded-lg border border-line bg-paper p-3" : "mt-5 rounded-xl border border-line bg-paper p-4 sm:p-5"}>
+                {landing && (
+                  <summary className="flex min-h-13 cursor-pointer list-none items-center gap-3 rounded text-sm font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                    <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-line bg-wash">
+                      <Smartphone className="size-4" aria-hidden="true" />
+                    </span>
+                    <span className="flex-1">{translateCopy(englishMessage("ShortDrama.top.testPhone"))}</span>
+                    <ChevronDown className="size-4 shrink-0 text-ink-3 group-open:rotate-180 motion-safe:transition-transform" aria-hidden="true" />
+                  </summary>
+                )}
+                {landing ? (
+                  <p className="mt-3 text-sm text-ink-2">{translateCopy(englishMessage("ShortDrama.top.testLoginInstructions"))}</p>
+                ) : (
+                  <>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-sm font-medium text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8"))}</p>
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.tap.to.copy.ab4e649"))}</span>
+                    </div>
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-line bg-wash px-3 py-2 text-xs text-ink-2">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-line bg-paper text-[10px] font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.g.a36a671"))}</span>
+                      {translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8"))}
+                    </div>
+                  </>
+                )}
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {MICRODRAMA_DEMO.phones.map((phone, index) => {
+                    const id = `phone-${index}`;
+                    const isCopied = copied === id;
+                    return (
+                      <li key={phone}>
+                        <button
+                          type="button"
+                          onClick={() => copy(phone.replace(/\s/g, ""), id)}
+                          className={`cursor-pointer rounded-lg border px-2.5 py-1.5 font-mono text-xs transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] ${
+                            isCopied
+                              ? "border-amber-500/60 bg-amber-500/10 text-amber-700 dark:text-amber-300"
+                              : "border-line bg-wash text-ink hover:border-amber-500/45"
+                          }`}
+                        >
+                          {translateCopy(isCopied ? englishMessage("ShortDramaLiveAccess.copied.8e3df45") : phone)}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
 
-              <div className="mt-3 inline-flex items-center gap-2 rounded-lg border border-line bg-wash px-3 py-2 text-xs text-ink-2">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-line bg-paper text-[10px] font-semibold text-ink">{translateCopy(englishMessage("ShortDramaLiveAccess.g.a36a671"))}</span>{""}{translateCopy(englishMessage("ShortDramaLiveAccess.sign.in.with.google.or.use.a.test.number.48bcbe8"))}{""}</div>
-
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {MICRODRAMA_DEMO.phones.map((phone, index) => {
-                  const id = `phone-${index}`;
-                  const isCopied = copied === id;
-                  return (
-                    <li key={phone}>
-                      <button
-                        type="button"
-                        onClick={() => copy(phone.replace(/\s/g, ""), id)}
-                        className={`cursor-pointer rounded-lg border px-2.5 py-1.5 font-mono text-xs transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] ${
-                          isCopied
-                            ? "border-amber-500/60 bg-amber-500/10 text-amber-700 dark:text-amber-300"
-                            : "border-line bg-wash text-ink hover:border-amber-500/45"
-                        }`}
-                      >
-                        {translateCopy(isCopied ? englishMessage("ShortDramaLiveAccess.copied.8e3df45") : phone)}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                <p className="text-xs font-mono uppercase tracking-wider text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.otp.ff5e98c"))}</p>
-                <button
-                  type="button"
-                  onClick={() => copy(MICRODRAMA_DEMO.otp, "otp")}
-                  className="group inline-flex cursor-pointer items-center gap-2 rounded-xl border border-line bg-wash px-2 py-1.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-500/50 active:scale-[0.98]"
-                  aria-label={translateCopy.format("ShortDramaLiveAccess.copy.otp.value0.91f8af6", { value0: MICRODRAMA_DEMO.otp })}
-                >
-                  <span className="flex gap-1">
-                    {translateCopy(MICRODRAMA_DEMO.otp.split("").map((digit, index) => (
-                      <span
-                        key={`${digit}-${index}`}
-                        className="flex h-9 w-7 items-center justify-center rounded-md border border-line bg-paper font-mono text-base font-semibold text-ink transition-colors duration-200 group-hover:border-amber-500/40"
-                      >
-                        {translateCopy(digit)}
-                      </span>
-                    )))}
-                  </span>
-                  <span className="inline-flex items-center gap-1 pr-1.5 text-xs font-medium text-ink-2 group-hover:text-ink">
-                    {translateCopy(copied === "otp" ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-amber-500" />{""}{translateCopy(englishMessage("ShortDramaLiveAccess.copied.8e3df45"))}{""}</>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />{""}{translateCopy(englishMessage("ShortDramaLiveAccess.copy.af74f7c"))}{""}</>
-                    ))}
-                  </span>
-                </button>
-              </div>
-              <p className="sr-only" aria-live="polite">
-                {translateCopy(copied ? englishMessage("ShortDramaLiveAccess.copied.to.clipboard.0e73834") : "")}
-              </p>
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <p className="text-xs font-mono uppercase tracking-wider text-ink-3">{translateCopy(englishMessage("ShortDramaLiveAccess.otp.ff5e98c"))}</p>
+                  <button
+                    type="button"
+                    onClick={() => copy(MICRODRAMA_DEMO.otp, "otp")}
+                    className="group inline-flex max-w-full cursor-pointer flex-wrap items-center gap-2 rounded-xl border border-line bg-wash px-2 py-1.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-500/50 active:scale-[0.98]"
+                    aria-label={translateCopy.format("ShortDramaLiveAccess.copy.otp.value0.91f8af6", { value0: MICRODRAMA_DEMO.otp })}
+                  >
+                    <span className="flex gap-1">
+                      {translateCopy(MICRODRAMA_DEMO.otp.split("").map((digit, index) => (
+                        <span
+                          key={`${digit}-${index}`}
+                          className={`flex h-9 ${landing ? "w-5" : "w-7"} items-center justify-center rounded-md border border-line bg-paper font-mono text-base font-semibold text-ink transition-colors duration-200 group-hover:border-amber-500/40`}
+                        >
+                          {translateCopy(digit)}
+                        </span>
+                      )))}
+                    </span>
+                    <span className="inline-flex items-center gap-1 pr-1.5 text-xs font-medium text-ink-2 group-hover:text-ink">
+                      {translateCopy(copied === "otp" ? (
+                        <>
+                          <Check className="h-3.5 w-3.5 text-amber-500" />{""}{translateCopy(englishMessage("ShortDramaLiveAccess.copied.8e3df45"))}{""}</>
+                      ) : (
+                        <>
+                          <Copy className="h-3.5 w-3.5" />{""}{translateCopy(englishMessage("ShortDramaLiveAccess.copy.af74f7c"))}{""}</>
+                      ))}
+                    </span>
+                  </button>
+                </div>
+                <p className="sr-only" aria-live="polite">
+                  {translateCopy(copied ? englishMessage("ShortDramaLiveAccess.copied.to.clipboard.0e73834") : "")}
+                </p>
+              </LoginContainer>
             </div>
+            {children}
           </div>
         </div>
       </div>
@@ -222,10 +350,8 @@ export function ShortDramaLiveAccess({
 }
 
 function LiveDot() {
-  const translateCopy = useMessages();
-
   return (
-    <span className="relative flex h-2 w-2 shrink-0">
+    <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
       <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-80" />
       <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
     </span>

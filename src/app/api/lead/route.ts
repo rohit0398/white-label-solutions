@@ -1,4 +1,5 @@
 import { priceText } from "@/lib/pricing-catalog";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { NextResponse } from "next/server";
 import dns from "node:dns";
 
@@ -52,6 +53,9 @@ export async function POST(request: Request) {
       "source-code": priceText("💻 Full Source Code & License ({price:source-code-license})"),
       "dedicated-support": "⏱️ Developer Time ($20/hr)",
       "developer-time": "⏱️ Developer Time ($20/hr)",
+      [SHORT_DRAMA_PACKAGES.platform]: "Short drama platform",
+      [SHORT_DRAMA_PACKAGES.app]: "Short drama app development",
+      [SHORT_DRAMA_PACKAGES.web]: "Short drama website development",
       "ott-streaming": priceText("🎬 White-Label OTT & Short-Drama Platform ({price:launch})"),
       "ecommerce": priceText("🛍️ White-Label E-Commerce Platform ({price:launch})"),
     };
