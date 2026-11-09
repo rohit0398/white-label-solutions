@@ -24,7 +24,7 @@ export function Section({ id, index, title, intro, wide, bare, className, childr
   const translateCopy = useMessages();
 
   return (
-    <section id={id} className={cn("border-t border-line py-20 sm:py-28", className)}>
+    <section id={id} data-page-section className={cn("border-t border-line py-20 sm:py-28", className)}>
       {(index || title || intro) && (
         <header className={wide ? "wrap-wide mb-12" : "wrap mb-12"}>
           {index && <p className="font-mono text-xs text-ink-3 mb-4">{translateCopy(index)}</p>}

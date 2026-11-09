@@ -1,7 +1,10 @@
 "use client";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { priceText } from "@/lib/pricing-catalog";
+import { SHORT_DRAMA_PACKAGES, shortDramaOfferForPath } from "@/lib/short-drama-offers";
+import { OTT_PACKAGES, ottOfferForPath } from "@/lib/ott-offers";
 
 
 import React, { useEffect, useState } from "react";
@@ -24,8 +27,12 @@ interface LeadModalProps {
 
 const PLATFORM_OPTIONS = [
   { id: "ecommerce", label: priceText(englishMessage("LeadModal..white.label.e.commerce.platform.price.launc.661f078")) },
-  { id: "short-drama", label: priceText(englishMessage("LeadModal..9.16.short.drama.vertical.video.platform.pr.ead9b69")) },
-  { id: "ott-streaming", label: priceText(englishMessage("LeadModal..16.9.cinematic.ott.live.tv.platform.price.l.dc97011")) },
+  { id: SHORT_DRAMA_PACKAGES.platform, label: englishMessage("ShortDrama.top.platform.title") },
+  { id: SHORT_DRAMA_PACKAGES.app, label: englishMessage("ShortDrama.top.app.title") },
+  { id: SHORT_DRAMA_PACKAGES.web, label: englishMessage("ShortDrama.top.web.title") },
+  { id: OTT_PACKAGES.platform, label: englishMessage("OttOverview.platform.title") },
+  { id: OTT_PACKAGES.app, label: englishMessage("OttOverview.app.title") },
+  { id: OTT_PACKAGES.web, label: englishMessage("OttOverview.web.title") },
   { id: "source-code", label: priceText(englishMessage("LeadModal..full.unencrypted.git.source.code.license.pr.7366f5d")) },
   { id: "developer-time", label: englishMessage("LeadModal..dedicated.engineering.support.20.hr.c9f5793") },
   { id: "launch", label: englishMessage("LeadModal..full.custom.white.label.cloud.launch.2bf35ab") },
@@ -36,12 +43,18 @@ function resolveInitialPackage(tierId?: string, pathname?: string): string {
   if (tierId && tierId !== "launch") {
     if (tierId === "source-code-license") return "source-code";
     if (tierId === "dedicated-support") return "developer-time";
+    if (tierId === "short-drama-base") return SHORT_DRAMA_PACKAGES.platform;
+    if (tierId === "ott-streaming") return OTT_PACKAGES.platform;
     return tierId;
   }
   // Otherwise, dynamically pre-select based on current URL path
   const path = (pathname || "").toLowerCase();
-  if (path.includes("short-drama")) return "short-drama";
-  if (path.includes("ott") || path.includes("streaming")) return "ott-streaming";
+  const offer = shortDramaOfferForPath(path);
+  if (offer) return SHORT_DRAMA_PACKAGES[offer];
+  const ottOffer = ottOfferForPath(path);
+  if (ottOffer) return OTT_PACKAGES[ottOffer];
+  if (path.includes("short-drama")) return SHORT_DRAMA_PACKAGES.platform;
+  if (path.includes("ott") || path.includes("streaming")) return OTT_PACKAGES.platform;
   if (path.includes("ecommerce") || path.includes("shopify")) return "ecommerce";
   if (path.includes("source-code")) return "source-code";
 
@@ -54,6 +67,7 @@ const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
 export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps) {
   const translateCopy = useMessages();
+  const whatsappUrl = useContactWhatsApp();
 
   const { language } = useSite();
   const pathname = usePathname();
@@ -149,7 +163,13 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               {translateCopy(t.leadModal.title)}
             </h2>
             <p className="mt-2 text-ink-2 text-sm sm:text-[15px] leading-relaxed">
-              {translateCopy(t.leadModal.subtitle)}
+              {translateCopy(
+                Object.values(SHORT_DRAMA_PACKAGES).some((id) => id === selectedPackage)
+                  ? englishMessage("ShortDrama.top.modalIntro")
+                  : Object.values(OTT_PACKAGES).some((id) => id === selectedPackage)
+                    ? englishMessage("OttOverview.modalIntro")
+                    : t.leadModal.subtitle
+              )}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
@@ -316,7 +336,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
             <p className="mt-6 text-sm text-ink-3">
               {translateCopy(t.leadModal.whatsappText)}{" "}
               <a
-                href={BRAND.contact.whatsappUrl}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick("LeadModal-Footer")}
@@ -335,7 +355,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <a
-                href={BRAND.contact.whatsappUrl}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick("LeadModal-Success")}

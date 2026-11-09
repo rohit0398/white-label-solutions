@@ -4,26 +4,21 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { Screenshot } from "@/components/ui/Screenshot";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
+import { displayPackagePrice } from "@/lib/pricing-catalog";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
-import { BRAND } from "@/lib/constants";
 import {
   Clock,
   Calendar,
-  CheckCircle2,
   Tv,
   Film,
   Lock,
   Cast,
-  ShieldCheck,
   Server,
   ArrowRight,
-  MessageSquare,
   Sparkles,
-  Layers,
-  ChevronRight,
-  Play,
-  Zap,
   Smartphone,
 } from "lucide-react";
 
@@ -50,14 +45,14 @@ export const metadata: Metadata = {
       "Engineering guide for building high-scale 16:9 cinematic OTT streaming platforms. Multi-bitrate HLS, Widevine & FairPlay DRM, TV casting, and private cloud deployment.",
     url: "/blog/ott-video-streaming-development",
     type: "article",
-    images: ["/og-image.png"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "OTT Video Streaming Development Guide: HLS, DRM & Cloud Architecture",
     description:
       "Learn how to build and deploy cinematic OTT platforms with adaptive HLS, Google Widevine DRM, and TV casting with 0% revenue cut.",
-    images: ["/og-image.png"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
 };
 
@@ -96,7 +91,7 @@ export default function OttVideoStreamingDevelopmentPage() {
     headline: "Complete Guide to OTT Video Streaming Development: Adaptive HLS, DRM Security & Private Cloud Architecture",
     description:
       "A comprehensive technical architecture and deployment guide for launching cinematic 16:9 video streaming platforms and mobile/TV apps on private cloud infrastructure.",
-    image: [`${siteUrl}/og-image.png`],
+    image: [`${siteUrl}/showcase/microdrama-catalog.webp`],
     author: {
       "@type": "Organization",
       name: "Mechatron Lab Engineering Team",
@@ -336,8 +331,8 @@ export default function OttVideoStreamingDevelopmentPage() {
             </p>
             <div className="p-6 rounded-2xl border border-line bg-wash space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3">
-                <span className="font-semibold text-sm text-ink">Complete Cinematic OTT Suite</span>
-                <span className="text-accent font-mono font-semibold text-sm">$4,999 Flat One-Time</span>
+                <span className="font-semibold text-sm text-ink">OTT Video Streaming Platform</span>
+                <span className="text-accent font-mono font-semibold text-sm">{displayPackagePrice(OTT_PACKAGES.platform, "en-US")} one-time deployment</span>
               </div>
               <ul className="space-y-2 text-xs text-ink-2">
                 <li>✓ 16:9 widescreen Next.js 16 web streaming portal with sub-second catalog discovery</li>
@@ -348,6 +343,12 @@ export default function OttVideoStreamingDevelopmentPage() {
                 <li>✓ 0% platform commission · You own all customer accounts and video assets</li>
               </ul>
             </div>
+            <Screenshot
+              src="/showcase/microdrama-admin-series.webp"
+              sizes="(min-width: 896px) 848px, calc(100vw - 48px)"
+              alt="MicroDrama admin catalog with series records and publishing controls"
+              caption="MicroDrama’s admin panel shows how a video team can organize and publish a series catalog."
+            />
           </section>
 
           {/* Bottom Conversion Box */}
@@ -357,13 +358,13 @@ export default function OttVideoStreamingDevelopmentPage() {
               <span>Launch Your Cinematic OTT Service</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink max-w-xl mx-auto">
-              Schedule a Live Architecture Demo of Our 16:9 Cinematic OTT Platform
+              See how the OTT platform would work for your catalog
             </h3>
             <p className="text-xs sm:text-sm text-ink-2 max-w-lg mx-auto leading-relaxed">
-              Test-drive adaptive HLS video streaming, review Video CMS management workflows, and discuss your private cloud deployment with our engineering leads.
+              See how viewers browse and watch, how your team manages the catalog, and what it takes to deploy on your cloud.
             </p>
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
-              <DemoButton tierId="ott-streaming" size="md">
+              <DemoButton tierId={OTT_PACKAGES.platform} size="md">
                 Book a platform walkthrough
               </DemoButton>
               <Link

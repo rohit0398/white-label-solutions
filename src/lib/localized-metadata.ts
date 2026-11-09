@@ -18,11 +18,12 @@ export function landingMetadata(locale: LandingLocale, family: LandingFamily): M
   const title = family === "ecommerce" ? commerceSeo[locale].title : seo.title;
   const path = localizedPath(familyPath(family), locale);
   const description = family === "ecommerce" ? commerceSeo[locale].description : seo.description;
+  const image = family === "ott-streaming" ? "/showcase/microdrama-catalog.webp" : "/og-image.png";
   return {
     title, description, keywords: seo.keywords,
     alternates: { canonical: path, languages: languageAlternates(familyPath(family)) },
-    openGraph: { type: "website", locale: seo.ogLocale, title, description, url: path, siteName: "Mechatron Lab Solutions", images: ["/og-image.png"] },
-    twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
+    openGraph: { type: "website", locale: seo.ogLocale, title, description, url: path, siteName: "Mechatron Lab Solutions", images: [image] },
+    twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
 

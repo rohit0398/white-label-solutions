@@ -1,5 +1,6 @@
 "use client";
 import { useMessages } from "@/components/site/useMessages";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 
 import { trackWhatsAppClick } from "@/lib/analytics";
 import React from "react";
@@ -17,6 +18,7 @@ export interface ClosingProps {
 
 export function Closing({ headline, description, ctaDemo, tierId }: ClosingProps = {}) {
   const translateCopy = useMessages();
+  const whatsappUrl = useContactWhatsApp();
 
   const { language } = useSite();
   const t = TRANSLATIONS[language];
@@ -26,7 +28,7 @@ export function Closing({ headline, description, ctaDemo, tierId }: ClosingProps
   const activeCta = ctaDemo || t.closing.ctaDemo;
 
   return (
-    <section className="border-t border-line py-20 sm:py-28 bg-wash">
+    <section data-page-section className="border-t border-line py-20 sm:py-28 bg-wash">
       <div className="wrap text-center space-y-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">
           {translateCopy(activeHeadline)}
@@ -37,7 +39,7 @@ export function Closing({ headline, description, ctaDemo, tierId }: ClosingProps
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
           <DemoButton size="md" tierId={tierId}>{translateCopy(activeCta)}</DemoButton>
           <a
-            href={BRAND.contact.whatsappUrl} onClick={() => trackWhatsAppClick("Closing")}
+            href={whatsappUrl} onClick={() => trackWhatsAppClick("Closing")}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-ink-2 hover:text-ink underline underline-offset-4 decoration-line hover:decoration-ink"

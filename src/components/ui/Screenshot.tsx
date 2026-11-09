@@ -10,11 +10,12 @@ interface ScreenshotProps {
   alt: string;
   caption?: React.ReactNode;
   priority?: boolean;
+  sizes?: string;
   className?: string;
 }
 
 /** A real screenshot, shown plainly: thin border, small radius, no fake browser chrome. */
-export function Screenshot({ src, alt, caption, priority, className }: ScreenshotProps) {
+export function Screenshot({ src, alt, caption, priority, sizes = "(max-width: 768px) 100vw, 1040px", className }: ScreenshotProps) {
   const translateCopy = useMessages();
 
   return (
@@ -23,7 +24,7 @@ export function Screenshot({ src, alt, caption, priority, className }: Screensho
         <Image
           src={src}
           {...imageDimensions(src)}
-          sizes="(max-width: 768px) 100vw, 1040px"
+          sizes={sizes}
           alt={translateCopy(alt)}
           loading={priority ? "eager" : "lazy"}
           className="block w-full h-auto"

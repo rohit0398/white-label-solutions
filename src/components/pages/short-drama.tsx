@@ -7,17 +7,15 @@ import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
+import { SHORT_DRAMA_PACKAGES, SHORT_DRAMA_SCREENSHOT_SIZES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
-import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -36,10 +34,13 @@ import {
 } from "lucide-react";
 import Link from "@/components/ui/LocalizedLink";
 
+import { LOCALIZED_SHORT_DRAMA_SEO } from "@/lib/translations/seo";
+
+const { title, description } = LOCALIZED_SHORT_DRAMA_SEO.en;
+
 export const metadata: Metadata = {
-  title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
-  description:
-    "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
+  title,
+  description,
   keywords: [
     "short drama app development company",
     "short drama app development",
@@ -63,9 +64,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Short-Drama App Development Company | Video Streaming",
-    description:
-      "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
+    title,
+    description,
     url: "/solutions/short-drama",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -74,9 +74,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Short-Drama App Development Company | Video Streaming",
-    description:
-      "Launch your branded short-drama app like ReelShort in 2–4 weeks with 0% revenue cut on your private cloud.",
+    title,
+    description,
     images: ["/showcase/ott-drama-app.jpg"],
   },
 };
@@ -105,15 +104,6 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
     siteUrl,
   });
 
-  const tickerItems = [
-    { title: translateCopy(englishMessage("short-drama.native.flutter.apps.2bc1c8c")), detail: translateCopy(englishMessage("short-drama.ios.android.60fps.fluid.vertical.swiper.c34538f")) },
-    { title: translateCopy(englishMessage("short-drama.mobile.first.web.bd606a1")), detail: translateCopy(englishMessage("short-drama.next.js.16.vertical.web.player.sub.second.bu.2f307d8")) },
-    { title: translateCopy(englishMessage("short-drama.vip.subscriptions.b1f080e")), detail: translateCopy(englishMessage("short-drama.stripe.apple.storekit.google.play.in.app.pur.2204a70")) },
-    { title: translateCopy(englishMessage("short-drama.rewarded.video.ads.a884660")), detail: translateCopy(englishMessage("short-drama.google.admob.unity.ads.for.free.tier.viewers.301444d")) },
-    { title: translateCopy(englishMessage("short-drama.wholesale.cdn.1e1582e")), detail: translateCopy(englishMessage("short-drama.cloudflare.stream.video.ingest.zero.egress.f.d99c959")) },
-    { title: translateCopy(englishMessage("ott-streaming.0.revenue.cut.ab5aabb")), detail: translateCopy(englishMessage("ott-streaming.keep.100.of.subscription.ad.revenue.6ab8464")) },
-  ];
-
   const modules = [
     {
       n: "01",
@@ -127,9 +117,10 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         label: priceText(translateCopy(englishMessage("short-drama.looking.for.mobile.apps.only.explore.app.onl.24d4b24"))),
       },
       screenshot: {
-        src: "/showcase/ott-drama-app-showcase.jpg",
-        alt: translateCopy(englishMessage("short-drama.9.16.vertical.short.drama.mobile.app.interfa.3939b91")),
-        caption: translateCopy(englishMessage("short-drama.native.9.16.drama.apps.60fps.swipe.vip.acces.90dfd5d")),
+        src: "/showcase/microdrama-mobile-feed.webp",
+        alt: englishMessage("ShortDrama.top.app.feedImage"),
+        caption: englishMessage("ShortDrama.top.app.previewCaption"),
+        portrait: true,
       },
       capabilities: [
         {
@@ -166,9 +157,8 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         label: priceText(translateCopy(englishMessage("short-drama.looking.for.website.only.explore.website.pac.1e8102c"))),
       },
       screenshot: {
-        src: "/showcase/ott-cinematic-web.jpg",
-        alt: translateCopy(englishMessage("short-drama.responsive.mobile.first.web.streaming.player.6ea8284")),
-        caption: translateCopy(englishMessage("short-drama.next.js.web.player.episode.drawer.vip.subscr.3a964e7")),
+        src: "/showcase/microdrama-web-player.webp",
+        alt: englishMessage("ShortDrama.top.web.image"),
       },
       capabilities: [
         {
@@ -201,9 +191,9 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
       description:
         translateCopy(englishMessage("short-drama.your.self.hosted.administrative.operations.c.bee8d68")),
       screenshot: {
-        src: "/showcase/ott-video-cms.jpg",
-        alt: translateCopy(englishMessage("short-drama.video.cms.console.with.cloud.encoding.and.ep.c17c030")),
-        caption: translateCopy(englishMessage("ott-streaming.video.cms.console.master.uploads.cloudflare.a11f1bb")),
+        src: "/showcase/microdrama-admin-series.webp",
+        alt: englishMessage("ShortDrama.media.series"),
+        caption: englishMessage("ShortDrama.media.series"),
       },
       capabilities: [
         {
@@ -261,42 +251,9 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
 
       <Navbar />
 
-      <main className="flex-1">
+      <main className="short-drama-page flex-1">
         {/* Unified Hero */}
-        <SolutionHero
-          category="drama"
-          breadcrumbs={[
-            { label: translateCopy(englishMessage("ecommerce.home.70f8bb9")), href: "/" },
-            { label: translateCopy(englishMessage("ecommerce.solutions.05b004a")), href: "/solutions" },
-            { label: translateCopy(englishMessage("short-drama.short.drama.platform.2897406")) },
-          ]}
-          badge={translateCopy(translateCopy(englishMessage("short-drama.complete.short.drama.suite.app.web.cms.0.rev.cb01d23")))}
-          headline={translateCopy(englishMessage("short-drama.short.drama.video.streaming.platform.a9db9d8"))}
-          subtitle={translateCopy(englishMessage("short-drama.launch.your.branded.vertical.micro.drama.str.579d2c2"))}
-          anchors={[
-            { label: translateCopy(englishMessage("short-drama.live.test.build.c215c43")), href: "#live-demo" },
-            { label: translateCopy(englishMessage("ott-streaming.01.platform.architecture.e1548cc")), href: "#architecture" },
-            { label: translateCopy(englishMessage("ott-streaming.02.4.week.rollout.e059d4f")), href: "#rollout" },
-            { label: translateCopy(englishMessage("short-drama.03.production.proof.5d573e8")), href: "#production-apps" },
-            { label: priceText(translateCopy(englishMessage("short-drama.04.pricing.price.short.drama.base.18d9001"))), href: "#pricing" },
-            { label: translateCopy(englishMessage("ott-streaming.05.faq.07fa9e9")), href: "#faq" },
-          ]}
-          ctaDemoText={translateCopy(translateCopy(englishMessage("short-drama.book.short.drama.suite.demo.2fd028b")))}
-          tierId="ott-streaming"
-          footerNote={translateCopy(translateCopy(englishMessage("short-drama.published.under.your.developer.accounts.full.09c6156")))}
-        />
-
-        <ShortDramaLiveAccess emphasis="both" />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="short-drama"
-          headline={translateCopy(englishMessage("short-drama.enterprise.video.streaming.architecture.zero.aa8b029"))}
-          subheadline={translateCopy(englishMessage("short-drama.deployed.to.your.aws.or.cloudflare.account.i.09bc33d"))}
-        />
-
-        {/* Live Capabilities Ticker */}
-        <LiveTicker items={tickerItems} ariaLabel={translateCopy(translateCopy(englishMessage("short-drama.short.drama.streaming.capabilities.ticker.475e75e")))} />
+        <ShortDramaOverview offer="platform" />
 
         {/* Architecture & Modules Breakout */}
         <Section
@@ -306,7 +263,7 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
           intro={translateCopy(translateCopy(englishMessage("short-drama.a.comprehensive.9.16.short.drama.software.pl.f3f1aea")))}
           wide
         >
-          <div className="space-y-24">
+          <div className="space-y-32 sm:space-y-40">
             {modules.map((m) => (
               <div
                 key={m.n}
@@ -338,13 +295,24 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
                 </div>
 
                 {m.screenshot && (
-                  <div className="group max-w-3xl mx-auto w-full">
+                  <div className={`group mx-auto w-full ${m.screenshot.portrait ? "max-w-[15rem]" : "max-w-3xl"}`}>
                     <Screenshot
+                      sizes={m.screenshot.portrait ? "240px" : SHORT_DRAMA_SCREENSHOT_SIZES}
                       src={m.screenshot.src}
                       alt={translateCopy(m.screenshot.alt)}
                       caption={m.screenshot.caption}
                       className={translateCopy(translateCopy(englishMessage("ott-streaming.transition.transform.duration.300.0e49470")))}
                     />
+                  </div>
+                )}
+
+                {m.n === "03" && (
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {(["episodes", "analytics"] as const).map((capture) => {
+                      const label = englishMessage(`ShortDrama.media.${capture}`);
+                      return <Screenshot key={capture} src={`/showcase/microdrama-admin-${capture}.webp`} alt={label} caption={label}
+                        sizes="(min-width: 1088px) 508px, (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 48px)" />;
+                    })}
                   </div>
                 )}
 
@@ -413,7 +381,7 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
           headline={translateCopy(englishMessage("short-drama.ready.to.launch.your.9.16.short.drama.stream.18b3f55"))}
           description={translateCopy(translateCopy(englishMessage("short-drama.talk.directly.with.our.solutions.engineering.53b8b46")))}
           ctaDemo={translateCopy(translateCopy(englishMessage("short-drama.book.short.drama.walkthrough.ec513d3")))}
-          tierId="ott-streaming"
+          tierId={SHORT_DRAMA_PACKAGES.platform}
         />
       </main>
 

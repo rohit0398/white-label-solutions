@@ -32,6 +32,7 @@ export interface ShowcaseProject {
   iosBetaUrl?: string;
   caseStudyUrl?: string;
   screenshotUrl?: string;
+  productPreview?: boolean;
   demoAccess?: DemoAccess;
 }
 

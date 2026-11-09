@@ -86,9 +86,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "OTT Platform Development Company | Video Apps | Mechatron Lab",
+    title: "White-Label OTT Streaming Platform",
     description:
-      "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your cloud with 0% fees.",
+      "Launch a branded streaming service for movies and series with a website and iOS and Android apps. Manage your catalog, subscriptions, and ads in one place.",
     keywords: [
       "ott platform development company",
       "video streaming app development",
@@ -101,9 +101,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Desarrollo de Plataforma OTT | Apps de Streaming | Mechatron Lab",
+    title: "Plataforma de streaming OTT de marca blanca",
     description:
-      "Lanza tu plataforma de video como Netflix en 2–4 semanas. Portal web 16:9, apps iOS/Android y Video CMS en tu propia nube con 0% comisión.",
+      "Lanza tu propio servicio de streaming de películas y series con un sitio web y apps para iOS y Android. Gestiona el catálogo, las suscripciones y los anuncios desde un solo panel.",
     keywords: [
       "desarrollo plataforma ott",
       "desarrollo app streaming video",
@@ -114,9 +114,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "es_ES",
   },
   de: {
-    title: "OTT Plattform Entwicklung | Video Streaming Apps | Mechatron Lab",
+    title: "White-Label-OTT-Streaming-Plattform",
     description:
-      "Starten Sie Ihre Video-Streaming-Plattform wie Netflix in 2–4 Wochen. Breitbild-Webportal, iOS/Android-Apps und Video CMS in Ihrer Cloud ohne Provision.",
+      "Starten Sie Ihren eigenen Streamingdienst für Filme und Serien mit einer Website und Apps für iOS und Android. Verwalten Sie Katalog, Abos und Werbung zentral.",
     keywords: [
       "ott plattform entwicklung",
       "video streaming app entwicklung",
@@ -127,9 +127,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Développement Plateforme OTT | Applications Vidéo | Mechatron Lab",
+    title: "Plateforme de streaming OTT en marque blanche",
     description:
-      "Lancez votre plateforme de streaming type Netflix en 2 à 4 semaines. Portail web 16:9, apps iOS/Android et CMS sur votre cloud avec 0% commission.",
+      "Lancez votre service de streaming de films et de séries avec un site et des applications iOS et Android. Gérez le catalogue, les abonnements et la publicité au même endroit.",
     keywords: [
       "developpement plateforme ott",
       "application streaming video",
@@ -140,9 +140,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "ओटीटी प्लेटफ़ॉर्म डेवलपमेंट | वीडियो स्ट्रीमिंग ऐप्स | Mechatron Lab",
+    title: "व्हाइट लेबल OTT स्ट्रीमिंग प्लेटफ़ॉर्म",
     description:
-      "नेटफ्लिक्स जैसा अपना ब्रांडेड वीडियो स्ट्रीमिंग प्लेटफ़ॉर्म 2–4 हफ्तों में लॉन्च करें। वेब पोर्टल, मोबाइल ऐप्स और CMS बिना किसी कमीशन के।",
+      "फ़िल्मों और सीरीज़ के लिए अपने ब्रांड की स्ट्रीमिंग सेवा शुरू करें। वेबसाइट और iOS व Android ऐप के साथ कैटलॉग, सदस्यता और विज्ञापन एक ही पैनल से संभालें।",
     keywords: [
       "ओटीटी प्लेटफॉर्म डेवलपमेंट",
       "वीडियो स्ट्रीमिंग ऐप डेवलपमेंट",
@@ -156,9 +156,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "Short-Drama App Development Company | Video Streaming | Mechatron Lab",
+    title: "White-Label Short Drama Streaming Platform",
     description:
-      "Launch your branded short-drama app like ReelShort in 2–4 weeks. Complete 9:16 iOS & Android apps, web player, and CMS on your private cloud with 0% revenue cut.",
+      "Launch a branded short drama platform with iOS and Android apps, a website, and one admin panel. Deploy it to your own cloud account.",
     keywords: [
       "short drama app development company",
       "reelshort clone app with source code",
@@ -170,9 +170,9 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Desarrollo de Apps de Micro-Dramas 9:16 | Streaming | Mechatron Lab",
+    title: "Plataforma de streaming de microdramas",
     description:
-      "Lanza tu app de micro-dramas tipo ReelShort en 2–4 semanas. Apps nativas 9:16 iOS/Android, reproductor web y CMS en tu propia nube sin comisiones.",
+      "Lanza una plataforma de microdramas con tu marca, apps para iOS y Android, sitio web y un solo panel de administración. Instálala en tu propia nube.",
     keywords: [
       "desarrollo app micro drama 9:16",
       "clon reelshort con codigo fuente",
@@ -183,9 +183,9 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "es_ES",
   },
   de: {
-    title: "9:16 Kurzserien App Entwicklung | Video Streaming | Mechatron Lab",
+    title: "Streaming-Plattform für Kurzserien",
     description:
-      "Starten Sie Ihre Kurzserien-App wie ReelShort in 2–4 Wochen. 9:16 iOS & Android Apps, Web-Player und CMS in Ihrer Cloud ohne Provision.",
+      "Starten Sie eine Plattform für Kurzserien unter Ihrer Marke mit iOS- und Android-Apps, Website und zentraler Verwaltung in Ihrer eigenen Cloud.",
     keywords: [
       "kurzdrama plattform white label",
       "reelshort klon app",
@@ -196,9 +196,9 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Développement d'Apps Mini-Séries 9:16 | Streaming | Mechatron Lab",
+    title: "Plateforme de streaming de mini-séries verticales",
     description:
-      "Lancez votre application de mini-séries type ReelShort en 2 à 4 semaines. Apps 9:16 iOS/Android, lecteur web et CMS sur votre cloud avec 0% commission.",
+      "Lancez une plateforme de mini-séries à votre marque avec des apps iOS et Android, un site et une interface de gestion, sur votre propre cloud.",
     keywords: [
       "developpement app mini serie 9:16",
       "clone reelshort code source",
@@ -209,9 +209,9 @@ export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "9:16 शॉर्ट-ड्रामा ऐप डेवलपमेंट | वीडियो स्ट्रीमिंग | Mechatron Lab",
+    title: "शॉर्ट ड्रामा स्ट्रीमिंग प्लेटफ़ॉर्म",
     description:
-      "2–4 हफ्तों में रीलशॉर्ट जैसा अपना शॉर्ट-ड्रामा ऐप लॉन्च करें। 9:16 iOS और एंड्रॉइड ऐप्स, वेब प्लेयर और CMS बिना किसी कमीशन के।",
+      "अपने ब्रांड का शॉर्ट ड्रामा प्लेटफ़ॉर्म लॉन्च करें। iOS और Android ऐप, वेबसाइट और एक एडमिन पैनल, सब आपके अपने क्लाउड खाते में।",
     keywords: [
       "शॉर्ट ड्रामा ऐप डेवलपमेंट",
       "रीलशॉर्ट क्लोन ऐप सोर्स कोड",

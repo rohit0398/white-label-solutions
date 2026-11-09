@@ -1,4 +1,5 @@
 import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
+import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -7,18 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
-import {
-  ArrowRight,
-  BookOpen,
-  Calendar,
-  Clock,
-  Sparkles,
-  TrendingUp,
-  ShieldCheck,
-  Smartphone,
-  Layers,
-  ChevronRight,
-} from "lucide-react";
+import { Sparkles, ChevronRight } from "lucide-react";
 
 import { BlogGrid, BlogPost } from "@/components/blog/BlogGrid";
 
@@ -227,21 +217,21 @@ export default function BlogIndexPage() {
                 href="/solutions/ecommerce"
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
-                <span>E-Commerce ($4,999)</span>
+                <span>E-Commerce ({displayPackagePrice(FAMILY_PACKAGE.ecommerce, "en-US")})</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
               <Link
                 href="/solutions/short-drama"
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
-                <span>Short Drama ($4,999)</span>
+                <span>Short Drama ({displayPackagePrice(FAMILY_PACKAGE["short-drama"], "en-US")})</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
               <Link
                 href="/solutions/ott-streaming"
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
-                <span>Cinematic OTT ($4,999)</span>
+                <span>OTT Streaming ({displayPackagePrice(FAMILY_PACKAGE["ott-streaming"], "en-US")})</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
             </div>

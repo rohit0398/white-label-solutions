@@ -5,23 +5,23 @@ import { priceText } from "@/lib/pricing-catalog";
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
+import { LOCALIZED_OTT_SEO } from "@/lib/translations/seo";
 import type { Metadata } from "next";
 import Link from "@/components/ui/LocalizedLink";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
+import { OttOverview } from "@/components/sections/OttOverview";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { CINEMATIC_OTT_BASE_PRICING_TIERS, OTT_SHOWCASE_PROJECTS, CINEMATIC_OTT_FAQS } from "@/lib/constants";
+import { CINEMATIC_OTT_BASE_PRICING_TIERS, OTT_SOLUTION_PROJECTS, CINEMATIC_OTT_FAQS } from "@/lib/constants";
 import {
   Smartphone,
   Tv,
@@ -36,10 +36,11 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+const { title, description } = LOCALIZED_OTT_SEO.en;
+
 export const metadata: Metadata = {
-  title: "OTT Platform Development Company | Video Apps | Mechatron Lab",
-  description:
-    "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your private cloud with 0% fees.",
+  title,
+  description,
   keywords: [
     "ott platform development company",
     "video streaming app development",
@@ -61,21 +62,19 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "OTT Platform Development Company | Video Apps",
-    description:
-      "Launch your branded streaming platform like Netflix in 2–4 weeks. Widescreen web portal, iOS & Android apps, and Video CMS on your private cloud with 0% fees.",
+    title,
+    description,
     url: "/solutions/ott-streaming",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "OTT Platform Development Company | Video Apps",
-    description:
-      "Launch your branded video streaming platform like Netflix in 2–4 weeks on your private cloud with zero commission.",
-    images: ["/showcase/ott-cinematic-web.jpg"],
+    title,
+    description,
+    images: ["/showcase/microdrama-catalog.webp"],
   },
 };
 
@@ -103,15 +102,6 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
     siteUrl,
   });
 
-  const ottTickerItems = [
-    { title: translateCopy(englishMessage("ott-streaming.episodic.comedy.series.ed360a3")), detail: translateCopy(englishMessage("ott-streaming.1m.viewers.high.retention.serialized.content.0a3a61e")) },
-    { title: translateCopy(englishMessage("ott-streaming.305.tv.network.5894f39")), detail: translateCopy(englishMessage("ott-streaming.live.tv.channels.on.demand.active.broadcast.44eaf42")) },
-    { title: "Cloudflare Stream", detail: translateCopy(englishMessage("ott-streaming.adaptive.hls.bitrate.zero.bandwidth.markup.5a9dc49")) },
-    { title: translateCopy(englishMessage("ott-streaming.0.revenue.cut.ab5aabb")), detail: translateCopy(englishMessage("ott-streaming.keep.100.of.subscription.ad.revenue.6ab8464")) },
-    { title: translateCopy(englishMessage("ott-streaming.buffer.velocity.dd790a0")), detail: translateCopy(englishMessage("ott-streaming..1.2s.first.frame.via.multi.cdn.edge.a689bf6")) },
-    { title: translateCopy(englishMessage("home.code.custody.abfa3b5")), detail: translateCopy(englishMessage("ott-streaming.100.git.repository.access.zero.vendor.lock.i.b74b4d8")) },
-  ];
-
   const modules = [
     {
       n: "01",
@@ -121,9 +111,10 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
       description:
         translateCopy(englishMessage("ott-streaming.complete.native.mobile.applications.engineer.7cd4839")),
       screenshot: {
-        src: "/showcase/ott-streaming-app.jpg",
-        alt: translateCopy(englishMessage("ott-streaming.native.16.9.cinematic.mobile.streaming.app.w.25b773f")),
-        caption: translateCopy(englishMessage("ott-streaming.native.flutter.streaming.apps.4k.hdr.hls.air.210b47a")),
+        src: "/showcase/microdrama-mobile-feed.webp",
+        alt: englishMessage("ShortDrama.top.app.feedImage"),
+        caption: englishMessage("ShortDrama.top.app.previewCaption"),
+        portrait: true,
       },
       childLink: {
         href: "/solutions/ott-app-development",
@@ -160,9 +151,9 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
       description:
         translateCopy(englishMessage("ott-streaming.high.speed.desktop.tablet.and.smart.tv.compa.757c9bf")),
       screenshot: {
-        src: "/showcase/ott-cinematic-web.jpg",
-        alt: translateCopy(englishMessage("ott-streaming.16.9.cinematic.video.streaming.web.portal.wi.1de32b4")),
-        caption: translateCopy(englishMessage("ott-streaming.next.js.16.9.widescreen.streaming.hub.contin.3eed242")),
+        src: "/showcase/microdrama-web-player.webp",
+        alt: englishMessage("ShortDrama.top.web.image"),
+        caption: englishMessage("OttOverview.microdramaExample"),
       },
       childLink: {
         href: "/solutions/ott-website-development",
@@ -199,9 +190,9 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
       description:
         translateCopy(englishMessage("ott-streaming.your.self.hosted.administrative.operations.c.bd0ea8d")),
       screenshot: {
-        src: "/showcase/ott-video-cms.jpg",
-        alt: translateCopy(englishMessage("ott-streaming.video.cms.cloud.transcoding.operations.conso.e18d9af")),
-        caption: translateCopy(englishMessage("ott-streaming.video.cms.console.master.uploads.cloudflare.a11f1bb")),
+        src: "/showcase/microdrama-admin-analytics.webp",
+        alt: englishMessage("ShortDrama.media.analytics"),
+        caption: englishMessage("ShortDrama.media.analytics"),
       },
       capabilities: [
         {
@@ -259,39 +250,8 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
 
       <Navbar />
 
-      <main className="flex-1">
-        {/* Unified Hero */}
-        <SolutionHero
-          category="ott"
-          breadcrumbs={[
-            { label: translateCopy(englishMessage("ecommerce.home.70f8bb9")), href: "/" },
-            { label: translateCopy(englishMessage("ecommerce.solutions.05b004a")), href: "/solutions" },
-            { label: translateCopy(englishMessage("ott-streaming.cinematic.ott.platform.4474378")) },
-          ]}
-          badge={translateCopy(translateCopy(englishMessage("ott-streaming.complete.cinematic.ott.suite.web.apps.cms.0.53873a5")))}
-          headline={translateCopy(englishMessage("ott-streaming.cinematic.ott.video.streaming.platform.0ea477a"))}
-          subtitle={translateCopy(englishMessage("ott-streaming.deploy.your.branded.video.streaming.platform.d7cb987"))}
-          anchors={[
-            { label: translateCopy(englishMessage("ott-streaming.01.platform.architecture.e1548cc")), href: "#architecture" },
-            { label: translateCopy(englishMessage("ott-streaming.02.4.week.rollout.e059d4f")), href: "#rollout" },
-            { label: translateCopy(englishMessage("ott-streaming.03.production.work.37a86dc")), href: "#production-apps" },
-            { label: priceText(translateCopy(englishMessage("ott-streaming.04.pricing.price.cinematic.base.3bf3771"))), href: "#pricing" },
-            { label: translateCopy(englishMessage("ott-streaming.05.faq.07fa9e9")), href: "#faq" },
-          ]}
-          ctaDemoText={translateCopy(translateCopy(englishMessage("ott-streaming.book.ott.platform.walkthrough.87cf5dd")))}
-          tierId="ott-streaming"
-          footerNote={translateCopy(translateCopy(englishMessage("ott-streaming.published.under.your.developer.accounts.full.1bf5cbc")))}
-        />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="ott"
-          headline={translateCopy(englishMessage("ott-streaming.enterprise.widescreen.video.architecture.nex.ba401fa"))}
-          subheadline={translateCopy(englishMessage("ott-streaming.4k.hdr.and.adaptive.1080p.hls.playback.on.we.fa1c739"))}
-        />
-
-        {/* Live Ticker */}
-        <LiveTicker items={ottTickerItems} ariaLabel={translateCopy(translateCopy(englishMessage("ott-streaming.ott.streaming.architecture.ticker.7ea2b0e")))} />
+      <main className="ott-page flex-1">
+        <OttOverview offer="platform" />
 
         {/* Architecture & Modules Breakout */}
         <Section
@@ -301,7 +261,7 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
           intro={translateCopy(translateCopy(englishMessage("ott-streaming.a.comprehensive.16.9.widescreen.video.stream.bbef4b3")))}
           wide
         >
-          <div className="space-y-24">
+          <div className="space-y-32 lg:space-y-40">
             {modules.map((m) => (
               <div
                 key={m.n}
@@ -333,8 +293,9 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
                 </div>
 
                 {m.screenshot && (
-                  <div className="group max-w-3xl mx-auto w-full">
+                  <div className={`group mx-auto w-full ${m.screenshot.portrait ? "max-w-[14rem]" : "max-w-3xl"}`}>
                     <Screenshot
+                      sizes={m.screenshot.portrait ? "224px" : "(min-width: 816px) 768px, calc(100vw - 48px)"}
                       src={m.screenshot.src}
                       alt={translateCopy(m.screenshot.alt)}
                       caption={m.screenshot.caption}
@@ -381,7 +342,7 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
           index={translateCopy(translateCopy(englishMessage("home.03.production.experience.cb464c0")))}
           title={translateCopy(englishMessage("ott-streaming.battle.tested.video.entertainment.platforms.02a1fbc"))}
           intro={translateCopy(translateCopy(englishMessage("ott-streaming.our.engineering.team.has.built.and.deployed.e0d983e")))}
-          projects={OTT_SHOWCASE_PROJECTS}
+          projects={OTT_SOLUTION_PROJECTS}
         />
 
         {/* Dedicated Base Pricing ($4,999 / $1,999 / $20/hr) */}
@@ -408,7 +369,7 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
           headline={translateCopy(englishMessage("ott-streaming.ready.to.launch.your.cinematic.video.streami.6096be0"))}
           description={translateCopy(translateCopy(englishMessage("ott-streaming.talk.directly.with.our.solutions.engineering.be623db")))}
           ctaDemo={translateCopy(translateCopy(englishMessage("ott-streaming.book.ott.walkthrough.e7a0014")))}
-          tierId="ott-streaming"
+          tierId={OTT_PACKAGES.platform}
         />
       </main>
 

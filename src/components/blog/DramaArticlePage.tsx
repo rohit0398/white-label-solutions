@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
+import { MicroDramaAppPreview } from "@/components/sections/MicroDramaAppPreview";
 import { Screenshot } from "@/components/ui/Screenshot";
 import { DemoButton } from "@/components/site/DemoButton";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,19 +11,27 @@ import { DRAMA_ARTICLES, dramaArticle } from "@/lib/content/short-drama-articles
 import { displayPackagePrice, packageAmount, type PackageId } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 
+const articleImage = "/showcase/microdrama-catalog.webp";
+const articleVisuals: Partial<Record<string, { previewSection?: string; adminSection?: string }>> = {
+  "short-drama-app-development": { previewSection: "viewer", adminSection: "operations" },
+  "build-app-like-reelshort": { previewSection: "mvp" },
+  "build-app-like-dramabox": { adminSection: "operations" },
+  "short-drama-monetization": { adminSection: "vip" },
+};
+
 export function articleMetadata(slug: string): Metadata {
   const article = dramaArticle(slug);
   const url = `/blog/${slug}`;
   return { title: `${article.title} | Mechatron Lab`, description: article.description,
     alternates: { canonical: url },
-    openGraph: { type: "article", title: article.title, description: article.description, url, images: ["/showcase/ott-drama-app-showcase.jpg"] },
-    twitter: { card: "summary_large_image", title: article.title, description: article.description, images: ["/showcase/ott-drama-app-showcase.jpg"] },
+    openGraph: { type: "article", title: article.title, description: article.description, url, images: [articleImage] },
+    twitter: { card: "summary_large_image", title: article.title, description: article.description, images: [articleImage] },
   };
 }
 
 function PackageComparison() {
   const rows: { label: string; base: PackageId; source: PackageId; href: string }[] = [
-    { label: "Complete app + web + CMS suite", base: "short-drama-base", source: "short-drama-source-code", href: "/solutions/short-drama" },
+    { label: "Apps, website and CMS", base: "short-drama-base", source: "short-drama-source-code", href: "/solutions/short-drama" },
     { label: "Native apps + CMS", base: "short-drama-app-launch", source: "short-drama-app-source-code", href: "/solutions/short-drama-app-development" },
     { label: "Web player + CMS", base: "short-drama-web-launch", source: "short-drama-web-source-code", href: "/solutions/short-drama-website-development" },
   ];
@@ -46,9 +55,10 @@ function PackageComparison() {
 export default function DramaArticlePage({ slug }: { slug: string }) {
   const article = dramaArticle(slug);
   const url = `${SITE_URL}/blog/${slug}`;
+  const { previewSection, adminSection } = articleVisuals[slug] ?? {};
   return <div className="min-h-screen flex flex-col bg-paper text-ink">
     <JsonLd schema={{ "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description,
-      mainEntityOfPage: url, url, image: `${SITE_URL}/showcase/ott-drama-app-showcase.jpg`, inLanguage: "en",
+      mainEntityOfPage: url, url, image: `${SITE_URL}${articleImage}`, inLanguage: "en",
       author: { "@type": "Organization", name: "Mechatron Lab Engineering Team", url: `${SITE_URL}/about` },
       publisher: { "@type": "Organization", name: "Mechatron Lab Solutions", url: SITE_URL }, dateModified: "2026-11-02" }} />
     <JsonLd schema={{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
@@ -73,11 +83,24 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
           {section.paragraphs.map((paragraph, i) => <p key={i} className="text-ink-2 leading-relaxed">{paragraph}</p>)}
           {section.bullets && <ul className="list-disc pl-5 space-y-2 text-ink-2 leading-relaxed">{section.bullets.map(item => <li key={item}>{item}</li>)}</ul>}
-          {index === 1 && <div className="pt-5"><ShortDramaLiveAccess emphasis="both" /></div>}
+          {section.id === previewSection && (
+            <div className="space-y-3">
+              <p className="text-sm text-ink-3">MicroDrama’s mobile website shows how viewers browse the catalog and preview an episode.</p>
+              <MicroDramaAppPreview animated={false} />
+            </div>
+          )}
+          {section.id === adminSection && (
+            <Screenshot
+              src="/showcase/microdrama-admin-episodes.webp"
+              alt="Mechatron Lab MicroDrama episode list and publishing status"
+              sizes="(min-width: 704px) 656px, calc(100vw - 48px)"
+              caption="MicroDrama’s admin panel shows episode order and publishing status."
+            />
+          )}
+          {index === 1 && <div className="pt-5"><ShortDramaLiveAccess emphasis="both" landing /></div>}
         </section>)}
-        <section className="space-y-5"><h2 className="text-2xl font-semibold">See how the admin panel works</h2><p className="text-ink-2 leading-relaxed">We can show you how to upload a series, arrange episodes and choose which ones viewers can watch for free. Bring your questions to a demo.</p><Screenshot src="/showcase/ott-video-cms.jpg" alt="Mechatron Lab video CMS interface shown for a product walkthrough" caption="Our video admin panel. Ask us for a walkthrough." /></section>
         <PackageComparison />
-        <section className="rounded-2xl border border-line bg-wash p-6 sm:p-8 space-y-4"><h2 className="text-2xl font-semibold">Tell us about your short-drama app</h2><p className="text-ink-2 leading-relaxed">Tell us who you want to reach, whether you have your dramas ready, and whether you need a website, mobile apps or both. We’ll explain what’s included and what would need extra work.</p><div className="flex flex-wrap gap-4 items-center"><DemoButton tierId="short-drama">Request a demo</DemoButton><Link href="/solutions/short-drama" className="text-sm underline">Explore the complete suite</Link></div></section>
+        <section className="rounded-2xl border border-line bg-wash p-6 sm:p-8 space-y-4"><h2 className="text-2xl font-semibold">Tell us about your short-drama app</h2><p className="text-ink-2 leading-relaxed">Tell us who you want to reach, whether you have your dramas ready, and whether you need a website, mobile apps or both. We’ll explain what’s included and what would need extra work.</p><div className="flex flex-wrap gap-4 items-center"><DemoButton tierId="short-drama">Request a demo</DemoButton><Link href="/solutions/short-drama" className="text-sm underline">Explore the short drama platform</Link></div></section>
         <section className="space-y-4"><h2 className="text-xl font-semibold">Sources and further reading</h2><p className="text-sm text-ink-3">Sources checked on 2 November 2026. App features and provider prices can change. Brand names are used as references; our product is not affiliated with them.</p><ul className="list-disc pl-5 space-y-2 text-sm">{article.sources.map(source => <li key={source.url}><a href={source.url} className="underline underline-offset-4">{source.title}</a></li>)}</ul></section>
         <nav aria-label="Related short-drama guides" className="border-t border-line pt-8 space-y-4"><h2 className="text-xl font-semibold">More short-drama guides</h2><ul className="space-y-3">{DRAMA_ARTICLES.filter(item => item.slug !== slug).map(item => <li key={item.slug}><Link href={`/blog/${item.slug}`} className="text-ink-2 underline underline-offset-4">{item.title}</Link></li>)}</ul></nav>
       </article>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Screenshot } from "@/components/ui/Screenshot";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
@@ -29,14 +30,14 @@ export const metadata: Metadata = {
     description:
       "How an entertainment network scaled a 9:16 vertical short-drama app to 2.4M+ mobile downloads with sub-second HLS pre-caching and coin paywalls on private cloud.",
     url: "/case-studies/short-drama-platform",
-    images: ["/showcase/ott-drama-app.jpg"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Case Study: 2.4M+ Short-Drama Streaming Platform | Mechatron Lab",
     description:
       "How an entertainment network scaled a 9:16 vertical short-drama app to 2.4M+ downloads with sub-second playback.",
-    images: ["/showcase/ott-drama-app.jpg"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
 };
 
@@ -124,7 +125,7 @@ export default function ShortDramaCaseStudyPage() {
             variant="drama"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
-            Scaling a 9:16 Short-Drama Network to 2.4M+ Mobile Viewers on Private Cloud.
+            Scaling a Short Drama App to 2.4M+ Downloads
           </AnimatedHeadline>
 
           <p className="text-lg text-ink-2 leading-relaxed max-w-3xl">
@@ -132,8 +133,8 @@ export default function ShortDramaCaseStudyPage() {
           </p>
 
           <div className="pt-2 flex flex-wrap gap-4 items-center">
-            <DemoButton size="sm">
-              Schedule Short-Drama architecture demo →
+            <DemoButton size="sm" tierId={SHORT_DRAMA_PACKAGES.platform}>
+              Book a Short Drama walkthrough
             </DemoButton>
             <Link href="/solutions/short-drama" className={buttonClass("secondary", "sm")}>
               View short-drama platform specs
@@ -141,14 +142,15 @@ export default function ShortDramaCaseStudyPage() {
           </div>
         </div>
 
-        <ShortDramaLiveAccess emphasis="both" />
+        <ShortDramaLiveAccess emphasis="both" landing />
 
         {/* Screenshot (Proportionate showcase framing) */}
         <div className="wrap max-w-4xl mx-auto">
           <Screenshot
-            src="/showcase/ott-drama-app-showcase.jpg"
-            alt="9:16 Short-drama mobile player interface with episode drawer and coin paywall"
-            caption="Production 9:16 vertical short-drama mobile player with sub-second chapter pre-caching."
+            src="/showcase/microdrama-web-player.webp"
+            sizes="(min-width: 896px) 848px, calc(100vw - 48px)"
+            alt="MicroDrama browser player with a vertical video and an episode list"
+            caption="The MicroDrama web player and episode list."
             className="shadow-md"
           />
         </div>
@@ -211,7 +213,7 @@ export default function ShortDramaCaseStudyPage() {
               <p className="mt-2 text-sm text-ink-2">Deploy in 2–4 weeks onto your private cloud with 100% code ownership.</p>
             </div>
             <div className="flex items-center gap-4 shrink-0">
-              <DemoButton size="sm">Book a live demo</DemoButton>
+              <DemoButton size="sm" tierId={SHORT_DRAMA_PACKAGES.platform}>Book a walkthrough</DemoButton>
               <Link href="/solutions/short-drama" className={buttonClass("link", "sm")}>
                 Platform overview →
               </Link>

@@ -11,12 +11,13 @@ import React, { useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
 import { Button } from "@/components/ui/Button";
 import { Menu, X, Sun, Moon, MessageSquare, ChevronDown } from "lucide-react";
-import { BRAND } from "@/lib/constants";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
 
 export function Navbar() {
   const translateCopy = useMessages();
+  const whatsappUrl = useContactWhatsApp();
 
   const { openDemo, theme, toggleTheme, language } = useSite();
   const [open, setOpen] = useState(false);
@@ -52,7 +53,7 @@ export function Navbar() {
 
     // Short-Drama
     {
-      title: englishMessage("Footer.complete.short.drama.suite.2191d19"),
+      title: englishMessage("ShortDrama.top.platform.title"),
       desc: englishMessage("Navbar.vertical.reels.apps.web.player.cms.ed6db0f"),
       href: "/solutions/short-drama",
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
@@ -75,7 +76,7 @@ export function Navbar() {
 
     // Cinematic OTT
     {
-      title: englishMessage("Footer.complete.cinematic.ott.suite.8180988"),
+      title: englishMessage("OttOverview.platform.title"),
       desc: englishMessage("Navbar.16.9.web.portal.mobile.apps.video.cms.c017d6a"),
       href: "/solutions/ott-streaming",
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
@@ -275,7 +276,7 @@ export function Navbar() {
           {/* Direct WhatsApp Live Chat Button with Active Radar Ping & Hover Physics */}
           <a
             id="nav-whatsapp-chat"
-            href={BRAND.contact.whatsappUrl} onClick={() => trackWhatsAppClick("Navbar")}
+            href={whatsappUrl} onClick={() => trackWhatsAppClick("Navbar")}
             target="_blank"
             rel="noopener noreferrer"
             className="group relative h-8 w-8 inline-flex items-center justify-center text-accent bg-accent/5 hover:bg-accent/15 rounded-md border border-accent/30 hover:border-accent hover:scale-105 active:scale-95 transition-all duration-200 shadow-xs animate-pulse-glow shrink-0"
@@ -422,7 +423,7 @@ export function Navbar() {
               </Button>
 
               <a
-                href={BRAND.contact.whatsappUrl}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => { trackWhatsAppClick("Navbar"); setOpen(false); }}

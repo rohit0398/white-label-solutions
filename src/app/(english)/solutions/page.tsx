@@ -134,7 +134,7 @@ export default function SolutionsCatalogPage() {
       badge: priceText("Complete ({price:short-drama-base})"),
       icon: Clapperboard,
       href: "/solutions/short-drama",
-      status: "Flagship Drama Suite",
+      status: "Complete Short Drama Platform",
       stats: [
         { label: "Formats", val: "iOS + Android + Web" },
         { label: "Monetization", val: "SVOD + Rewarded Ads" },
@@ -146,7 +146,7 @@ export default function SolutionsCatalogPage() {
         "Weekly, monthly & annual VIP subscription passes via Stripe, Apple StoreKit & Google Play",
         "Video CMS with automated Cloudflare Stream encoding and episode paywall rule controls",
       ],
-      cta: "Explore Complete Drama Suite →",
+      cta: "Explore the short drama platform →",
     },
     {
       id: "short-drama-app-development",

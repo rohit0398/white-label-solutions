@@ -1,16 +1,15 @@
-import { priceText } from "@/lib/pricing-catalog";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS, OTT_SHOWCASE_PROJECTS } from "@/lib/constants";
+import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS, OTT_SOLUTION_PROJECTS } from "@/lib/constants";
+import { englishMessage } from "@/lib/messages";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SolutionHero } from "@/components/sections/SolutionHero";
-import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
 import { Work } from "@/components/sections/Work";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
+import { OttOverview } from "@/components/sections/OttOverview";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
 import { Screenshot } from "@/components/ui/Screenshot";
@@ -19,12 +18,15 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CompleteOttCallout } from "@/components/sections/CompleteOttCallout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
-import { Smartphone, ShieldCheck, Zap, Download, Tv } from "lucide-react";
+import { Smartphone, ShieldCheck, Download, Tv } from "lucide-react";
+
+const searchTitle = "OTT App Development for iOS & Android";
+const searchDescription =
+  "Launch branded OTT apps for iOS and Android with widescreen playback, TV casting, offline downloads, and in-app subscriptions.";
 
 export const metadata: Metadata = {
-  title: "OTT Mobile App Development | iOS, Android & TV | Mechatron Lab",
-  description:
-    "Custom 16:9 video streaming apps for iOS, Android & Smart TV. Includes Chromecast casting, offline viewing, and private cloud deployment with 0% commission.",
+  title: searchTitle,
+  description: searchDescription,
   keywords: [
     "ott mobile app development",
     "video streaming app development",
@@ -39,21 +41,19 @@ export const metadata: Metadata = {
     canonical: "/solutions/ott-app-development",
   },
   openGraph: {
-    title: "OTT Mobile App Development | iOS, Android & TV",
-    description:
-      "Custom 16:9 video streaming apps for iOS, Android & Smart TV. Includes Chromecast casting, offline viewing, and private cloud deployment with 0% commission.",
+    title: searchTitle,
+    description: searchDescription,
     url: "/solutions/ott-app-development",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
-    images: ["/showcase/ott-streaming-app.jpg"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "OTT Mobile App Development | iOS, Android & TV",
-    description:
-      "Custom 16:9 video streaming apps for iOS, Android & Smart TV deployed on your private cloud with 0% commission.",
-    images: ["/showcase/ott-streaming-app.jpg"],
+    title: searchTitle,
+    description: searchDescription,
+    images: ["/showcase/microdrama-catalog.webp"],
   },
 };
 
@@ -74,18 +74,10 @@ export default function OttAppDevelopmentPage() {
       "White-label 16:9 cinematic video streaming mobile apps for iOS & Android with adaptive HLS playback, TV casting, VIP subscriptions, and central Video CMS.",
     price: schemaPrice("cinematic-app-launch"),
     url: "/solutions/ott-app-development",
-    operatingSystem: "iOS, Android, Android TV",
+    operatingSystem: "iOS, Android",
     applicationCategory: "MultimediaApplication",
     siteUrl,
   });
-
-  const tickerItems = [
-    { title: "Native Flutter Apps", detail: "iOS & Android · 60FPS Hardware-Accelerated Playback" },
-    { title: "Adaptive Bitrates", detail: "Sub-Second Buffer · 1080p, 720p, 480p Auto-Scale" },
-    { title: "Chromecast & AirPlay", detail: "1-Tap Big-Screen TV Casting Support" },
-    { title: "Offline Storage", detail: "Encrypted Local Downloads for On-the-Go Watching" },
-    { title: "Private Cloud", detail: "Deployed to Your AWS / Cloudflare Account in 2–4 Weeks" },
-  ];
 
   const ottAppRolloutSteps = [
     {
@@ -118,39 +110,8 @@ export default function OttAppDevelopmentPage() {
 
       <Navbar />
 
-      <main className="flex-1">
-        {/* Unified Hero */}
-        <SolutionHero
-          category="ott"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Solutions", href: "/solutions" },
-            { label: "Cinematic OTT Apps" },
-          ]}
-          badge="Widescreen Mobile Architecture · 0% Revenue Cut"
-          headline="Cinematic OTT Mobile App Development (iOS &amp; Android)."
-          subtitle="Launch your branded Netflix-style video streaming apps for iOS &amp; Android in 2–4 weeks. Native Flutter apps, adaptive HLS multi-bitrate streaming, AirPlay &amp; Chromecast TV streaming, In-App Purchase VIP subscriptions, and central Video CMS deployed directly onto your private cloud for a flat one-time fee."
-          anchors={[
-            { label: "01 Mobile App", href: "#app-features" },
-            { label: "02 Video CMS", href: "#video-cms" },
-            { label: "03 4-Week Rollout", href: "#rollout" },
-            { label: "04 Production Proof", href: "#production-apps" },
-            { label: priceText("05 Pricing ({price:cinematic-app-launch})"), href: "#pricing" },
-          ]}
-          ctaDemoText="Book streaming app demo"
-          tierId="ott-streaming"
-          footerNote="Published under your developer accounts · Full source code option · Keep 100% of subscribers"
-        />
-
-        {/* Engineering Tech Stack Strip */}
-        <TechStackStrip
-          mode="ott-app"
-          headline="Flutter Native Video Streaming Architecture (iOS, Android &amp; TV)"
-          subheadline="60FPS hardware acceleration with DRM playback security"
-        />
-
-        {/* Live Ticker */}
-        <LiveTicker items={tickerItems} ariaLabel="Cinematic streaming capabilities ticker" />
+      <main className="ott-page flex-1">
+        <OttOverview offer="app" />
 
         {/* Mobile App Feature Grid */}
         <Section
@@ -160,11 +121,12 @@ export default function OttAppDevelopmentPage() {
           intro="Engineered for binge-watching on smartphones and tablets. Hardware-accelerated 60FPS video playback, offline encrypted downloads, 1-tap TV casting to Chromecast and AirPlay, and native In-App Purchase VIP passes."
           wide
         >
-          <div className="max-w-3xl mx-auto w-full group my-8">
+          <div className="max-w-[14rem] mx-auto w-full group my-8">
             <Screenshot
-              src="/showcase/ott-streaming-app.jpg"
-              alt="Native 16:9 widescreen streaming mobile apps interface"
-              caption="Native Flutter Streaming Apps · 4K HDR & HLS · AirPlay & Chromecast TV Casting"
+              src="/showcase/microdrama-mobile-feed.webp"
+              sizes="224px"
+              alt={englishMessage("ShortDrama.top.app.feedImage")}
+              caption={englishMessage("ShortDrama.top.app.previewCaption")}
               className="transition-transform duration-300"
             />
           </div>
@@ -213,7 +175,7 @@ export default function OttAppDevelopmentPage() {
         </Section>
 
         {/* Video CMS Showcase */}
-        <OttCmsShowcase index="02" />
+        <OttCmsShowcase index="02" shortDramaCapture="episodes" />
 
         {/* 4-Week Rollout */}
         <HowItWorks
@@ -230,7 +192,7 @@ export default function OttAppDevelopmentPage() {
           index="04 · Production Experience"
           title="Battle-Tested Video &amp; Entertainment Platforms"
           intro="Our engineering team has built and deployed entertainment streaming applications operating at multi-million scale."
-          projects={OTT_SHOWCASE_PROJECTS}
+          projects={OTT_SOLUTION_PROJECTS}
         />
 
         {/* Cross-Sell Callout Box to Complete Package */}
@@ -260,7 +222,7 @@ export default function OttAppDevelopmentPage() {
           headline="Ready to launch your cinematic video streaming apps?"
           description="Talk directly with our solutions engineering team. We’ll demonstrate the Flutter widescreen player, the AirPlay/Chromecast integration, and the Video CMS console."
           ctaDemo="Book streaming app walkthrough →"
-          tierId="ott-streaming"
+          tierId={OTT_PACKAGES.app}
         />
       </main>
 
