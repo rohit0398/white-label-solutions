@@ -10,12 +10,11 @@ import {
   Layers,
   Tv,
   Film,
-  Sparkles,
 } from "lucide-react";
 
 export interface BlogPost {
   slug: string;
-  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "Cinematic OTT";
+  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "OTT Streaming";
   pillar: "all" | "ecommerce" | "short-drama" | "ott";
   title: string;
   excerpt: string;
@@ -41,14 +40,14 @@ export function BlogGrid({ posts }: BlogGridProps) {
     { id: "all" as const, label: "All Guides", count: posts.length },
     { id: "ecommerce" as const, label: "E-Commerce", count: posts.filter((p) => p.pillar === "ecommerce").length },
     { id: "short-drama" as const, label: "9:16 Short Drama", count: posts.filter((p) => p.pillar === "short-drama").length },
-    { id: "ott" as const, label: "16:9 Cinematic OTT", count: posts.filter((p) => p.pillar === "ott").length },
+    { id: "ott" as const, label: "OTT Streaming", count: posts.filter((p) => p.pillar === "ott").length },
   ];
 
   const getCategoryIcon = (category: BlogPost["category"]) => {
     switch (category) {
       case "Short Drama":
         return <Film className="h-3.5 w-3.5 text-accent shrink-0" />;
-      case "Cinematic OTT":
+      case "OTT Streaming":
         return <Tv className="h-3.5 w-3.5 text-accent shrink-0" />;
       case "Pricing & ROI":
         return <TrendingUp className="h-3.5 w-3.5 text-accent shrink-0" />;

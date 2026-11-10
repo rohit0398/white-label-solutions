@@ -62,6 +62,8 @@ export async function POST(request: Request) {
       [OTT_PACKAGES.web]: "OTT website development",
       "ott-streaming": priceText("🎬 White-Label OTT & Short-Drama Platform ({price:launch})"),
       "ecommerce": priceText("🛍️ White-Label E-Commerce Platform ({price:launch})"),
+      "app-launch": priceText("E-Commerce Mobile App ({price:app-launch})"),
+      "web-launch": priceText("E-Commerce Website ({price:web-launch})"),
     };
 
     const packageLabel = PACKAGE_LABELS[leadData.package] || leadData.package;

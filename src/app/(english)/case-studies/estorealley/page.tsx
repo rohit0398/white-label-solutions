@@ -10,7 +10,7 @@ import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 
 export const metadata: Metadata = {
-  title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
+  title: "Wholesale and Retail Marketplace Case Study",
   description:
     "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout and Google Play mobile app on their private cloud.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: "/case-studies/estorealley",
   },
   openGraph: {
-    title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
+    title: "Wholesale and Retail Marketplace Case Study",
     description:
       "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout and Google Play mobile app on their private cloud.",
     url: "/case-studies/estorealley",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Study: Global Wholesale Marketplace | Mechatron Lab",
+    title: "Wholesale and Retail Marketplace Case Study",
     description:
       "How eStoreAlley built an international wholesale marketplace with Stripe multi-currency checkout on private cloud.",
     images: ["/showcase/estorealley-store.png"],
@@ -69,9 +69,9 @@ export default function EStoreAlleyCaseStudyPage() {
 
   const metrics = [
     { label: "Platform model", value: "Wholesale + Retail", desc: "Dual B2B & B2C merchant listings" },
-    { label: "Payment gateway", value: "Stripe v3", desc: "Multi-currency checkout worldwide" },
+    { label: "Checkout", value: "Stripe", desc: "Payment integration for the marketplace" },
     { label: "Mobile channel", value: "Google Play", desc: "Dedicated Android marketplace app" },
-    { label: "Platform cut", value: "0%", desc: "Zero percentage fees on volume" },
+    { label: "Suppliers", value: "Directory", desc: "Merchant profiles and buyer inquiries" },
   ];
 
   return (
@@ -106,7 +106,7 @@ export default function EStoreAlleyCaseStudyPage() {
             variant="ecommerce"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
-            How eStoreAlley Built an International Wholesale Directory &amp; Marketplace.
+            Building a Marketplace for Wholesale and Retail Buyers
           </AnimatedHeadline>
 
           <p className="mt-6 text-lg text-ink-2 leading-relaxed">
@@ -138,7 +138,7 @@ export default function EStoreAlleyCaseStudyPage() {
         {/* Screenshot */}
         <div className="wrap-wide">
           <Screenshot
-            src="/showcase/estorealley-store.png"
+            src="/showcase/commerce-marketplace.webp"
             alt="eStoreAlley live marketplace directory storefront"
             caption="eStoreAlley storefront operating on client-owned cloud servers."
           />
@@ -162,8 +162,7 @@ export default function EStoreAlleyCaseStudyPage() {
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">Key platform capabilities</h2>
             <p className="mt-3 text-ink-2 leading-relaxed">
-              By avoiding proprietary SaaS marketplace tools that charge monthly fees plus 5% transaction cuts,
-              eStoreAlley launched on client-owned cloud servers with full source code flexibility.
+              The project combined a supplier directory, wholesale pricing rules, and retail checkout. The team could serve both types of buyer from one marketplace.
             </p>
           </div>
 
@@ -195,14 +194,23 @@ export default function EStoreAlleyCaseStudyPage() {
           </dl>
         </div>
 
+        <section className="wrap space-y-3">
+          <h2 className="text-xl font-semibold">Planning a similar launch?</h2>
+          <p className="text-ink-2">Review your catalog, checkout, and order workflows before choosing a package.</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <Link href="/blog/ecommerce-website-development" className="underline underline-offset-4">Read the e-commerce website launch guide</Link>
+            <Link href="/solutions/ecommerce-website-development#storefront" className="underline underline-offset-4">Explore the storefront and checkout</Link>
+          </div>
+        </section>
+
         {/* Bottom CTA */}
         <div className="wrap border-t border-line pt-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Launch a marketplace on your cloud</h2>
-              <p className="mt-2 text-sm text-ink-2">Production-ready deployment in 2–4 weeks with zero percentage revenue cuts.</p>
+              <p className="mt-2 text-sm text-ink-2">Tell us how buyers find sellers and place orders. We’ll scope marketplace and wholesale workflows for your launch.</p>
             </div>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex flex-wrap items-center gap-4">
               <DemoButton size="sm">Book a demo</DemoButton>
               <Link href="/case-studies/mechatron-lab" className={buttonClass("link", "sm")}>
                 Mechatron Lab case study →

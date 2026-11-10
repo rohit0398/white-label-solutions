@@ -11,34 +11,17 @@ import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 
+const title = "Short Drama App Case Study for Vertical Streaming";
+const description = "How an entertainment studio launched vertical episode playback, coin unlocks, and a publishing panel on its own cloud.";
+const canonical = "/case-studies/short-drama-platform";
+const image = "/showcase/microdrama-web-player.webp";
+
 export const metadata: Metadata = {
-  title: "Case Study: 2.4M+ Short-Drama Streaming Platform | Mechatron Lab",
-  description:
-    "How an entertainment network scaled a 9:16 vertical short-drama app to 2.4M+ mobile downloads with sub-second HLS pre-caching, coin paywalls, and private cloud deployment.",
-  keywords: [
-    "short drama app case study",
-    "vertical video streaming case study",
-    "9:16 mobile micro-series architecture",
-    "cloudflare stream video paywall",
-    "white label short drama source code",
-  ],
-  alternates: {
-    canonical: "/case-studies/short-drama-platform",
-  },
-  openGraph: {
-    title: "Case Study: 2.4M+ Short-Drama Streaming Platform | Mechatron Lab",
-    description:
-      "How an entertainment network scaled a 9:16 vertical short-drama app to 2.4M+ mobile downloads with sub-second HLS pre-caching and coin paywalls on private cloud.",
-    url: "/case-studies/short-drama-platform",
-    images: ["/showcase/microdrama-catalog.webp"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Case Study: 2.4M+ Short-Drama Streaming Platform | Mechatron Lab",
-    description:
-      "How an entertainment network scaled a 9:16 vertical short-drama app to 2.4M+ downloads with sub-second playback.",
-    images: ["/showcase/microdrama-catalog.webp"],
-  },
+  title,
+  description,
+  alternates: { canonical },
+  openGraph: { title, description, url: canonical, images: [image] },
+  twitter: { card: "summary_large_image", title, description, images: [image] },
 };
 
 export default function ShortDramaCaseStudyPage() {
@@ -57,40 +40,17 @@ export default function ShortDramaCaseStudyPage() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Case Studies",
-        item: `${siteUrl}/case-studies`,
+        name: "Short Drama",
+        item: siteUrl + "/solutions/short-drama",
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: "2.4M+ Short-Drama Streaming Platform",
+        name: title,
         item: `${siteUrl}/case-studies/short-drama-platform`,
       },
     ],
   };
-
-  const metrics = [
-    {
-      value: "2.4M+",
-      label: "Mobile App Downloads",
-      desc: "Cross-platform iOS and Android installs across global markets",
-    },
-    {
-      value: "99.8%",
-      label: "Playback Reliability",
-      desc: "Zero-stall video playback via multi-CDN edge pre-caching",
-    },
-    {
-      value: "4.2x",
-      label: "Coin Paywall Conversion",
-      desc: "Micro-transactions converting 420% higher than traditional monthly SVOD",
-    },
-    {
-      value: "$0",
-      label: "Bandwidth Markups",
-      desc: "Direct wholesale Cloudflare Stream ingest with 0% middleman markups",
-    },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink">
@@ -125,11 +85,11 @@ export default function ShortDramaCaseStudyPage() {
             variant="drama"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
-            Scaling a Short Drama App to 2.4M+ Downloads
+            Building a Short Drama Platform for Vertical Episodes
           </AnimatedHeadline>
 
           <p className="text-lg text-ink-2 leading-relaxed max-w-3xl">
-            A fast-growing entertainment studio required a mobile-first streaming infrastructure capable of serving millions of vertical episodic video streams. They needed 60FPS vertical swipe responsiveness, in-app coin micro-transactions, automated DRM-grade video encoding, and complete freedom from 30% SaaS recurring revenue taxation.
+            An entertainment studio needed a mobile player for short vertical episodes. Its team also needed to publish shows and change how viewers unlock episodes without updating the app.
           </p>
 
           <div className="pt-2 flex flex-wrap gap-4 items-center">
@@ -145,55 +105,42 @@ export default function ShortDramaCaseStudyPage() {
         <ShortDramaLiveAccess emphasis="both" landing />
 
         {/* Screenshot (Proportionate showcase framing) */}
-        <div className="wrap max-w-4xl mx-auto">
+        <div className="wrap-wide">
           <Screenshot
-            src="/showcase/microdrama-web-player.webp"
-            sizes="(min-width: 896px) 848px, calc(100vw - 48px)"
+            src={image}
+            sizes="(min-width: 1088px) 1040px, calc(100vw - 48px)"
             alt="MicroDrama browser player with a vertical video and an episode list"
-            caption="The MicroDrama web player and episode list."
+            caption="MicroDrama demo showing the browser player and episode list."
             className="shadow-md"
           />
-        </div>
-
-        {/* Metrics Strip */}
-        <div className="wrap">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 py-8 border-y border-line">
-            {metrics.map((m, idx) => (
-              <div key={idx} className="space-y-1">
-                <div className="text-2xl sm:text-3xl font-semibold font-mono text-ink">{m.value}</div>
-                <div className="text-xs font-medium text-ink">{m.label}</div>
-                <div className="text-[11px] text-ink-3 leading-snug">{m.desc}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Narrative / Highlights */}
         <div className="wrap space-y-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Key Platform Engineering Deliverables</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">What we built</h2>
             <p className="mt-3 text-ink-2 leading-relaxed">
-              By replacing legacy agency development with our production-ready white-label architecture, the network launched on their private cloud VPC within 3 weeks with full Git code ownership.
+              The project combined a vertical player, episode unlocks, and a publishing panel on the studio’s cloud.
             </p>
           </div>
 
           <dl className="divide-y divide-line border-y border-line">
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
-              <dt className="font-medium text-ink">Sub-50ms Vertical Swipe Engine</dt>
+              <dt className="font-medium text-ink">Vertical episode playback</dt>
               <dd className="text-ink-2 text-sm leading-relaxed">
-                Custom Flutter video playback pipeline that silently pre-buffers the initial 2-second segments of adjacent episodes in memory, eliminating buffering pauses during TikTok-style vertical swiping.
+                The Flutter player prepares the next episode while viewers watch, reducing the wait when they swipe.
               </dd>
             </div>
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
-              <dt className="font-medium text-ink">Cliffhanger Coin Paywalls</dt>
+              <dt className="font-medium text-ink">Coin and ad unlocks</dt>
               <dd className="text-ink-2 text-sm leading-relaxed">
-                Dynamic unlock rules permitting free preview of early chapters while requiring virtual coins or rewarded video ads (AdMob / Unity Ads) for subsequent cliffhangers, maximizing monetization conversion.
+                The team could make early episodes free and require coins or a rewarded ad for selected later episodes.
               </dd>
             </div>
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
               <dt className="font-medium text-ink">Cloudflare Stream Integration</dt>
               <dd className="text-ink-2 text-sm leading-relaxed">
-                Automated multi-bitrate HLS encoding and CDN distribution charged at wholesale cloud rates (~$1 per 1,000 viewed minutes) with $0 egress bandwidth markups.
+                Cloudflare Stream encoded and delivered multiple video quality levels. The studio paid for video usage through its own account.
               </dd>
             </div>
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
@@ -205,14 +152,22 @@ export default function ShortDramaCaseStudyPage() {
           </dl>
         </div>
 
+        <section className="wrap space-y-4">
+          <h2 className="text-2xl font-semibold tracking-tight">Project outcome</h2>
+          <p className="text-ink-2 leading-relaxed">The studio could publish series, offer free previews, and charge for selected episodes. We scope coin wallets separately for new launches.</p>
+          <Link href="/blog/short-drama-app-development" className="inline-block text-sm underline underline-offset-4">
+            Read the Short Drama launch guide
+          </Link>
+        </section>
+
         {/* Bottom CTA */}
         <div className="wrap border-t border-line pt-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Launch your short-drama platform</h2>
-              <p className="mt-2 text-sm text-ink-2">Deploy in 2–4 weeks onto your private cloud with 100% code ownership.</p>
+              <p className="mt-2 text-sm text-ink-2">The platform includes mobile apps, a website, and an admin panel. The source code license is available as an add-on.</p>
             </div>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex flex-wrap items-center gap-4">
               <DemoButton size="sm" tierId={SHORT_DRAMA_PACKAGES.platform}>Book a walkthrough</DemoButton>
               <Link href="/solutions/short-drama" className={buttonClass("link", "sm")}>
                 Platform overview →

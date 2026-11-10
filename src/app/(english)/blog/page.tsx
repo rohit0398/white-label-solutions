@@ -1,3 +1,4 @@
+import { ECOMMERCE_GUIDES } from "@/lib/content/ecommerce-guides";
 import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
@@ -90,51 +91,48 @@ export default function BlogIndexPage() {
     ...DRAMA_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "Short Drama", pillar: "short-drama", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", featured: article.slug === "short-drama-app-development", tags: ["Short Drama", "Launch Planning", "Monetization"] })),
     {
       slug: "ott-video-streaming-development",
-      category: "Cinematic OTT",
+      category: "OTT Streaming",
       pillar: "ott",
-      title: "Complete Guide to OTT Video Streaming Development: Adaptive HLS, DRM Security & Private Cloud Architecture",
+      title: "OTT Streaming Development Guide for Web and Mobile",
       excerpt:
-        "Technical architecture for deploying Netflix-grade 16:9 widescreen streaming portals. Explores multi-bitrate HLS ladders, Google Widevine & Apple FairPlay DRM token security, TV casting, and private cloud hosting.",
+        "Plan an OTT streaming service for web and mobile. Compare adaptive playback, content protection, TV casting, and launch costs.",
       readTime: "12 min read",
-      date: "October 2026",
+      date: "November 2026",
       featured: true,
       tags: ["HLS Streaming", "Widevine DRM", "TV Cast", "Video CMS"],
     },
     {
-      slug: "ecommerce-website-development-cost",
+      slug: ECOMMERCE_GUIDES.cost.slug,
       category: "Pricing & ROI",
       pillar: "ecommerce",
-      title: "E-Commerce Website Development Cost in 2026: Agency Quotes vs. SaaS Taxes vs. Pre-Built Ownership",
-      excerpt:
-        "A realistic breakdown of what it actually costs to build, launch, and host an e-commerce platform. Compare traditional $40k–$80k agency quotes, ongoing Shopify fees ($26k+ over 3 years), and pre-built private cloud deployment.",
-      readTime: "8 min read",
-      date: "October 2026",
+      title: ECOMMERCE_GUIDES.cost.title,
+      excerpt: ECOMMERCE_GUIDES.cost.description,
+      readTime: "Launch guide",
+      date: "November 2026",
       featured: false,
-      tags: ["Development Cost", "Shopify ROI", "SaaS Comparison"],
+      tags: ["Development Cost", "Source Code", "Hosting"],
     },
     {
-      slug: "ecommerce-website-development",
+      slug: ECOMMERCE_GUIDES.website.slug,
       category: "Web Engineering",
       pillar: "ecommerce",
-      title: "Complete Guide to E-Commerce Website Development: Modern Architecture, Gateways & Launch Strategy",
-      excerpt:
-        "Learn how to build a high-speed online storefront with sub-second page loads, automated multi-rate tax invoices, and multi-warehouse inventory without accumulating legacy technical debt.",
-      readTime: "10 min read",
-      date: "October 2026",
+      title: ECOMMERCE_GUIDES.website.title,
+      excerpt: ECOMMERCE_GUIDES.website.description,
+      readTime: "Launch guide",
+      date: "November 2026",
       featured: false,
-      tags: ["Next.js", "Web Development", "Cloud Architecture"],
+      tags: ["Storefront", "Checkout", "Fulfillment"],
     },
     {
-      slug: "ecommerce-app-development",
+      slug: ECOMMERCE_GUIDES.app.slug,
       category: "Mobile Apps",
       pillar: "ecommerce",
-      title: "E-Commerce App Development: How to Launch Native iOS & Android Shopping Apps in 2–4 Weeks",
-      excerpt:
-        "Over 73% of retail orders occur on smartphones. Discover how to deploy unified Flutter mobile shopping apps under your own developer accounts with free push alerts and zero in-app sales cuts.",
-      readTime: "9 min read",
-      date: "October 2026",
+      title: ECOMMERCE_GUIDES.app.title,
+      excerpt: ECOMMERCE_GUIDES.app.description,
+      readTime: "Launch guide",
+      date: "November 2026",
       featured: false,
-      tags: ["Flutter", "iOS & Android", "App Store Publishing"],
+      tags: ["iOS and Android", "Checkout", "App Store Review"],
     },
   ];
 

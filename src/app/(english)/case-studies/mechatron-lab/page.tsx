@@ -10,9 +10,9 @@ import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 
 export const metadata: Metadata = {
-  title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
+  title: "Electronics Store and Android App Case Study",
   description:
-    "How Mechatron Lab scaled to 1,000+ technical SKUs with an AI shopping assistant, multi-warehouse fulfillment, and native Android app on their private cloud.",
+    "See how an electronics retailer connected its storefront, Android app, inventory, and warehouse fulfillment.",
   keywords: [
     "mechatron lab ecommerce case study",
     "technical hardware online store",
@@ -24,17 +24,17 @@ export const metadata: Metadata = {
     canonical: "/case-studies/mechatron-lab",
   },
   openGraph: {
-    title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
+    title: "Electronics Store and Android App Case Study",
     description:
-      "How Mechatron Lab scaled to 1,000+ technical SKUs with an AI shopping assistant, multi-warehouse fulfillment, and native Android app on their private cloud.",
+      "See how an electronics retailer connected its storefront, Android app, inventory, and warehouse fulfillment.",
     url: "/case-studies/mechatron-lab",
     images: ["/showcase/mechatron-store.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Study: Technical E-Commerce & App | Mechatron Lab",
+    title: "Electronics Store and Android App Case Study",
     description:
-      "How Mechatron Lab scaled to 1,000+ technical SKUs with multi-warehouse fulfillment and native Android app.",
+      "See how an electronics retailer connected its storefront, Android app, inventory, and warehouse fulfillment.",
     images: ["/showcase/mechatron-store.png"],
   },
 };
@@ -68,10 +68,10 @@ export default function MechatronLabCaseStudyPage() {
   };
 
   const metrics = [
-    { label: "Catalog scale", value: "1,000+ SKUs", desc: "Technical robotics & electronic parts" },
-    { label: "Page speed", value: "0.9s", desc: "Sub-second load times worldwide" },
+    { label: "Catalog", value: "Technical parts", desc: "Robotics and electronics products" },
+    { label: "Shopping channels", value: "Web and Android", desc: "A storefront and shopping app" },
     { label: "Fulfillment", value: "Multi-Hub", desc: "Mohali & Shillong warehouses" },
-    { label: "Platform cut", value: "0%", desc: "Zero revenue cuts or per-order fees" },
+    { label: "Operations", value: "Admin panel", desc: "Products, stock, and orders" },
   ];
 
   return (
@@ -106,7 +106,7 @@ export default function MechatronLabCaseStudyPage() {
             variant="ecommerce"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
-            How Mechatron Lab Scaled to 1,000+ Hardware SKUs with Multi-Warehouse Dispatch.
+            Building an Electronics Store with Multi-Warehouse Fulfillment
           </AnimatedHeadline>
 
           <p className="mt-6 text-lg text-ink-2 leading-relaxed">
@@ -138,7 +138,7 @@ export default function MechatronLabCaseStudyPage() {
         {/* Screenshot */}
         <div className="wrap-wide">
           <Screenshot
-            src="/showcase/mechatron-store.png"
+            src="/showcase/commerce-storefront.webp"
             alt="Mechatron Lab live online storefront"
             caption="Mechatron Lab web storefront running on the client's own cloud."
           />
@@ -162,9 +162,7 @@ export default function MechatronLabCaseStudyPage() {
           <div>
             <h2 className="text-2xl font-semibold tracking-tight">The solution architecture</h2>
             <p className="mt-3 text-ink-2 leading-relaxed">
-              Mechatron Lab was deployed directly onto the client&apos;s private cloud account.
-              Instead of paying thousands in monthly SaaS subscriptions and 2% per-order commissions,
-              the client maintains 100% control over their database, customer orders, and server keys.
+              The store and admin panel run on the retailer’s cloud account. The team can manage orders and stock across its warehouses from one place.
             </p>
           </div>
 
@@ -184,7 +182,7 @@ export default function MechatronLabCaseStudyPage() {
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
               <dt className="font-medium text-ink">Automated GST tax invoicing</dt>
               <dd className="text-ink-2 text-sm leading-relaxed">
-                Automated 18% GST invoice generation with clear base price and tax breakdowns, creating ready-to-print B2B and B2C tax invoices instantly.
+                The order workflow generates invoices with the configured GST breakdown for the sale.
               </dd>
             </div>
             <div className="py-5 grid sm:grid-cols-[14rem_1fr] gap-2 sm:gap-6">
@@ -199,20 +197,29 @@ export default function MechatronLabCaseStudyPage() {
         {/* Admin screenshot */}
         <div className="wrap-wide">
           <Screenshot
-            src="/showcase/admin-dashboard.png"
+            src="/showcase/commerce-admin.webp"
             alt="Mechatron Lab admin panel"
             caption="The operations dashboard used daily to manage warehouse orders and inventory alerts."
           />
         </div>
+
+        <section className="wrap space-y-3">
+          <h2 className="text-xl font-semibold">Planning a similar launch?</h2>
+          <p className="text-ink-2">Review your catalog, checkout, and order workflows before choosing a package.</p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <Link href="/blog/ecommerce-website-development" className="underline underline-offset-4">Read the e-commerce website launch guide</Link>
+            <Link href="/solutions/ecommerce#admin-crm" className="underline underline-offset-4">Explore the order and inventory panel</Link>
+          </div>
+        </section>
 
         {/* Bottom CTA */}
         <div className="wrap border-t border-line pt-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight">Need a setup like Mechatron Lab?</h2>
-              <p className="mt-2 text-sm text-ink-2">Production-ready deployment in 2–4 weeks with zero platform commissions.</p>
+              <p className="mt-2 text-sm text-ink-2">Tell us how you manage products, stock, and fulfillment today. We’ll explain what the standard package covers and what needs custom work.</p>
             </div>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex flex-wrap items-center gap-4">
               <DemoButton size="sm">Book a demo</DemoButton>
               <Link href="/case-studies/estorealley" className={buttonClass("link", "sm")}>
                 Next case study: eStoreAlley →

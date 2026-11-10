@@ -1,38 +1,38 @@
 "use client";
 import { englishMessage } from "@/lib/messages";
-import { useMessages } from "@/components/site/useMessages";
-
-import { priceText } from "@/lib/pricing-catalog";
+import { useSite } from "@/components/site/SiteProvider";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
+import { displayPackagePrice } from "@/lib/pricing-catalog";
 import React from "react";
 import { Smartphone, Monitor, Clapperboard } from "lucide-react";
 import { CompletePackageCallout } from "@/components/sections/CompletePackageCallout";
 
 export function CompleteOttCallout() {
-  const translateCopy = useMessages();
+  const { language, currency } = useSite();
 
   return (
     <CompletePackageCallout
       wide
-      badge={translateCopy(englishMessage("CompleteOttCallout.unified.entertainment.stack.73d544a"))}
-      title={translateCopy(englishMessage("CompleteOttCallout.looking.for.the.complete.ott.short.drama.sol.abdc4ab"))}
-      subtitle={translateCopy(englishMessage("CompleteOttCallout.need.both.9.16.vertical.drama.reels.and.16.9.9ecf0f5"))}
-      price={priceText(englishMessage("CompleteOttCallout..price.launch.6843b00"))}
+      badge={englishMessage("CompleteShortDramaCallout.all.in.one.short.drama.suite.b8cf31a")}
+      title={englishMessage("constants.complete.ott.suite.1409006")}
+      subtitle={englishMessage("OttOverview.platform.intro")}
+      price={displayPackagePrice(OTT_PACKAGES.platform, language, currency)}
       priceLabel="one-time investment"
       pillars={[
         {
           icon: Smartphone,
-          title: englishMessage("CompleteOttCallout.9.16.vertical.drama.apps.760f07a"),
-          desc: englishMessage("CompleteOttCallout.60fps.vertical.swipe.gestures.vip.subscripti.0f58fb6"),
+          title: englishMessage("StreamingArchitecture.ott.app.title"),
+          desc: englishMessage("OttOverview.app.intro"),
         },
         {
           icon: Monitor,
-          title: englishMessage("CompleteOttCallout.16.9.widescreen.portal.453123b"),
-          desc: englishMessage("CompleteOttCallout.next.js.web.smart.tv.streaming.hub.with.sub.588d279"),
+          title: englishMessage("StreamingArchitecture.ott.web.title"),
+          desc: englishMessage("OttOverview.web.intro"),
         },
         {
           icon: Clapperboard,
-          title: englishMessage("CompleteOttCallout.video.cms.encoding.46449d7"),
-          desc: englishMessage("CompleteOttCallout.automated.cloudflare.stream.aws.mediaconvert.8e1ef28"),
+          title: englishMessage("StreamingArchitecture.ott.admin.title"),
+          desc: englishMessage("StreamingArchitecture.ott.admin.intro"),
         },
       ]}
       guarantees={[
@@ -40,7 +40,7 @@ export function CompleteOttCallout() {
         "100% Subscriber & Video Custody",
         "0% Platform Commission",
       ]}
-      ctaText={priceText(englishMessage("CompleteOttCallout.explore.complete.streaming.package.price.lau.0f64828"))}
+      ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
       ctaHref="/solutions/ott-streaming"
     />
   );

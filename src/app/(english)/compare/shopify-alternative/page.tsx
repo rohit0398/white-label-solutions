@@ -1,3 +1,4 @@
+import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,9 +10,9 @@ import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 
 export const metadata: Metadata = {
-  title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+  title: "Shopify Alternative for a Private Cloud Store",
   description:
-    "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
+    "Compare Shopify with a store deployed to your cloud. Review setup, hosting, payment fees, shopping apps, and optional source code licensing.",
   keywords: [
     "shopify alternative no monthly fees",
     "shopify alternative self hosted",
@@ -24,17 +25,17 @@ export const metadata: Metadata = {
     canonical: "/compare/shopify-alternative",
   },
   openGraph: {
-    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    title: "Shopify Alternative for a Private Cloud Store",
     description:
-      "Tired of monthly Shopify fees? Launch an online store, native mobile apps, and CRM on your own private cloud. Keep 100% of your sales with 0% commission.",
+      "Compare Shopify with a store deployed to your cloud. Review setup, hosting, payment fees, shopping apps, and optional source code licensing.",
     url: "/compare/shopify-alternative",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shopify Alternative with No Monthly Fees | Mechatron Lab",
+    title: "Shopify Alternative for a Private Cloud Store",
     description:
-      "Tired of monthly Shopify fees? Launch an online store and mobile apps with 0% commission.",
+      "Compare Shopify with a store deployed to your cloud. Review setup, hosting, payment fees, shopping apps, and optional source code licensing.",
     images: ["/og-image.png"],
   },
 };
@@ -64,12 +65,12 @@ export default function ShopifyAlternativePage() {
   const comparisonRows = [
     {
       feature: "Monthly software fees",
-      mechatron: "$0 / month (private cloud hosting only)",
+      mechatron: "No monthly platform license fee. Hosting and ongoing support are separate.",
       shopify: "Plan and billing term determine the subscription; see current pricing",
     },
     {
       feature: "Sales commission / GMV cut",
-      mechatron: "0% (keep 100% of your revenue)",
+      mechatron: "No platform commission. Payment processing fees still apply.",
       shopify: "Third-party transaction fees depend on plan, region and payment provider",
     },
     {
@@ -78,13 +79,13 @@ export default function ShopifyAlternativePage() {
       shopify: "Customer-facing native apps may require a separate service or integration",
     },
     {
-      feature: "Source code ownership",
-      mechatron: "Full unrestricted Git repos option ($1,999)",
-      shopify: "0% (Proprietary platform; lock-in)",
+      feature: "Source code access",
+      mechatron: displayPackagePrice("source-code-license", "en-US") + " optional commercial license",
+      shopify: "Shopify’s hosted platform is proprietary.",
     },
     {
       feature: "Customer data & servers",
-      mechatron: "100% private on your AWS, GCP, or Azure account",
+      mechatron: "Deployed to your AWS, Google Cloud, or Azure account",
       shopify: "Hosted on Shopify shared multi-tenant servers",
     },
     {
@@ -99,7 +100,7 @@ export default function ShopifyAlternativePage() {
     },
     {
       feature: "Custom logic & gateways",
-      mechatron: "Direct source code modification",
+      mechatron: "Source code changes with the license. Custom integrations are scoped separately.",
       shopify: "Restricted by Shopify Liquid & Checkout limits",
     },
   ];
@@ -134,7 +135,7 @@ export default function ShopifyAlternativePage() {
             variant="ecommerce"
             className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight"
           >
-            The Self-Hosted Shopify Alternative with Zero Monthly Software Fees.
+            A Shopify Alternative for a Private Cloud Store
           </AnimatedHeadline>
 
           <p className="mt-6 text-lg text-ink-2 leading-relaxed">
@@ -142,6 +143,10 @@ export default function ShopifyAlternativePage() {
             Launch a customized online store, native mobile apps, and an all-in-one Admin & CRM
             deployed directly on your private cloud account.
           </p>
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <a href="#comparison" className="underline underline-offset-4">Compare features and costs</a>
+            <Link href="/blog/ecommerce-website-development-cost#packages" className="underline underline-offset-4">See e-commerce package prices</Link>
+          </div>
         </div>
 
         {/* 2 Models Contrast */}
@@ -159,29 +164,30 @@ export default function ShopifyAlternativePage() {
               <span className="font-mono text-xs text-accent uppercase font-medium">Your private cloud</span>
               <h2 className="text-xl font-semibold tracking-tight">The white-label model</h2>
               <p className="text-sm text-ink-2 leading-relaxed">
-                A fixed setup of $4,999 deploys your store, native mobile apps, and admin directly onto your AWS, GCP, or Azure account. Cloud hosting is billed separately and varies with traffic, storage, backups, and integrations. We charge no platform revenue share; payment-provider fees still apply.
+                The complete package starts at {displayPackagePrice(FAMILY_PACKAGE.ecommerce, "en-US")} for setup of the store, apps, and admin panel on your cloud account. Cloud hosting is billed separately and varies with traffic, storage, backups, and integrations. We charge no platform revenue share; payment-provider fees still apply.
               </p>
             </div>
           </div>
         </div>
 
         {/* Comparison Table */}
-        <div className="wrap">
-          <h2 className="text-2xl font-semibold tracking-tight mb-6">Detailed comparison</h2>
-          <p className="text-sm text-ink-2 mb-6">Reviewed 1 November 2026. Consult <a className="underline" href="https://www.shopify.com/pricing">Shopify’s current pricing</a> and <a className="underline" href="https://help.shopify.com/en/manual/your-account/manage-billing/billing-charges">billing documentation</a> for your country, payment setup, and billing term. This is a scope comparison, not a personalized cost quotation.</p>
-          <div className="overflow-x-auto border-t border-line">
-            <table className="w-full text-left text-sm">
+        <div id="comparison" className="wrap-wide scroll-mt-24">
+          <h2 className="mb-6 text-2xl font-semibold tracking-tight">Detailed comparison</h2>
+          <p className="text-sm text-ink-2 mb-6">Consult <a className="underline" href="https://www.shopify.com/pricing">Shopify’s current pricing</a> and <a className="underline" href="https://help.shopify.com/en/manual/your-account/manage-billing/billing-charges">billing documentation</a> for your country, payment setup, and billing term. This is a scope comparison, not a personalized cost quotation.</p>
+          <div role="region" aria-label="Shopify comparison table" tabIndex={0} className="overflow-x-auto border-t border-line">
+            <table className="w-full min-w-[36rem] text-left text-sm">
+              <caption className="sr-only">Comparison of the private cloud e-commerce offer and Shopify</caption>
               <thead>
                 <tr className="border-b border-line text-xs font-mono text-ink-3">
-                  <th className="py-3 pr-4 font-normal">Capability</th>
-                  <th className="py-3 px-4 font-semibold text-ink">Mechatron White-Label</th>
-                  <th className="py-3 pl-4 font-normal">Shopify / SaaS</th>
+                  <th scope="col" className="py-3 pr-4 font-normal">Capability</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-ink">Mechatron White-Label</th>
+                  <th scope="col" className="py-3 pl-4 font-normal">Shopify / SaaS</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line text-xs sm:text-sm">
                 {comparisonRows.map((row, idx) => (
                   <tr key={idx}>
-                    <td className="py-3.5 pr-4 font-medium text-ink">{row.feature}</td>
+                    <th scope="row" className="py-3.5 pr-4 font-medium text-ink">{row.feature}</th>
                     <td className="py-3.5 px-4 font-medium text-accent">{row.mechatron}</td>
                     <td className="py-3.5 pl-4 text-ink-3">{row.shopify}</td>
                   </tr>
@@ -195,7 +201,7 @@ export default function ShopifyAlternativePage() {
         <div className="wrap p-8 rounded-lg border border-line bg-wash space-y-4">
           <h3 className="text-lg font-semibold tracking-tight">Active stores running on this model</h3>
           <p className="text-sm text-ink-2 leading-relaxed">
-            Mechatron Lab powers over 1,000 SKUs with an Android app and multi-warehouse routing. eStoreAlley operates an international marketplace directory with Stripe checkout and Google Play app.
+            Explore an electronics store with multi-warehouse fulfillment and a marketplace that serves both wholesale and retail buyers.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <Link href="/case-studies/mechatron-lab" className={buttonClass("link", "sm")}>
@@ -211,13 +217,13 @@ export default function ShopifyAlternativePage() {
         <div className="wrap border-t border-line pt-16">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-6">
             <div>
-              <h2 className="text-2xl font-semibold tracking-tight">Ready to migrate away from SaaS lock-in?</h2>
-              <p className="mt-2 text-sm text-ink-2">Schedule a walkthrough with our solution architects.</p>
+              <h2 className="text-2xl font-semibold tracking-tight">Plan your store migration</h2>
+              <p className="mt-2 text-sm text-ink-2">Bring your current catalog, payment setup, and integrations. We’ll help you compare the work involved.</p>
             </div>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex flex-wrap items-center gap-4">
               <DemoButton size="sm">Book a demo</DemoButton>
-              <Link href="/#pricing" className={buttonClass("link", "sm")}>
-                View pricing plans →
+              <Link href="/solutions/ecommerce#pricing" className={buttonClass("link", "sm")}>
+                View e-commerce pricing →
               </Link>
             </div>
           </div>

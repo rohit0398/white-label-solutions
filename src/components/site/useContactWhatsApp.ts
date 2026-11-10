@@ -6,6 +6,13 @@ import { BRAND } from "@/lib/constants";
 import { englishMessage } from "@/lib/messages";
 import { shortDramaOfferForPath } from "@/lib/short-drama-offers";
 import { ottOfferForPath } from "@/lib/ott-offers";
+import { basePath } from "@/lib/site-config";
+
+const ecommerceMessages: Partial<Record<string, string>> = {
+  "/solutions/ecommerce": englishMessage("EcommerceContact.platform"),
+  "/solutions/ecommerce-app-development": englishMessage("EcommerceContact.app"),
+  "/solutions/ecommerce-website-development": englishMessage("EcommerceContact.web"),
+};
 
 export function useContactWhatsApp() {
   const pathname = usePathname();
@@ -23,7 +30,7 @@ export function useContactWhatsApp() {
     app: englishMessage("OttOverview.app.whatsapp"),
     web: englishMessage("OttOverview.web.whatsapp"),
   };
-  const message = offer ? messages[offer] : ottOffer ? ottMessages[ottOffer] : undefined;
+  const message = offer ? messages[offer] : ottOffer ? ottMessages[ottOffer] : ecommerceMessages[basePath(pathname)];
   if (!message) return BRAND.contact.whatsappUrl;
 
   const url = new URL(BRAND.contact.whatsappUrl);

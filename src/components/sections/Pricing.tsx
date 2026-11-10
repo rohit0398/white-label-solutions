@@ -26,6 +26,7 @@ export interface PricingProps {
   intro?: string;
   tiers?: PricingTier[];
   hideCalculator?: boolean;
+  children?: React.ReactNode;
 }
 
 export function Pricing({
@@ -35,12 +36,12 @@ export function Pricing({
   intro,
   tiers,
   hideCalculator = false,
+  children,
 }: PricingProps = {}) {
   const translateCopy = useMessages();
 
   const { currency, setCurrency, language } = useSite();
   const t = TRANSLATIONS[language];
-  const [monthlyGmv, setMonthlyGmv] = useState<number>(50000);
 
   const activeTiers = tiers || PRICING_TIERS;
   const sectionIndex = index !== undefined ? index : t.pricing.index;
@@ -181,7 +182,7 @@ export function Pricing({
 
       {/* Tier Cards / Rows with Tactile Hover Physics */}
       <div className="wrap-wide grid gap-6 sm:grid-cols-3">
-        {activeTiers.map((tier, idx) => {
+        {activeTiers.map((tier) => {
           const price = tier.prices[currency];
           const translatedTier = translateCopy(tier);
           return (
@@ -421,6 +422,7 @@ export function Pricing({
           </div>
         </>
       )}
+      {children && <div className="wrap-wide mt-6">{children}</div>}
     </Section>
   );
 }
