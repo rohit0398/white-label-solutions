@@ -101,7 +101,14 @@ export function ShortDramaOverview({ offer }: { offer: ShortDramaOffer }) {
         {offer === "app" && <MicroDramaAppPreview />}
       </StreamingHero>
 
-      <ShortDramaLiveAccess emphasis={content.emphasis} landing />
+      <ShortDramaLiveAccess emphasis={content.emphasis} landing>
+        {offer === "platform" && (
+          <div className="mt-5 border-t border-line pt-4">
+            <h3 className="text-sm font-semibold text-ink">{t(englishMessage("ShortDrama.top.platform.walkthroughTitle"))}</h3>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-ink-2">{t(englishMessage("ShortDrama.top.platform.walkthroughIntro"))}</p>
+          </div>
+        )}
+      </ShortDramaLiveAccess>
 
       <TechStackStrip
         id="short-drama-features"

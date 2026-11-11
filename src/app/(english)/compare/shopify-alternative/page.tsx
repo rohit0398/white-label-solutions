@@ -1,4 +1,4 @@
-import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
+import { displayPackagePrice, FAMILY_PACKAGE, packageAmount } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,6 +9,13 @@ import { Pricing } from "@/components/sections/Pricing";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+
+const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+const hostedExample = { plan: 100, apps: 50, support: 100 };
+const cloudExample = { hosting: 40, support: 100 };
+const exampleMonths = 36;
+const hostedTotal = (hostedExample.plan + hostedExample.apps + hostedExample.support) * exampleMonths;
+const cloudTotal = packageAmount(FAMILY_PACKAGE.ecommerce) + (cloudExample.hosting + cloudExample.support) * exampleMonths;
 
 export const metadata: Metadata = {
   title: "Shopify Alternative for a Private Cloud Store",
@@ -146,6 +153,7 @@ export default function ShopifyAlternativePage() {
           </p>
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             <a href="#comparison" className="underline underline-offset-4">Compare features and costs</a>
+            <a href="#cost-example" className="underline underline-offset-4">See a worked budget</a>
             <a href="#cost-calculator" className="underline underline-offset-4">Estimate three-year costs</a>
             <Link href="/blog/ecommerce-website-development-cost#packages" className="underline underline-offset-4">See e-commerce package prices</Link>
           </div>
@@ -198,6 +206,32 @@ export default function ShopifyAlternativePage() {
             </table>
           </div>
         </div>
+
+        <section id="cost-example" aria-labelledby="cost-example-title" className="wrap scroll-mt-24">
+          <h2 id="cost-example-title" className="text-2xl font-semibold tracking-tight">A three-year budget example</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-2">
+            This example uses hypothetical US dollar budgets. It excludes payment fees, taxes, migration, custom integrations, and the optional source code license. Include any of those costs that apply to your store.
+          </p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-lg border border-line p-5">
+              <h3 className="font-semibold">Hosted store example</h3>
+              <p className="mt-2 text-sm text-ink-2">
+                Each month, budget {usd.format(hostedExample.plan)} for the plan, {usd.format(hostedExample.apps)} for apps, and {usd.format(hostedExample.support)} for support.
+              </p>
+              <p className="mt-3 font-semibold">{usd.format(hostedTotal)} over three years</p>
+            </div>
+            <div className="rounded-lg border border-line p-5">
+              <h3 className="font-semibold">Store and shopping apps on your cloud</h3>
+              <p className="mt-2 text-sm text-ink-2">
+                Start with {displayPackagePrice(FAMILY_PACKAGE.ecommerce, "en-US")} for setup. Each month, budget {usd.format(cloudExample.hosting)} for hosting and {usd.format(cloudExample.support)} for support.
+              </p>
+              <p className="mt-3 font-semibold">{usd.format(cloudTotal)} over three years</p>
+            </div>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-ink-2">
+            A hosted store can suit a team that wants managed hosting and ready-made integrations. Running on your own cloud gives your team control of the deployment and can make sense when the store needs custom workflows. Check what your chosen hosted plan charges for branded shopping apps before comparing the budgets.
+          </p>
+        </section>
 
         <Pricing
           id="cost-calculator"

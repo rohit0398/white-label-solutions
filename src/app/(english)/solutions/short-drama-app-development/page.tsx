@@ -1,7 +1,7 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { SHORT_DRAMA_FAQS, SHORT_DRAMA_APP_PRICING_TIERS } from "@/lib/constants";
+import { SHORT_DRAMA_APP_PRICING_TIERS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
 import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
@@ -21,6 +21,21 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 const searchTitle = "Short Drama App Development for iOS & Android";
 const searchDescription =
   "Develop branded iOS and Android apps for vertical short drama. Manage episodes and VIP access from one admin panel, and publish under your own developer accounts.";
+
+const faqs = [
+  {
+    q: "What comes with the Short Drama app package?",
+    a: "Branded iOS and Android apps with vertical swipe playback, an admin panel for series and episodes, and controls for free and VIP access.",
+  },
+  {
+    q: "How do viewers pay for VIP access in the app?",
+    a: "Set which episodes require VIP access in the admin panel. Viewers subscribe through Apple or Google Play billing on their device.",
+  },
+  {
+    q: "Who submits the apps to the stores?",
+    a: "We help prepare and submit the apps through your developer accounts. Apple and Google handle review and approval.",
+  },
+];
 
 export const metadata: Metadata = {
   title: searchTitle,
@@ -65,7 +80,7 @@ export default function ShortDramaAppDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(SHORT_DRAMA_FAQS);
+  const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
     name: "Short-Drama Mobile App Platform (9:16 Vertical Reels)",
     description:
@@ -114,9 +129,9 @@ export default function ShortDramaAppDevelopmentPage() {
         <Faq
           id="faq"
           index="06 · Frequently Asked Questions"
-          title="Short-Drama Platform Questions"
-          intro="Everything you need to know about app publishing, Cloudflare Stream video costs, and source code ownership."
-          items={SHORT_DRAMA_FAQS}
+          title="Short Drama app questions"
+          intro=""
+          items={faqs}
         />
 
         {/* Closing Conversion Banner */}

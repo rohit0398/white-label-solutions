@@ -14,6 +14,7 @@ import { CompleteStoreCallout } from "@/components/sections/CompleteStoreCallout
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import Link from "@/components/ui/LocalizedLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
@@ -97,7 +98,11 @@ export default function EcommerceWebsiteDevelopmentPage() {
           intro="The launch fee covers the storefront and admin panel. Hosting, payment processing, and the optional source code license are separate."
           hideCalculator
           tiers={ECOMMERCE_WEB_PRICING_TIERS}
-        />
+        >
+          <Link href="/blog/ecommerce-website-development-cost" className="text-sm font-medium underline underline-offset-4">
+            See what affects the cost of an e-commerce website
+          </Link>
+        </Pricing>
 
         <Faq index="" items={faqs} />
         <Closing tierId="web-launch" headline={englishMessage("EcommerceClosing.title")} description={englishMessage("EcommerceClosing.description")} />

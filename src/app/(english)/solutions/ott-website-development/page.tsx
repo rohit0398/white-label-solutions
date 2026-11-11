@@ -1,7 +1,7 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_WEB_PRICING_TIERS } from "@/lib/constants";
+import { CINEMATIC_OTT_WEB_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Pricing } from "@/components/sections/Pricing";
@@ -21,6 +21,21 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 const searchTitle = "OTT Website Development for Movies & Series";
 const searchDescription =
   "Launch a branded OTT website with a browsable catalog, widescreen playback, and Stripe subscriptions. Manage movies and series from one admin panel.";
+
+const faqs = [
+  {
+    q: "What comes with the OTT website package?",
+    a: "A branded website with a movie and series catalog, browser playback, and an admin panel for publishing and managing the catalog.",
+  },
+  {
+    q: "How do viewers subscribe on the website?",
+    a: "Viewers can subscribe through Stripe checkout. You manage which titles require a subscription in the admin panel.",
+  },
+  {
+    q: "Can the site carry live feeds?",
+    a: "The standard website covers on-demand video. Tell us about your live feeds, scheduling, and target browsers so we can quote the work separately.",
+  },
+];
 
 export const metadata: Metadata = {
   title: searchTitle,
@@ -64,7 +79,7 @@ export default function OttWebsiteDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(CINEMATIC_OTT_FAQS);
+  const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
     name: "Cinematic OTT Website Platform",
     description:
@@ -112,9 +127,9 @@ export default function OttWebsiteDevelopmentPage() {
         <Faq
           id="faq"
           index="06 · Frequently Asked Questions"
-          title="Cinematic OTT Platform Questions"
-          intro="Clear answers on video CDN bandwidth economics, transcoding pipelines, DRM signed URLs, and source code ownership."
-          items={CINEMATIC_OTT_FAQS}
+          title="OTT website questions"
+          intro=""
+          items={faqs}
         />
 
         {/* Closing Conversion Banner */}
