@@ -8,15 +8,18 @@ import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
 import { BRAND } from "@/lib/constants";
+import { CASE_STUDIES_PATH } from "@/lib/content/case-studies";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
 import { useSite } from "@/components/site/SiteProvider";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { TRANSLATIONS } from "@/lib/translations";
 
 const footerLinkClass = "flex min-h-11 items-center py-1 text-ink-2 transition-colors [overflow-wrap:anywhere] hover:text-ink md:min-h-7";
 
 export function Footer() {
   const translateCopy = useMessages();
+  const whatsappUrl = useContactWhatsApp();
   const groupId = useId();
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
 
@@ -44,10 +47,7 @@ export function Footer() {
       links: [
         { label: englishMessage("Footer.engineering.blog.e223c12"), href: "/blog" },
         { label: t.footer.comparedToShopify, href: "/compare/shopify-alternative" },
-        { label: englishMessage("Footer.2.4m.short.drama.app.case.study.d1ce8ad"), href: "/case-studies/short-drama-platform" },
-        { label: englishMessage("Footer.24.7.linear.ott.network.case.study.7abd557"), href: "/case-studies/ott-streaming-network" },
-        { label: englishMessage("Footer.mechatron.lab.store.c3f3334"), href: "/case-studies/mechatron-lab" },
-        { label: englishMessage("Footer.estorealley.case.study.99a7857"), href: "/case-studies/estorealley" },
+        { label: englishMessage("Footer.caseStudies"), href: CASE_STUDIES_PATH },
         { label: englishMessage("Footer.about.mechatron.lab.1d844e8"), href: "/about" },
       ],
     },
@@ -58,7 +58,7 @@ export function Footer() {
         { label: englishMessage("Footer.terms.of.service.0c8a9a9"), href: "/terms" },
         { label: englishMessage("Footer.refund.policy.d5527d0"), href: "/refund-policy" },
         { label: BRAND.contact.email, href: `mailto:${BRAND.contact.email}` },
-        { label: englishMessage("Footer.whatsapp.support.aeef9c6"), href: BRAND.contact.whatsappUrl, external: true },
+        { label: englishMessage("Footer.whatsapp.support.aeef9c6"), href: whatsappUrl, external: true },
       ],
     },
   ];

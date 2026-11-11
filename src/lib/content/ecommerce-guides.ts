@@ -77,9 +77,9 @@ export const ECOMMERCE_GUIDES = {
     datePublished: "2026-10-01",
     image: {
       src: "/showcase/commerce-marketplace.webp",
-      alt: "eStoreAlley online marketplace storefront",
+      alt: "eStoreAlley retail and wholesale store directory",
       section: "scope",
-      example: { href: "/case-studies/estorealley", label: "See the wholesale and retail marketplace case study" },
+      example: { href: "/case-studies/estorealley", label: "See the retail and wholesale directory case study" },
     },
     offer: { href: "/solutions/ecommerce#pricing", label: "View e-commerce platform pricing", tierId: "launch" },
     sections: [

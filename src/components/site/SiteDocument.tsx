@@ -142,7 +142,7 @@ export default function SiteDocument({
             availableLanguage: ["English", "Hindi"],
           },
         ],
-        sameAs: ["https://mechatronlab.com", "https://estorealley.web.app"],
+        sameAs: ["https://mechatronlab.com"],
       },
       {
         "@type": "WebSite",

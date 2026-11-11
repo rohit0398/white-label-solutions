@@ -22,6 +22,7 @@ import {
 
 export type TechStackMode =
   | "all"
+  | "home"
   | "web"
   | "app"
   | "short-drama"
@@ -165,6 +166,14 @@ export function TechStackStrip({
 
   const stackMap: Record<TechStackMode, typeof webStack> = {
     all: ecommerceAllStack,
+    home: [
+      ecommerceAllStack[0],
+      ecommerceAllStack[1],
+      ecommerceAllStack[2],
+      hlsStream,
+      ecommerceAllStack[4],
+      ecommerceAllStack[5],
+    ],
     web: webStack,
     app: appStack,
     "short-drama": shortDramaAllStack,
@@ -200,7 +209,7 @@ export function TechStackStrip({
     : [
         { label: englishMessage("TechStackStrip.mutual.nda.on.request.ee5b3d3"), icon: Lock },
         { label: englishMessage("TechStackStrip.100.private.cloud.vpc.zero.multi.tenancy.ec6dcaf"), icon: Server },
-        { label: englishMessage("TechStackStrip.pci.dss.level.1.tokenized.checkout.8d345d9"), icon: ShieldCheck },
+        ...(mode === "home" ? [] : [{ label: englishMessage("TechStackStrip.pci.dss.level.1.tokenized.checkout.8d345d9"), icon: ShieldCheck }]),
         { label: englishMessage("ShortDrama.top.stack.source"), icon: Code2 },
       ];
 

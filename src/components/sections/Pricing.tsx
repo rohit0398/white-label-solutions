@@ -5,19 +5,13 @@ import { packageAmount } from "@/lib/pricing-catalog";
 
 import React, { useState } from "react";
 import { PRICING_TIERS } from "@/lib/constants";
-import { Currency, PricingTier } from "@/types";
+import type { PricingTier } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { Section } from "@/components/ui/Section";
+import { CurrencySelector } from "@/components/ui/CurrencySelector";
 import { DemoButton } from "@/components/site/DemoButton";
 import { useSite } from "@/components/site/SiteProvider";
 import { TRANSLATIONS } from "@/lib/translations";
-
-const currencies: { code: Currency; symbol: string; label: string }[] = [
-  { code: "USD", symbol: "$", label: "USD" },
-  { code: "EUR", symbol: "€", label: "EUR" },
-  { code: "GBP", symbol: "£", label: "GBP" },
-  { code: "INR", symbol: "₹", label: "INR" },
-];
 
 export interface PricingProps {
   id?: string;
@@ -26,6 +20,7 @@ export interface PricingProps {
   intro?: string;
   tiers?: PricingTier[];
   hideCalculator?: boolean;
+  calculatorOnly?: boolean;
   children?: React.ReactNode;
 }
 
@@ -36,11 +31,12 @@ export function Pricing({
   intro,
   tiers,
   hideCalculator = false,
+  calculatorOnly = false,
   children,
 }: PricingProps = {}) {
   const translateCopy = useMessages();
 
-  const { currency, setCurrency, language } = useSite();
+  const { currency, language } = useSite();
   const t = TRANSLATIONS[language];
 
   const activeTiers = tiers || PRICING_TIERS;
@@ -156,32 +152,16 @@ export function Pricing({
       index={sectionIndex}
       title={translateCopy(sectionTitle)}
       intro={sectionIntro}
+      className={calculatorOnly ? "border-t-0 py-0 sm:py-0" : undefined}
       wide
       bare
     >
-      {/* Currency Switcher */}
-      <div className="wrap-wide mb-10 flex items-center justify-between flex-wrap gap-4">
-        <p className="text-sm text-ink-3">{translateCopy(t.pricing.currencyLabel)}</p>
-        <div className="inline-flex rounded-md border border-line p-0.5 bg-wash">
-          {currencies.map((c) => (
-            <button
-              key={c.code}
-              type="button"
-              onClick={() => setCurrency(c.code)}
-              className={`px-3 py-1 text-xs font-mono rounded transition-all duration-150 active:scale-95 cursor-pointer ${
-                currency === c.code
-                  ? "bg-paper text-ink font-semibold shadow-xs"
-                  : "text-ink-3 hover:text-ink hover:bg-paper/40"
-              }`}
-            >
-              {translateCopy(c.label)} ({translateCopy(c.symbol)})
-            </button>
-          ))}
-        </div>
+      <div className="wrap-wide mb-10">
+        <CurrencySelector />
       </div>
 
       {/* Tier Cards / Rows with Tactile Hover Physics */}
-      <div className="wrap-wide grid gap-6 sm:grid-cols-3">
+      {!calculatorOnly && <div className="wrap-wide grid gap-6 sm:grid-cols-3">
         {activeTiers.map((tier) => {
           const price = tier.prices[currency];
           const translatedTier = translateCopy(tier);
@@ -243,12 +223,12 @@ export function Pricing({
             </div>
           );
         })}
-      </div>
+      </div>}
 
       {showCalculator && (
         <>
           {/* 3-Year Comparison Table */}
-          <div className="wrap-wide mt-20">
+          {!calculatorOnly && <div className="wrap-wide mt-20">
             <h3 className="text-xl font-semibold tracking-tight">{translateCopy(t.pricing.tco.title)}</h3>
             <p className="mt-2 text-xs text-ink-2">{translateCopy(englishMessage("Pricing.illustrative.cost.scenarios.below.not.univer.8b5c003"))}</p>
             <p className="mt-1 text-sm text-ink-3">
@@ -289,14 +269,16 @@ export function Pricing({
                 </tbody>
               </table>
             </div>
-          </div>
+          </div>}
 
           {/* Interactive Savings Playground with Live Reactive Comparison Bars */}
-          <div className="wrap-wide mt-16 p-6 sm:p-8 rounded-2xl border border-line bg-wash shadow-xs transition-all duration-200">
-            <h3 className="text-base font-semibold tracking-tight text-ink">{translateCopy(t.pricing.calculator.headline)}</h3>
-            <p className="mt-1 text-xs text-ink-2">
-              {translateCopy(t.pricing.calculator.subtitle)}
-            </p>
+          <div className={`wrap-wide rounded-2xl border border-line bg-wash p-6 shadow-xs sm:p-8 ${calculatorOnly ? "" : "mt-16"}`}>
+            {!calculatorOnly && (
+              <>
+                <h3 className="text-base font-semibold tracking-tight text-ink">{translateCopy(t.pricing.calculator.headline)}</h3>
+                <p className="mt-1 text-xs text-ink-2">{translateCopy(t.pricing.calculator.subtitle)}</p>
+              </>
+            )}
 
             <p className="mt-3 text-xs text-ink-2 leading-relaxed">{translateCopy(englishMessage("Pricing.illustrative.model.not.a.shopify.quote.or.gu.e78be1c"))}{" "}<a className="underline" href="https://www.shopify.com/pricing">{translateCopy(englishMessage("Pricing.current.shopify.pricing.81e3251"))}</a>.</p>
             <div className="mt-6 space-y-6">
@@ -413,7 +395,7 @@ export function Pricing({
                 <span className="text-xs text-ink-2 font-medium block">
                   {translateCopy(t.pricing.calculator.savingsTitle)}:
                 </span>
-                <span className="text-[11px] font-mono text-ink-3">{translateCopy(englishMessage("Pricing.estimated.36.month.merchant.retention.with.0.0fc121f"))}</span>
+                {!calculatorOnly && <span className="text-[11px] font-mono text-ink-3">{translateCopy(englishMessage("Pricing.estimated.36.month.merchant.retention.with.0.0fc121f"))}</span>}
               </div>
               <span className="text-2xl sm:text-3xl font-bold font-mono text-accent">
                 +{translateCopy(formatCurrency(Math.round(estimatedSavings), currency))}

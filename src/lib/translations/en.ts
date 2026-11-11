@@ -144,9 +144,9 @@ export const en: TranslationDictionary = {
       },
       {
         title: "eStoreAlley",
-        industry: "Wholesale and retail marketplace",
+        industry: "Retail and wholesale store directory",
         description:
-          "Multi-vendor directory with separate wholesale pricing, Stripe checkout and an Android app.",
+          "A directory and Android app that help shoppers and stockists discover independent stores and buy directly from them.",
       },
       {
         title: "Style Gear",

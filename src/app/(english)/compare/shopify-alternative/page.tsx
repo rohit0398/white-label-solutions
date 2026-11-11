@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { DemoButton } from "@/components/site/DemoButton";
+import { Pricing } from "@/components/sections/Pricing";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
@@ -145,6 +146,7 @@ export default function ShopifyAlternativePage() {
           </p>
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             <a href="#comparison" className="underline underline-offset-4">Compare features and costs</a>
+            <a href="#cost-calculator" className="underline underline-offset-4">Estimate three-year costs</a>
             <Link href="/blog/ecommerce-website-development-cost#packages" className="underline underline-offset-4">See e-commerce package prices</Link>
           </div>
         </div>
@@ -197,11 +199,19 @@ export default function ShopifyAlternativePage() {
           </div>
         </div>
 
+        <Pricing
+          id="cost-calculator"
+          index=""
+          title="Estimate three-year store costs"
+          intro="Adjust sales volume, developer time, and the optional source code license to compare two example budgets."
+          calculatorOnly
+        />
+
         {/* Live Proof Callout */}
         <div className="wrap p-8 rounded-lg border border-line bg-wash space-y-4">
-          <h3 className="text-lg font-semibold tracking-tight">Active stores running on this model</h3>
+          <h3 className="text-lg font-semibold tracking-tight">E-commerce case studies</h3>
           <p className="text-sm text-ink-2 leading-relaxed">
-            Explore an electronics store with multi-warehouse fulfillment and a marketplace that serves both wholesale and retail buyers.
+            Explore an electronics store with multi-warehouse fulfillment and a retail and wholesale directory that sends shoppers to each seller’s website.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <Link href="/case-studies/mechatron-lab" className={buttonClass("link", "sm")}>

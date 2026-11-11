@@ -49,6 +49,7 @@ export async function POST(request: Request) {
     let delivered = false;
 
     const PACKAGE_LABELS: Record<string, string> = {
+      "general": "General project inquiry",
       "launch": priceText("🚀 White-Label Launch Package ({price:launch})"),
       "source-code-license": priceText("💻 Full Source Code & License ({price:source-code-license})"),
       "source-code": priceText("💻 Full Source Code & License ({price:source-code-license})"),

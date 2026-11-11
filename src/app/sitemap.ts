@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, LANGUAGES, LOCALIZED_PATHS, localizedPath, languageAlternates } from "@/lib/site-config";
+import { CASE_STUDIES, CASE_STUDIES_PATH } from "@/lib/content/case-studies";
 
 const englishPaths = [
   "/",
@@ -14,10 +15,8 @@ const englishPaths = [
   "/solutions/short-drama-website-development",
   "/solutions/ott-website-development",
   "/solutions/ott-app-development",
-  "/case-studies/mechatron-lab",
-  "/case-studies/estorealley",
-  "/case-studies/short-drama-platform",
-  "/case-studies/ott-streaming-network",
+  CASE_STUDIES_PATH,
+  ...Object.values(CASE_STUDIES).map(study => study.path),
   "/blog",
   "/blog/short-drama-app-development",
   "/blog/build-app-like-reelshort",

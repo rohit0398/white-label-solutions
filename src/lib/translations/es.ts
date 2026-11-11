@@ -144,9 +144,9 @@ export const es: TranslationDictionary = {
       },
       {
         title: "eStoreAlley",
-        industry: "Marketplace mayorista y minorista",
+        industry: "Directorio de tiendas minoristas y mayoristas",
         description:
-          "Directorio multisede con precios para mayoristas, checkout Stripe y app nativa en Google Play.",
+          "Un directorio y una aplicación para Android que ayudan a compradores y distribuidores a encontrar tiendas independientes y comprarles directamente.",
       },
       {
         title: "Style Gear",

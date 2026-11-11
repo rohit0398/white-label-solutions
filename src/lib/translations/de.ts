@@ -143,9 +143,9 @@ export const de: TranslationDictionary = {
       },
       {
         title: "eStoreAlley",
-        industry: "B2B- & B2C-Großhandelsmarktplatz",
+        industry: "Verzeichnis für Einzel- und Großhandel",
         description:
-          "Multi-Vendor-Verzeichnis mit gestaffelten Händlerpreisen, Stripe-Checkout und eigener Google Play App.",
+          "Ein Verzeichnis und eine Android-App, mit denen Kunden und Wiederverkäufer unabhängige Händler finden und direkt bei ihnen einkaufen können.",
       },
       {
         title: "Style Gear",
