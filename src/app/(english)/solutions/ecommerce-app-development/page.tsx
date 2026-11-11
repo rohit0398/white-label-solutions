@@ -1,15 +1,15 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
+import { englishMessage } from "@/lib/messages";
 import type { Metadata } from "next";
-import { FAQS, ECOMMERCE_APP_PRICING_TIERS } from "@/lib/constants";
+import { ECOMMERCE_APP_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
-import { AppShowcase } from "@/components/sections/AppShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Work } from "@/components/sections/Work";
+import { EcommerceArchitecture } from "@/components/sections/EcommerceArchitecture";
+import { EcommerceProof } from "@/components/sections/EcommerceProof";
+import { EcommerceRollout } from "@/components/sections/EcommerceRollout";
 import { CompleteStoreCallout } from "@/components/sections/CompleteStoreCallout";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
@@ -17,39 +17,22 @@ import { Closing } from "@/components/sections/Closing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
+const title = "E-Commerce App Development for iOS and Android";
+const description = "Launch branded shopping apps for iOS and Android with catalog sync, checkout, and push notifications. Submit through your own developer accounts.";
+const canonical = "/solutions/ecommerce-app-development";
+
+const faqs = [
+  { q: "Can the apps connect to my existing store?", a: "We review your catalog, inventory, and order APIs before confirming what can connect and what needs custom work." },
+  { q: "Who submits the apps?", a: "We help prepare and submit the apps through your Apple and Google developer accounts. The stores review the apps after submission." },
+  { q: "Does the app package include source code?", a: "The app launch covers deployment and submission support. The Flutter source code license is available as an add-on." },
+];
+
 export const metadata: Metadata = {
-  title: "E-Commerce Mobile App Development | iOS & Android | Mechatron Lab",
-  description:
-    "Launch native iOS & Android shopping apps built with Flutter in 2–4 weeks. Fast checkout, push notifications, and 0% app sales cuts on your private cloud.",
-  keywords: [
-    "ecommerce mobile app development",
-    "ecommerce app development company",
-    "flutter ecommerce app",
-    "shopping app development",
-    "mobile commerce app development",
-    "white label ecommerce app",
-    "ios android shopping app",
-  ],
-  alternates: {
-    canonical: "/solutions/ecommerce-app-development",
-  },
-  openGraph: {
-    title: "E-Commerce Mobile App Development | iOS & Android",
-    description:
-      "Launch native iOS & Android shopping apps built with Flutter in 2–4 weeks. Fast checkout, push notifications, and 0% app sales cuts on your private cloud.",
-    url: "/solutions/ecommerce-app-development",
-    siteName: "Mechatron Lab Solutions",
-    locale: "en_US",
-    type: "website",
-    images: ["/og-image.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "E-Commerce Mobile App Development | iOS & Android",
-    description:
-      "Launch native iOS & Android shopping apps built with Flutter with 0% commission on your private cloud.",
-    images: ["/og-image.png"],
-  },
+  title,
+  description,
+  alternates: { canonical },
+  openGraph: { type: "website", title, description, url: canonical, images: ["/og-image.png"] },
+  twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
 };
 
 export default function EcommerceAppDevelopmentPage() {
@@ -62,11 +45,10 @@ export default function EcommerceAppDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(FAQS);
+  const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
-    name: "E-Commerce Mobile App Development (Flutter iOS & Android)",
-    description:
-      "Custom white-label e-commerce mobile app development for iOS and Android. High-performance Flutter shopping apps published under your developer accounts with 0% revenue cut.",
+    name: title,
+    description,
     price: schemaPrice("app-launch"),
     url: "/solutions/ecommerce-app-development",
     operatingSystem: "iOS, Android",
@@ -91,32 +73,34 @@ export default function EcommerceAppDevelopmentPage() {
             { label: "Solutions", href: "/solutions" },
             { label: "E-Commerce App Development" },
           ]}
-          badge="Flutter 3.x Native Apps · 60 FPS Fluid Experience · 0% Revenue Cut"
-          headline="E-Commerce Mobile App Development (iOS &amp; Android)."
-          subtitle="Deploy branded native mobile shopping apps for iOS and Android in 2–4 weeks. Built with Flutter, native 1-tap checkout, push notifications, and private cloud sync with zero monthly platform cuts."
+          badge="Shopping apps for iOS and Android"
+          headline="E-Commerce App Development"
+          subtitle="Launch branded shopping apps with product browsing, checkout, and order updates. We review how the apps connect to your existing store or help you plan the complete platform."
           anchors={[
-            { label: "01 Mobile Shopping Apps (Flutter)", href: "#mobile-apps" },
-            { label: "02 Push Notifications & Loyalty", href: "#hero" },
+            { label: englishMessage("EcommerceProof.appTitle"), href: "#work" },
+            { label: englishMessage("ShortDrama.top.included"), href: "#architecture" },
+            { label: englishMessage("ShortDrama.top.pricing"), href: "#pricing" },
           ]}
         />
-        <TechStackStrip mode="app" />
-        <LiveTicker />
-        <AppShowcase index="01" />
-        <HowItWorks index="02" />
-        <Work mode="app" index="03" />
+        <EcommerceProof offer="app" />
+        <TechStackStrip mode="app" wide headline={englishMessage("EcommerceArchitecture.techTitle")}
+          subheadline={englishMessage("constants.deployment.to.your.aws.google.cloud.or.azure.98716f6")} />
+        <EcommerceArchitecture offer="app" />
+        <EcommerceRollout offer="app" />
 
         {/* Child Cross-Sell Callout Box */}
         <CompleteStoreCallout />
 
-        {/* Child Reduced Pricing ($2,999 / $999 / $15/hr) */}
         <Pricing
-          title="Simple, transparent app pricing"
-          intro="Fixed-cost iOS and Android mobile app launch with zero recurring monthly SaaS cuts. Optional unencrypted source code license and dedicated developer hours."
+          index=""
+          title="Mobile app pricing"
+          intro="The launch fee covers the iOS and Android apps and submission support. Source code licensing and custom integrations are available separately."
+          hideCalculator
           tiers={ECOMMERCE_APP_PRICING_TIERS}
         />
 
-        <Faq />
-        <Closing />
+        <Faq index="" items={faqs} />
+        <Closing tierId="app-launch" headline={englishMessage("EcommerceClosing.title")} description={englishMessage("EcommerceClosing.description")} />
       </main>
 
       <Footer />

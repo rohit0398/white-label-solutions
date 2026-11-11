@@ -1,33 +1,32 @@
 "use client";
 import { englishMessage } from "@/lib/messages";
-import { useMessages } from "@/components/site/useMessages";
-
-import { priceText } from "@/lib/pricing-catalog";
+import { useSite } from "@/components/site/SiteProvider";
+import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import React from "react";
-import { Store, Globe, Smartphone, ShieldCheck } from "lucide-react";
+import { Globe, Smartphone, ShieldCheck } from "lucide-react";
 import { CompletePackageCallout } from "@/components/sections/CompletePackageCallout";
 
 export function CompleteStoreCallout() {
-  const translateCopy = useMessages();
+  const { language, currency } = useSite();
 
   return (
     <CompletePackageCallout
       wide
-      badge={translateCopy(englishMessage("CompletePackageCallout.all.in.one.package.a1ef02a"))}
-      title={translateCopy(englishMessage("CompleteStoreCallout.looking.for.the.complete.e.commerce.solution.d0fc478"))}
-      subtitle={translateCopy(englishMessage("CompleteStoreCallout.need.both.the.web.storefront.and.mobile.shop.ec80da2"))}
-      price={priceText(englishMessage("CompleteOttCallout..price.launch.6843b00"))}
+      badge={englishMessage("CompleteShortDramaCallout.all.in.one.short.drama.suite.b8cf31a")}
+      title={englishMessage("ecommerce.complete.e.commerce.store.513e59f")}
+      subtitle={englishMessage("ecommerce.pre.built.production.ready.architecture.desi.3d7f316")}
+      price={displayPackagePrice(FAMILY_PACKAGE.ecommerce, language, currency)}
       priceLabel="one-time investment"
       pillars={[
         {
           icon: Globe,
           title: englishMessage("CompleteStoreCallout.next.js.16.web.storefront.27975e3"),
-          desc: englishMessage("CompleteStoreCallout.sub.second.page.speeds.headless.checkout.dyn.2aa2cdd"),
+          desc: englishMessage("EcommerceCallout.storefront"),
         },
         {
           icon: Smartphone,
           title: englishMessage("CompleteStoreCallout.native.ios.android.apps.433bd0f"),
-          desc: englishMessage("CompleteStoreCallout.flutter.3.x.native.binaries.published.under.29ffc51"),
+          desc: englishMessage("EcommerceCallout.apps"),
         },
         {
           icon: ShieldCheck,
@@ -40,7 +39,7 @@ export function CompleteStoreCallout() {
         "100% Data & User Ownership",
         "0% Platform Commission",
       ]}
-      ctaText={priceText(englishMessage("CompleteStoreCallout.explore.complete.store.package.price.launch.87a5a05"))}
+      ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
       ctaHref="/solutions/ecommerce"
     />
   );

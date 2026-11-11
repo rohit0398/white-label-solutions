@@ -4,11 +4,13 @@ import { useMessages } from "@/components/site/useMessages";
 
 import React from "react";
 import Link from "@/components/ui/LocalizedLink";
+import Image from "@/components/ui/LocalizedImage";
 import { TRANSLATIONS } from "@/lib/translations";
 import { useSite } from "@/components/site/SiteProvider";
-import { BRAND } from "@/lib/constants";
+import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
+import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
+import { imageDimensions } from "@/lib/image-dimensions";
 import { Button } from "@/components/ui/Button";
-import { Screenshot } from "@/components/ui/Screenshot";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge, BadgeCategory } from "@/components/ui/HeadingBadge";
 import { MessageSquare } from "lucide-react";
@@ -24,7 +26,7 @@ export interface HeroProps {
   badge?: string;
   headline?: string;
   subtitle?: string;
-  anchors?: { label: string; href?: string }[];
+  anchors?: { label: string; href: string }[];
   mode?: "all" | "web" | "app";
   showScreenshot?: boolean;
   category?: BadgeCategory;
@@ -35,150 +37,139 @@ export function Hero({
   badge,
   headline,
   subtitle,
-  anchors,
+  anchors = [],
   mode = "all",
-  showScreenshot,
+  showScreenshot = true,
   category,
 }: HeroProps = {}) {
   const translateCopy = useMessages();
 
-  const { language, openDemo } = useSite();
+  const { language, currency, openDemo } = useSite();
   const t = TRANSLATIONS[language];
+  const whatsappUrl = useContactWhatsApp();
+  const packageId = mode === "app" ? "app-launch" : mode === "web" ? "web-launch" : FAMILY_PACKAGE.ecommerce;
 
   const badgeText = badge ?? t.hero.badge;
   const headlineText = headline ?? t.hero.headline;
   const subtitleText = subtitle ?? t.hero.subtitle;
-  const shouldShowScreenshot = showScreenshot !== undefined ? showScreenshot : mode !== "app";
+  const storefront = mode === "web" ? "/showcase/commerce-marketplace.webp" : "/showcase/commerce-storefront.webp";
 
   return (
-    <section id="hero" className="pt-16 sm:pt-14 pb-20">
-      <div className="wrap">
-        {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav className="flex items-center gap-2 text-xs font-mono text-ink-3 mb-6">
-            {breadcrumbs.map((b, idx) => (
-              <React.Fragment key={idx}>
-                {idx > 0 && <span>/</span>}
-                {b.href ? (
-                  <Link href={b.href} className="hover:text-ink transition-colors">
-                    {translateCopy(b.label)}
-                  </Link>
-                ) : (
-                  <span className="text-ink">{translateCopy(b.label)}</span>
-                )}
-              </React.Fragment>
-            ))}
-          </nav>
-        )}
-
-        {/* Ambient Active Status Beacon (Single existing heading badge with domain identity) */}
-        <div className="mb-6">
-          <HeadingBadge category={category}>
-            {badgeText}
-          </HeadingBadge>
-        </div>
-
-        <AnimatedHeadline
-          as="h1"
-          variant={category}
-          className="text-[2.5rem] sm:text-[3.5rem] font-semibold tracking-[-0.035em] leading-[1.05]"
-        >
-          {headlineText}
-        </AnimatedHeadline>
-        <p className="mt-6 text-lg sm:text-xl text-ink-2 leading-relaxed">{translateCopy(subtitleText)}</p>
-
-        {/* Living Platform Anchors with Gentle Ambient Floating & Tactile Hover */}
-        <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-ink-2">
-          {anchors && anchors.length > 0 ? (
-            anchors.map((a, idx) => (
-              <a
-                key={idx}
-                href={a.href || "#what-you-get"}
-                className={`${
-                  idx % 2 === 0 ? "animate-float-slow" : "animate-float-reverse"
-                } px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs`}
-              >
-                {translateCopy(a.label)}
-              </a>
-            ))
-          ) : (
-            <>
-              <a
-                href="#what-you-get"
-                className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-              >
-                {translateCopy(t.hero.anchors.storefront)}
-              </a>
-              <a
-                href="#what-you-get"
-                className="animate-float-reverse px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-              >
-                {translateCopy(t.hero.anchors.apps)}
-              </a>
-              <a
-                href="#what-you-get"
-                className="animate-float-slow px-2.5 py-1 rounded border border-line bg-paper hover:border-ink hover:text-ink hover:-translate-y-1 active:scale-95 transition-all duration-200 cursor-pointer shadow-xs"
-              >
-                {translateCopy(t.hero.anchors.admin)}
-              </a>
-            </>
+    <section id="hero" className="wrap-wide pb-10 pt-9 sm:pb-14 sm:pt-12">
+      <div className="grid items-center gap-8 lg:min-h-[380px] lg:grid-cols-[minmax(0,0.93fr)_minmax(0,1.07fr)]">
+        <div>
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <nav aria-label={translateCopy(englishMessage("EcommerceHero.breadcrumb"))} className="mb-6 flex flex-wrap items-center gap-2 font-mono text-xs text-ink-3">
+              {breadcrumbs.map((b, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && <span aria-hidden="true">/</span>}
+                  {b.href ? (
+                    <Link href={b.href} className="hover:text-ink transition-colors">
+                      {translateCopy(b.label)}
+                    </Link>
+                  ) : (
+                    <span aria-current="page" className="text-ink">{translateCopy(b.label)}</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </nav>
           )}
+
+          <div className="mb-6">
+            <HeadingBadge category={category}>
+              {badgeText}
+            </HeadingBadge>
+          </div>
+
+          <AnimatedHeadline
+            as="h1"
+            variant={category}
+            className="text-4xl font-semibold leading-[1.08] tracking-[-0.035em] sm:text-5xl"
+          >
+            {headlineText}
+          </AnimatedHeadline>
+          <p className="mt-4 text-base leading-relaxed text-ink-2 sm:text-lg">{translateCopy(subtitleText)}</p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button
+              id="hero-book-demo"
+              onClick={() => openDemo(packageId)}
+              className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
+            >
+              <span>{translateCopy(englishMessage("ShortDrama.top.walkthrough"))}</span>
+              <span className="text-paper/70 font-mono text-xs">→</span>
+            </Button>
+
+            <a
+              id="hero-chat-whatsapp"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("Hero")}
+              className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+              </span>
+              <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
+              <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
+            </a>
+          </div>
+
+          {anchors.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {anchors.map(({ label, href }, index) => (
+                <a
+                  key={href}
+                  id={href === "#work" ? "hero-see-work" : undefined}
+                  href={href}
+                  className={(index % 2 ? "animate-float-reverse" : "animate-float-slow") + " inline-flex min-h-9 items-center rounded-md border border-line bg-paper px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-accent/60 hover:text-ink hover:[animation-play-state:paused] focus-visible:[animation-play-state:paused]"}
+                >
+                  {translateCopy(label)}
+                </a>
+              ))}
+            </div>
+          )}
+          <p className="mt-5 text-sm text-ink-3">
+            {translateCopy.format("EcommerceHero.setupPrice", { value0: displayPackagePrice(packageId, language, currency) })}
+          </p>
         </div>
-
-        {/* Top Banner Action Buttons with Active Living Animation & Tactile Hover */}
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          {/* Primary Book Demo Button with Living Breathing Pulse & Spring Hover Elevation */}
-          <Button
-            id="hero-book-demo"
-            onClick={() => openDemo()}
-            className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
-          >
-            <span>{translateCopy(t.hero.ctaDemo)}</span>
-            <span className="text-paper/70 font-mono text-xs">→</span>
-          </Button>
-
-          {/* Direct WhatsApp Live Chat Button with Active Radar Ping & Rotating Hover Physics */}
-          <a
-            id="hero-chat-whatsapp"
-            href={BRAND.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("Hero")}
-            className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-            </span>
-            <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
-            <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
-          </a>
-
-          {/* See Live Stores Link */}
-          <a
-            id="hero-see-work"
-            href="#work"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold tracking-tight text-ink underline underline-offset-4 decoration-line hover:decoration-ink active:opacity-75 transition-colors sm:ml-2"
-          >
-            <span>{translateCopy(t.hero.ctaWork)}</span>
-            <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-          </a>
-        </div>
-
-        <p className="mt-10 text-sm text-ink-3">{translateCopy(t.hero.facts)}</p>
-      </div>
-
-      {shouldShowScreenshot && (
-        <div className="wrap-wide mt-16 sm:mt-20 group">
-          <Screenshot
-            src="/showcase/mechatron-store.png"
-            alt={translateCopy(englishMessage("Hero.mechatron.lab.online.store.built.on.the.plat.0e5abc6"))}
-            caption={translateCopy(englishMessage("Hero.mechatronlab.com.running.on.the.client.s.own.a8abced"))}
-            priority
-            className="transition-transform duration-300 group-hover:scale-[1.008]"
+        {showScreenshot && mode === "app" && (
+          <div className="mx-auto grid w-full max-w-md grid-cols-2 items-center gap-3 sm:gap-4">
+            <Image
+              src="/showcase/commerce-app-catalog.webp"
+              {...imageDimensions("/showcase/commerce-app-catalog.webp")}
+              alt={englishMessage("MobileAppScreenshots.storefront.catalog.79138b3")}
+              sizes="(min-width: 496px) 216px, calc((100vw - 64px) / 2)"
+              loading="eager"
+              fetchPriority="high"
+              className="h-auto w-full rounded-xl border border-line shadow-sm"
+            />
+            <Image
+              src="/showcase/commerce-app-checkout.webp"
+              {...imageDimensions("/showcase/commerce-app-checkout.webp")}
+              alt={englishMessage("EcommerceArchitecture.checkoutImage")}
+              sizes="(min-width: 496px) 216px, calc((100vw - 64px) / 2)"
+              loading="eager"
+              className="h-auto w-full rounded-xl border border-line shadow-sm"
+            />
+          </div>
+        )}
+        {showScreenshot && mode !== "app" && (
+          <Image
+            src={storefront}
+            {...imageDimensions(storefront)}
+            alt={mode === "web"
+              ? englishMessage("EcommerceArchitecture.marketplaceImage")
+              : englishMessage("Hero.mechatron.lab.online.store.built.on.the.plat.0e5abc6")}
+            sizes="(min-width: 1088px) 545px, (min-width: 1024px) 52vw, calc(100vw - 48px)"
+            preload
+            className="h-auto w-full rounded-xl border border-line shadow-sm"
           />
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

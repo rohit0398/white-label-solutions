@@ -3,6 +3,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useMessages } from "@/components/site/useMessages";
 import Link from "@/components/ui/LocalizedLink";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { ScreenshotGallery } from "@/components/ui/ScreenshotGallery";
 import { englishMessage } from "@/lib/messages";
 import { cn } from "@/lib/utils";
@@ -27,6 +28,7 @@ export function ArchitectureModule({
   id, title, intro, points, images, portrait, galleryLabel, imageNote, link, heading: Heading = "h3",
 }: ArchitectureModuleProps) {
   const translate = useMessages();
+  const [firstImage] = images;
 
   return (
     <div id={id} className={cn(
@@ -43,13 +45,15 @@ export function ArchitectureModule({
       </div>
 
       <div className="min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
-        <ScreenshotGallery
+        {images.length === 1 && firstImage ? (
+          <Screenshot {...firstImage} sizes="(min-width: 1088px) 570px, (min-width: 1024px) 55vw, calc(100vw - 48px)" />
+        ) : <ScreenshotGallery
           label={galleryLabel ?? imageNote ?? title}
           images={images}
           portrait={portrait}
           previousLabel={englishMessage("ShortDrama.architecture.gallery.previous")}
           nextLabel={englishMessage("ShortDrama.architecture.gallery.next")}
-        />
+        />}
       </div>
 
       <div className="lg:col-start-1 lg:row-start-2">

@@ -6,9 +6,19 @@ export interface DramaArticle {
   description: string;
   intro: string;
   takeaway: string;
-  sections: { id: string; title: string; paragraphs: string[]; bullets?: string[]; checklist?: readonly LaunchStep[] }[];
+  datePublished?: string;
+  sections: {
+    id: string;
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+    checklist?: readonly LaunchStep[];
+    options?: { title: string; text: string; href: string; linkLabel: string }[];
+  }[];
   sources: { title: string; url: string }[];
 }
+
+export const MICRO_DRAMA_LAUNCH_SLUG = "launch-micro-drama-platform";
 
 const platformSources = [
   { title: "Cloudflare Stream: storage and delivery pricing", url: "https://developers.cloudflare.com/stream/pricing/" },
@@ -18,8 +28,75 @@ const platformSources = [
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
   {
+    slug: MICRO_DRAMA_LAUNCH_SLUG,
+    title: "How to Launch a Micro Drama Platform: Web First or App First?",
+    description: "Choose a web-first, app-first, or combined launch for your micro drama platform. Compare viewer journeys, try the live demo, and explore launch packages.",
+    intro: "If a viewer discovers your micro drama in a social clip, do you want them to open an episode in their browser or install an app first? That decision changes what your studio needs to test and support on launch day.",
+    takeaway: "Start on the web if shared episode links drive discovery. Start with apps if you have a plan to drive installs and bring viewers back. Launch both together if you already need both routes and can test them end to end.",
+    datePublished: "2026-11-11",
+    sections: [
+      {
+        id: "choose-your-launch",
+        title: "Choose how viewers will start watching",
+        paragraphs: ["Pick the option that fits the audience and distribution channels you have lined up for your first release."],
+        options: [
+          {
+            title: "Web first for link-driven discovery",
+            text: "Use a mobile-friendly website if you’re promoting episodes through social clips, newsletters, or partner links. A viewer can go from the promotion to a specific episode without installing an app. Test the journey in the browsers your audience actually uses.",
+            href: "/solutions/short-drama-website-development",
+            linkLabel: "Explore the website package",
+          },
+          {
+            title: "App first for an install campaign",
+            text: "Start with iOS and Android if your launch plan already sends people to the stores and you’ll release episodes regularly. Test the journey from install to first play and from a new episode alert back to the series. Leave time for store submission and review.",
+            href: "/solutions/short-drama-app-development",
+            linkLabel: "Explore the app package",
+          },
+          {
+            title: "Web and apps for two established channels",
+            text: "Launch both if partners need a browser link and you also have an audience ready to install. Decide which path each campaign uses, then confirm how sign-in, viewing progress, and paid access behave when someone switches devices.",
+            href: "/solutions/short-drama",
+            linkLabel: "Explore the complete platform",
+          },
+        ],
+      },
+      {
+        id: "try-a-viewing-session",
+        title: "Try the same series on web and mobile",
+        paragraphs: [
+          "Use the MicroDrama demo below to compare the browser player with the mobile test builds. Pick a series you haven’t watched before, open its first episode, and see how easy it is to find the next one. Try it on a phone over mobile data as well as Wi-Fi.",
+          "For your own release, also test the first paid-access decision and what happens when a purchase fails. Ask which steps you can try in the demo and which depend on the package or payment setup you choose.",
+        ],
+      },
+      {
+        id: "measure-the-first-release",
+        title: "Measure where people stop watching",
+        paragraphs: [
+          "For a web launch, follow visits from a specific campaign through first episode starts, completions, and a return visit. If people arrive but rarely play, review the link destination and player before spending more on promotion.",
+          "For an app launch, follow store visits, installs, first episode starts, and return viewing. A drop between installs and plays points to a different problem from a drop at the store listing. Compare both channels using the same series and similar audiences when you can.",
+        ],
+      },
+      {
+        id: "prepare-for-the-next-channel",
+        title: "Plan the handoff before adding a second channel",
+        paragraphs: [
+          "Decide how viewers will sign in, which purchases should carry across devices, and whether existing episode links will still work. Ask your provider what can be shared across clients and what needs separate setup. Test the switch with one account, one series, and one purchase before you expand.",
+        ],
+        bullets: [
+          "Bring one complete series with artwork, captions, and episode order.",
+          "List your first promotion channels and which device or store each one points to.",
+          "Choose which episodes are free and describe what a paid viewer should get.",
+        ],
+      },
+    ],
+    sources: [
+      { title: "Apple Developer: submit an app for review", url: "https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app/" },
+      { title: "Google Play Console: prepare and roll out a release", url: "https://support.google.com/googleplay/android-developer/answer/9859348?hl=en" },
+    ],
+  },
+  {
     slug: "short-drama-app-development",
-    title: "Short-Drama App Development: A Practical Launch Guide for Studios",
+    title: "How to Plan a Short Drama App Launch",
     description: "Plan a short-drama platform: content, viewer apps, CMS, monetization, launch scope, infrastructure costs and a working web, iOS and Android demo.",
     intro: "Launching a short-drama business connects three operations: preparing a catalog people want to watch, delivering episodes reliably, and collecting payment or advertising revenue. This guide helps studios, content owners and founders scope that operation before choosing a development partner.",
     takeaway: "Define your content rights, audience and first monetization model before writing a feature list. Then evaluate the viewer experience and operator workflow together.",
@@ -58,7 +135,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
       { id: "reference", title: "1. What to learn from ReelShort", paragraphs: ["ReelShort’s official listing describes short, vertically presented serialized entertainment. That is a reference for the viewer format, not public documentation of its backend, recommendation engine or development budget. Competitor screenshots cannot establish which infrastructure or programming language a service uses.", "Use the reference to discuss outcomes: a viewer can discover a story, understand its episode sequence, continue watching and make a clear access decision. Build original branding and use content you have permission to distribute. You can try our own short-drama app using the links below."] },
       { id: "mvp", title: "2. Define a focused first release", paragraphs: ["Write a release checklist around the first complete series. It should cover discovery, episode playback, authentication where necessary, watch progress, access rules and a support route. Choose one principal paid-access model before adding overlapping passes, wallets and promotions.", "The operator side needs equal attention: creating a series, placing episodes in order, uploading artwork and captions, setting access and publishing. A polished viewer screen without a workable catalog operation leaves the studio dependent on developers for routine releases."], bullets: ["Launch catalog and series/episode metadata.", "Vertical player, episode navigation and viewing continuity.", "Account access and one agreed monetization model.", "CMS publishing workflow and failed-upload visibility.", "Basic viewing and payment reporting, with definitions agreed in scope."] },
       { id: "delivery", title: "3. Choose a ready-made platform or a custom build", paragraphs: ["A white-label deployment fits when an existing product’s workflows closely match your first release. Evaluate the actual build rather than a feature checklist: test the player, ask to see publishing, and identify configuration versus new development. Our web, Android and iOS test links are provided below for that evaluation.", "Custom delivery becomes relevant when the product depends on unusual editorial workflows, a new access model or integrations outside the existing foundation. A hybrid plan can launch an agreed base while separately scoping later work. Do not assume an AI recommendation system, offline downloads or licensed multi-DRM is included merely because a competitor offers a similar experience."] },
-      { id: "cost", title: "4. Understand what the development price buys", paragraphs: ["Compare proposals on client platforms, CMS scope, integrations, deployment, testing and support. Separate the base deployment from source-code licensing. The live pricing section below uses our current package catalog; it is not an estimate of what ReelShort spent developing its service.", "Your complete launch budget also includes content rights or production, video storage and delivery, payment/store fees and audience acquisition. Paid advertising is not a development feature. A working app does not by itself establish that a catalog can acquire and retain viewers profitably."], bullets: ["Request a list of included workflows and explicitly excluded features.", "Confirm source rights, cloud-account ownership and export options.", "Budget for ongoing support after the included support period.", "Model usage at several viewing levels rather than relying on one monthly hosting number."] },
+      { id: "cost", title: "4. Understand what the development price buys", paragraphs: ["Compare proposals on client platforms, CMS scope, integrations, deployment, testing and support. Separate the base deployment from source-code licensing. The linked cost guide compares our published packages and source code options.", "Your complete launch budget also includes content rights or production, video storage and delivery, payment/store fees and audience acquisition. Paid advertising is not a development feature. A working app does not by itself establish that a catalog can acquire and retain viewers profitably."], bullets: ["Request a list of included workflows and explicitly excluded features.", "Confirm source rights, cloud-account ownership and export options.", "Budget for ongoing support after the included support period.", "Model usage at several viewing levels rather than relying on one monthly hosting number."] },
       { id: "acceptance", title: "5. Validate the experience before launch", paragraphs: ["Test a viewer arriving from a shared episode link, opening the player, returning after interruption and reaching a paid-access decision. Repeat on slower mobile connections and a representative older phone. Record initial start time, playback interruptions and episode transitions as separate measures.", "Run a second acceptance session with the person who will operate the CMS. Publish a sample series, change its availability and correct an upload. Agree how billing issues are investigated and how access is restored. These practical tests are more useful than a promise of identical performance to an established entertainment network."] },
       { id: "readiness", title: "6. Prepare the studio’s side of the project", paragraphs: ["Have approved brand assets, a launch catalog, captions, territory rights and developer/payment accounts ready. Nominate one decision-maker for scope and one operator for catalog training. External account approval and app-store review sit outside a developer’s direct control.", "Bring a short list of must-have features to a walkthrough. Ask which can be demonstrated now, which are configuration and which require a separate quote. A scoped proposal should make that distinction visible before any delivery dates are agreed."] },
     ],
@@ -76,18 +153,18 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
       { id: "payments", title: "3. Verify payments before granting access", paragraphs: ["Treat a completed purchase as a server-side entitlement decision, not just a successful animation on a phone. Plan receipt verification, duplicate notification handling, purchase restoration and pending transactions. A viewer changing devices should not need to pay again solely because local app state was lost.", "Refunds, cancellation and renewal are different events. Cancellation may stop a future renewal while an existing paid period remains active; the product must follow its published terms and provider rules. Test these cases using the appropriate provider test environments before launch."] },
       { id: "coins", title: "4. Scope a coin wallet as a separate subsystem", paragraphs: ["If you choose coins, define the purchase, bonus, spend and reversal records. Distinguish promotional credits from paid credits where your rules require it. A balance alone cannot explain a dispute; the operator needs a transaction history and a link between a spend and the resulting access.", "Design duplicate handling around interrupted connections. Retrying an episode unlock should not spend twice, and retrying a reward should not grant it twice. A coin economy, ledger and its administrative tools should be priced and demonstrated explicitly rather than assumed from the words short-drama platform."], bullets: ["Record each change with a transaction identifier and reason.", "Define expiry, bonus usage and refund behavior before launch.", "Verify ad-reward callbacks rather than trusting a client-only counter.", "Agree what support staff may correct and how corrections are recorded."] },
       { id: "operations", title: "5. Give operators usable controls", paragraphs: ["The team publishing a drama needs to understand which episodes are previews, when the next episode becomes available and which plans cover the series. Review the screens used to change those rules and preview the result before publishing.", "Measure access decisions alongside viewing: paywall exposure, checkout starts, verified purchases and subsequent viewing are separate events. An apparent drop in conversion could be a failed payment callback or a poorly placed gate. Define the metrics before comparing series or changing prices."] },
-      { id: "launch", title: "6. Evaluate the supplier with a scenario", paragraphs: ["Bring a sample series and ask for a walkthrough from upload to an episode access decision. Then ask what happens when payment is pending, a subscriber returns on another device and an operator needs to investigate a complaint. Try our demo below and ask us about the features you need.", "Compare base deployment, optional source licensing, custom monetization work and recurring usage separately. We take no platform revenue share; that does not remove payment processing, app-store fees or other operating expenses. Confirm the access model and scope in writing before choosing the launch package."] },
+      { id: "launch", title: "6. Evaluate the supplier with a scenario", paragraphs: ["Bring a sample series and ask for a walkthrough from upload to an episode access decision. Then ask what happens when payment is pending, a subscriber returns on another device and an operator needs to investigate a complaint. Use the live demo links to try the viewer experience and ask us about the features you need.", "Compare base deployment, optional source licensing, custom monetization work and recurring usage separately. We take no platform revenue share; that does not remove payment processing, app-store fees or other operating expenses. Confirm the access model and scope in writing before choosing the launch package."] },
     ],
     sources: [{ title: "DramaBox: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.storymatrix.drama" }, ...platformSources],
   },
   {
     slug: "short-drama-app-development-cost",
     title: "Short-Drama App Development Cost: Deployment, Licensing and Running Costs",
-    description: "Compare short-drama app-only, web-only and suite packages, source-code add-ons, custom scope, video usage, store fees, content and ongoing support costs.",
+    description: "Compare Short Drama app, website, and complete platform costs, including source code licenses, video delivery, store fees, and ongoing support.",
     intro: "A useful short-drama budget separates the software you launch from the entertainment business you operate. A one-time deployment price does not include an unlimited catalog, unlimited streaming or a guaranteed audience.",
     takeaway: "Compare equivalent deliverables. Add source rights, custom work and recurring operations to the base deployment rather than treating every quote as the same product.",
     sections: [
-      { id: "scope", title: "1. Choose the launch surface before comparing quotes", paragraphs: ["An app-only launch, a mobile-web launch and a complete app-plus-web suite solve different distribution needs. The native route requires store preparation and device testing. Web-first distribution lets someone open an episode link without installing an app, but still needs its own browser and checkout testing.", "The package comparison below reads our current published catalog. App-only and web-only are separate offers, and the suite combines the viewer surfaces with the agreed CMS. This is our offer, not a universal industry price or a competitor’s actual engineering budget."] },
+      { id: "scope", title: "1. Choose the launch surface before comparing quotes", paragraphs: ["An app-only launch, a mobile-web launch and a complete platform with apps and a website solve different distribution needs. The native route requires store preparation and device testing. Web-first distribution lets someone open an episode link without installing an app, but still needs its own browser and checkout testing.", "The package comparison below reads our current published catalog. App-only and web-only are separate offers, and the complete platform combines apps, a website, and the agreed admin tools. This is our offer, not a universal industry price or a competitor’s actual engineering budget."] },
       { id: "license", title: "2. Check whether source code is included", paragraphs: ["A deployed and branded platform is not automatically the same purchase as a source-code license. Identify which repositories, documentation and commercial rights the license covers, how the code is delivered, and what modification or redistribution rights apply.", "The source add-on and combined totals below come from the same price catalog as the product pages. Optional engineering is not included in those totals. Ask for a written breakdown when changing payment integrations, extending the CMS or adding a new viewer feature."] },
       { id: "usage", title: "3. Budget for video storage and delivered minutes", paragraphs: ["Cloudflare Stream documents charges for stored video capacity and delivered viewing minutes. Its published delivery price is $1 per 1,000 minutes, with storage capacity purchased at $5 per month per 1,000 stored minutes. Check the provider’s current terms before budgeting; no additional bandwidth charge does not mean delivery is free.", "For example, 1,000 viewers receiving 20 minutes each means 20,000 delivered minutes, or $20 at that delivery rate. Storage capacity, hosting, database services, monitoring, taxes and other costs are additional. Your bill will depend on actual usage."], bullets: ["Estimate delivered minutes across low, expected and high viewing scenarios.", "Count the duration of stored episodes and any provider capacity increments.", "Allow for previewing, preloading and viewing behavior when investigating real usage.", "Assign responsibility for provider accounts, billing alerts and cost review."] },
       { id: "other", title: "4. Include the business costs outside development", paragraphs: ["Content production and licensing are independent budget lines. So are artwork, captions, dubbing and the team publishing new episodes. A software vendor cannot supply another publisher’s dramas simply because the platform resembles its viewing format.", "Revenue also differs from net receipts. Apple, Google and payment providers have their own fees and program rules. Advertising revenue depends on market, inventory, fill and engagement; it should not be used to promise a fixed payback period. Customer acquisition requires its own experiments and budget."], bullets: ["Content production or distribution rights.", "Developer accounts, payment processing and store fees.", "Video usage, hosting and operational monitoring.", "Support, maintenance, security updates and requested changes.", "Audience acquisition and creative production."] },
@@ -108,7 +185,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
       { id: "ads", title: "3. Rewarded ads: verify the reward and the interruption", paragraphs: ["In a rewarded flow, the viewer chooses an advertisement in return for an explicit benefit, such as access to an episode. State the benefit before playback. Decide what happens after an interrupted ad, a failed callback or a repeated request, and verify completion with the supported provider integration.", "An ad-heavy experience also has a viewer cost: time and interruption. Track whether people continue watching after receiving the reward, not just how many ads start. Availability, fill and proceeds vary by region and provider; an installed SDK is not a guarantee of profitable inventory."] },
       { id: "freereels", title: "4. What to learn from FreeReels", paragraphs: ["The official FreeReels listing identifies both advertising and in-app purchases. Its name alone is not evidence of an exclusively ad-funded business. Use the listing as a reference for a viewing proposition, then verify current behavior in the specific market you are researching.", "For your own app, decide whether ads pay for all viewing, a free tier or just selected episode unlocks. Optional purchases and subscriptions can be evaluated as separate paths. These are product planning choices, not claims about FreeReels’ private economics, revenue or backend architecture."] },
       { id: "economics", title: "5. Work out what you keep after costs", paragraphs: ["To estimate what you keep, subtract streaming, content and other running costs from the money you receive. For subscriptions, account for relevant store/payment deductions and refunds. For ads, disclose assumed completed impressions, fill and net revenue per thousand impressions. Keep acquisition costs visible rather than assuming every install arrives free.", "For example, if a planning sheet assumes 10,000 completed impressions and $5 net per thousand impressions, the implied receipts are $50. The $5 rate is just an example; your actual ad revenue will vary. Compare it with the viewing minutes and costs required to deliver those sessions."] },
-      { id: "experiment", title: "6. Choose a launch experiment you can measure", paragraphs: ["Test one clear access model with a defined catalog and audience. Measure episode starts, completion, access decisions, verified purchases or rewards, repeat viewing and support requests. Agree event definitions so that a failed purchase does not look like a completed transaction.", "Try our app below, or ask us to show you the admin panel. Ask which access rules are already supported, what is configurable and what needs custom work. Choose scope from evidence before mixing several revenue models in the first release."], bullets: ["Define the first free-to-paid or free-to-reward transition.", "Publish understandable prices, durations and access rules.", "Test interruption, restoration and duplicate notifications.", "Review net receipts and repeat viewing by market and channel.", "Add another monetization path only with a clear reason and acceptance plan."] },
+      { id: "experiment", title: "6. Choose a launch experiment you can measure", paragraphs: ["Test one clear access model with a defined catalog and audience. Measure episode starts, completion, access decisions, verified purchases or rewards, repeat viewing and support requests. Agree event definitions so that a failed purchase does not look like a completed transaction.", "Open the live demo or ask us to show you the admin panel. Ask which access rules are already supported, what is configurable and what needs custom work. Choose scope from evidence before mixing several revenue models in the first release."], bullets: ["Define the first free-to-paid or free-to-reward transition.", "Publish understandable prices, durations and access rules.", "Test interruption, restoration and duplicate notifications.", "Review net receipts and repeat viewing by market and channel.", "Add another monetization path only with a clear reason and acceptance plan."] },
     ],
     sources: [{ title: "FreeReels: official listing identifies ads and in-app purchases", url: "https://play.google.com/store/apps/details?id=com.freereels.app" }, ...platformSources],
   },

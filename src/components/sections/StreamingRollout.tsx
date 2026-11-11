@@ -2,6 +2,7 @@
 
 import { useMessages } from "@/components/site/useMessages";
 import { LaunchSteps } from "@/components/ui/LaunchSteps";
+import Link from "@/components/ui/LocalizedLink";
 import { Section } from "@/components/ui/Section";
 import { englishMessage } from "@/lib/messages";
 import type { ShortDramaOffer } from "@/lib/short-drama-offers";
@@ -77,6 +78,14 @@ export function StreamingRollout({ offer, family }: { offer: ShortDramaOffer; fa
         <p className="mt-5 text-sm leading-relaxed text-ink-2">
           {translate(englishMessage("ShortDramaRollout.storeReview"))}
         </p>
+      )}
+      {offer === "platform" && (
+        <Link
+          href={ott ? "/blog/ott-video-streaming-development" : "/blog/short-drama-app-development"}
+          className="mt-4 inline-block text-sm font-medium underline underline-offset-4"
+        >
+          {ott ? englishMessage("OttRollout.readGuide") : englishMessage("ShortDramaRollout.readGuide")}
+        </Link>
       )}
     </Section>
   );

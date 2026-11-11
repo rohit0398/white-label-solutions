@@ -16,6 +16,7 @@ const linkCls =
   "inline-flex items-center gap-1 text-ink underline underline-offset-4 decoration-line hover:decoration-ink active:opacity-75 transition-colors";
 
 export interface WorkProps {
+  wide?: boolean;
   id?: string;
   index?: string;
   title?: string;
@@ -25,7 +26,7 @@ export interface WorkProps {
   demoPlatforms?: "all" | "web" | "app";
 }
 
-export function Work({ id = "work", index, title, intro, projects, mode = "all", demoPlatforms = "all" }: WorkProps = {}) {
+export function Work({ id = "work", index, title, intro, projects, mode = "all", demoPlatforms = "all", wide }: WorkProps = {}) {
   const translateCopy = useMessages();
 
   const { language } = useSite();
@@ -50,6 +51,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
       index={activeIndex}
       title={translateCopy(activeTitle)}
       intro={activeIntro}
+      wide={wide}
     >
       <ul className="border-t border-line divide-y divide-line">
         {activeProjects.map((p, idx) => {
@@ -64,8 +66,10 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                   <h3 className="text-xl font-semibold tracking-tight text-ink group-hover:text-ink transition-colors">
                     {translateCopy(translatedProject.title)}
                   </h3>
-                  {p.productPreview ? (
-                    <span className="rounded border border-line px-1.5 py-0.5 text-xs text-ink-3">{translateCopy(englishMessage("OttOverview.preview"))}</span>
+                  {p.productPreview || p.demoAccess ? (
+                    <span className="rounded border border-line px-1.5 py-0.5 text-xs text-ink-3">
+                      {translateCopy(p.productPreview ? englishMessage("OttOverview.preview") : englishMessage("short-drama.live.test.build.c215c43"))}
+                    </span>
                   ) : (
                     <span className="relative flex h-2 w-2" title={translateCopy(englishMessage("Work.live.production.deployment.069cb54"))}>
                       <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
@@ -150,7 +154,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
                       sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
-                      alt={translateCopy.format("media.screenshot", { value0: translatedProject.title })}
+                      alt={p.screenshotAlt ?? translateCopy.format("media.screenshot", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />
@@ -168,7 +172,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
                       sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
-                      alt={translateCopy.format("Work..value0.storefront.screenshot.a572497", { value0: translatedProject.title })}
+                      alt={p.screenshotAlt ?? translateCopy.format("Work..value0.storefront.screenshot.a572497", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />

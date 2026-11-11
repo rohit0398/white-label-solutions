@@ -13,7 +13,7 @@ import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, Shiel
 export const metadata: Metadata = {
   title: "White-Label Software Solutions Catalog | Mechatron Lab",
   description:
-    "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Private cloud deployment with 100% code ownership & 0% fees.",
+    "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Deploy to your cloud, with optional source code licensing and no platform commission.",
   keywords: [
     "white label software solutions",
     "white label ecommerce platform",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Private cloud deployment with 100% code ownership & 0% fees.",
+      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Deploy to your cloud, with optional source code licensing and no platform commission.",
     url: "/solutions",
     images: ["/og-image.png"],
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming with 0% fees.",
+      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming with optional source code licensing.",
     images: ["/og-image.png"],
   },
 };
@@ -78,16 +78,16 @@ export default function SolutionsCatalogPage() {
       ],
       points: [
         "Pre-built, production-ready architecture designed for rapid deployment in 2–4 weeks",
-        "Sub-second Next.js web storefront with automated tax & inventory sync",
+        "Branded storefront with product pages, checkout, and inventory sync",
         "Unified Flutter mobile app published directly to your Google Play & App Store accounts",
-        "Pre-integrated payment gateways (Stripe, PayPal, UPI, COD) with 0% transaction fees",
+        "Payment options include Stripe, PayPal, UPI, and cash on delivery. Provider fees may apply.",
       ],
       cta: "Explore E-Commerce Store & Apps →",
     },
     {
       id: "ecommerce-website-development",
       title: "E-Commerce Website Development",
-      subtitle: "Sub-second Next.js web storefront & central operations CRM",
+      subtitle: "Online storefront and admin panel for orders and inventory",
       badge: priceText("Web Only ({price:web-launch})"),
       icon: Globe,
       href: "/solutions/ecommerce-website-development",
@@ -98,7 +98,7 @@ export default function SolutionsCatalogPage() {
         { label: "Deployment", val: "Your Cloud" },
       ],
       points: [
-        "Sub-second React Server Components web store optimized for Google Core Web Vitals",
+        "Responsive storefront with product pages and browser checkout",
         "Operations Admin CRM with multi-warehouse stock management and margin tracking",
         "Automated tax compliance generating GST, EU VAT, or US sales-tax invoices per order",
         "Pre-integrated payment gateways (Stripe, PayPal, Apple Pay, Google Pay, UPI, COD)",
@@ -115,12 +115,12 @@ export default function SolutionsCatalogPage() {
       status: "Ready for Deployment",
       stats: [
         { label: "Rendering Speed", val: "60 FPS Flutter" },
-        { label: "App Store Cut", val: "0% (Exempt)" },
+        { label: "Checkout", val: "Physical goods" },
         { label: "Platforms", val: "iOS & Android" },
       ],
       points: [
         "Unified Flutter 3.x codebase compiling directly to native iOS and Android machine code",
-        "100% approval guarantee published directly under your corporate Apple & Google Play accounts",
+        "Submission support through your Apple and Google developer accounts",
         "Free unlimited push notifications (FCM & APNs) for abandoned cart recovery and order tracking",
         "1-tap fast checkout with Apple Pay, Google Pay, Stripe, PayPal, Razorpay & biometric sign-in",
       ],
@@ -129,7 +129,7 @@ export default function SolutionsCatalogPage() {
     // --- Short-Drama Solutions ---
     {
       id: "short-drama",
-      title: "Short-Drama Streaming Platform",
+      title: "Short Drama Streaming Platform",
       subtitle: "Complete mobile apps, mobile-web player & central Video CMS",
       badge: priceText("Complete ({price:short-drama-base})"),
       icon: Clapperboard,
@@ -142,7 +142,7 @@ export default function SolutionsCatalogPage() {
       ],
       points: [
         "Complete 9:16 vertical drama platform: Flutter iOS & Android apps and mobile-first web player",
-        "TikTok-style 60FPS vertical swipe gestures with chapter scrubbers and continuous autoplay",
+        "Swipe through vertical episodes and continue watching from the episode list",
         "Weekly, monthly & annual VIP subscription passes via Stripe, Apple StoreKit & Google Play",
         "Video CMS with automated Cloudflare Stream encoding and episode paywall rule controls",
       ],
@@ -150,28 +150,28 @@ export default function SolutionsCatalogPage() {
     },
     {
       id: "short-drama-app-development",
-      title: "Short-Drama Mobile App Development",
+      title: "Short Drama App Development",
       subtitle: "Native 9:16 iOS & Android vertical drama apps + Video CMS",
       badge: priceText("Mobile Apps ({price:short-drama-app-launch})"),
       icon: Smartphone,
       href: "/solutions/short-drama-app-development",
       status: "Ready for Deployment",
       stats: [
-        { label: "Rendering", val: "60 FPS Flutter" },
+        { label: "Playback", val: "Vertical episodes" },
         { label: "Monetization", val: "VIP + Video Ads" },
-        { label: "Deployment", val: "2–4 Weeks" },
+        { label: "Estimated setup", val: "2–4 weeks" },
       ],
       points: [
-        "Native Flutter iOS & Android apps with seamless 60FPS vertical swipe gesture mechanics",
+        "Branded iOS and Android apps with swipe playback for vertical episodes",
         "In-App Purchase VIP subscriptions via Apple StoreKit and Google Play Billing",
         "Rewarded video ads (Google AdMob / Unity Ads) to unlock cliffhanger episodes for free",
         "Cloudflare Stream raw ingest integration with 0% platform revenue cut",
       ],
-      cta: "Explore Drama Mobile App →",
+      cta: "Explore Short Drama apps →",
     },
     {
       id: "short-drama-website-development",
-      title: "Short-Drama Website Development",
+      title: "Short Drama Website Development",
       subtitle: "Mobile-first 9:16 vertical web streaming portal + Video CMS",
       badge: priceText("Web Only ({price:short-drama-web-launch})"),
       icon: Globe,
@@ -180,21 +180,21 @@ export default function SolutionsCatalogPage() {
       stats: [
         { label: "Format", val: "9:16 Mobile-Web" },
         { label: "Monetization", val: "Stripe VIP Passes" },
-        { label: "Buffer Speed", val: "< 1.0s HLS" },
+        { label: "Playback", val: "Adaptive HLS" },
       ],
       points: [
-        "Sub-second Next.js 16 vertical web player with instant social media deep-link autoplay",
-        "Direct Stripe recurring VIP subscription checkout with 0% app-store commission tax",
-        "Central Video CMS with episode paywall rules, DRM signed URLs, and viewer drop-off analytics",
-        "Search-engine-optimized series, episode & synopsis title pages for viral organic reach",
+        "Vertical browser playback and shareable episode links",
+        "Stripe checkout for recurring VIP subscriptions on the website",
+        "Admin panel for episode access rules and viewer analytics",
+        "Series and episode pages with their own titles and descriptions",
       ],
-      cta: "Explore Drama Website →",
+      cta: "Explore the Short Drama website →",
     },
 
     // --- Cinematic OTT Solutions ---
     {
       id: "ott-streaming",
-      title: "Cinematic OTT Video Platform",
+      title: "OTT Video Streaming Platform",
       subtitle: "16:9 widescreen Next.js web portal, native mobile apps & Video CMS",
       badge: priceText("Complete ({price:cinematic-base})"),
       icon: Clapperboard,
@@ -203,19 +203,19 @@ export default function SolutionsCatalogPage() {
       stats: [
         { label: "Platforms", val: "Web + iOS + Android" },
         { label: "Monetization", val: "SVOD + Video Ads" },
-        { label: "Encoding", val: "1080p / 4K ABR" },
+        { label: "Playback", val: "Adaptive HLS" },
       ],
       points: [
         "Complete 16:9 video platform: Next.js widescreen web portal and Flutter iOS & Android apps",
-        "Sub-second buffer via adaptive HLS bitrates on Cloudflare Stream & AWS MediaConvert",
+        "Adaptive video quality based on the viewer’s connection",
         "Recurring SVOD subscription passes (monthly/annual) and Google AdMob / VAST video ads",
-        "Video CMS with viewer retention curves, DRM signed token authorization, and catalog tools",
+        "Admin panel for publishing, viewing analytics, and access controls",
       ],
       cta: "Explore Complete OTT Platform →",
     },
     {
       id: "ott-app-development",
-      title: "Cinematic OTT Mobile App Development",
+      title: "OTT App Development",
       subtitle: "Native 16:9 widescreen iOS & Android streaming apps + Video CMS",
       badge: priceText("Mobile Apps ({price:cinematic-app-launch})"),
       icon: Smartphone,
@@ -227,33 +227,33 @@ export default function SolutionsCatalogPage() {
         { label: "Offline", val: "Encrypted Downloads" },
       ],
       points: [
-        "Hardware-accelerated 60FPS video playback with adaptive bitrate auto-scaling",
-        "1-tap TV casting via Chromecast and Apple AirPlay with lockscreen playback controls",
+        "Widescreen video playback that adapts to connection speed",
+        "Cast to compatible TVs via Chromecast or AirPlay",
         "Encrypted local video downloads for offline playback during flights and road trips",
         "Apple StoreKit & Google Play Billing integration for recurring monthly/annual VIP passes",
       ],
-      cta: "Explore Streaming Mobile Apps →",
+      cta: "Explore OTT apps →",
     },
     {
       id: "ott-website-development",
-      title: "Cinematic OTT Website Development",
+      title: "OTT Website Development",
       subtitle: "16:9 widescreen streaming website & adaptive HLS bitrates",
       badge: priceText("Web Only ({price:cinematic-web-launch})"),
       icon: Globe,
       href: "/solutions/ott-website-development",
       status: "Ready for Deployment",
       stats: [
-        { label: "Resolution", val: "4K HDR / 1080p" },
+        { label: "Format", val: "Widescreen video" },
         { label: "Monetization", val: "Stripe SVOD" },
         { label: "Bitrates", val: "Adaptive HLS" },
       ],
       points: [
         "Next.js 16 responsive widescreen web portal for movies, documentaries, and full seasons",
-        "Sub-second initial frame buffer via adaptive HLS bitrates on multi-CDN edge",
+        "Adaptive playback in the browser",
         "Stripe recurring billing for monthly, quarterly, and annual VIP streaming passes",
-        "Search engine optimized series, cast, and episode synopsis pages for organic traffic",
+        "Browsable movie and series pages with their own titles and descriptions",
       ],
-      cta: "Explore Cinematic OTT Website →",
+      cta: "Explore the OTT website →",
     },
   ];
 
@@ -309,7 +309,7 @@ export default function SolutionsCatalogPage() {
           </AnimatedHeadline>
 
           <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
-            Production-grade, fully customized digital platforms built for scale. Deployed directly into your company’s private cloud with zero platform cuts and complete Git source code ownership.
+            Choose a platform for online stores, Short Drama, or OTT streaming. We deploy it to your cloud account. Source code licensing is available as an add-on.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">

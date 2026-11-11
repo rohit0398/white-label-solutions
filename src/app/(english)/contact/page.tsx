@@ -1,224 +1,85 @@
-import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Mail, MessageSquare } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ContactForm } from "@/components/site/ContactForm";
-import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
-import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { ContactForm, ContactWhatsAppLink } from "@/components/site/ContactForm";
 import { BRAND } from "@/lib/constants";
-import {
-  MessageSquare,
-  Mail,
-  Clock,
-  Globe2,
-  ShieldCheck,
-  CheckCircle2,
-  Lock,
-  Headphones,
-} from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/schema";
+import { SITE_URL } from "@/lib/site-config";
+
+const title = "Contact Us for a Demo or Project Quote";
+const description = "Request a demo or discuss your e-commerce, short drama, or OTT project. Send an inquiry or reach us on WhatsApp or by email.";
+const canonical = "/contact";
+const images = ["/og-image.png"];
 
 export const metadata: Metadata = {
-  title: "Contact Us & Book Architecture Demo | Mechatron Lab",
-  description:
-    "Speak directly with our software engineers. Schedule a live architecture demo of our e-commerce or OTT video platforms, or chat instantly via WhatsApp.",
-  alternates: {
-    canonical: "/contact",
-  },
-  openGraph: {
-    title: "Contact Us & Book Architecture Demo | Mechatron Lab",
-    description:
-      "Speak directly with our software engineers. Schedule a live architecture demo of our e-commerce or OTT video platforms, or chat instantly via WhatsApp.",
-    url: "/contact",
-    images: ["/og-image.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contact Us & Book Architecture Demo | Mechatron Lab",
-    description:
-      "Speak directly with our software engineers. Schedule a live demo or chat via WhatsApp.",
-    images: ["/og-image.png"],
-  },
+  title,
+  description,
+  alternates: { canonical },
+  openGraph: { title, description, url: canonical, images },
+  twitter: { card: "summary_large_image", title, description, images },
 };
 
 export default function ContactPage() {
-  const siteUrl = SITE_URL;
-
-  const contactSchema = {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    name: "Contact Mechatron Lab Solutions",
-    description: "Contact and software consultation page for Mechatron Lab Solutions.",
-    url: `${siteUrl}/contact`,
-    mainEntity: {
-      "@type": "Organization",
-      name: "Mechatron Lab Solutions",
-      url: siteUrl,
-      email: BRAND.contact.email,
-      telephone: BRAND.contact.whatsappDisplay,
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          telephone: BRAND.contact.whatsappDisplay,
-          contactType: "customer service",
-          email: BRAND.contact.email,
-          availableLanguage: ["English", "Spanish", "German", "French", "Hindi"],
-        },
-      ],
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Contact Us",
-        item: `${siteUrl}/contact`,
-      },
-    ],
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-paper text-ink">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(contactSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-
+    <div className="flex min-h-screen flex-col bg-paper text-ink">
+      <JsonLd schema={{
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        name: title,
+        description,
+        url: SITE_URL + canonical,
+        mainEntity: { "@id": SITE_URL + "/#organization" },
+      }} />
+      <JsonLd schema={generateBreadcrumbSchema(SITE_URL, [
+        { name: "Home", item: "/" },
+        { name: "Contact", item: canonical },
+      ])} />
       <Navbar />
 
-      <main className="flex-1 py-16 sm:pt-12 sm:pb-24">
-        <div className="wrap-wide space-y-12">
-          {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-xs font-mono text-ink-3">
-            <Link href="/" className="hover:text-ink">Home</Link>
-            <span>/</span>
-            <span className="text-ink">Contact</span>
+      <main className="wrap-wide flex-1 pb-16 pt-8 sm:pb-24 sm:pt-12">
+        <header className="mb-8 max-w-3xl sm:mb-10">
+          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-sm text-ink-3">
+            <Link href="/" className="py-1 hover:text-ink">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page" className="text-ink">Contact</span>
           </nav>
+          <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">Talk to us about your project</h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-2 sm:text-lg">
+            Ask for a walkthrough or tell us about the e-commerce, short drama, or OTT platform you want to launch.
+          </p>
+        </header>
 
-          {/* Page Header */}
-          <div className="max-w-3xl space-y-4">
-            <div>
-              <HeadingBadge category="default">
-                Direct Engineering Consultation
-              </HeadingBadge>
-            </div>
-            <AnimatedHeadline
-              as="h1"
-              className="text-3xl sm:text-5xl font-semibold tracking-tight text-ink"
-            >
-              Let&apos;s Build Your Platform.
-            </AnimatedHeadline>
-            <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
-              Have questions about our white-label architectures, source code licensing, or deployment timeline? Talk directly with our core engineering team. No aggressive sales pitches—just technical clarity.
-            </p>
-          </div>
-
-          <div className="grid gap-12 lg:grid-cols-12 items-start">
-            {/* Left Column: Direct Info Cards */}
-            <div className="lg:col-span-5 space-y-6">
-              {/* WhatsApp Card */}
-              <a
-                href={BRAND.contact.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-6 rounded-2xl border border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent transition-all duration-200 group"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <span className="text-xs font-mono text-accent font-semibold flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-                      </span>
-                      Instant Response Channel
-                    </span>
-                    <h3 className="text-lg font-semibold text-ink group-hover:text-accent transition-colors">
-                      Chat on WhatsApp
-                    </h3>
-                  </div>
-                  <div className="h-10 w-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
-                    <MessageSquare className="h-5 w-5" />
-                  </div>
-                </div>
-                <p className="mt-3 text-xs text-ink-2 leading-relaxed">
-                  Message us directly to see live Android/iOS APK builds, examine admin panel screencasts, or discuss deployment timelines.
-                </p>
-                <p className="mt-4 text-xs font-mono font-medium text-accent">
-                  {BRAND.contact.whatsappDisplay} →
-                </p>
-              </a>
-
-              {/* Email Card */}
-              <div className="p-6 rounded-2xl border border-line bg-wash space-y-2">
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <span className="text-xs font-mono text-ink-3">Official Inquiries</span>
-                    <h3 className="text-base font-semibold text-ink">Direct Email</h3>
-                  </div>
-                  <div className="h-9 w-9 rounded-lg bg-paper border border-line flex items-center justify-center text-ink-2">
-                    <Mail className="h-4 w-4" />
-                  </div>
-                </div>
-                <p className="text-xs text-ink-2">
-                  Send RFP documents, NDA requests, or architecture diagrams:
-                </p>
-                <a
-                  href={`mailto:${BRAND.contact.email}`}
-                  className="inline-block text-xs font-mono text-ink underline hover:text-accent pt-1"
-                >
-                  {BRAND.contact.email}
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
+          <section className="rounded-2xl border border-line p-5 sm:p-6" aria-labelledby="contact-direct">
+            <h2 id="contact-direct" className="text-lg font-semibold">Contact us directly</h2>
+            <ul className="mt-2 divide-y divide-line">
+              <li>
+                <ContactWhatsAppLink placement="ContactPage" className="group flex min-h-11 items-center gap-3 py-3">
+                  <MessageSquare aria-hidden="true" className="size-5 shrink-0 text-accent" />
+                  <span className="min-w-0">
+                    <span className="block font-medium group-hover:underline">Chat on WhatsApp</span>
+                    <span className="text-sm text-ink-2">{BRAND.contact.whatsappDisplay}</span>
+                  </span>
+                </ContactWhatsAppLink>
+              </li>
+              <li>
+                <a href={`mailto:${BRAND.contact.email}`} className="group flex min-h-11 items-center gap-3 py-3">
+                  <Mail aria-hidden="true" className="size-5 shrink-0 text-ink-3" />
+                  <span className="min-w-0">
+                    <span className="block font-medium group-hover:underline">Send an email</span>
+                    <span className="text-sm text-ink-2 [overflow-wrap:anywhere]">{BRAND.contact.email}</span>
+                  </span>
                 </a>
-              </div>
-
-              {/* Guarantees Grid */}
-              <div className="p-6 rounded-2xl border border-line bg-wash space-y-4">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-ink-3">
-                  Enterprise Consultation Promises
-                </h4>
-                <ul className="space-y-3 text-xs text-ink-2">
-                  <li className="flex items-start gap-2.5">
-                    <Clock className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                    <span><strong className="text-ink">2-Hour SLA:</strong> Quick turnaround on all business day requests.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <ShieldCheck className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                    <span><strong className="text-ink">Mutual NDA Ready:</strong> We sign non-disclosure agreements before technical deep-dives.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Lock className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                    <span><strong className="text-ink">Private Cloud Handover:</strong> 100% data sovereignty in your own AWS/GCP/Azure account.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Globe2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                    <span><strong className="text-ink">Global Coverage:</strong> Serving clients across North America, Europe, UK, and India.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Right Column: Contact Form */}
-            <div className="lg:col-span-7">
-              <ContactForm />
-            </div>
-          </div>
+              </li>
+            </ul>
+            <p className="mt-3 border-t border-line pt-4 text-sm leading-relaxed text-ink-2">
+              If you already have a brief, send it by email with your target launch date and the features you need.
+            </p>
+          </section>
+          <ContactForm />
         </div>
       </main>
 

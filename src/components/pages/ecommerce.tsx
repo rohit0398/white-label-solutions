@@ -2,61 +2,43 @@ import { createLocalizer, englishMessage } from "@/lib/messages";
 import { getLocaleMessages } from "@/lib/locale-messages";
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
-import { SITE_URL } from "@/lib/site-config";
+import { languageAlternates, SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { FAQS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { TechStackStrip } from "@/components/sections/TechStackStrip";
-import { LiveTicker } from "@/components/sections/LiveTicker";
-import { AppShowcase } from "@/components/sections/AppShowcase";
-import { AdminCrmShowcase } from "@/components/sections/AdminCrmShowcase";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { Work } from "@/components/sections/Work";
+import { EcommerceArchitecture } from "@/components/sections/EcommerceArchitecture";
+import { EcommerceProof } from "@/components/sections/EcommerceProof";
+import { EcommerceRollout } from "@/components/sections/EcommerceRollout";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
 import { Closing } from "@/components/sections/Closing";
+import Link from "@/components/ui/LocalizedLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
+const title = "White-Label E-Commerce Platform for Web and Mobile";
+const description = "Launch a branded online store, iOS and Android shopping apps, and an admin panel for products, orders, and inventory on your cloud.";
+
 export const metadata: Metadata = {
-  title: "E-Commerce Website & App Development Company | Mechatron Lab",
-  description:
-    "Launch an online store and native iOS & Android apps in 2–4 weeks. Complete Next.js web store, Flutter apps, and CRM on your cloud with 0% revenue cut.",
-  keywords: [
-    "ecommerce development company",
-    "ecommerce website development company",
-    "ecommerce app development company",
-    "custom ecommerce development",
-    "flutter ecommerce app",
-    "nextjs ecommerce store",
-    "pre-built ecommerce store",
-    "white label ecommerce platform",
-    "self hosted ecommerce platform",
-  ],
+  title,
+  description,
   alternates: {
     canonical: "/solutions/ecommerce",
-    languages: {
-      en: "/solutions/ecommerce",
-      es: "/es/solutions/ecommerce",
-      de: "/de/solutions/ecommerce",
-      fr: "/fr/solutions/ecommerce",
-      hi: "/hi/solutions/ecommerce",
-    },
+    languages: languageAlternates("/solutions/ecommerce"),
   },
   openGraph: {
-    title: "E-Commerce Website & App Development Company | Mechatron Lab",
-    description:
-      "Launch an online store and native iOS & Android apps in 2–4 weeks. Complete Next.js web store, Flutter apps, and CRM on your cloud with 0% revenue cut.",
+    title,
+    description,
     url: "/solutions/ecommerce",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "E-Commerce Website & App Development Company | Mechatron Lab",
-    description:
-      "Launch an online store and native iOS & Android shopping apps in 2–4 weeks with 0% revenue cuts on your private cloud.",
+    title,
+    description,
     images: ["/og-image.png"],
   },
 };
@@ -106,20 +88,27 @@ export default function EcommerceSolutionPillarPage({ language = "en" }: { langu
           headline={translateCopy(englishMessage("ecommerce.pre.built.e.commerce.store.mobile.apps.ready.f9105e8"))}
           subtitle={translateCopy(englishMessage("ecommerce.pre.built.production.ready.architecture.desi.3d7f316"))}
           anchors={[
-            { label: translateCopy(englishMessage("ecommerce.01.web.storefront.18c172c")), href: "#hero" },
-            { label: translateCopy(englishMessage("ecommerce.02.native.apps.2c3c671")), href: "#mobile-apps" },
-            { label: translateCopy(englishMessage("ecommerce.03.operations.crm.c5abd12")), href: "#admin-crm" },
+            { label: englishMessage("EcommerceProof.title"), href: "#work" },
+            { label: englishMessage("ShortDrama.top.included"), href: "#architecture" },
+            { label: englishMessage("ShortDrama.top.pricing"), href: "#pricing" },
           ]}
         />
-        <TechStackStrip mode="all" />
-        <LiveTicker />
-        <AppShowcase index="01" />
-        <AdminCrmShowcase index="02" />
-        <HowItWorks index="03" />
-        <Work mode="all" index="04" />
-        <Pricing index="05" />
-        <Faq items={translateCopy(FAQS)} />
-        <Closing />
+        <EcommerceProof />
+        <TechStackStrip
+          mode="all"
+          wide
+          headline={englishMessage("EcommerceArchitecture.techTitle")}
+          subheadline={englishMessage("constants.deployment.to.your.aws.google.cloud.or.azure.98716f6")}
+        />
+        <EcommerceArchitecture />
+        <EcommerceRollout offer="all" />
+        <Pricing index="" intro={englishMessage("EcommercePricing.intro")} hideCalculator>
+          <Link href="/compare/shopify-alternative" className="text-sm font-medium underline underline-offset-4">
+            {englishMessage("EcommercePricing.compare")}
+          </Link>
+        </Pricing>
+        <Faq index="" items={translateCopy(FAQS)} />
+        <Closing headline={englishMessage("EcommerceClosing.title")} description={englishMessage("EcommerceClosing.description")} />
       </main>
 
       <Footer />

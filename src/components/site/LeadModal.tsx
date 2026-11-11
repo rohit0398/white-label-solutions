@@ -27,6 +27,8 @@ interface LeadModalProps {
 
 const PLATFORM_OPTIONS = [
   { id: "ecommerce", label: priceText(englishMessage("LeadModal..white.label.e.commerce.platform.price.launc.661f078")) },
+  { id: "app-launch", label: englishMessage("Footer.e.commerce.mobile.app.e48da2f") },
+  { id: "web-launch", label: englishMessage("Footer.e.commerce.website.e37a1d0") },
   { id: SHORT_DRAMA_PACKAGES.platform, label: englishMessage("ShortDrama.top.platform.title") },
   { id: SHORT_DRAMA_PACKAGES.app, label: englishMessage("ShortDrama.top.app.title") },
   { id: SHORT_DRAMA_PACKAGES.web, label: englishMessage("ShortDrama.top.web.title") },
@@ -55,6 +57,8 @@ function resolveInitialPackage(tierId?: string, pathname?: string): string {
   if (ottOffer) return OTT_PACKAGES[ottOffer];
   if (path.includes("short-drama")) return SHORT_DRAMA_PACKAGES.platform;
   if (path.includes("ott") || path.includes("streaming")) return OTT_PACKAGES.platform;
+  if (path.endsWith("/ecommerce-app-development")) return "app-launch";
+  if (path.endsWith("/ecommerce-website-development")) return "web-launch";
   if (path.includes("ecommerce") || path.includes("shopify")) return "ecommerce";
   if (path.includes("source-code")) return "source-code";
 

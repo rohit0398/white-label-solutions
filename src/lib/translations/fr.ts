@@ -143,9 +143,9 @@ export const fr: TranslationDictionary = {
       },
       {
         title: "eStoreAlley",
-        industry: "Marketplace de gros et détail",
+        industry: "Annuaire de boutiques de détail et de gros",
         description:
-          "Annuaire multi-vendeurs avec tarification grossiste, paiement Stripe et app Android sur le Play Store.",
+          "Un annuaire et une application Android qui permettent aux acheteurs et aux revendeurs de trouver des boutiques indépendantes et de commander directement auprès d’elles.",
       },
       {
         title: "Style Gear",

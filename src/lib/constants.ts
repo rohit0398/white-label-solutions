@@ -166,18 +166,20 @@ export const ECOMMERCE_WEB_PRICING_TIERS: PricingTier[] = [
   },
 ];
 
+export const ESTORE_ALLEY_URL = "https://estorealley.com";
+
 export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
     id: "mechatron-lab",
     title: "Mechatron Lab",
     industry: englishMessage("constants.electronics.and.robotics.parts.27c015b"),
     description:
-      englishMessage("constants.1.000.skus.two.warehouses.gst.invoicing.an.a.4263979"),
+      englishMessage("EcommerceArchitecture.admin"),
     url: "https://mechatronlab.com",
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.mechatronlab.mechatronlab&hl=en_IN",
     caseStudyUrl: "/case-studies/mechatron-lab",
-    screenshotUrl: "/showcase/mechatron-store.png",
+    screenshotUrl: "/showcase/commerce-storefront.webp",
   },
   {
     id: "estore-alley",
@@ -185,10 +187,10 @@ export const SHOWCASE_PROJECTS: ShowcaseProject[] = [
     industry: englishMessage("constants.wholesale.and.retail.marketplace.028c819"),
     description:
       englishMessage("constants.multi.vendor.directory.with.separate.wholesa.625e6a2"),
-    url: "https://estorealley.web.app",
+    url: ESTORE_ALLEY_URL,
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.estorealley.app&hl=en_IN",
     caseStudyUrl: "/case-studies/estorealley",
-    screenshotUrl: "/showcase/estorealley-store.png",
+    screenshotUrl: "/showcase/commerce-marketplace.webp",
   },
   {
     id: "style-gear",
@@ -586,7 +588,7 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
     title: englishMessage("constants.9.16.short.drama.mobile.web.platform.e1d865d"),
     industry: englishMessage("constants.vertical.video.series.cliffhanger.paywalls.87a9171"),
     description:
-      englishMessage("constants.live.test.build.of.the.60fps.vertical.swipe.7f0f23b"),
+      englishMessage("HomeProof.shortDrama"),
     url: MICRODRAMA_DEMO.websiteUrl,
     appDownloadUrl: MICRODRAMA_DEMO.apkUrl,
     appDownloadLabel: MICRODRAMA_DEMO.apkLabel,
@@ -601,13 +603,14 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
   },
   {
     id: "cinematic-ott-portal",
-    title: englishMessage("constants.16.9.cinematic.video.live.tv.portal.470c0e9"),
+    title: englishMessage("OttOverview.platform.title"),
     industry: englishMessage("constants.adaptive.multi.bitrate.hls.video.cms.440f54a"),
     description:
-      englishMessage("constants.widescreen.4k.hdr.playback.pipeline.with.ada.1d13bc5"),
+      englishMessage("HomeChooser.ott.description"),
     url: "/solutions/ott-streaming",
     caseStudyUrl: "/case-studies/ott-streaming-network",
-    screenshotUrl: "/showcase/ott-cinematic-web.webp",
+    screenshotUrl: "/showcase/microdrama-catalog.webp",
+    screenshotAlt: englishMessage("ShortDrama.top.platform.image"),
     productPreview: true,
   },
 ];

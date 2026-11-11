@@ -1,106 +1,101 @@
 "use client";
-import { priceText } from "@/lib/pricing-catalog";
 
-import React, { useState } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import Link from "next/link";
+import { CheckCircle2, ChevronDown, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { trackLeadSubmission, trackWhatsAppClick } from "@/lib/analytics";
-import { submitLead } from "@/lib/submit-lead";
 import { BRAND } from "@/lib/constants";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
-import { CheckCircle2, Send, MessageSquare, Shield, Clock, ChevronDown, SlidersHorizontal } from "lucide-react";
-import Link from "next/link";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
+import { submitLead } from "@/lib/submit-lead";
+
+const label = "block text-sm font-medium text-ink";
+const field = "mt-1.5 w-full rounded-lg border border-line bg-paper px-3 py-2.5 text-base text-ink placeholder:text-ink-3 focus:border-ink sm:text-sm";
+const popularCountryIds = new Set(POPULAR_COUNTRIES.map((country) => country.iso));
+const otherCountries = ALL_COUNTRIES.filter((country) => !popularCountryIds.has(country.iso));
+const countryCodes = new Map([...POPULAR_COUNTRIES, ...otherCountries].map((country) => [country.iso, country.code]));
+
+export function ContactWhatsAppLink({ placement, href = `https://wa.me/${BRAND.contact.whatsapp.slice(1)}`, className, children }: {
+  placement: string;
+  href?: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => trackWhatsAppClick(placement)}
+      className={className}
+    >
+      {children}
+    </a>
+  );
+}
 
 export function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [countryCode, setCountryCode] = useState("+1");
-  const [phone, setPhone] = useState("");
-  const [company, setCompany] = useState("");
-  const [solution, setSolution] = useState("");
-  const [message, setMessage] = useState("");
-  const [showAdditionalDetails, setShowAdditionalDetails] = useState(false);
-  const [honeypot, setHoneypot] = useState("");
+  const submitting = useRef(false);
   const [loading, setLoading] = useState(false);
-  const submittingRef = React.useRef(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [confirmation, setConfirmation] = useState<{ email: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting.current) return;
     setError(null);
 
-    if (!name.trim() || !email.trim()) {
-      setError("Please provide your name and email address.");
+    const values = new FormData(event.currentTarget);
+    const read = (field: string) => String(values.get(field) ?? "").trim();
+    const name = read("name");
+    const email = read("email");
+    const phone = read("phone");
+    const dialCode = countryCodes.get(read("country")) ?? "+1";
+    const solution = read("solution");
+
+    if (!name || !email) {
+      setError("Please enter your name and email address.");
       return;
     }
 
-    if (submittingRef.current) return;
-    submittingRef.current = true;
+    submitting.current = true;
     setLoading(true);
-
     try {
-      const fullPhone = phone.trim() ? `${countryCode} ${phone.trim()}` : undefined;
       await submitLead({
-          name: name.trim(),
-          email: email.trim(),
-          phone: fullPhone,
-          company: company.trim() || undefined,
-          package: solution || undefined,
-          message: message.trim() || undefined,
-          honeypot,
+        name,
+        email,
+        phone: phone ? `${dialCode} ${phone}` : undefined,
+        company: read("company") || undefined,
+        package: solution || "general",
+        message: read("message") || undefined,
+        honeypot: read("website_url"),
       });
-
-      // Track Google Ads Conversion AW-18503943905
       trackLeadSubmission(solution ? `ContactPage - ${solution}` : "ContactPage - General");
-
-      setSubmitted(true);
+      setConfirmation({ email });
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Submission failed. Please reach out via WhatsApp.";
-      setError(msg);
+      setError(err instanceof Error ? err.message : "We couldn't send your inquiry. Please try again or reach us on WhatsApp.");
     } finally {
-      submittingRef.current = false;
+      submitting.current = false;
       setLoading(false);
     }
-  };
+  }
 
-  if (submitted) {
+  if (confirmation) {
     return (
-      <div className="p-8 sm:p-10 rounded-2xl border border-line bg-wash text-center space-y-4 animate-fade-in">
-        <div className="h-12 w-12 rounded-full bg-accent/10 border border-accent/30 text-accent flex items-center justify-center mx-auto">
-          <CheckCircle2 className="h-6 w-6" />
+      <div className="space-y-4 rounded-2xl border border-line bg-wash p-6 sm:p-8">
+        <div role="status">
+          <CheckCircle2 aria-hidden="true" className="mb-3 size-6 text-accent" />
+          <h2 className="text-xl font-semibold tracking-tight">We received your inquiry</h2>
+          <p className="mt-2 break-words text-sm leading-relaxed text-ink-2">We’ll review your request and reply to {confirmation.email}.</p>
         </div>
-        <h3 className="text-xl font-semibold tracking-tight text-ink">
-          Inquiry Received Successfully!
-        </h3>
-        <p className="text-sm text-ink-2 max-w-md mx-auto leading-relaxed">
-          Thank you, <span className="font-semibold text-ink">{name}</span>. An engineering lead will review your specifications and reply to <span className="font-semibold text-ink">{email}</span> within 2 hours.
-        </p>
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={BRAND.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick("ContactSuccess")}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-accent bg-accent/10 text-accent font-medium text-xs hover:bg-accent/20 transition-colors"
-          >
-            <MessageSquare className="h-4 w-4" />
-            <span>Chat Now on WhatsApp (Instant)</span>
-          </a>
-          <button
-            type="button"
-            onClick={() => {
-              setSubmitted(false);
-              setName("");
-              setEmail("");
-              setPhone("");
-              setCountryCode("+1");
-              setCompany("");
-              setSolution("");
-              setMessage("");
-              setShowAdditionalDetails(false);
-            }}
-            className="text-xs font-mono text-ink-3 hover:text-ink underline cursor-pointer"
-          >
+        <div className="flex flex-wrap items-center gap-x-5">
+          <ContactWhatsAppLink placement="ContactSuccess" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline-offset-4 hover:underline">
+            <MessageSquare aria-hidden="true" className="size-4" />
+            Chat on WhatsApp
+          </ContactWhatsAppLink>
+          <button type="button" onClick={() => setConfirmation(null)} className="min-h-11 text-sm text-ink-2 underline underline-offset-4">
             Send another inquiry
           </button>
         </div>
@@ -109,216 +104,86 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 sm:p-8 rounded-2xl border border-line bg-wash space-y-5">
-      {/* Honeypot anti-spam field */}
-      <input
-        type="text"
-        name="website_url"
-        value={honeypot}
-        onChange={(e) => setHoneypot(e.target.value)}
-        tabIndex={-1}
-        autoComplete="off"
-        className="hidden"
-        aria-hidden="true"
-      />
+    <form method="post" aria-labelledby="contact-form-title" onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-line bg-wash p-5 sm:p-8">
+      <input type="text" name="website_url" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
-      <div className="space-y-1">
-        <h3 className="text-lg font-semibold tracking-tight text-ink">
-          Request Architecture Demo &amp; Quote
-        </h3>
-        <p className="text-xs text-ink-3">
-          Discuss your timeline, custom requirements, or schedule a live screen-share demonstration.
-        </p>
+      <div>
+        <h2 id="contact-form-title" className="text-xl font-semibold tracking-tight">Send an inquiry</h2>
+        <p className="mt-1 text-sm text-ink-2">Leave your name and email so we can get back to you.</p>
       </div>
 
-      {error && (
-        <div className="p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-500 text-xs">
-          {error}
-        </div>
-      )}
+      {error && <p role="alert" className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-700 dark:text-red-300">{error}</p>}
 
-      {/* Row 1: Name and Email */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
-          <label htmlFor="contact-name" className="block text-xs font-mono text-ink-2">
-            Your Name <span className="text-accent">*</span>
-          </label>
-          <input
-            id="contact-name"
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Alex Morgan"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
-          />
-        </div>
-
-        <div className="space-y-1.5">
-          <label htmlFor="contact-email" className="block text-xs font-mono text-ink-2">
-            Work Email <span className="text-accent">*</span>
-          </label>
-          <input
-            id="contact-email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="alex@company.com"
-            className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
-          />
-        </div>
+        <label className={label} htmlFor="contact-name">
+          Name
+          <input id="contact-name" name="name" autoComplete="name" type="text" required className={field} />
+        </label>
+        <label className={label} htmlFor="contact-email">
+          Email
+          <input id="contact-email" name="email" autoComplete="email" type="email" required className={field} />
+        </label>
       </div>
 
-      {/* Row 2: Phone with Country Code (Full width, Optional) */}
-      <div className="space-y-1.5 w-full">
-        <label htmlFor="contact-phone" className="block text-xs font-mono text-ink-2">
-          Phone / WhatsApp <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
-        </label>
-        <div className="flex w-full rounded-lg border border-line bg-paper focus-within:border-ink transition-all">
-          <select
-            id="contact-country-code"
-            value={countryCode}
-            onChange={(e) => setCountryCode(e.target.value)}
-            aria-label="Country dial code"
-            className="w-36 sm:w-48 h-10 shrink-0 rounded-l-lg border-r border-line bg-wash/60 hover:bg-wash px-2.5 text-xs text-ink focus:outline-none cursor-pointer font-medium transition-colors"
-          >
-            <optgroup label="Popular">
-              {POPULAR_COUNTRIES.map((c) => (
-                <option key={`pop-${c.iso}-${c.code}`} value={c.code}>
-                  {c.name} ({c.code})
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="All Countries (A–Z)">
-              {ALL_COUNTRIES.map((c) => (
-                <option key={`all-${c.iso}-${c.name}`} value={c.code}>
-                  {c.name} ({c.code})
-                </option>
-              ))}
-            </optgroup>
-          </select>
-          <input
-            id="contact-phone"
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="(555) 000-0000"
-            className="flex-1 min-w-0 h-10 bg-transparent px-3 text-sm text-ink placeholder:text-ink-4 focus:outline-none"
-          />
-        </div>
-      </div>
-
-      {/* Row 3: Platform of Interest (Full width, Optional, Nothing Selected by Default) */}
-      <div className="space-y-1.5 w-full">
-        <label htmlFor="contact-solution" className="block text-xs font-mono text-ink-2">
-          Platform of Interest <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
-        </label>
-        <select
-          id="contact-solution"
-          value={solution}
-          onChange={(e) => setSolution(e.target.value)}
-          className="w-full h-10 px-3 text-sm rounded-lg border border-line bg-paper text-ink focus:outline-none focus:border-ink transition-colors cursor-pointer"
-        >
-          <option value="">Select a platform of interest (Optional)...</option>
-          <option value="ecommerce">E-Commerce Platform (Web, Apps &amp; Admin - {priceText("{price:launch}")})</option>
-          <option value="short-drama">9:16 Short Drama Platform (Reels &amp; Paywalls - {priceText("{price:launch}")})</option>
-          <option value="ott-streaming">16:9 Cinematic OTT Platform (Widescreen 4K - {priceText("{price:launch}")})</option>
-          <option value="source-code">Full Unencrypted Source Code License ({priceText("{price:source-code-license}")} Add-on)</option>
-          <option value="developer-time">Dedicated Developer Support ($20 / hour)</option>
-          <option value="custom">Custom Enterprise Architecture</option>
+      <label className={label} htmlFor="contact-solution">
+        Platform <span className="font-normal text-ink-3">(optional)</span>
+        <select id="contact-solution" name="solution" className={field}>
+          <option value="">Choose a platform</option>
+          <option value="ecommerce">E-commerce</option>
+          <option value={SHORT_DRAMA_PACKAGES.platform}>Short drama</option>
+          <option value={OTT_PACKAGES.platform}>OTT streaming</option>
+          <option value="source-code">Source code licensing</option>
+          <option value="developer-time">Developer support</option>
+          <option value="custom">Custom project</option>
         </select>
-      </div>
+      </label>
 
-      {/* Progressive Disclosure: Expandable Company & Project Requirements */}
-      <div className="pt-1">
-        <button
-          type="button"
-          onClick={() => setShowAdditionalDetails((prev) => !prev)}
-          className="inline-flex items-center gap-2 text-xs font-mono text-ink-2 hover:text-ink py-1.5 px-2 -ml-2 rounded hover:bg-wash transition-colors cursor-pointer group select-none"
-        >
-          <SlidersHorizontal className="h-3.5 w-3.5 text-accent transition-transform group-hover:scale-110" />
-          <span className="font-medium">
-            {showAdditionalDetails ? "Hide company & project details" : "+ Add company & project details (Optional)"}
-          </span>
-          <ChevronDown
-            className={`h-3.5 w-3.5 text-ink-3 transition-transform duration-200 ${
-              showAdditionalDetails ? "rotate-180 text-ink" : ""
-            }`}
-          />
-        </button>
-
-        {showAdditionalDetails && (
-          <div className="space-y-4 pt-3 border-t border-line/60 mt-2 animate-fade-in">
-            <div className="space-y-1.5">
-              <label htmlFor="contact-company" className="block text-xs font-mono text-ink-2">
-                Company / Brand Name <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
-              </label>
-              <input
-                id="contact-company"
-                type="text"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
-                placeholder="e.g. Acme Retail or Media Studio"
-                className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="contact-message" className="block text-xs font-mono text-ink-2">
-                Project Notes / Specific Questions <span className="text-ink-3 text-[11px] font-normal">(Optional)</span>
-              </label>
-              <textarea
-                id="contact-message"
-                rows={3}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Tell us about your target launch date, existing customer database, or specific custom integrations..."
-                className="w-full px-3 py-2 text-sm rounded-lg border border-line bg-paper text-ink placeholder:text-ink-4 focus:outline-none focus:border-ink transition-colors resize-none"
-              />
+      <details className="group border-t border-line">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
+          Add project details <ChevronDown aria-hidden="true" className="size-4 text-ink-3 group-open:rotate-180" />
+        </summary>
+        <div className="space-y-4 pt-1">
+          <label className={label} htmlFor="contact-message">
+            What are you building? <span className="font-normal text-ink-3">(optional)</span>
+            <textarea id="contact-message" name="message" rows={3} placeholder="Tell us about the platform, features, or launch date you have in mind." className={field} />
+          </label>
+          <label className={label} htmlFor="contact-company">
+            Company <span className="font-normal text-ink-3">(optional)</span>
+            <input id="contact-company" name="company" autoComplete="organization" className={field} />
+          </label>
+          <div>
+            <label className={label} htmlFor="contact-phone">
+              Phone or WhatsApp <span className="font-normal text-ink-3">(optional)</span>
+            </label>
+            <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-2">
+              <select name="country" defaultValue="US" aria-label="Country dial code" className={field}>
+                <optgroup label="Popular">
+                  {POPULAR_COUNTRIES.map((country) => (
+                    <option key={country.iso} value={country.iso}>{country.name} ({country.code})</option>
+                  ))}
+                </optgroup>
+                <optgroup label="Other countries">
+                  {otherCountries.map((country) => (
+                    <option key={country.iso} value={country.iso}>{country.name} ({country.code})</option>
+                  ))}
+                </optgroup>
+              </select>
+              <input id="contact-phone" name="phone" type="tel" autoComplete="tel-national" className={field} />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </details>
 
-      <Button
-        id="contact-submit-btn"
-        type="submit"
-        size="md"
-        disabled={loading}
-        className="w-full justify-center h-11 text-sm font-medium cursor-pointer"
-      >
-        {loading ? (
-          <span className="flex items-center gap-2">
-            <span className="h-3.5 w-3.5 rounded-full border-2 border-paper border-t-transparent animate-spin" />
-            <span>Sending inquiry...</span>
-          </span>
-        ) : (
-          <span className="flex items-center gap-2">
-            <Send className="h-4 w-4" />
-            <span>Send Inquiry &amp; Request Demo</span>
-          </span>
-        )}
+      <Button id="contact-submit-btn" type="submit" disabled={loading} className="w-full sm:w-auto">
+        {loading ? "Sending inquiry…" : "Send inquiry"}
       </Button>
 
-      {/* Mandatory Google Ads Policy Compliance Notice */}
-      <div className="pt-2 text-center space-y-1">
-        <p className="text-[11px] text-ink-3">
-          By submitting, you agree to our{" "}
-          <Link href="/privacy" className="underline hover:text-ink">
-            Privacy Policy
-          </Link>{" "}
-          and{" "}
-          <Link href="/terms" className="underline hover:text-ink">
-            Terms of Service
-          </Link>
-          .
-        </p>
-        <p className="text-[10px] text-ink-4 flex items-center justify-center gap-1">
-          <Shield className="h-3 w-3 text-accent" />
-          <span>Zero spam. Direct engineer response within 2 hours.</span>
-        </p>
-      </div>
+      <p className="text-xs leading-relaxed text-ink-3">
+        By submitting, you agree to our{" "}
+        <Link href="/privacy" className="underline underline-offset-4 hover:text-ink">Privacy Policy</Link>
+        {" "}and{" "}
+        <Link href="/terms" className="underline underline-offset-4 hover:text-ink">Terms of Service</Link>.
+      </p>
     </form>
   );
 }

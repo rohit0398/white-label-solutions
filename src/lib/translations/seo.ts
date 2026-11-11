@@ -9,9 +9,9 @@ export interface LocalizedSeo {
 
 export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label Software Platforms | OTT & Commerce | Mechatron Lab",
+    title: "White-Label Platforms for Streaming and E-Commerce",
     description:
-      "Production-ready software platforms for 9:16 short drama, OTT video streaming, and e-commerce. Deployed to your private cloud in 2–4 weeks with 0% revenue cut.",
+      "Launch a branded Short Drama platform, widescreen OTT service, or online store with shopping apps. Compare packages for deployment on your cloud.",
     keywords: [
       "white label software platforms",
       "pre-built ecommerce store",
@@ -27,9 +27,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "en_US",
   },
   es: {
-    title: "Plataformas Software Marca Blanca | OTT y E-Commerce | Mechatron Lab",
+    title: "Plataformas de marca blanca para streaming y comercio electrónico",
     description:
-      "Plataformas de software para micro-dramas 9:16, streaming OTT 16:9 y e-commerce. Desplegado en tu propia nube en 2–4 semanas sin comisiones.",
+      "Lanza una plataforma de dramas cortos, un servicio OTT panorámico o una tienda online con apps. Compara las opciones para tu propia nube.",
     keywords: [
       "plataformas software marca blanca",
       "tienda ecommerce marca blanca",
@@ -41,9 +41,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "es_ES",
   },
   de: {
-    title: "White-Label Software-Plattformen | OTT & E-Commerce | Mechatron Lab",
+    title: "White-Label-Plattformen für Streaming und E-Commerce",
     description:
-      "Software-Plattformen für 9:16 Kurzserien, OTT Video-Streaming und E-Commerce. In 2–4 Wochen in Ihrer privaten Cloud bereitgestellt – 0 % Provision.",
+      "Starten Sie eine Kurzdrama-Plattform, einen OTT-Dienst oder einen Onlineshop mit Apps unter Ihrer Marke. Vergleichen Sie Pakete für Ihre Cloud.",
     keywords: [
       "white label software plattformen",
       "fertiger online shop eigene cloud",
@@ -55,9 +55,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "de_DE",
   },
   fr: {
-    title: "Plateformes Logicielles Marque Blanche | OTT & E-Commerce | Mechatron Lab",
+    title: "Plateformes en marque blanche pour le streaming et l’e-commerce",
     description:
-      "Plateformes logicielles pour mini-séries 9:16, streaming OTT et e-commerce. Déployées sur votre cloud privé en 2 à 4 semaines avec 0% commission.",
+      "Lancez des séries courtes, un service OTT ou une boutique avec applications à votre marque. Comparez les offres à déployer sur votre cloud.",
     keywords: [
       "plateformes logicielles marque blanche",
       "boutique ecommerce marque blanche",
@@ -69,9 +69,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
     ogLocale: "fr_FR",
   },
   hi: {
-    title: "व्हाइट-लेबल सॉफ्टवेयर प्लेटफ़ॉर्म | OTT और ई-कॉमर्स | Mechatron Lab",
+    title: "स्ट्रीमिंग और ई-कॉमर्स के लिए व्हाइट लेबल प्लेटफ़ॉर्म",
     description:
-      "9:16 शॉर्ट-ड्रामा, OTT वीडियो स्ट्रीमिंग और ई-कॉमर्स सॉफ्टवेयर। 2–4 हफ्तों में आपके प्राइवेट क्लाउड पर डिप्लॉय, 0% कमीशन।",
+      "अपने ब्रांड का शॉर्ट ड्रामा प्लेटफ़ॉर्म, OTT सेवा या शॉपिंग ऐप्स वाला स्टोर लॉन्च करें। अपने क्लाउड पर डिप्लॉयमेंट के पैकेज देखें।",
     keywords: [
       "व्हाइट लेबल सॉफ्टवेयर प्लेटफॉर्म",
       "रेडीमेड ईकॉमर्स स्टोर",

@@ -26,7 +26,7 @@ const TICKER_ITEMS = [
   },
   {
     title: englishMessage("LiveTicker.code.ownership.80ca3ae"),
-    detail: englishMessage("ott-streaming.100.git.repository.access.zero.vendor.lock.i.b74b4d8"),
+    detail: englishMessage("constants.add.on.the.full.repositories.with.the.right.fc5bba1"),
   },
 ];
 
@@ -44,7 +44,7 @@ export function LiveTicker({ items, ariaLabel }: LiveTickerProps = {}) {
 
   return (
     <div
-      aria-label={translateCopy(englishMessage("LiveTicker.live.platform.status.and.production.stores.t.2abc1a3"))}
+      aria-label={translateCopy(ariaLabel ?? englishMessage("LiveTicker.live.platform.status.and.production.stores.t.2abc1a3"))}
       className="border-y border-line bg-wash/60 py-3 overflow-hidden select-none"
     >
       <div className="animate-marquee flex items-center gap-10 text-xs font-mono text-ink-2">

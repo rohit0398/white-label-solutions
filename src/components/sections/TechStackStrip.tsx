@@ -22,6 +22,7 @@ import {
 
 export type TechStackMode =
   | "all"
+  | "home"
   | "web"
   | "app"
   | "short-drama"
@@ -32,6 +33,7 @@ export type TechStackMode =
   | "ott-app";
 
 export interface TechStackStripProps {
+  wide?: boolean;
   mode?: TechStackMode;
   id?: string;
   headline?: string;
@@ -66,6 +68,7 @@ export function EngineeringCard({
 }
 
 export function TechStackStrip({
+  wide = false,
   mode = "all",
   id,
   headline = englishMessage("home.production.tested.technologies.zero.outdated.28783bc"),
@@ -163,6 +166,14 @@ export function TechStackStrip({
 
   const stackMap: Record<TechStackMode, typeof webStack> = {
     all: ecommerceAllStack,
+    home: [
+      ecommerceAllStack[0],
+      ecommerceAllStack[1],
+      ecommerceAllStack[2],
+      hlsStream,
+      ecommerceAllStack[4],
+      ecommerceAllStack[5],
+    ],
     web: webStack,
     app: appStack,
     "short-drama": shortDramaAllStack,
@@ -176,9 +187,10 @@ export function TechStackStrip({
   const stack = stackMap[mode] ?? ecommerceAllStack;
 
   const isVideo = mode.startsWith("short-drama") || mode.startsWith("ott");
+  const wideLayout = wide || isVideo;
   const stackLabel = translateCopy(englishMessage("TechStackStrip.modern.engineering.stack.4f4abf1"));
   const cards = stack.map(({ name, desc, icon }) => (
-    <EngineeringCard key={name} icon={icon} title={translateCopy(name)} description={translateCopy(desc)} compact={!isVideo} />
+    <EngineeringCard key={name} icon={icon} title={translateCopy(name)} description={translateCopy(desc)} compact={!wideLayout} />
   ));
 
   const assurances = isVideo
@@ -197,41 +209,41 @@ export function TechStackStrip({
     : [
         { label: englishMessage("TechStackStrip.mutual.nda.on.request.ee5b3d3"), icon: Lock },
         { label: englishMessage("TechStackStrip.100.private.cloud.vpc.zero.multi.tenancy.ec6dcaf"), icon: Server },
-        { label: englishMessage("TechStackStrip.pci.dss.level.1.tokenized.checkout.8d345d9"), icon: ShieldCheck },
-        { label: englishMessage("TechStackStrip.unencrypted.git.repositories.delivered.30b5811"), icon: Code2 },
+        ...(mode === "home" ? [] : [{ label: englishMessage("TechStackStrip.pci.dss.level.1.tokenized.checkout.8d345d9"), icon: ShieldCheck }]),
+        { label: englishMessage("ShortDrama.top.stack.source"), icon: Code2 },
       ];
 
   return (
     <section
       id={id}
       aria-labelledby={id ? `${id}-heading` : undefined}
-      className={isVideo ? "border-t border-line bg-wash pt-10 pb-16 sm:pt-12 sm:pb-20" : "border-y border-line bg-wash py-10"}
+      className={wideLayout ? "border-t border-line bg-wash pt-10 pb-16 sm:pt-12 sm:pb-20" : "border-y border-line bg-wash py-10"}
     >
-      <div className={isVideo ? "wrap-wide space-y-8" : "wrap space-y-8"}>
-        <div className={isVideo ? "space-y-2" : "flex flex-col justify-between gap-4 sm:flex-row sm:items-center"}>
+      <div className={wideLayout ? "wrap-wide space-y-8" : "wrap space-y-8"}>
+        <div className={wideLayout ? "space-y-2" : "flex flex-col justify-between gap-4 sm:flex-row sm:items-center"}>
           <div>
             <p className="text-xs font-mono text-accent uppercase tracking-wider font-semibold">{stackLabel}</p>
             <h2
               id={id ? `${id}-heading` : undefined}
-              className={isVideo ? "mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl" : "text-lg font-semibold tracking-tight text-ink mt-0.5"}
+              className={wideLayout ? "mt-1 text-xl font-semibold tracking-tight text-ink sm:text-2xl" : "text-lg font-semibold tracking-tight text-ink mt-0.5"}
             >
               {translateCopy(headline)}
             </h2>
           </div>
-          <p className={isVideo ? "text-sm font-mono text-ink-3" : "text-xs font-mono text-ink-3 hidden sm:inline"}>
+          <p className={wideLayout ? "text-sm font-mono text-ink-3" : "text-xs font-mono text-ink-3 hidden sm:inline"}>
             {translateCopy(subheadline)}
           </p>
         </div>
 
         {/* 6-Technology Grid */}
-        {isVideo ? (
+        {wideLayout ? (
           <ShortDramaCardRail label={stackLabel} desktopColumns="md:grid-cols-3 lg:grid-cols-6">{cards}</ShortDramaCardRail>
         ) : (
           <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">{cards}</ul>
         )}
 
         {/* 4 Guarantees Strip */}
-        <div className={isVideo
+        <div className={wideLayout
           ? "grid gap-4 border-t border-line/60 pt-5 text-xs font-mono text-ink-3 sm:grid-cols-2"
           : "pt-2 border-t border-line/60 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-ink-3"}
         >
