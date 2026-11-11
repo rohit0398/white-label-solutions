@@ -84,30 +84,41 @@ export function HomeHero() {
       </div>
 
       <div className="wrap-wide mt-8 grid gap-3 md:mt-10 md:grid-cols-3 md:gap-4">
-        {homePlatforms.map(({ family, title, desc, icon: Icon }) => (
-          <Link
+        {homePlatforms.map(({ family, title, desc, action, proof, icon: Icon }) => (
+          <article
             key={family}
-            href={`/solutions/${family}`}
-            onClick={() => trackEvent("select_platform", { platform: family, placement: "HomeHero" })}
-            className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-wash/85 p-4 transition-colors hover:border-accent/60 hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:p-5"
+            className="flex min-w-0 flex-col rounded-2xl border border-line bg-wash/85 transition-colors hover:border-accent/60 hover:bg-paper"
           >
-            <div className="flex items-center gap-3">
-              <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
-                <Icon aria-hidden="true" className="size-4" />
-              </span>
-              <h2 className="font-semibold leading-snug text-ink">{translateCopy(title)}</h2>
-            </div>
-            <p className="flex-1 text-sm leading-relaxed text-ink-2">{translateCopy(desc)}</p>
-            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-line pt-3 text-sm">
-              <span className="font-medium text-ink">
-                {translateCopy.format("EcommerceHero.setupPrice", { value0: displayPackagePrice(FAMILY_PACKAGE[family], language, currency) })}
-              </span>
-              <span className="inline-flex items-center gap-1.5 font-medium text-accent underline-offset-4 group-hover:underline">
-                {translateCopy(englishMessage("HomeChooser.viewPlatform"))}
-                <ArrowRight aria-hidden="true" className="size-3.5 shrink-0" />
-              </span>
-            </div>
-          </Link>
+            <Link
+              href={`/solutions/${family}`}
+              onClick={() => trackEvent("select_platform", { platform: family, placement: "HomeHero" })}
+              className="group flex flex-1 flex-col gap-3 rounded-t-2xl p-4 focus-visible:outline-2 focus-visible:outline-accent md:p-5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-accent/30 bg-accent/10 text-accent">
+                  <Icon aria-hidden="true" className="size-4" />
+                </span>
+                <h2 className="font-semibold leading-snug text-ink">{translateCopy(title)}</h2>
+              </div>
+              <p className="flex-1 text-sm leading-relaxed text-ink-2">{translateCopy(desc)}</p>
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-line pt-3 text-sm">
+                <span className="font-medium text-ink">
+                  {translateCopy.format("EcommerceHero.setupPrice", { value0: displayPackagePrice(FAMILY_PACKAGE[family], language, currency) })}
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-medium text-accent underline-offset-4 group-hover:underline">
+                  {translateCopy(action)}
+                  <ArrowRight aria-hidden="true" className="size-3.5 shrink-0" />
+                </span>
+              </div>
+            </Link>
+            <Link
+              href={proof.href}
+              onClick={() => trackEvent("view_product_example", { platform: family, placement: "HomeHero" })}
+              className="mx-4 mb-4 self-start text-sm text-ink-2 underline decoration-line underline-offset-4 hover:text-ink md:mx-5"
+            >
+              {proof.label}
+            </Link>
+          </article>
         ))}
       </div>
     </section>

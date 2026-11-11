@@ -1,7 +1,7 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_FAQS, CINEMATIC_OTT_APP_PRICING_TIERS } from "@/lib/constants";
+import { CINEMATIC_OTT_APP_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Pricing } from "@/components/sections/Pricing";
@@ -21,6 +21,21 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 const searchTitle = "OTT App Development for iOS & Android";
 const searchDescription =
   "Launch branded OTT apps for iOS and Android with widescreen playback, TV casting, offline downloads, and in-app subscriptions.";
+
+const faqs = [
+  {
+    q: "Which devices does the standard OTT app package cover?",
+    a: "It includes apps for iOS and Android. We can review your target casting devices during the walkthrough and scope dedicated TV apps separately.",
+  },
+  {
+    q: "Can viewers watch offline or pay in the apps?",
+    a: "The apps support offline video downloads and subscriptions through Apple and Google Play billing. Review those flows in your test build before submission.",
+  },
+  {
+    q: "Can the apps carry live channels or advanced DRM?",
+    a: "On-demand playback is included. We scope live channels and Widevine or FairPlay DRM separately based on your content and target devices.",
+  },
+];
 
 export const metadata: Metadata = {
   title: searchTitle,
@@ -65,7 +80,7 @@ export default function OttAppDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(CINEMATIC_OTT_FAQS);
+  const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
     name: "Cinematic OTT Mobile App Platform (iOS & Android)",
     description:
@@ -113,9 +128,9 @@ export default function OttAppDevelopmentPage() {
         <Faq
           id="faq"
           index="06 · Frequently Asked Questions"
-          title="Cinematic OTT Platform Questions"
-          intro="Clear answers on video CDN bandwidth economics, transcoding pipelines, DRM signed URLs, and source code ownership."
-          items={CINEMATIC_OTT_FAQS}
+          title="OTT app questions"
+          intro=""
+          items={faqs}
         />
 
         {/* Closing Conversion Banner */}

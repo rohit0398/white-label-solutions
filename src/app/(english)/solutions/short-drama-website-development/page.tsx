@@ -1,7 +1,7 @@
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { SHORT_DRAMA_FAQS, SHORT_DRAMA_WEB_PRICING_TIERS } from "@/lib/constants";
+import { SHORT_DRAMA_WEB_PRICING_TIERS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
 import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { Navbar } from "@/components/layout/Navbar";
@@ -21,6 +21,21 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } f
 const searchTitle = "Short Drama Website Development for Vertical Video";
 const searchDescription =
   "Launch a branded short drama website with browser playback, shareable episode links and VIP subscriptions. Publish shows and episodes from one admin panel.";
+
+const faqs = [
+  {
+    q: "Do viewers need to download an app?",
+    a: "Viewers can open a shared episode link and watch directly in a supported browser. The website package includes the vertical player and publishing panel.",
+  },
+  {
+    q: "How does VIP checkout work on the website?",
+    a: "Choose which episodes are free or VIP in the admin panel. Viewers can subscribe through Stripe checkout on the website.",
+  },
+  {
+    q: "Can we launch the website first and add apps later?",
+    a: "Yes. The website package launches on its own. Tell us what you need when you are ready to add iOS and Android apps.",
+  },
+];
 
 export const metadata: Metadata = {
   title: searchTitle,
@@ -64,7 +79,7 @@ export default function ShortDramaWebsiteDevelopmentPage() {
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
-  const faqSchema = generateFaqSchema(SHORT_DRAMA_FAQS);
+  const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
     name: "Short-Drama Web Streaming Platform (9:16 Vertical Player)",
     description:
@@ -113,9 +128,9 @@ export default function ShortDramaWebsiteDevelopmentPage() {
         <Faq
           id="faq"
           index="06 · Frequently Asked Questions"
-          title="Short-Drama Platform Questions"
-          intro="Everything you need to know about web video players, Cloudflare Stream bandwidth costs, and source code ownership."
-          items={SHORT_DRAMA_FAQS}
+          title="Short Drama website questions"
+          intro=""
+          items={faqs}
         />
 
         {/* Closing Conversion Banner */}

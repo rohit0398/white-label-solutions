@@ -23,11 +23,11 @@ export function EcommerceProof({ offer = "all" }: { offer?: "all" | "app" | "web
           {projects.map((project) => (
             <li key={project.id} className="min-w-0 rounded-lg border border-line bg-paper p-4">
               <h3 className="font-semibold">{project.title}</h3>
-              <p className="mt-1 text-sm text-ink-2">{translate(project.industry)}</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink-2">{translate(project.description)}</p>
               <div className="mt-2 flex flex-wrap gap-x-3">
                 {!appsOnly && (
                   <a href={project.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                    {translate(englishMessage("EcommerceProof.openStore"))}
+                    {translate(project.id === "estore-alley" ? englishMessage("EcommerceProof.openDirectory") : englishMessage("EcommerceProof.openStore"))}
                     <ArrowUpRight aria-hidden="true" className="size-3 shrink-0" />
                   </a>
                 )}

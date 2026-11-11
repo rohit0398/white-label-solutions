@@ -9,6 +9,8 @@ import { EngineeringCard, TechStackStrip } from "@/components/sections/TechStack
 import { DemoButton } from "@/components/site/DemoButton";
 import { useMessages } from "@/components/site/useMessages";
 import Image from "@/components/ui/LocalizedImage";
+import Link from "@/components/ui/LocalizedLink";
+import { CASE_STUDIES } from "@/lib/content/case-studies";
 import { imageDimensions } from "@/lib/image-dimensions";
 import { englishMessage } from "@/lib/messages";
 import { OTT_PACKAGES, type OttOffer } from "@/lib/ott-offers";
@@ -64,6 +66,18 @@ const quickLinks = [
   { href: "#pricing", label: englishMessage("ShortDrama.top.pricing") },
 ];
 
+const standardPlayback = {
+  platform: englishMessage("OttScope.platform"),
+  app: englishMessage("OttScope.app"),
+  web: englishMessage("OttScope.web"),
+};
+
+const optionalFeatures = [
+  englishMessage("OttScope.live"),
+  englishMessage("OttScope.tv"),
+  englishMessage("OttScope.drm"),
+];
+
 export function OttOverview({ offer }: { offer: OttOffer }) {
   const t = useMessages();
   const { title, intro, mode, architecture, features, image, imageLabel } = content[offer];
@@ -87,12 +101,39 @@ export function OttOverview({ offer }: { offer: OttOffer }) {
       </StreamingHero>
 
       <section id="ott-preview" aria-labelledby="ott-preview-heading" className="wrap-wide pb-14 sm:pb-20">
-        <div className="flex flex-wrap items-center justify-between gap-5 rounded-xl border border-line bg-wash px-5 py-6 sm:p-8">
-          <div className="max-w-2xl">
+        <div className="grid items-start gap-6 rounded-xl border border-line bg-wash px-5 py-6 sm:p-8 lg:grid-cols-2 lg:gap-10">
+          <div>
             <h2 id="ott-preview-heading" className="text-xl font-semibold tracking-tight">{t(englishMessage("OttOverview.preview.title"))}</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-2 sm:text-base">{t(englishMessage("OttOverview.preview.description"))}</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-2">{t(standardPlayback[offer])}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <DemoButton tierId={tierId}>{t(englishMessage("ShortDrama.top.walkthrough"))}</DemoButton>
+              <Link href={CASE_STUDIES.ott.path} className="text-sm font-medium underline underline-offset-4">
+                {englishMessage("HomeProof.ottCase")}
+              </Link>
+            </div>
           </div>
-          <DemoButton tierId={tierId}>{t(englishMessage("ShortDrama.top.walkthrough"))}</DemoButton>
+          <table className="w-full table-fixed text-start text-sm">
+            <caption className="pb-2 text-start font-semibold text-ink">{t(englishMessage("OttScope.title"))}</caption>
+            <tbody className="divide-y divide-line border-y border-line">
+              <tr>
+                <th scope="row" className="py-2 pe-3 text-start font-medium text-ink">{t(englishMessage("OttScope.onDemand"))}</th>
+                <td className="py-2 text-ink-2">{t(englishMessage("OttScope.included"))}</td>
+              </tr>
+              {offer !== "web" && (
+                <tr>
+                  <th scope="row" className="py-2 pe-3 text-start font-medium text-ink">{t(englishMessage("OttScope.casting"))}</th>
+                  <td className="py-2 text-ink-2">{t(englishMessage("OttScope.confirmDevices"))}</td>
+                </tr>
+              )}
+              {optionalFeatures.map((feature) => (
+                <tr key={feature}>
+                  <th scope="row" className="py-2 pe-3 text-start font-medium text-ink">{t(feature)}</th>
+                  <td className="py-2 text-ink-2">{t(englishMessage("OttScope.custom"))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 

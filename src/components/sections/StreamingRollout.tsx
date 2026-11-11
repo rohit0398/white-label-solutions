@@ -4,6 +4,8 @@ import { useMessages } from "@/components/site/useMessages";
 import { LaunchSteps } from "@/components/ui/LaunchSteps";
 import Link from "@/components/ui/LocalizedLink";
 import { Section } from "@/components/ui/Section";
+import { CASE_STUDIES } from "@/lib/content/case-studies";
+import { MICRO_DRAMA_LAUNCH_SLUG } from "@/lib/content/short-drama-articles";
 import { englishMessage } from "@/lib/messages";
 import type { ShortDramaOffer } from "@/lib/short-drama-offers";
 
@@ -43,10 +45,19 @@ const ottRollout = {
   },
 };
 
+const shortDramaGuides = {
+  platform: { href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, label: englishMessage("ShortDramaRollout.launchGuide") },
+  app: { href: "/blog/short-drama-app-development-cost", label: englishMessage("ShortDramaRollout.costGuide") },
+  web: { href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, label: englishMessage("ShortDramaRollout.launchGuide") },
+};
+
 export function StreamingRollout({ offer, family }: { offer: ShortDramaOffer; family: "short-drama" | "ott" }) {
   const translate = useMessages();
   const ott = family === "ott";
   const rollout = (ott ? ottRollout : shortDramaRollout)[offer];
+  const guide = ott
+    ? { href: "/blog/ott-video-streaming-development", label: englishMessage("OttRollout.readGuide") }
+    : shortDramaGuides[offer];
   const steps = [
     {
       title: englishMessage("ShortDramaRollout.share.title"),
@@ -79,14 +90,14 @@ export function StreamingRollout({ offer, family }: { offer: ShortDramaOffer; fa
           {translate(englishMessage("ShortDramaRollout.storeReview"))}
         </p>
       )}
-      {offer === "platform" && (
-        <Link
-          href={ott ? "/blog/ott-video-streaming-development" : "/blog/short-drama-app-development"}
-          className="mt-4 inline-block text-sm font-medium underline underline-offset-4"
-        >
-          {ott ? englishMessage("OttRollout.readGuide") : englishMessage("ShortDramaRollout.readGuide")}
-        </Link>
-      )}
+      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+        <Link href={guide.href} className="underline underline-offset-4">{guide.label}</Link>
+        {!ott && (
+          <Link href={CASE_STUDIES.shortDrama.path} className="underline underline-offset-4">
+            {englishMessage("HomeProof.dramaCase")}
+          </Link>
+        )}
+      </div>
     </Section>
   );
 }

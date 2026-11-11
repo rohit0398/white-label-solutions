@@ -34,9 +34,13 @@ export default function MechatronLabCaseStudyPage() {
         guide: { href: "/blog/ecommerce-website-development", label: "Read the e-commerce website launch guide" },
       }}
     >
-      <div className="wrap-wide">
-        <Screenshot src="/showcase/commerce-admin.webp" alt="Mechatron Lab admin dashboard for inventory and orders" />
-      </div>
+      <section className="wrap-wide" aria-labelledby="order-workflow">
+        <h2 id="order-workflow" className="text-2xl font-semibold tracking-tight">From checkout to warehouse fulfillment</h2>
+        <p className="mt-2 max-w-2xl text-ink-2">
+          A customer places an order on the website or app. Staff open the order in the admin panel, check stock in Mohali and Shillong, and choose the fulfillment location based on availability and delivery address.
+        </p>
+        <Screenshot className="mt-5" src="/showcase/commerce-admin.webp" alt="Mechatron Lab admin dashboard for inventory and orders" />
+      </section>
     </CaseStudyPage>
   );
 }

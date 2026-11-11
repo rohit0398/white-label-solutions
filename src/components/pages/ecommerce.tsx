@@ -20,7 +20,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
 const title = "White-Label E-Commerce Platform for Web and Mobile";
-const description = "Launch a branded online store, iOS and Android shopping apps, and an admin panel for products, orders, and inventory on your cloud.";
+const description = "Launch an online store and iOS and Android shopping apps. Manage orders and multi-warehouse inventory from one admin panel on your cloud.";
 
 export const metadata: Metadata = {
   title,
