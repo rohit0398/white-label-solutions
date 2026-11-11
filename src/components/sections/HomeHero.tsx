@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
@@ -18,7 +19,23 @@ export function HomeHero() {
   const whatsappUrl = useContactWhatsApp();
 
   return (
-    <section id="hero" className="pt-16 sm:pt-14 pb-16 sm:pb-20">
+    <section id="hero" className="relative isolate bg-paper pb-16 pt-16 sm:pb-20 sm:pt-14">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(100%,30rem)] overflow-hidden md:h-full [[data-theme=light]_&]:opacity-25"
+      >
+        <Image
+          src="/showcase/home-hero-platforms.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          loading="eager"
+          fetchPriority="low"
+          className="object-cover object-right"
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-paper/85 via-paper/72 to-paper/55 md:from-paper md:from-20% md:via-paper/60 md:via-60% md:to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-paper/10 via-transparent to-paper" />
+      </div>
       <div className="wrap space-y-6">
         <div>
           <HeadingBadge category="default">{translateCopy(englishMessage("HomeChooser.badge"))}</HeadingBadge>
@@ -72,7 +89,7 @@ export function HomeHero() {
             key={family}
             href={`/solutions/${family}`}
             onClick={() => trackEvent("select_platform", { platform: family, placement: "HomeHero" })}
-            className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-wash/40 p-4 transition-colors hover:border-accent/60 hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:p-5"
+            className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-wash/85 p-4 transition-colors hover:border-accent/60 hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:p-5"
           >
             <div className="flex items-center gap-3">
               <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-accent/30 bg-accent/10 text-accent">

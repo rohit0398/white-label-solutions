@@ -17,10 +17,15 @@ const popularCountryIds = new Set(POPULAR_COUNTRIES.map((country) => country.iso
 const otherCountries = ALL_COUNTRIES.filter((country) => !popularCountryIds.has(country.iso));
 const countryCodes = new Map([...POPULAR_COUNTRIES, ...otherCountries].map((country) => [country.iso, country.code]));
 
-export function ContactWhatsAppLink({ placement, className, children }: { placement: string; className?: string; children: ReactNode }) {
+export function ContactWhatsAppLink({ placement, href = `https://wa.me/${BRAND.contact.whatsapp.slice(1)}`, className, children }: {
+  placement: string;
+  href?: string;
+  className?: string;
+  children: ReactNode;
+}) {
   return (
     <a
-      href={`https://wa.me/${BRAND.contact.whatsapp.slice(1)}`}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => trackWhatsAppClick(placement)}

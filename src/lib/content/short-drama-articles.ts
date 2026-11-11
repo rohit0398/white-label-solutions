@@ -6,9 +6,19 @@ export interface DramaArticle {
   description: string;
   intro: string;
   takeaway: string;
-  sections: { id: string; title: string; paragraphs: string[]; bullets?: string[]; checklist?: readonly LaunchStep[] }[];
+  datePublished?: string;
+  sections: {
+    id: string;
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+    checklist?: readonly LaunchStep[];
+    options?: { title: string; text: string; href: string; linkLabel: string }[];
+  }[];
   sources: { title: string; url: string }[];
 }
+
+export const MICRO_DRAMA_LAUNCH_SLUG = "launch-micro-drama-platform";
 
 const platformSources = [
   { title: "Cloudflare Stream: storage and delivery pricing", url: "https://developers.cloudflare.com/stream/pricing/" },
@@ -17,6 +27,73 @@ const platformSources = [
 ];
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
+  {
+    slug: MICRO_DRAMA_LAUNCH_SLUG,
+    title: "How to Launch a Micro Drama Platform: Web First or App First?",
+    description: "Choose a web-first, app-first, or combined launch for your micro drama platform. Compare viewer journeys, try the live demo, and explore launch packages.",
+    intro: "If a viewer discovers your micro drama in a social clip, do you want them to open an episode in their browser or install an app first? That decision changes what your studio needs to test and support on launch day.",
+    takeaway: "Start on the web if shared episode links drive discovery. Start with apps if you have a plan to drive installs and bring viewers back. Launch both together if you already need both routes and can test them end to end.",
+    datePublished: "2026-11-11",
+    sections: [
+      {
+        id: "choose-your-launch",
+        title: "Choose how viewers will start watching",
+        paragraphs: ["Pick the option that fits the audience and distribution channels you have lined up for your first release."],
+        options: [
+          {
+            title: "Web first for link-driven discovery",
+            text: "Use a mobile-friendly website if you’re promoting episodes through social clips, newsletters, or partner links. A viewer can go from the promotion to a specific episode without installing an app. Test the journey in the browsers your audience actually uses.",
+            href: "/solutions/short-drama-website-development",
+            linkLabel: "Explore the website package",
+          },
+          {
+            title: "App first for an install campaign",
+            text: "Start with iOS and Android if your launch plan already sends people to the stores and you’ll release episodes regularly. Test the journey from install to first play and from a new episode alert back to the series. Leave time for store submission and review.",
+            href: "/solutions/short-drama-app-development",
+            linkLabel: "Explore the app package",
+          },
+          {
+            title: "Web and apps for two established channels",
+            text: "Launch both if partners need a browser link and you also have an audience ready to install. Decide which path each campaign uses, then confirm how sign-in, viewing progress, and paid access behave when someone switches devices.",
+            href: "/solutions/short-drama",
+            linkLabel: "Explore the complete platform",
+          },
+        ],
+      },
+      {
+        id: "try-a-viewing-session",
+        title: "Try the same series on web and mobile",
+        paragraphs: [
+          "Use the MicroDrama demo below to compare the browser player with the mobile test builds. Pick a series you haven’t watched before, open its first episode, and see how easy it is to find the next one. Try it on a phone over mobile data as well as Wi-Fi.",
+          "For your own release, also test the first paid-access decision and what happens when a purchase fails. Ask which steps you can try in the demo and which depend on the package or payment setup you choose.",
+        ],
+      },
+      {
+        id: "measure-the-first-release",
+        title: "Measure where people stop watching",
+        paragraphs: [
+          "For a web launch, follow visits from a specific campaign through first episode starts, completions, and a return visit. If people arrive but rarely play, review the link destination and player before spending more on promotion.",
+          "For an app launch, follow store visits, installs, first episode starts, and return viewing. A drop between installs and plays points to a different problem from a drop at the store listing. Compare both channels using the same series and similar audiences when you can.",
+        ],
+      },
+      {
+        id: "prepare-for-the-next-channel",
+        title: "Plan the handoff before adding a second channel",
+        paragraphs: [
+          "Decide how viewers will sign in, which purchases should carry across devices, and whether existing episode links will still work. Ask your provider what can be shared across clients and what needs separate setup. Test the switch with one account, one series, and one purchase before you expand.",
+        ],
+        bullets: [
+          "Bring one complete series with artwork, captions, and episode order.",
+          "List your first promotion channels and which device or store each one points to.",
+          "Choose which episodes are free and describe what a paid viewer should get.",
+        ],
+      },
+    ],
+    sources: [
+      { title: "Apple Developer: submit an app for review", url: "https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app/" },
+      { title: "Google Play Console: prepare and roll out a release", url: "https://support.google.com/googleplay/android-developer/answer/9859348?hl=en" },
+    ],
+  },
   {
     slug: "short-drama-app-development",
     title: "How to Plan a Short Drama App Launch",

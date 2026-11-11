@@ -4,8 +4,16 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 47);
+assert.equal(urls.length, 49);
 assert.equal(sitemap.includes("<lastmod>"), false);
+const dramaGuides = [
+  "launch-micro-drama-platform",
+  "short-drama-app-development",
+  "build-app-like-reelshort",
+  "build-app-like-dramabox",
+  "short-drama-app-development-cost",
+  "short-drama-monetization",
+];
 const titles = new Set();
 const descriptions = new Set();
 const pages = [];
@@ -29,15 +37,23 @@ for (const url of urls) {
   assert.equal(nodes.some(node => node.aggregateRating), false, path);
   const products = nodes.filter(node => node["@type"] === "SoftwareApplication");
   assert.equal(products.length, path.includes("/solutions/") ? 1 : 0, path);
-  if (["short-drama-app-development", "build-app-like-reelshort", "build-app-like-dramabox", "short-drama-app-development-cost", "short-drama-monetization"].some(slug => path === `/blog/${slug}`)) {
+  if (dramaGuides.some(slug => path === `/blog/${slug}`)) {
     assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `Article schema: ${path}`);
     assert.ok(html.includes('id="live-demo"'), `Live product access: ${path}`);
-    assert.ok(html.includes('id="packages"'), `Package comparison: ${path}`);
     assert.ok(html.includes('href="/solutions/short-drama"'), `Commercial link: ${path}`);
-    assert.ok(html.includes("$6,998"), `Catalog-derived suite plus license total: ${path}`);
-    for (const slug of ["build-app-like-reelshort", "build-app-like-dramabox", "short-drama-app-development-cost", "short-drama-monetization"]) {
+    for (const slug of dramaGuides) {
       if (path !== `/blog/${slug}`) assert.ok(html.includes(`href="/blog/${slug}"`), `Related guide discovery: ${path}`);
     }
+  }
+  if (path === "/blog/short-drama-app-development-cost") {
+    assert.ok(html.includes('id="packages"'), `Package comparison: ${path}`);
+    assert.ok(html.includes("$6,998"), `Catalog-derived suite plus license total: ${path}`);
+  }
+  if (path === "/blog/launch-micro-drama-platform") {
+    assert.ok(html.includes('href="/solutions/short-drama-app-development"'), "App package link");
+    assert.ok(html.includes('href="/solutions/short-drama-website-development"'), "Website package link");
+    assert.ok(html.includes('href="/blog/short-drama-app-development-cost#packages"'), "Package price link");
+    assert.ok(html.includes("I+read+your+micro+drama+launch+guide"), "Guide-specific WhatsApp link");
   }
   if (lang !== "en") {
     assert.equal(html.includes("Production-Ready Platforms. Deployed Directly to Your Cloud."), false, path);

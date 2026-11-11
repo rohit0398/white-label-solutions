@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL, LANGUAGES, LOCALIZED_PATHS, localizedPath, languageAlternates } from "@/lib/site-config";
 import { CASE_STUDIES, CASE_STUDIES_PATH } from "@/lib/content/case-studies";
+import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
 
 const englishPaths = [
   "/",
@@ -18,11 +19,7 @@ const englishPaths = [
   CASE_STUDIES_PATH,
   ...Object.values(CASE_STUDIES).map(study => study.path),
   "/blog",
-  "/blog/short-drama-app-development",
-  "/blog/build-app-like-reelshort",
-  "/blog/build-app-like-dramabox",
-  "/blog/short-drama-app-development-cost",
-  "/blog/short-drama-monetization",
+  ...DRAMA_ARTICLES.map(article => `/blog/${article.slug}`),
   "/blog/ott-video-streaming-development",
   "/blog/ecommerce-website-development-cost",
   "/blog/ecommerce-website-development",
