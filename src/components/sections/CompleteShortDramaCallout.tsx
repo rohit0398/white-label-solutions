@@ -1,4 +1,6 @@
 "use client";
+
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { englishMessage } from "@/lib/messages";
 import { useSite } from "@/components/site/SiteProvider";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
@@ -40,7 +42,7 @@ export function CompleteShortDramaCallout() {
         "0% Platform Commission",
       ]}
       ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
-      ctaHref="/solutions/short-drama"
+      ctaHref={SHORT_DRAMA_PATHS.platform}
     />
   );
 }

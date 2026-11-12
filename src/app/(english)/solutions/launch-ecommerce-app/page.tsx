@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import { englishMessage } from "@/lib/messages";
@@ -17,9 +18,9 @@ import { Closing } from "@/components/sections/Closing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
-const title = "E-Commerce App Development for iOS and Android";
-const description = "Launch branded shopping apps for iOS and Android with catalog sync, checkout, and push notifications. Submit through your own developer accounts.";
-const canonical = "/solutions/ecommerce-app-development";
+const title = "Launch an E-Commerce App for iOS & Android";
+const description = "Launch white-label shopping apps for iOS and Android with product browsing, checkout, and order updates.";
+const canonical = ECOMMERCE_PATHS.app;
 
 const faqs = [
   { q: "Can the apps connect to my existing store?", a: "We review your catalog, inventory, and order APIs before confirming what can connect and what needs custom work." },
@@ -41,7 +42,7 @@ export default function EcommerceAppDevelopmentPage() {
   const breadcrumbs = [
     { name: "Home", item: "/" },
     { name: "Solutions", item: "/solutions" },
-    { name: "E-Commerce App Development", item: "/solutions/ecommerce-app-development" },
+    { name: "E-Commerce App Development", item: ECOMMERCE_PATHS.app },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
@@ -50,7 +51,7 @@ export default function EcommerceAppDevelopmentPage() {
     name: title,
     description,
     price: schemaPrice("app-launch"),
-    url: "/solutions/ecommerce-app-development",
+    url: ECOMMERCE_PATHS.app,
     operatingSystem: "iOS, Android",
     applicationCategory: "ShoppingApplication",
     siteUrl,
@@ -74,8 +75,8 @@ export default function EcommerceAppDevelopmentPage() {
             { label: "E-Commerce App Development" },
           ]}
           badge="Shopping apps for iOS and Android"
-          headline="E-Commerce App Development"
-          subtitle="Launch branded shopping apps with product browsing, checkout, and order updates. We review how the apps connect to your existing store or help you plan the complete platform."
+          headline="Launch an e-commerce app for iOS and Android"
+          subtitle={description}
           anchors={[
             { label: englishMessage("EcommerceProof.appTitle"), href: "#work" },
             { label: englishMessage("ShortDrama.top.included"), href: "#architecture" },

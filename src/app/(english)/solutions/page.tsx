@@ -1,3 +1,5 @@
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { priceText } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
@@ -69,7 +71,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Ready-to-launch Next.js storefront, Flutter mobile apps & Admin CRM",
       badge: priceText("Complete ({price:launch})"),
       icon: ShoppingBag,
-      href: "/solutions/ecommerce",
+      href: ECOMMERCE_PATHS.platform,
       status: "Ready for Deployment",
       stats: [
         { label: "Deployment Speed", val: "2–4 Weeks" },
@@ -90,7 +92,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Online storefront and admin panel for orders and inventory",
       badge: priceText("Web Only ({price:web-launch})"),
       icon: Globe,
-      href: "/solutions/ecommerce-website-development",
+      href: ECOMMERCE_PATHS.web,
       status: "Ready for Deployment",
       stats: [
         { label: "Page Speed", val: "< 0.9s Next.js" },
@@ -111,7 +113,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Native iOS & Android mobile shopping apps built with Flutter",
       badge: "Mobile Apps",
       icon: Smartphone,
-      href: "/solutions/ecommerce-app-development",
+      href: ECOMMERCE_PATHS.app,
       status: "Ready for Deployment",
       stats: [
         { label: "Rendering Speed", val: "60 FPS Flutter" },
@@ -133,7 +135,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Complete mobile apps, mobile-web player & central Video CMS",
       badge: priceText("Complete ({price:short-drama-base})"),
       icon: Clapperboard,
-      href: "/solutions/short-drama",
+      href: SHORT_DRAMA_PATHS.platform,
       status: "Complete Short Drama Platform",
       stats: [
         { label: "Formats", val: "iOS + Android + Web" },
@@ -154,7 +156,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Native 9:16 iOS & Android vertical drama apps + Video CMS",
       badge: priceText("Mobile Apps ({price:short-drama-app-launch})"),
       icon: Smartphone,
-      href: "/solutions/short-drama-app-development",
+      href: SHORT_DRAMA_PATHS.app,
       status: "Ready for Deployment",
       stats: [
         { label: "Playback", val: "Vertical episodes" },
@@ -175,7 +177,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Mobile-first 9:16 vertical web streaming portal + Video CMS",
       badge: priceText("Web Only ({price:short-drama-web-launch})"),
       icon: Globe,
-      href: "/solutions/short-drama-website-development",
+      href: SHORT_DRAMA_PATHS.web,
       status: "Ready for Deployment",
       stats: [
         { label: "Format", val: "9:16 Mobile-Web" },
@@ -198,7 +200,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "16:9 widescreen Next.js web portal, native mobile apps & Video CMS",
       badge: priceText("Complete ({price:cinematic-base})"),
       icon: Clapperboard,
-      href: "/solutions/ott-streaming",
+      href: OTT_PATHS.platform,
       status: "Flagship Streaming",
       stats: [
         { label: "Platforms", val: "Web + iOS + Android" },
@@ -219,7 +221,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "Native 16:9 widescreen iOS & Android streaming apps + Video CMS",
       badge: priceText("Mobile Apps ({price:cinematic-app-launch})"),
       icon: Smartphone,
-      href: "/solutions/ott-app-development",
+      href: OTT_PATHS.app,
       status: "Ready for Deployment",
       stats: [
         { label: "Platforms", val: "iOS & Android" },
@@ -240,7 +242,7 @@ export default function SolutionsCatalogPage() {
       subtitle: "16:9 widescreen streaming website & adaptive HLS bitrates",
       badge: priceText("Web Only ({price:cinematic-web-launch})"),
       icon: Globe,
-      href: "/solutions/ott-website-development",
+      href: OTT_PATHS.web,
       status: "Ready for Deployment",
       stats: [
         { label: "Format", val: "Widescreen video" },

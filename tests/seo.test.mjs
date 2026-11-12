@@ -78,18 +78,45 @@ test("one price change updates cards, text and schema inputs together", () => {
 test("language switching preserves supported paths and uses explicit English fallbacks", () => {
   const { localizedPath, languageAlternates } = loadTs("src/lib/site-config.ts");
   assert.equal(localizedPath("/es/solutions/short-drama", "fr"), "/fr/solutions/short-drama");
-  assert.equal(localizedPath("/hi/solutions/ecommerce", "en"), "/solutions/ecommerce");
+  assert.equal(localizedPath("/es/solutions/short-drama", "en"), "/solutions/launch-micro-drama-platform");
+  assert.equal(localizedPath("/solutions/launch-micro-drama-platform", "es"), "/es/solutions/short-drama");
+  assert.equal(languageAlternates("/solutions/launch-micro-drama-platform")["x-default"], "/solutions/launch-micro-drama-platform");
+  assert.equal(localizedPath("/hi/solutions/ecommerce", "en"), "/solutions/launch-ecommerce-platform");
+  assert.equal(localizedPath("/solutions/launch-ecommerce-platform", "hi"), "/hi/solutions/ecommerce");
+  assert.equal(localizedPath("/fr/solutions/ott-streaming", "en"), "/solutions/launch-ott-streaming-platform");
+  assert.equal(localizedPath("/solutions/launch-ott-streaming-platform", "fr"), "/fr/solutions/ott-streaming");
   assert.equal(localizedPath("/blog/ecommerce-app-development", "de"), "/blog/ecommerce-app-development");
   assert.equal(localizedPath("/", "hi"), "/hi");
-  assert.equal(languageAlternates("/solutions/ott-streaming")["x-default"], "/solutions/ott-streaming");
+  assert.equal(languageAlternates("/solutions/ott-streaming")["x-default"], "/solutions/launch-ott-streaming-platform");
+});
+
+test("micro drama launch paths select their corresponding contact package", () => {
+  const { shortDramaOfferForPath } = loadTs("src/lib/short-drama-offers.ts");
+  assert.equal(shortDramaOfferForPath("/solutions/launch-micro-drama-platform"), "platform");
+  assert.equal(shortDramaOfferForPath("/solutions/launch-micro-drama-app"), "app");
+  assert.equal(shortDramaOfferForPath("/solutions/launch-micro-drama-website"), "web");
+  assert.equal(shortDramaOfferForPath("/es/solutions/short-drama"), "platform");
+});
+
+test("OTT and e-commerce launch paths select the matching inquiry packages", () => {
+  const { ottOfferForPath, OTT_PACKAGES } = loadTs("src/lib/ott-offers.ts");
+  const { ecommerceOfferForPath, ECOMMERCE_PACKAGES } = loadTs("src/lib/ecommerce-offers.ts");
+  assert.equal(OTT_PACKAGES[ottOfferForPath("/solutions/launch-ott-streaming-platform")], "cinematic-base");
+  assert.equal(OTT_PACKAGES[ottOfferForPath("/solutions/launch-ott-app")], "cinematic-app-launch");
+  assert.equal(OTT_PACKAGES[ottOfferForPath("/solutions/launch-ott-website")], "cinematic-web-launch");
+  assert.equal(OTT_PACKAGES[ottOfferForPath("/fr/solutions/ott-streaming")], "cinematic-base");
+  assert.equal(ECOMMERCE_PACKAGES[ecommerceOfferForPath("/solutions/launch-ecommerce-platform")], "ecommerce");
+  assert.equal(ECOMMERCE_PACKAGES[ecommerceOfferForPath("/solutions/launch-ecommerce-app")], "app-launch");
+  assert.equal(ECOMMERCE_PACKAGES[ecommerceOfferForPath("/solutions/launch-ecommerce-website")], "web-launch");
+  assert.equal(ECOMMERCE_PACKAGES[ecommerceOfferForPath("/hi/solutions/ecommerce")], "ecommerce");
 });
 
 test("English aliases redirect permanently for people and bots, preserving query parameters", () => {
   const { proxy } = loadTs("src/proxy.ts");
   for (const agent of ["Mozilla/5.0", "Googlebot", "bingbot"]) {
-    const result = proxy(new NextRequest("https://example.com/en/solutions/ecommerce?campaign=test", { headers: { "user-agent": agent } }));
+    const result = proxy(new NextRequest("https://example.com/en/solutions/launch-ecommerce-platform?campaign=test", { headers: { "user-agent": agent } }));
     assert.equal(result.status, 308);
-    assert.equal(result.headers.get("location"), "https://example.com/solutions/ecommerce?campaign=test");
+    assert.equal(result.headers.get("location"), "https://example.com/solutions/launch-ecommerce-platform?campaign=test");
   }
   const explicit = proxy(new NextRequest("https://example.com/es", { headers: { "accept-language": "de", cookie: "NEXT_LOCALE=fr" } }));
   assert.equal(explicit.headers.get("location"), null);

@@ -14,7 +14,7 @@ import { SHORT_DRAMA_PACKAGES, type ShortDramaOffer } from "@/lib/short-drama-of
 
 const OFFER_CONTENT = {
   platform: {
-    title: englishMessage("ShortDrama.top.platform.title"),
+    title: englishMessage("ShortDrama.top.platform.heading"),
     badge: englishMessage("ShortDrama.top.platform.heroBadge"),
     intro: englishMessage("ShortDrama.top.platform.intro"),
     emphasis: "both",
@@ -35,7 +35,7 @@ const OFFER_CONTENT = {
     engineeringHeadline: englishMessage("short-drama.enterprise.video.streaming.architecture.zero.aa8b029"),
   },
   app: {
-    title: englishMessage("ShortDrama.top.app.title"),
+    title: englishMessage("ShortDrama.top.app.heading"),
     badge: englishMessage("ShortDrama.top.app.heroBadge"),
     intro: englishMessage("ShortDrama.top.app.intro"),
     emphasis: "app",
@@ -50,7 +50,7 @@ const OFFER_CONTENT = {
     engineeringHeadline: englishMessage("ShortDrama.top.stack.appHeadline"),
   },
   web: {
-    title: englishMessage("ShortDrama.top.web.title"),
+    title: englishMessage("ShortDrama.top.web.heading"),
     badge: englishMessage("ShortDrama.top.web.heroBadge"),
     intro: englishMessage("ShortDrama.top.web.intro"),
     emphasis: "web",

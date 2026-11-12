@@ -1,3 +1,5 @@
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { MetadataRoute } from "next";
 import { SITE_URL, LANGUAGES, LOCALIZED_PATHS, localizedPath, languageAlternates } from "@/lib/site-config";
 import { CASE_STUDIES, CASE_STUDIES_PATH } from "@/lib/content/case-studies";
@@ -7,15 +9,15 @@ const englishPaths = [
   "/",
   "/compare/shopify-alternative",
   "/solutions",
-  "/solutions/ecommerce-website-development",
-  "/solutions/ecommerce-app-development",
-  "/solutions/ecommerce",
-  "/solutions/ott-streaming",
-  "/solutions/short-drama",
-  "/solutions/short-drama-app-development",
-  "/solutions/short-drama-website-development",
-  "/solutions/ott-website-development",
-  "/solutions/ott-app-development",
+  ECOMMERCE_PATHS.web,
+  ECOMMERCE_PATHS.app,
+  ECOMMERCE_PATHS.platform,
+  OTT_PATHS.platform,
+  SHORT_DRAMA_PATHS.platform,
+  SHORT_DRAMA_PATHS.app,
+  SHORT_DRAMA_PATHS.web,
+  OTT_PATHS.web,
+  OTT_PATHS.app,
   CASE_STUDIES_PATH,
   ...Object.values(CASE_STUDIES).map(study => study.path),
   "/blog",

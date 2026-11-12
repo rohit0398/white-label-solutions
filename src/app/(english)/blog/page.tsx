@@ -1,3 +1,5 @@
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { ECOMMERCE_GUIDES } from "@/lib/content/ecommerce-guides";
 import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
@@ -212,21 +214,21 @@ export default function BlogIndexPage() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-3 w-full sm:w-auto">
               <DemoButton size="md" />
               <Link
-                href="/solutions/ecommerce"
+                href={ECOMMERCE_PATHS.platform}
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
                 <span>E-Commerce ({displayPackagePrice(FAMILY_PACKAGE.ecommerce, "en-US")})</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
               <Link
-                href="/solutions/short-drama"
+                href={SHORT_DRAMA_PATHS.platform}
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
                 <span>Short Drama ({displayPackagePrice(FAMILY_PACKAGE["short-drama"], "en-US")})</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
               <Link
-                href="/solutions/ott-streaming"
+                href={OTT_PATHS.platform}
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-lg border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
                 <span>OTT Streaming ({displayPackagePrice(FAMILY_PACKAGE["ott-streaming"], "en-US")})</span>

@@ -1,3 +1,4 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { englishMessage } from "@/lib/messages";
 
 import { priceText } from "@/lib/pricing-catalog";
@@ -607,7 +608,7 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
     industry: englishMessage("constants.adaptive.multi.bitrate.hls.video.cms.440f54a"),
     description:
       englishMessage("HomeChooser.ott.description"),
-    url: "/solutions/ott-streaming",
+    url: OTT_PATHS.platform,
     caseStudyUrl: "/case-studies/ott-streaming-network",
     screenshotUrl: "/showcase/microdrama-catalog.webp",
     screenshotAlt: englishMessage("ShortDrama.top.platform.image"),

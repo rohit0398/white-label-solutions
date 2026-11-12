@@ -1,3 +1,4 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import Link from "next/link";
 import { CaseStudyPage, caseStudyMetadata } from "../_components/CaseStudyPage";
 import { buttonClass } from "@/components/ui/Button";
@@ -26,7 +27,7 @@ export default function OttStreamingCaseStudyPage() {
         title: "Planning an OTT launch?",
         description: "The standard package covers on-demand streaming. Tell us which channels and devices you need so we can scope live feeds, TV apps, or advanced DRM.",
         packageId: OTT_PACKAGES.platform,
-        solution: { href: "/solutions/ott-streaming", label: "Explore the OTT platform" },
+        solution: { href: OTT_PATHS.platform, label: "Explore the OTT platform" },
         guide: { href: "/blog/ott-video-streaming-development", label: "Read the OTT streaming guide" },
       }}
     />

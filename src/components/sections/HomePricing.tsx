@@ -18,13 +18,13 @@ export function HomePricing() {
       <div className="space-y-6">
         <CurrencySelector />
         <ul className="grid gap-3 md:grid-cols-3">
-          {homePlatforms.map(({ family, title }) => (
+          {homePlatforms.map(({ family, href, title }) => (
             <li key={family} className="space-y-2 rounded-xl border border-line bg-wash/40 p-5">
               <h3 className="font-semibold">{translateCopy(title)}</h3>
               <p className="text-sm font-medium text-ink-2">
                 {translateCopy.format("EcommerceHero.setupPrice", { value0: displayPackagePrice(FAMILY_PACKAGE[family], language, currency) })}
               </p>
-              <Link href={`/solutions/${family}#pricing`} className="inline-block text-sm font-medium underline underline-offset-4">
+              <Link href={`${href}#pricing`} className="inline-block text-sm font-medium underline underline-offset-4">
                 {englishMessage("HomePricing.viewPackages")}
               </Link>
             </li>

@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import { englishMessage } from "@/lib/messages";
@@ -18,9 +19,9 @@ import Link from "@/components/ui/LocalizedLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
-const title = "E-Commerce Website Development for Online Stores";
-const description = "Launch a branded online store with browser checkout, product pages, and an admin panel for orders and inventory on your cloud account.";
-const canonical = "/solutions/ecommerce-website-development";
+const title = "Launch an E-Commerce Website | Storefront & Checkout";
+const description = "Launch a white-label online store with product pages and browser checkout. Manage orders and inventory from one admin panel on your cloud account.";
+const canonical = ECOMMERCE_PATHS.web;
 
 const faqs = [
   { q: "What does the website package include?", a: "It includes a branded storefront, browser checkout, and an admin panel for products, orders, and stock." },
@@ -42,7 +43,7 @@ export default function EcommerceWebsiteDevelopmentPage() {
   const breadcrumbs = [
     { name: "Home", item: "/" },
     { name: "Solutions", item: "/solutions" },
-    { name: "E-Commerce Website Development", item: "/solutions/ecommerce-website-development" },
+    { name: "E-Commerce Website Development", item: ECOMMERCE_PATHS.web },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
@@ -51,7 +52,7 @@ export default function EcommerceWebsiteDevelopmentPage() {
     name: title,
     description,
     price: schemaPrice("web-launch"),
-    url: "/solutions/ecommerce-website-development",
+    url: ECOMMERCE_PATHS.web,
     operatingSystem: "Web, Cloud (AWS, GCP, Azure, DigitalOcean)",
     applicationCategory: "BusinessApplication",
     siteUrl,
@@ -75,8 +76,8 @@ export default function EcommerceWebsiteDevelopmentPage() {
             { label: "E-Commerce Website Development" },
           ]}
           badge="Online store and admin panel"
-          headline="E-Commerce Website Development"
-          subtitle="Launch a storefront with product pages, browser checkout, and an admin panel for orders and inventory. We deploy the store to your cloud account."
+          headline="Launch an e-commerce website"
+          subtitle={description}
           anchors={[
             { label: englishMessage("EcommerceProof.title"), href: "#work" },
             { label: englishMessage("ShortDrama.top.included"), href: "#architecture" },

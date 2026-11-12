@@ -1,4 +1,8 @@
 "use client";
+
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
 import { priceText } from "@/lib/pricing-catalog";
@@ -32,21 +36,21 @@ export function Navbar() {
     {
       title: englishMessage("ecommerce.complete.e.commerce.store.513e59f"),
       desc: englishMessage("Navbar.next.js.storefront.flutter.apps.crm.fc8477c"),
-      href: "/solutions/ecommerce",
+      href: ECOMMERCE_PATHS.platform,
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
       group: "ecommerce",
     },
     {
       title: englishMessage("Footer.e.commerce.mobile.app.e48da2f"),
       desc: englishMessage("Navbar.native.ios.android.apps.with.flutter.6fa4704"),
-      href: "/solutions/ecommerce-app-development",
+      href: ECOMMERCE_PATHS.app,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "ecommerce",
     },
     {
       title: englishMessage("Footer.e.commerce.website.e37a1d0"),
       desc: englishMessage("Navbar.web.storefront.operations.crm.1c4add5"),
-      href: "/solutions/ecommerce-website-development",
+      href: ECOMMERCE_PATHS.web,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "ecommerce",
     },
@@ -55,21 +59,21 @@ export function Navbar() {
     {
       title: englishMessage("ShortDrama.top.platform.title"),
       desc: englishMessage("Navbar.vertical.reels.apps.web.player.cms.ed6db0f"),
-      href: "/solutions/short-drama",
+      href: SHORT_DRAMA_PATHS.platform,
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
       group: "drama",
     },
     {
       title: englishMessage("Footer.short.drama.mobile.app.96b0c6e"),
       desc: englishMessage("Navbar.native.9.16.apps.with.vip.passes.ads.c86a0f8"),
-      href: "/solutions/short-drama-app-development",
+      href: SHORT_DRAMA_PATHS.app,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "drama",
     },
     {
       title: englishMessage("Footer.short.drama.website.486bf53"),
       desc: englishMessage("Navbar.mobile.first.9.16.web.player.cms.3794858"),
-      href: "/solutions/short-drama-website-development",
+      href: SHORT_DRAMA_PATHS.web,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "drama",
     },
@@ -78,21 +82,21 @@ export function Navbar() {
     {
       title: englishMessage("OttOverview.platform.title"),
       desc: englishMessage("Navbar.16.9.web.portal.mobile.apps.video.cms.c017d6a"),
-      href: "/solutions/ott-streaming",
+      href: OTT_PATHS.platform,
       price: priceText(englishMessage("CompleteOttCallout..price.launch.6843b00")),
       group: "ott",
     },
     {
       title: englishMessage("Footer.cinematic.ott.mobile.app.b41f93e"),
       desc: englishMessage("Navbar.16.9.streaming.apps.with.tv.casting.5a138f5"),
-      href: "/solutions/ott-app-development",
+      href: OTT_PATHS.app,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "ott",
     },
     {
       title: englishMessage("Footer.cinematic.ott.website.43c6b97"),
       desc: englishMessage("Navbar.16.9.widescreen.portal.adaptive.hls.5e2efde"),
-      href: "/solutions/ott-website-development",
+      href: OTT_PATHS.web,
       price: priceText(englishMessage("HomePlatformsDeck..price.web.launch.b516fa1")),
       group: "ott",
     },

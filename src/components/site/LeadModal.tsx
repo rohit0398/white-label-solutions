@@ -5,6 +5,7 @@ import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { priceText } from "@/lib/pricing-catalog";
 import { SHORT_DRAMA_PACKAGES, shortDramaOfferForPath } from "@/lib/short-drama-offers";
 import { OTT_PACKAGES, ottOfferForPath } from "@/lib/ott-offers";
+import { ECOMMERCE_PACKAGES, ecommerceOfferForPath } from "@/lib/ecommerce-offers";
 
 
 import React, { useEffect, useState } from "react";
@@ -55,10 +56,10 @@ function resolveInitialPackage(tierId?: string, pathname?: string): string {
   if (offer) return SHORT_DRAMA_PACKAGES[offer];
   const ottOffer = ottOfferForPath(path);
   if (ottOffer) return OTT_PACKAGES[ottOffer];
+  const ecommerceOffer = ecommerceOfferForPath(path);
+  if (ecommerceOffer) return ECOMMERCE_PACKAGES[ecommerceOffer];
   if (path.includes("short-drama")) return SHORT_DRAMA_PACKAGES.platform;
   if (path.includes("ott") || path.includes("streaming")) return OTT_PACKAGES.platform;
-  if (path.endsWith("/ecommerce-app-development")) return "app-launch";
-  if (path.endsWith("/ecommerce-website-development")) return "web-launch";
   if (path.includes("ecommerce") || path.includes("shopify")) return "ecommerce";
   if (path.includes("source-code")) return "source-code";
 

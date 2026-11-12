@@ -86,9 +86,9 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label OTT Streaming Platform",
+    title: "Launch an OTT Streaming Platform | Web, iOS & Android",
     description:
-      "Launch a branded streaming service for movies and series with a website and iOS and Android apps. Manage your catalog, subscriptions, and ads in one place.",
+      "Launch a white-label streaming service for movies and series on web, iOS, and Android. Manage the catalog, subscriptions, and ads from one admin panel.",
     keywords: [
       "ott platform development company",
       "video streaming app development",
@@ -156,9 +156,9 @@ export const LOCALIZED_OTT_SEO: Record<Language, LocalizedSeo> = {
 
 export const LOCALIZED_SHORT_DRAMA_SEO: Record<Language, LocalizedSeo> = {
   en: {
-    title: "White-Label Short Drama Streaming Platform",
+    title: "Launch a Micro Drama Platform | Web, iOS & Android",
     description:
-      "Launch a branded short drama platform with iOS and Android apps, a website, and one admin panel. Deploy it to your own cloud account.",
+      "Launch a white-label micro drama platform with iOS and Android apps, a streaming website, and one admin panel for episodes and VIP access.",
     keywords: [
       "short drama app development company",
       "reelshort clone app with source code",

@@ -1,3 +1,4 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -209,7 +210,7 @@ export default function OttVideoStreamingDevelopmentPage() {
                 </div>
                 <p className="text-xs text-ink-2 leading-relaxed">
                   Viewers can browse films and series, open a title page, and watch in the browser. See the{" "}
-                  <Link href="/solutions/ott-website-development" className="underline underline-offset-4">OTT website offer</Link>.
+                  <Link href={OTT_PATHS.web} className="underline underline-offset-4">OTT website offer</Link>.
                 </p>
               </div>
               <div className="p-5 rounded-xl border border-line bg-wash/50 space-y-2">
@@ -219,7 +220,7 @@ export default function OttVideoStreamingDevelopmentPage() {
                 </div>
                 <p className="text-xs text-ink-2 leading-relaxed">
                   See the{" "}
-                  <Link href="/solutions/ott-app-development" className="underline underline-offset-4">OTT app offer</Link>{" "}
+                  <Link href={OTT_PATHS.app} className="underline underline-offset-4">OTT app offer</Link>{" "}
                   for widescreen playback, offline viewing, and casting on compatible devices.
                 </p>
               </div>
@@ -415,7 +416,7 @@ export default function OttVideoStreamingDevelopmentPage() {
                 Book a platform walkthrough
               </DemoButton>
               <Link
-                href="/solutions/ott-streaming"
+                href={OTT_PATHS.platform}
                 className="inline-flex items-center gap-1.5 px-4 h-11 rounded-md border border-line bg-paper hover:bg-wash text-ink text-xs font-mono font-medium transition-colors"
               >
                 <span>Explore the OTT streaming platform</span>

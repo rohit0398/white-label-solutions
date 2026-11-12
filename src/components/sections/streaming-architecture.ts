@@ -1,3 +1,4 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import type { ArchitectureModuleContent } from "@/components/sections/ArchitectureModule";
 import { englishMessage } from "@/lib/messages";
 
@@ -104,7 +105,7 @@ export const ottPlatformModules = [
   {
     ...ottAppModule,
     link: {
-      href: "/solutions/ott-app-development",
+      href: OTT_PATHS.app,
       label: englishMessage("ShortDrama.architecture.app.link"),
     },
   },
@@ -112,7 +113,7 @@ export const ottPlatformModules = [
     ...ottWebModule,
     images: catalogScreens,
     link: {
-      href: "/solutions/ott-website-development",
+      href: OTT_PATHS.web,
       label: englishMessage("ShortDrama.architecture.web.link"),
     },
   },

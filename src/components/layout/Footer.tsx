@@ -1,4 +1,8 @@
 "use client";
+
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
 
@@ -31,15 +35,15 @@ export function Footer() {
       title: englishMessage("ecommerce.solutions.05b004a"),
       links: [
         { label: englishMessage("Footer.all.architectures.b75fb98"), href: "/solutions" },
-        { label: englishMessage("ecommerce.complete.e.commerce.store.513e59f"), href: "/solutions/ecommerce" },
-        { label: englishMessage("Footer.e.commerce.mobile.app.e48da2f"), href: "/solutions/ecommerce-app-development" },
-        { label: englishMessage("Footer.e.commerce.website.e37a1d0"), href: "/solutions/ecommerce-website-development" },
-        { label: englishMessage("ShortDrama.top.platform.title"), href: "/solutions/short-drama" },
-        { label: englishMessage("Footer.short.drama.mobile.app.96b0c6e"), href: "/solutions/short-drama-app-development" },
-        { label: englishMessage("Footer.short.drama.website.486bf53"), href: "/solutions/short-drama-website-development" },
-        { label: englishMessage("OttOverview.platform.title"), href: "/solutions/ott-streaming" },
-        { label: englishMessage("Footer.cinematic.ott.mobile.app.b41f93e"), href: "/solutions/ott-app-development" },
-        { label: englishMessage("Footer.cinematic.ott.website.43c6b97"), href: "/solutions/ott-website-development" },
+        { label: englishMessage("ecommerce.complete.e.commerce.store.513e59f"), href: ECOMMERCE_PATHS.platform },
+        { label: englishMessage("Footer.e.commerce.mobile.app.e48da2f"), href: ECOMMERCE_PATHS.app },
+        { label: englishMessage("Footer.e.commerce.website.e37a1d0"), href: ECOMMERCE_PATHS.web },
+        { label: englishMessage("ShortDrama.top.platform.title"), href: SHORT_DRAMA_PATHS.platform },
+        { label: englishMessage("Footer.short.drama.mobile.app.96b0c6e"), href: SHORT_DRAMA_PATHS.app },
+        { label: englishMessage("Footer.short.drama.website.486bf53"), href: SHORT_DRAMA_PATHS.web },
+        { label: englishMessage("OttOverview.platform.title"), href: OTT_PATHS.platform },
+        { label: englishMessage("Footer.cinematic.ott.mobile.app.b41f93e"), href: OTT_PATHS.app },
+        { label: englishMessage("Footer.cinematic.ott.website.43c6b97"), href: OTT_PATHS.web },
       ],
     },
     {

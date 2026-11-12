@@ -1,7 +1,8 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { schemaPrice } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
-import { CINEMATIC_OTT_WEB_PRICING_TIERS } from "@/lib/constants";
+import { CINEMATIC_OTT_APP_PRICING_TIERS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Pricing } from "@/components/sections/Pricing";
@@ -11,29 +12,29 @@ import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { Closing } from "@/components/sections/Closing";
 import { Section } from "@/components/ui/Section";
 import { ArchitectureModule } from "@/components/sections/ArchitectureModule";
-import { ottWebModule } from "@/components/sections/streaming-architecture";
+import { ottAppModule } from "@/components/sections/streaming-architecture";
 import { OttCmsShowcase } from "@/components/sections/OttCmsShowcase";
 import { StreamingRollout } from "@/components/sections/StreamingRollout";
 import { CompleteOttCallout } from "@/components/sections/CompleteOttCallout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
-const searchTitle = "OTT Website Development for Movies & Series";
+const searchTitle = "Launch an OTT App for iOS & Android";
 const searchDescription =
-  "Launch a branded OTT website with a browsable catalog, widescreen playback, and Stripe subscriptions. Manage movies and series from one admin panel.";
+  "Launch white-label OTT apps for iOS and Android. Stream movies and series with TV casting, offline downloads, and in-app subscriptions.";
 
 const faqs = [
   {
-    q: "What comes with the OTT website package?",
-    a: "A branded website with a movie and series catalog, browser playback, and an admin panel for publishing and managing the catalog.",
+    q: "Which devices does the standard OTT app package cover?",
+    a: "It includes apps for iOS and Android. We can review your target casting devices during the walkthrough and scope dedicated TV apps separately.",
   },
   {
-    q: "How do viewers subscribe on the website?",
-    a: "Viewers can subscribe through Stripe checkout. You manage which titles require a subscription in the admin panel.",
+    q: "Can viewers watch offline or pay in the apps?",
+    a: "The apps support offline video downloads and subscriptions through Apple and Google Play billing. Review those flows in your test build before submission.",
   },
   {
-    q: "Can the site carry live feeds?",
-    a: "The standard website covers on-demand video. Tell us about your live feeds, scheduling, and target browsers so we can quote the work separately.",
+    q: "Can the apps carry live channels or advanced DRM?",
+    a: "On-demand playback is included. We scope live channels and Widevine or FairPlay DRM separately based on your content and target devices.",
   },
 ];
 
@@ -41,52 +42,53 @@ export const metadata: Metadata = {
   title: searchTitle,
   description: searchDescription,
   keywords: [
-    "ott video streaming website development",
-    "video streaming website development",
-    "cinematic ott platform web",
-    "netflix clone website",
-    "vod website development",
-    "custom web streaming platform",
-    "hls video streaming web",
+    "ott mobile app development",
+    "video streaming app development",
+    "netflix clone app",
+    "flutter video streaming app",
+    "vod mobile app development",
+    "smart tv app development",
+    "white label streaming app",
+    "custom ott app developers",
   ],
   alternates: {
-    canonical: "/solutions/ott-website-development",
+    canonical: OTT_PATHS.app,
   },
   openGraph: {
     title: searchTitle,
     description: searchDescription,
-    url: "/solutions/ott-website-development",
+    url: OTT_PATHS.app,
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
-    images: ["/showcase/microdrama-web-genres.webp"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: searchTitle,
     description: searchDescription,
-    images: ["/showcase/microdrama-web-genres.webp"],
+    images: ["/showcase/microdrama-catalog.webp"],
   },
 };
 
-export default function OttWebsiteDevelopmentPage() {
+export default function OttAppDevelopmentPage() {
   const siteUrl = SITE_URL;
 
   const breadcrumbs = [
     { name: "Home", item: "/" },
     { name: "Solutions", item: "/solutions" },
-    { name: "Cinematic OTT Website", item: "/solutions/ott-website-development" },
+    { name: "Cinematic OTT Mobile App Development", item: OTT_PATHS.app },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
   const faqSchema = generateFaqSchema(faqs);
   const softwareSchema = generateSoftwareSchema({
-    name: "Cinematic OTT Website Platform",
+    name: "Cinematic OTT Mobile App Platform (iOS & Android)",
     description:
-      "White-label widescreen video streaming web portal and TV-ready web app with adaptive HLS bitrates, Stripe VIP subscriptions, and central Video CMS.",
-    price: schemaPrice("cinematic-web-launch"),
-    url: "/solutions/ott-website-development",
-    operatingSystem: "Web, Smart TV, macOS, Windows, Linux",
+      "White-label 16:9 cinematic video streaming mobile apps for iOS & Android with adaptive HLS playback, TV casting, VIP subscriptions, and central Video CMS.",
+    price: schemaPrice("cinematic-app-launch"),
+    url: OTT_PATHS.app,
+    operatingSystem: "iOS, Android",
     applicationCategory: "MultimediaApplication",
     siteUrl,
   });
@@ -100,44 +102,44 @@ export default function OttWebsiteDevelopmentPage() {
       <Navbar />
 
       <main className="ott-page flex-1">
-        <OttOverview offer="web" />
+        <OttOverview offer="app" />
 
-        <Section id="web-experience" wide>
-          <ArchitectureModule heading="h2" {...ottWebModule} />
+        <Section id="app-features" wide>
+          <ArchitectureModule heading="h2" {...ottAppModule} />
         </Section>
 
         <OttCmsShowcase ott />
 
-        <StreamingRollout family="ott" offer="web" />
+        <StreamingRollout family="ott" offer="app" />
 
-        {/* Cross-Sell Callout Box to Complete OTT Package */}
+        {/* Cross-Sell Callout Box to Complete Package */}
         <CompleteOttCallout />
 
         {/* Dedicated Child Pricing ($2,999 / $999 / $15/hr) */}
         <Pricing
           id="pricing"
           index="05 · Pricing &amp; Licensing"
-          title="Transparent Streaming Website Pricing"
+          title="Transparent Streaming App Pricing"
           intro="Flat one-time fee. No recurring monthly SaaS rent, no bandwidth markups, and 0% revenue cut."
-          tiers={CINEMATIC_OTT_WEB_PRICING_TIERS}
+          tiers={CINEMATIC_OTT_APP_PRICING_TIERS}
           hideCalculator
         />
 
-        {/* FAQs */}
+        {/* FAQ */}
         <Faq
           id="faq"
           index="06 · Frequently Asked Questions"
-          title="OTT website questions"
+          title="OTT app questions"
           intro=""
           items={faqs}
         />
 
         {/* Closing Conversion Banner */}
         <Closing
-          headline="Ready to launch your video streaming website?"
-          description="Talk directly with our solutions engineering team. We’ll demonstrate the Next.js widescreen player, the Stripe VIP checkout, and the Video CMS console."
-          ctaDemo="Book website walkthrough →"
-          tierId={OTT_PACKAGES.web}
+          headline="Ready to launch your cinematic video streaming apps?"
+          description="Talk directly with our solutions engineering team. We’ll demonstrate the Flutter widescreen player, the AirPlay/Chromecast integration, and the Video CMS console."
+          ctaDemo="Book streaming app walkthrough →"
+          tierId={OTT_PACKAGES.app}
         />
       </main>
 

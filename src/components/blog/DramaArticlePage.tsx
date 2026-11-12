@@ -1,3 +1,4 @@
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
@@ -11,9 +12,17 @@ import { ContactWhatsAppLink } from "@/components/site/ContactForm";
 import { DemoButton } from "@/components/site/DemoButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BRAND } from "@/lib/constants";
-import { DRAMA_ARTICLES, MICRO_DRAMA_LAUNCH_SLUG, dramaArticle } from "@/lib/content/short-drama-articles";
+import {
+  DRAMA_ARTICLES,
+  MICRO_DRAMA_APP_CHECKLIST_SLUG,
+  MICRO_DRAMA_BUILDERS_SLUG,
+  MICRO_DRAMA_LAUNCH_SLUG,
+  MICRO_DRAMA_PUBLISHING_SLUG,
+  MICRO_DRAMA_SOURCE_CODE_SLUG,
+  dramaArticle,
+} from "@/lib/content/short-drama-articles";
 import { displayPackagePrice, packageAmount, type PackageId } from "@/lib/pricing-catalog";
-import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
+import { SHORT_DRAMA_PACKAGES, type ShortDramaOffer } from "@/lib/short-drama-offers";
 import { SITE_URL } from "@/lib/site-config";
 
 const articleImage = "/showcase/microdrama-catalog.webp";
@@ -23,21 +32,56 @@ const articleNextSteps: Partial<Record<string, {
   title: string;
   text: string;
   links: { href: string; label: string }[];
+  offer?: ShortDramaOffer;
   whatsappMessage?: string;
 }>> = {
+  [MICRO_DRAMA_BUILDERS_SLUG]: {
+    title: "Ask for a walkthrough with one series",
+    text: "Tell us where viewers will watch and how you want to charge for episodes. We can show you the viewer and publishing flows for the package you’re considering.",
+    links: [
+      { href: SHORT_DRAMA_PATHS.platform, label: "Explore the white-label micro drama platform" },
+      { href: `/blog/${MICRO_DRAMA_SOURCE_CODE_SLUG}`, label: "Read about source code and hosting" },
+    ],
+    whatsappMessage: "Hi, I read your micro drama app builders guide and would like to discuss a white-label launch.",
+  },
   [MICRO_DRAMA_LAUNCH_SLUG]: {
     title: "Talk through your launch plan",
     text: "Tell us where viewers will find your series, which devices they use, and how you want to offer paid access. We can walk you through the package that fits your first release.",
-    links: [{ href: "/blog/short-drama-app-development-cost#packages", label: "Compare package prices" }],
+    links: [
+      { href: "/blog/short-drama-app-development-cost#packages", label: "Compare package prices" },
+      { href: `/blog/${MICRO_DRAMA_BUILDERS_SLUG}`, label: "Compare white-label app builders" },
+      { href: `/blog/${MICRO_DRAMA_APP_CHECKLIST_SLUG}`, label: "Use the iOS and Android launch checklist" },
+    ],
     whatsappMessage: "Hi, I read your micro drama launch guide and would like help choosing between a website and mobile apps.",
+  },
+  [MICRO_DRAMA_SOURCE_CODE_SLUG]: {
+    title: "Review the handover before choosing a package",
+    text: "Tell us which platforms you plan to launch and who will maintain them. We can walk you through the accounts, deployment, and optional source code license for that package.",
+    links: [{ href: "/blog/short-drama-app-development-cost#packages", label: "Compare deployment and source license prices" }],
+    whatsappMessage: "Hi, I read your micro drama source code guide and would like to discuss hosting and the source code license.",
+  },
+  [MICRO_DRAMA_PUBLISHING_SLUG]: {
+    title: "See how a series is published",
+    text: "Tell us about a series you plan to launch. We can show how to add it to the admin panel, set free and VIP access, and check the result on the viewer side.",
+    links: [{ href: SHORT_DRAMA_PATHS.platform, label: "See the platform and admin tools" }],
+    whatsappMessage: "Hi, I read your micro drama publishing guide and would like to see the admin panel and publishing flow.",
+  },
+  [MICRO_DRAMA_APP_CHECKLIST_SLUG]: {
+    title: "Review your iOS and Android launch plan",
+    text: "Tell us which markets you plan to launch in, whether your store accounts are set up, and how viewers should get VIP access. We can discuss the app package and what you’ll need for submission.",
+    links: [{ href: SHORT_DRAMA_PATHS.app, label: "Explore the iOS and Android app package" }],
+    offer: "app",
+    whatsappMessage: "Hi, I read your micro drama app launch checklist and would like help planning an iOS and Android release.",
   },
   "short-drama-app-development": {
     title: "Choose where viewers will watch",
     text: "Start with the format that fits your audience. Compare the app and website offers, or see how an entertainment studio launched its vertical player and publishing workflow.",
     links: [
       { href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, label: "Compare launching on web or apps first" },
-      { href: "/solutions/short-drama-app-development", label: "iOS and Android apps" },
-      { href: "/solutions/short-drama-website-development", label: "Short Drama website" },
+      { href: `/blog/${MICRO_DRAMA_BUILDERS_SLUG}`, label: "Compare white-label and custom options" },
+      { href: `/blog/${MICRO_DRAMA_PUBLISHING_SLUG}`, label: "See how to publish a series" },
+      { href: SHORT_DRAMA_PATHS.app, label: "iOS and Android apps" },
+      { href: SHORT_DRAMA_PATHS.web, label: "Short Drama website" },
       { href: "/case-studies/short-drama-platform", label: "Short Drama case study" },
     ],
   },
@@ -45,7 +89,7 @@ const articleNextSteps: Partial<Record<string, {
     title: "Plan your first release",
     text: "Bring one series and the features you want viewers to try. We can help you scope a first release around your own catalog.",
     links: [
-      { href: "/solutions/short-drama-app-development", label: "Explore Short Drama app development" },
+      { href: SHORT_DRAMA_PATHS.app, label: "Explore Short Drama app development" },
       { href: "/blog/short-drama-app-development-cost#packages", label: "Compare launch packages and prices" },
     ],
   },
@@ -57,7 +101,10 @@ const articleNextSteps: Partial<Record<string, {
   "short-drama-app-development-cost": {
     title: "Get an estimate for your launch",
     text: "Tell us which screens you need, the size of your starting catalog, and whether you need a source code license.",
-    links: [{ href: "/solutions/short-drama#pricing", label: "See complete platform pricing" }],
+    links: [
+      { href: `${SHORT_DRAMA_PATHS.platform}#pricing`, label: "See complete platform pricing" },
+      { href: `/blog/${MICRO_DRAMA_BUILDERS_SLUG}`, label: "Compare software providers" },
+    ],
   },
   "short-drama-monetization": {
     title: "Try the viewer access flow",
@@ -65,28 +112,47 @@ const articleNextSteps: Partial<Record<string, {
     links: [{ href: "#live-demo", label: "Try the MicroDrama demo" }],
   },
 };
-const articleVisuals: Partial<Record<string, { previewSection?: string; adminSection?: string }>> = {
-  "short-drama-app-development": { previewSection: "viewer", adminSection: "operations" },
+const adminEpisodes = {
+  src: "/showcase/microdrama-admin-episodes.webp",
+  alt: "MicroDrama admin panel showing episode numbers, season, and publishing status",
+};
+const adminEpisodesWithCaption = { ...adminEpisodes, caption: "MicroDrama’s admin panel shows episode order and publishing status." };
+const articleVisuals: Partial<Record<string, {
+  previewSection?: string;
+  screenshots?: Partial<Record<string, { src: string; alt: string; caption?: string }>>;
+}>> = {
+  [MICRO_DRAMA_BUILDERS_SLUG]: { screenshots: { "live-demo-checklist": adminEpisodesWithCaption } },
+  [MICRO_DRAMA_PUBLISHING_SLUG]: {
+    screenshots: {
+      "create-a-series": {
+        src: "/showcase/microdrama-admin-series.webp",
+        alt: "MicroDrama series catalog showing artwork, series status, and the Add button",
+      },
+      "add-and-order-episodes": adminEpisodes,
+    },
+  },
+  "short-drama-app-development": { previewSection: "viewer", screenshots: { operations: adminEpisodesWithCaption } },
   "build-app-like-reelshort": { previewSection: "mvp" },
-  "build-app-like-dramabox": { adminSection: "operations" },
-  "short-drama-monetization": { adminSection: "vip" },
+  "build-app-like-dramabox": { screenshots: { operations: adminEpisodesWithCaption } },
+  "short-drama-monetization": { screenshots: { vip: adminEpisodesWithCaption } },
 };
 
 export function articleMetadata(slug: string): Metadata {
   const article = dramaArticle(slug);
   const url = `/blog/${slug}`;
-  return { title: article.title, description: article.description,
+  const title = article.seoTitle ?? article.title;
+  return { title, description: article.description,
     alternates: { canonical: url },
-    openGraph: { type: "article", title: article.title, description: article.description, url, images: [articleImage], publishedTime: article.datePublished },
-    twitter: { card: "summary_large_image", title: article.title, description: article.description, images: [articleImage] },
+    openGraph: { type: "article", title, description: article.description, url, images: [articleImage], publishedTime: article.datePublished, modifiedTime: article.dateModified },
+    twitter: { card: "summary_large_image", title, description: article.description, images: [articleImage] },
   };
 }
 
 function PackageComparison() {
   const rows: { label: string; base: PackageId; source: PackageId; href: string }[] = [
-    { label: "Apps, website and CMS", base: "short-drama-base", source: "short-drama-source-code", href: "/solutions/short-drama" },
-    { label: "Native apps + CMS", base: "short-drama-app-launch", source: "short-drama-app-source-code", href: "/solutions/short-drama-app-development" },
-    { label: "Web player + CMS", base: "short-drama-web-launch", source: "short-drama-web-source-code", href: "/solutions/short-drama-website-development" },
+    { label: "Apps, website and CMS", base: "short-drama-base", source: "short-drama-source-code", href: SHORT_DRAMA_PATHS.platform },
+    { label: "Native apps + CMS", base: "short-drama-app-launch", source: "short-drama-app-source-code", href: SHORT_DRAMA_PATHS.app },
+    { label: "Web player + CMS", base: "short-drama-web-launch", source: "short-drama-web-source-code", href: SHORT_DRAMA_PATHS.web },
   ];
   return <section id="packages" className="space-y-4">
     <h2 className="text-2xl font-semibold">Compare our published launch packages</h2>
@@ -108,12 +174,12 @@ function PackageComparison() {
 export default function DramaArticlePage({ slug }: { slug: string }) {
   const article = dramaArticle(slug);
   const url = `${SITE_URL}/blog/${slug}`;
-  const { previewSection, adminSection } = articleVisuals[slug] ?? {};
+  const { previewSection, screenshots } = articleVisuals[slug] ?? {};
   const nextStep = articleNextSteps[slug];
-  const articleDate = article.datePublished ?? updated;
+  const articleDate = article.dateModified ?? article.datePublished ?? updated;
   const whatsappUrl = nextStep?.whatsappMessage ? new URL(BRAND.contact.whatsappUrl) : undefined;
   if (whatsappUrl && nextStep?.whatsappMessage) whatsappUrl.searchParams.set("text", nextStep.whatsappMessage);
-  const showPackageComparison = slug === "short-drama-app-development-cost";
+  const showPackageComparison = slug === "short-drama-app-development-cost" || slug === MICRO_DRAMA_BUILDERS_SLUG;
   return <div className="min-h-screen flex flex-col bg-paper text-ink">
     <JsonLd schema={{ "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description,
       mainEntityOfPage: url, url, image: `${SITE_URL}${articleImage}`, inLanguage: "en",
@@ -129,19 +195,17 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
     <main className="flex-1 pt-14 sm:pt-10 pb-20">
       <article className="wrap space-y-12" lang="en">
         <header className="space-y-5">
-          <nav aria-label="Breadcrumb" className="text-sm text-ink-3 flex flex-wrap gap-2"><Link href="/blog" className="underline">Blog</Link><span>/</span><Link href="/solutions/short-drama" className="underline">Short drama</Link></nav>
+          <nav aria-label="Breadcrumb" className="text-sm text-ink-3 flex flex-wrap gap-2"><Link href="/blog" className="underline">Blog</Link><span>/</span><Link href={SHORT_DRAMA_PATHS.platform} className="underline">Short drama</Link></nav>
           <p className="text-xs font-mono uppercase tracking-wider text-accent">Guides for studios and founders</p>
           <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight">{article.title}</h1>
-          <p className="text-sm text-ink-3">By <Link href="/about" className="underline">Mechatron Lab Engineering Team</Link> · {article.datePublished ? "Published" : "Updated"} <time dateTime={articleDate}>{articleDateFormat.format(new Date(articleDate))}</time></p>
+          <p className="text-sm text-ink-3">By <Link href="/about" className="underline">Mechatron Lab Engineering Team</Link> · {article.datePublished && !article.dateModified ? "Published" : "Updated"} <time dateTime={articleDate}>{articleDateFormat.format(new Date(articleDate))}</time></p>
           <p className="text-lg leading-relaxed text-ink-2">{article.intro}</p>
           <aside className="p-5 rounded-xl bg-wash border border-line"><p className="font-semibold mb-2">Before you start</p><p className="text-ink-2 leading-relaxed">{article.takeaway}</p></aside>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href="#live-demo" className="underline underline-offset-4">Try our web, iOS and Android demos</a>
-            {showPackageComparison && <a href="#packages" className="underline underline-offset-4">See packages and prices</a>}
-          </div>
+          {showPackageComparison && <a href="#packages" className="inline-block text-sm underline underline-offset-4">See packages and prices</a>}
         </header>
+        <ShortDramaLiveAccess emphasis="both" landing />
         <nav aria-label="Article contents" className="rounded-xl border border-line p-5 space-y-3"><h2 className="font-semibold">In this guide</h2><ol className="space-y-2 text-sm text-ink-2">{article.sections.map(section => <li key={section.id}><a className="underline underline-offset-4" href={`#${section.id}`}>{section.title}</a></li>)}</ol></nav>
-        {article.sections.map((section, index) => <section key={section.id} id={section.id} className="space-y-5 scroll-mt-24">
+        {article.sections.map(({ id, ...section }) => <section key={id} id={id} className="space-y-5 scroll-mt-24">
           <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
           {section.paragraphs.map((paragraph, i) => <p key={i} className="text-ink-2 leading-relaxed">{paragraph}</p>)}
           {section.options && (
@@ -156,29 +220,45 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
             </ul>
           )}
           {section.bullets && <ul className="list-disc pl-5 space-y-2 text-ink-2 leading-relaxed">{section.bullets.map(item => <li key={item}>{item}</li>)}</ul>}
+          {section.builderComparison && (
+            <div className="overflow-x-auto rounded-xl border border-line">
+              <table className="w-full min-w-[36rem] text-left text-sm leading-relaxed">
+                <caption className="sr-only">Micro drama app providers and what to verify</caption>
+                <thead className="bg-wash"><tr>
+                  <th scope="col" className="p-4">Provider</th>
+                  <th scope="col" className="p-4">Published offering</th>
+                  <th scope="col" className="p-4">What to verify</th>
+                </tr></thead>
+                <tbody>{section.builderComparison.map(row => (
+                  <tr key={row.href} className="border-t border-line align-top">
+                    <th scope="row" className="p-4 font-medium"><Link href={row.href} className="underline underline-offset-4">{row.name}</Link></th>
+                    <td className="p-4 text-ink-2">{row.offering}</td>
+                    <td className="p-4 text-ink-2">{row.verify}</td>
+                  </tr>
+                ))}</tbody>
+              </table>
+            </div>
+          )}
           {section.checklist && <LaunchSteps steps={section.checklist} compact />}
-          {section.id === previewSection && (
+          {id === previewSection && (
             <div className="space-y-3">
               <p className="text-sm text-ink-3">MicroDrama’s mobile website shows how viewers browse the catalog and preview an episode.</p>
               <MicroDramaAppPreview animated={false} />
             </div>
           )}
-          {section.id === adminSection && (
+          {screenshots?.[id] && (
             <Screenshot
-              src="/showcase/microdrama-admin-episodes.webp"
-              alt="Mechatron Lab MicroDrama episode list and publishing status"
+              {...screenshots[id]}
               sizes="(min-width: 704px) 656px, calc(100vw - 48px)"
-              caption="MicroDrama’s admin panel shows episode order and publishing status."
             />
           )}
-          {index === 1 && <div className="pt-5"><ShortDramaLiveAccess emphasis="both" landing /></div>}
         </section>)}
         {showPackageComparison && <PackageComparison />}
         {nextStep && <section className="space-y-4 rounded-2xl border border-line bg-wash p-6 sm:p-8">
           <h2 className="text-2xl font-semibold">{nextStep.title}</h2>
           <p className="leading-relaxed text-ink-2">{nextStep.text}</p>
           <div className="flex flex-wrap items-center gap-4">
-            <DemoButton tierId={SHORT_DRAMA_PACKAGES.platform} trackingPlacement={slug === MICRO_DRAMA_LAUNCH_SLUG ? slug : undefined}>Request a walkthrough</DemoButton>
+            <DemoButton tierId={SHORT_DRAMA_PACKAGES[nextStep.offer ?? "platform"]} trackingPlacement={nextStep.whatsappMessage ? slug : undefined}>Request a walkthrough</DemoButton>
             {whatsappUrl && (
               <ContactWhatsAppLink href={whatsappUrl.toString()} placement={slug} className={buttonClass("secondary")}>Chat on WhatsApp</ContactWhatsAppLink>
             )}

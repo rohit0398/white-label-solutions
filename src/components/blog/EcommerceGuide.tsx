@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
@@ -12,9 +13,9 @@ import { generateBreadcrumbSchema } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site-config";
 
 const packages: { label: string; href: string; launch: PackageId; source: PackageId }[] = [
-  { label: "Storefront and admin", href: "/solutions/ecommerce-website-development", launch: "web-launch", source: "web-source-code" },
-  { label: "iOS and Android apps", href: "/solutions/ecommerce-app-development", launch: "app-launch", source: "app-source-code" },
-  { label: "Complete e-commerce platform", href: "/solutions/ecommerce", launch: "launch", source: "source-code-license" },
+  { label: "Storefront and admin", href: ECOMMERCE_PATHS.web, launch: "web-launch", source: "web-source-code" },
+  { label: "iOS and Android apps", href: ECOMMERCE_PATHS.app, launch: "app-launch", source: "app-source-code" },
+  { label: "Complete e-commerce platform", href: ECOMMERCE_PATHS.platform, launch: "launch", source: "source-code-license" },
 ];
 
 export function ecommerceGuideMetadata(guideKey: EcommerceGuideKey): Metadata {

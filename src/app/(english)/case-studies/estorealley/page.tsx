@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { CaseStudyPage, caseStudyMetadata } from "../_components/CaseStudyPage";
 import { buttonClass } from "@/components/ui/Button";
 import { ESTORE_ALLEY_URL } from "@/lib/constants";
@@ -30,7 +31,7 @@ export default function EStoreAlleyCaseStudyPage() {
         title: "Planning a directory or a marketplace?",
         description: "Tell us how buyers should find sellers and where checkout should happen. We can scope the right listing, payment, and seller workflows for your project.",
         packageId: "ecommerce",
-        solution: { href: "/solutions/ecommerce-website-development", label: "Explore e-commerce website development" },
+        solution: { href: ECOMMERCE_PATHS.web, label: "Explore e-commerce website development" },
         guide: { href: "/blog/ecommerce-website-development", label: "Read the e-commerce website launch guide" },
       }}
     />

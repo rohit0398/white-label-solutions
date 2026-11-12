@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import type { PackageId } from "@/lib/pricing-catalog";
 
 interface CommerceGuide {
@@ -25,9 +26,9 @@ export const ECOMMERCE_GUIDES = {
       src: "/showcase/commerce-storefront.webp",
       alt: "Mechatron Lab online store with product categories and electronics listings",
       section: "catalog",
-      example: { href: "/solutions/ecommerce-website-development#work", label: "Browse the live storefront examples" },
+      example: { href: `${ECOMMERCE_PATHS.web}#work`, label: "Browse the live storefront examples" },
     },
-    offer: { href: "/solutions/ecommerce-website-development", label: "Explore e-commerce website development", tierId: "web-launch" },
+    offer: { href: ECOMMERCE_PATHS.web, label: "Explore e-commerce website development", tierId: "web-launch" },
     sections: [
       { id: "platform", title: "Choose a store model", paragraphs: ["A hosted platform can work well if its themes, checkout, and fulfillment tools meet your needs. A storefront deployed in your own cloud can give you more control over integrations and how the store works. Plan who will handle monitoring, backups, and software updates.", "Write down the workflows that would justify custom work. Examples include quoting for wholesale buyers, stock across multiple warehouses, or a checkout that connects to an existing order system."] },
       { id: "catalog", title: "Design the catalog around how people shop", paragraphs: ["Use categories and filters customers understand. Give each product a clear name, useful images, price, availability, and shipping details. For products with variants, show what changes when the buyer chooses a size, color, or model.", "Link category pages to products through normal navigation so visitors and search engines can reach them. Keep displayed prices and stock consistent with any Product structured data you publish."] },
@@ -52,9 +53,9 @@ export const ECOMMERCE_GUIDES = {
       src: "/showcase/commerce-app-checkout.webp",
       alt: "Checkout screen from the Mechatron Lab Android app",
       section: "payments",
-      example: { href: "/solutions/ecommerce-app-development#work", label: "Find the live Android app listings" },
+      example: { href: `${ECOMMERCE_PATHS.app}#work`, label: "Find the live Android app listings" },
     },
-    offer: { href: "/solutions/ecommerce-app-development", label: "Explore e-commerce app development", tierId: "app-launch" },
+    offer: { href: ECOMMERCE_PATHS.app, label: "Explore e-commerce app development", tierId: "app-launch" },
     sections: [
       { id: "scope", title: "Decide what the app adds", paragraphs: ["Your website can remain the entry point for shoppers arriving through search or shared links. An app can make repeat purchases and order tracking easier. Compare those benefits with the cost of maintaining and testing another customer channel.", "Confirm which system owns products, prices, accounts, and inventory. If the app connects to an existing store, review its APIs and work through how orders, refunds, and stock changes will sync."] },
       { id: "payments", title: "Choose checkout for physical goods", paragraphs: ["Apple and Google distinguish physical goods from digital purchases. For physical products, use an appropriate merchant checkout and review the current store rules. Payment providers can still charge processing fees.", "Test failed payments, duplicate taps, and confirmation after the buyer returns to the app. Make sure an uncertain payment status has a clear recovery path." ] },
@@ -81,7 +82,7 @@ export const ECOMMERCE_GUIDES = {
       section: "scope",
       example: { href: "/case-studies/estorealley", label: "See the retail and wholesale directory case study" },
     },
-    offer: { href: "/solutions/ecommerce#pricing", label: "View e-commerce platform pricing", tierId: "launch" },
+    offer: { href: `${ECOMMERCE_PATHS.platform}#pricing`, label: "View e-commerce platform pricing", tierId: "launch" },
     sections: [
       { id: "scope", title: "Compare like-for-like launch scope", paragraphs: ["A storefront, shopping apps, and a complete store with central inventory cover different jobs. List the launch channels, product count, payment methods, warehouses, and integrations before comparing prices.", "A hosted store may be a practical starting point for standard workflows. A private cloud deployment can fit teams that want more control over integrations and operations. A custom build may make sense if your workflows fall outside an existing package."] },
       { id: "running-costs", title: "Budget for monthly operating costs", paragraphs: ["Include hosting, monitoring, backups, support, and payment processing. For a hosted store, check the subscription, paid extensions, and any third-party transaction fees for your plan, country, and payment setup.", "Build a 12-month estimate by adding setup and optional licenses to recurring costs, then model payment fees using your expected order volume. Ask what happens to the bill when order volume, catalog size, or support needs change."] },

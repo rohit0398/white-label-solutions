@@ -1,12 +1,15 @@
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { LaunchStep } from "@/components/ui/LaunchSteps";
 
 export interface DramaArticle {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   intro: string;
   takeaway: string;
   datePublished?: string;
+  dateModified?: string;
   sections: {
     id: string;
     title: string;
@@ -14,11 +17,16 @@ export interface DramaArticle {
     bullets?: string[];
     checklist?: readonly LaunchStep[];
     options?: { title: string; text: string; href: string; linkLabel: string }[];
+    builderComparison?: { name: string; href: string; offering: string; verify: string }[];
   }[];
   sources: { title: string; url: string }[];
 }
 
 export const MICRO_DRAMA_LAUNCH_SLUG = "launch-micro-drama-platform";
+export const MICRO_DRAMA_BUILDERS_SLUG = "white-label-micro-drama-app-builders";
+export const MICRO_DRAMA_SOURCE_CODE_SLUG = "micro-drama-app-source-code";
+export const MICRO_DRAMA_PUBLISHING_SLUG = "publish-micro-drama-series";
+export const MICRO_DRAMA_APP_CHECKLIST_SLUG = "micro-drama-app-launch-checklist";
 
 const platformSources = [
   { title: "Cloudflare Stream: storage and delivery pricing", url: "https://developers.cloudflare.com/stream/pricing/" },
@@ -28,8 +36,76 @@ const platformSources = [
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
   {
+    slug: MICRO_DRAMA_BUILDERS_SLUG,
+    title: "How to Compare White-Label Micro Drama App Builders",
+    seoTitle: "White-Label Micro Drama App Builders Compared",
+    description: "Compare white-label micro drama app builders by demo access, deployment, source code, and episode monetization. See what to test and budget for.",
+    intro: "When comparing software for a short drama app, ask each provider to show the same workflow. Bring one series, publish its first episodes, and watch what happens when a viewer reaches the first episode that requires payment.",
+    takeaway: "Get a quote that lists the website and apps, the admin panel, payment features, hosting, and source code terms. Use the same checklist for every provider so you can compare what each package actually covers.",
+    datePublished: "2026-11-12",
+    sections: [
+      {
+        id: "white-label-or-custom",
+        title: "White-label micro drama software or custom development?",
+        paragraphs: [
+          "A white-label platform starts with an existing viewer app and publishing workflow that can be configured for your brand. Bring a sample series, brand assets, and a draft of your free and paid access rules. Ask the provider to mark what is already available, what they configure during deployment, and what needs engineering work.",
+          "A custom build can make sense when a requirement shapes the whole product, such as a proprietary wallet, a studio approval workflow, or a payment system you must integrate from day one. Ask who will maintain those features after launch and how changes are priced.",
+        ],
+        options: [
+          { title: "Choose where viewers will watch first", text: "A web launch can start with shared episode links. A mobile launch needs a plan for installs and store review. Check both paths if you expect to launch them together.", href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, linkLabel: "Compare web-first and app-first launches" },
+        ],
+      },
+      {
+        id: "live-demo-checklist",
+        title: "Test one series before choosing a provider",
+        paragraphs: [
+          "Open the live demo at the top of this guide to see how viewers browse and play episodes. Try the web player or an iOS or Android test build. For an operator walkthrough, ask to see the same series in the admin panel and how changing an episode’s access affects the viewer.",
+        ],
+        checklist: [
+          { title: "Publish a sample series", text: "Ask the provider to add artwork, order the episodes, and set one episode to free and another to VIP or paid access." },
+          { title: "Follow the viewer journey", text: "Open a shared episode link or install the app. Play the free episode, continue to the next one, and check how the access prompt explains what the viewer gets." },
+          { title: "Check a purchase and a failure", text: "In a test environment, ask the provider to show a successful purchase and an interrupted one. Check what the viewer and the support team can see in each case." },
+        ],
+      },
+      {
+        id: "compare-providers",
+        title: "What to check on each micro drama platform",
+        paragraphs: [
+          "The table uses each provider’s published product page. Mechatron Lab is our own offer. Confirm the listed capabilities for the package you’re quoted and use the same sample series to evaluate each option.",
+        ],
+        builderComparison: [
+          { name: "Prebuilt Apps", href: "https://prebuildapps.com/white-label-micro-drama-app-development/", offering: "Markets a DramaBox-style package and links to the Reelxia web app and Google Play listing.", verify: "Ask which parts of the demo, source code, and app submission are covered by the quote." },
+          { name: "Flicknexs", href: "https://flicknexs.com/micro-drama-app-development", offering: "Describes white-label apps, a vertical web player, and different tiers for payments and protection.", verify: "Confirm the tier that covers your devices, in-app purchases, and the access rules you need." },
+          { name: "VPlayed", href: "https://www.vplayed.com/micro-drama-ott-app.php", offering: "Advertises source code ownership, cloud or on-premises deployment, and coin-based episode access.", verify: "Confirm the repository handoff, who runs the deployment, and how coin purchases are tested." },
+          { name: "MultiTV", href: "https://multitvsolution.com/micro-drama-platform.php", offering: "Markets vertical series playback, coin or episode payments, and tools for turning a video catalog into vertical episodes.", verify: "Ask which editing, captioning, and monetization tools are included in the proposed package." },
+          { name: "Mechatron Lab", href: SHORT_DRAMA_PATHS.platform, offering: "Offers web, iOS and Android packages with a publishing panel, plus an optional source code license.", verify: "Try the viewer builds and ask which VIP flows, payment integrations, and custom work apply to your release." },
+        ],
+      },
+      {
+        id: "budget-and-handover",
+        title: "Compare launch cost, ongoing bills, and ownership",
+        paragraphs: [
+          "Put setup, custom work, optional source code, and ongoing costs on separate lines. Estimate video storage and delivery for your own catalog and expected viewing. Include any app-store or payment processing costs that apply to your sales model.",
+          "Ask whose accounts will hold the domain, cloud resources, store listings, and payment credentials. The white-label brand, source code license, and ongoing maintenance are separate terms to confirm in the proposal.",
+        ],
+        options: [
+          { title: "Price web, apps, or the complete platform", text: "Use our package comparison below for published deployment and source license prices. The cost guide covers hosting, video delivery, and expenses to include in your operating budget.", href: "/blog/short-drama-app-development-cost", linkLabel: "Read the micro drama app cost guide" },
+        ],
+      },
+    ],
+    sources: [
+      { title: "Prebuilt Apps micro-drama product page", url: "https://prebuildapps.com/white-label-micro-drama-app-development/" },
+      { title: "Flicknexs micro drama app development", url: "https://flicknexs.com/micro-drama-app-development" },
+      { title: "VPlayed micro drama OTT platform", url: "https://www.vplayed.com/micro-drama-ott-app.php" },
+      { title: "MultiTV micro drama platform", url: "https://multitvsolution.com/micro-drama-platform.php" },
+      { title: "Vodlix vendor comparison and evaluation checklist", url: "https://vodlix.com/blog/best-short-drama-app-builders" },
+      ...platformSources,
+    ],
+  },
+  {
     slug: MICRO_DRAMA_LAUNCH_SLUG,
     title: "How to Launch a Micro Drama Platform: Web First or App First?",
+    seoTitle: "How to Launch a Micro Drama Platform | Web vs. Apps",
     description: "Choose a web-first, app-first, or combined launch for your micro drama platform. Compare viewer journeys, try the live demo, and explore launch packages.",
     intro: "If a viewer discovers your micro drama in a social clip, do you want them to open an episode in their browser or install an app first? That decision changes what your studio needs to test and support on launch day.",
     takeaway: "Start on the web if shared episode links drive discovery. Start with apps if you have a plan to drive installs and bring viewers back. Launch both together if you already need both routes and can test them end to end.",
@@ -43,19 +119,19 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
           {
             title: "Web first for link-driven discovery",
             text: "Use a mobile-friendly website if you’re promoting episodes through social clips, newsletters, or partner links. A viewer can go from the promotion to a specific episode without installing an app. Test the journey in the browsers your audience actually uses.",
-            href: "/solutions/short-drama-website-development",
+            href: SHORT_DRAMA_PATHS.web,
             linkLabel: "Explore the website package",
           },
           {
             title: "App first for an install campaign",
             text: "Start with iOS and Android if your launch plan already sends people to the stores and you’ll release episodes regularly. Test the journey from install to first play and from a new episode alert back to the series. Leave time for store submission and review.",
-            href: "/solutions/short-drama-app-development",
+            href: SHORT_DRAMA_PATHS.app,
             linkLabel: "Explore the app package",
           },
           {
             title: "Web and apps for two established channels",
             text: "Launch both if partners need a browser link and you also have an audience ready to install. Decide which path each campaign uses, then confirm how sign-in, viewing progress, and paid access behave when someone switches devices.",
-            href: "/solutions/short-drama",
+            href: SHORT_DRAMA_PATHS.platform,
             linkLabel: "Explore the complete platform",
           },
         ],
@@ -64,7 +140,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         id: "try-a-viewing-session",
         title: "Try the same series on web and mobile",
         paragraphs: [
-          "Use the MicroDrama demo below to compare the browser player with the mobile test builds. Pick a series you haven’t watched before, open its first episode, and see how easy it is to find the next one. Try it on a phone over mobile data as well as Wi-Fi.",
+          "Use the live demo at the top of this guide to compare the browser player with the mobile test builds. Pick a series you haven’t watched before, open its first episode, and see how easy it is to find the next one. Try it on a phone over mobile data as well as Wi-Fi.",
           "For your own release, also test the first paid-access decision and what happens when a purchase fails. Ask which steps you can try in the demo and which depend on the package or payment setup you choose.",
         ],
       },
@@ -95,10 +171,165 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     ],
   },
   {
+    slug: MICRO_DRAMA_SOURCE_CODE_SLUG,
+    title: "Micro Drama App Source Code and Hosting",
+    seoTitle: "Micro Drama App Source Code | Licensing & Hosting",
+    description: "See what a white-label micro drama deployment includes, what the optional source code license adds, and which accounts to control at handover.",
+    intro: "You can launch a branded micro drama app or website on your own accounts without building the platform from scratch. Before you choose a package, decide who will run it after launch and whether that team needs the source code.",
+    takeaway: "Ask for three things in writing before you sign: the package scope, the accounts you’ll control, and the repositories and rights covered by the source code license.",
+    datePublished: "2026-11-12",
+    sections: [
+      {
+        id: "deployment-and-source-code",
+        title: "What do deployment and the source code license include?",
+        paragraphs: [
+          "Our white-label launch fee covers branding, setup, and deployment for the package you choose. The mobile package includes iOS and Android apps, the web package includes the browser player, and the complete platform includes both. Each includes an admin panel for publishing series and episodes. Confirm any extra integrations or feature changes in the proposal.",
+          "The optional commercial source code license adds Git repository access for the agreed scope. Ask which repositories you receive, which components use third-party services, and whether your own developers can make changes and ship updates under the license. Confirm any rights you need to run multiple brands or distribute the code separately.",
+        ],
+      },
+      {
+        id: "accounts-and-operating-costs",
+        title: "Which accounts should the studio control?",
+        paragraphs: [
+          "List the accounts that keep the product running and name the person responsible for each. Give the implementation team the access it needs for setup, and review those permissions at handover. A repository alone is only one part of taking over a live service.",
+          "Hosting and video delivery are running costs. For example, Cloudflare Stream bills for stored video and delivered viewing minutes. Estimate those separately from the launch fee and source code license, along with payment fees and maintenance.",
+        ],
+        bullets: [
+          "Domain and DNS, cloud and database, and video storage and delivery accounts.",
+          "Apple and Google developer accounts and app signing arrangements for a mobile launch.",
+          "Payment provider accounts, billing contacts, monitoring access, and backups.",
+        ],
+      },
+      {
+        id: "handover-checklist",
+        title: "What should another developer be able to do?",
+        paragraphs: [
+          "Have the person who will maintain the platform join the handover. If you buy the license, ask them to follow the setup instructions on a clean machine and build one of the clients included in your package. Record any service credentials or configuration they need and share those through your team’s secure process.",
+        ],
+        checklist: [
+          { title: "Check the code against the quote", text: "Match the delivered repositories and build instructions to the mobile apps, website, and services listed in the agreement." },
+          { title: "Rehearse a small update", text: "Build and deploy a change to a test environment. Check one episode playback and one paid-access flow after the update." },
+          { title: "Assign responsibility after launch", text: "Agree who takes backups, responds to incidents, handles store updates, and answers questions once the included support period ends." },
+        ],
+      },
+    ],
+    sources: [
+      platformSources[0],
+      { title: "Prebuilt Apps: white-label micro drama app and source code offer", url: "https://prebuildapps.com/white-label-micro-drama-app-development/" },
+      { title: "VPlayed: micro drama deployment and ownership options", url: "https://www.vplayed.com/micro-drama-ott-app.php" },
+    ],
+  },
+  {
+    slug: MICRO_DRAMA_PUBLISHING_SLUG,
+    title: "How to Publish a Micro Drama Series",
+    seoTitle: "How to Publish a Micro Drama Series | Admin Panel Guide",
+    description: "See how to publish a micro drama series using our admin panel, from setting up the catalog and ordering episodes to checking free and VIP access.",
+    intro: "Follow one series from the MicroDrama admin panel to the screen a viewer sees. Bring a few episodes and your artwork to a walkthrough if you want to see how your own series would look on web or mobile.",
+    takeaway: "Prepare one complete series and test it from the viewer’s side before uploading the rest of your catalog. Check the episode order and the first point where a viewer needs VIP access.",
+    datePublished: "2026-11-12",
+    sections: [
+      {
+        id: "create-a-series",
+        title: "Add the series to the catalog",
+        paragraphs: [
+          "Start in Series and use Add to create the catalog entry. Have the title, short description, artwork, and episode list ready. Check how the artwork reads as a small thumbnail and on the series page. If you have a trailer, decide where it belongs in the first viewing session.",
+          "Give the team publishing the series a folder with the approved files and episode order. A name like SeriesName-S01-E03 makes it easier to match the right file to the right entry. Keep the master videos and artwork somewhere your studio can access later.",
+        ],
+      },
+      {
+        id: "add-and-order-episodes",
+        title: "Add episodes in viewing order",
+        paragraphs: [
+          "Open the series, select the season, and go to Episodes. Add individual episodes or use the bulk upload option shown in the admin panel. Check each episode number and status before publishing. Play the first, last, and a few middle episodes to catch a misnumbered file or the wrong video before viewers do.",
+          "If your release uses captions or multiple language versions, verify the files and playback on the devices you’ll launch on. Confirm how your team will correct or replace a video if an episode goes out with the wrong edit.",
+        ],
+      },
+      {
+        id: "configure-free-and-vip-access",
+        title: "Choose which episodes are free and which require VIP",
+        paragraphs: [
+          "For a sample release, make the first two episodes free and set the third to VIP. Open episode two as a viewer and continue to episode three. Check that the VIP message explains what the viewer gets and that an eligible account can play the locked episode.",
+          "Repeat the check with a fresh account on each launch platform. If you want coins, rewarded unlocks, or a different access model, bring the exact viewing flow to the walkthrough so we can confirm the scope.",
+        ],
+      },
+      {
+        id: "check-the-viewer-experience",
+        title: "Review the series as a viewer",
+        paragraphs: [
+          "Open the published series from the catalog on a phone. Start episode one, continue to the next episode, and try a shared web link if the website is part of your release. Ask someone outside the publishing team to follow the same steps so you can catch anything the admin view made easy to miss.",
+        ],
+        bullets: [
+          "The title and poster are legible on a small screen.",
+          "The series opens at the intended episode and the next episode plays in order.",
+          "The free and VIP episodes behave as configured for the viewer’s account.",
+        ],
+      },
+    ],
+    sources: [
+      { title: "MultiTV: catalog tools for micro drama platforms", url: "https://multitvsolution.com/micro-drama-platform.php" },
+      { title: "Vodlix: content management and release scheduling checklist", url: "https://vodlix.com/blog/best-short-drama-app-builders" },
+    ],
+  },
+  {
+    slug: MICRO_DRAMA_APP_CHECKLIST_SLUG,
+    title: "Micro Drama App Launch Checklist for iOS and Android",
+    seoTitle: "Micro Drama App Launch Checklist | App Store & Google Play",
+    description: "Prepare a white-label micro drama app for iOS and Android with a checklist for developer accounts, store listings, VIP testing, and app review.",
+    intro: "A white-label app gives you a working product to configure and test. You still need a launch catalog, developer accounts, working payments, and a build Apple and Google can review. Use this checklist to get those pieces ready together.",
+    takeaway: "Set up the developer accounts and prepare one complete series early. Then test the viewer and payment flows on both phones before submitting the apps.",
+    datePublished: "2026-11-12",
+    sections: [
+      {
+        id: "before-kickoff",
+        title: "Prepare accounts, branding, and a launch series",
+        paragraphs: [
+          "Set up Apple Developer and Google Play Console accounts for the business publishing the apps. Decide who will manage each account and give your implementation team the access it needs for setup and submission. Confirm which countries you plan to launch in and that you can distribute your series there.",
+          "Gather your app name, icon, artwork, support contact, and policy links. Prepare one complete series with the correct episode order, plus any captions or artwork it needs. Choose which episodes are free and describe what a VIP viewer can watch.",
+        ],
+      },
+      {
+        id: "test-ios-and-android",
+        title: "Test a free episode and a VIP purchase on both platforms",
+        paragraphs: [
+          "Use test builds and test billing accounts on real iOS and Android devices. Walk through the same sequence on both: sign in if required, watch a free episode, reach a VIP episode, and make a test purchase. Confirm that access updates after the purchase and works when the viewer closes and reopens the app.",
+          "Try cancelling the payment prompt and retrying after a network interruption. If your package uses recurring plans, test purchase restoration and check how access behaves after expiry. Write down the exact episode, device, and account state for any issue you find.",
+        ],
+      },
+      {
+        id: "submit-for-review",
+        title: "Submit the builds with clear reviewer instructions",
+        paragraphs: [
+          "Use screenshots that match the submitted build. Complete the store listing, content rating, privacy disclosures, and any billing information required for your release. In the review notes, name a sample series and the episode that triggers VIP access. If sign-in is required, provide review access and keep the backend available for the review.",
+          "Check the production access requirements in your Play Console. Google applies additional testing requirements to eligible new personal developer accounts. Plan testing and store review into the schedule, and confirm who will respond if a reviewer requests a change.",
+        ],
+      },
+      {
+        id: "release-day-checklist",
+        title: "Check the public release before sending viewers to it",
+        paragraphs: [
+          "The app package includes help preparing and submitting the builds through your developer accounts. Apple and Google handle their own review. Once the listings are live, install from each public store page and test the same series a viewer will see from your first campaign.",
+        ],
+        checklist: [
+          { title: "Check the store links", text: "Open the public listings from a phone and confirm they’re available in the intended launch markets." },
+          { title: "Check the first viewing session", text: "Install the public build, open a series, and make sure free playback and the VIP prompt behave as expected." },
+          { title: "Assign release support", text: "Give one person responsibility for monitoring playback or billing issues and responding to early viewer feedback." },
+        ],
+      },
+    ],
+    sources: [
+      { title: "Apple Developer: App Review Guidelines", url: "https://developer.apple.com/app-store/review/guidelines/" },
+      { title: "Google Play Console: prepare and roll out a release", url: "https://support.google.com/googleplay/android-developer/answer/9859348?hl=en" },
+      { title: "Google Play Console: testing requirements for new personal accounts", url: "https://support.google.com/googleplay/android-developer/answer/14151465?hl=en" },
+      { title: "Flicknexs: micro drama build and launch considerations", url: "https://flicknexs.com/micro-drama-app-development" },
+    ],
+  },
+  {
     slug: "short-drama-app-development",
-    title: "How to Plan a Short Drama App Launch",
-    description: "Plan a short-drama platform: content, viewer apps, CMS, monetization, launch scope, infrastructure costs and a working web, iOS and Android demo.",
-    intro: "Launching a short-drama business connects three operations: preparing a catalog people want to watch, delivering episodes reliably, and collecting payment or advertising revenue. This guide helps studios, content owners and founders scope that operation before choosing a development partner.",
+    title: "How to Build a Micro Drama App",
+    seoTitle: "How to Build a Micro Drama App | Development Guide",
+    description: "Plan a micro drama app from catalog to launch. Learn what to build for vertical playback, publishing, episode access, and web, iOS, and Android testing.",
+    intro: "Start a micro drama app with one complete series and a clear viewing path. Decide how viewers will discover an episode, what they can watch for free, and how your team will publish and manage the catalog. Use these steps to plan the first version of a short drama app for web, iOS, or Android.",
+    dateModified: "2026-11-12",
     takeaway: "Define your content rights, audience and first monetization model before writing a feature list. Then evaluate the viewer experience and operator workflow together.",
     sections: [
       { id: "audience", title: "1. Start with the audience and the catalog", paragraphs: ["Choose a specific launch audience: its language, preferred genres, viewing devices and payment options. A catalog designed for one market may need different subtitles, artwork, episode descriptions and prices in another. App translation alone does not localize the entertainment experience.", "Create an inventory of the series you can distribute. Record territory and language rights, permitted devices, availability windows, master files, captions and promotional assets. Producing or licensing dramas is a separate activity from buying a software platform; a deployment does not supply rights to another publisher’s shows."], bullets: ["Prepare at least one complete series for end-to-end acceptance testing.", "Name the person who approves artwork, uploads episodes and handles viewer support.", "Decide whether the first release is web-first, native apps, or the complete suite."] },
@@ -132,9 +363,9 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     intro: "An app like ReelShort is a serialized entertainment business, not simply a vertical video feed. For a studio or founder, the useful question is which viewer journey, catalog workflow and commercial model to launch under an independent brand.",
     takeaway: "Start with a complete discovery-to-playback-to-access journey for your own licensed catalog. Add advanced engagement features only when their scope and operating costs are understood.",
     sections: [
-      { id: "reference", title: "1. What to learn from ReelShort", paragraphs: ["ReelShort’s official listing describes short, vertically presented serialized entertainment. That is a reference for the viewer format, not public documentation of its backend, recommendation engine or development budget. Competitor screenshots cannot establish which infrastructure or programming language a service uses.", "Use the reference to discuss outcomes: a viewer can discover a story, understand its episode sequence, continue watching and make a clear access decision. Build original branding and use content you have permission to distribute. You can try our own short-drama app using the links below."] },
+      { id: "reference", title: "1. What to learn from ReelShort", paragraphs: ["ReelShort’s official listing describes short, vertically presented serialized entertainment. That is a reference for the viewer format, not public documentation of its backend, recommendation engine or development budget. Competitor screenshots cannot establish which infrastructure or programming language a service uses.", "Use the reference to discuss outcomes: a viewer can discover a story, understand its episode sequence, continue watching and make a clear access decision. Build original branding and use content you have permission to distribute. Try our short-drama app from the live demo at the top of this guide."] },
       { id: "mvp", title: "2. Define a focused first release", paragraphs: ["Write a release checklist around the first complete series. It should cover discovery, episode playback, authentication where necessary, watch progress, access rules and a support route. Choose one principal paid-access model before adding overlapping passes, wallets and promotions.", "The operator side needs equal attention: creating a series, placing episodes in order, uploading artwork and captions, setting access and publishing. A polished viewer screen without a workable catalog operation leaves the studio dependent on developers for routine releases."], bullets: ["Launch catalog and series/episode metadata.", "Vertical player, episode navigation and viewing continuity.", "Account access and one agreed monetization model.", "CMS publishing workflow and failed-upload visibility.", "Basic viewing and payment reporting, with definitions agreed in scope."] },
-      { id: "delivery", title: "3. Choose a ready-made platform or a custom build", paragraphs: ["A white-label deployment fits when an existing product’s workflows closely match your first release. Evaluate the actual build rather than a feature checklist: test the player, ask to see publishing, and identify configuration versus new development. Our web, Android and iOS test links are provided below for that evaluation.", "Custom delivery becomes relevant when the product depends on unusual editorial workflows, a new access model or integrations outside the existing foundation. A hybrid plan can launch an agreed base while separately scoping later work. Do not assume an AI recommendation system, offline downloads or licensed multi-DRM is included merely because a competitor offers a similar experience."] },
+      { id: "delivery", title: "3. Choose a white-label platform or a custom build", paragraphs: ["A white-label deployment fits when an existing product’s workflows closely match your first release. Evaluate the actual build rather than a feature checklist: test the player, ask to see publishing, and identify configuration versus new development. Our web, Android and iOS test links are provided below for that evaluation.", "Custom delivery becomes relevant when the product depends on unusual editorial workflows, a new access model or integrations outside the existing foundation. A hybrid plan can launch an agreed base while separately scoping later work. Do not assume an AI recommendation system, offline downloads or licensed multi-DRM is included merely because a competitor offers a similar experience."] },
       { id: "cost", title: "4. Understand what the development price buys", paragraphs: ["Compare proposals on client platforms, CMS scope, integrations, deployment, testing and support. Separate the base deployment from source-code licensing. The linked cost guide compares our published packages and source code options.", "Your complete launch budget also includes content rights or production, video storage and delivery, payment/store fees and audience acquisition. Paid advertising is not a development feature. A working app does not by itself establish that a catalog can acquire and retain viewers profitably."], bullets: ["Request a list of included workflows and explicitly excluded features.", "Confirm source rights, cloud-account ownership and export options.", "Budget for ongoing support after the included support period.", "Model usage at several viewing levels rather than relying on one monthly hosting number."] },
       { id: "acceptance", title: "5. Validate the experience before launch", paragraphs: ["Test a viewer arriving from a shared episode link, opening the player, returning after interruption and reaching a paid-access decision. Repeat on slower mobile connections and a representative older phone. Record initial start time, playback interruptions and episode transitions as separate measures.", "Run a second acceptance session with the person who will operate the CMS. Publish a sample series, change its availability and correct an upload. Agree how billing issues are investigated and how access is restored. These practical tests are more useful than a promise of identical performance to an established entertainment network."] },
       { id: "readiness", title: "6. Prepare the studio’s side of the project", paragraphs: ["Have approved brand assets, a launch catalog, captions, territory rights and developer/payment accounts ready. Nominate one decision-maker for scope and one operator for catalog training. External account approval and app-store review sit outside a developer’s direct control.", "Bring a short list of must-have features to a walkthrough. Ask which can be demonstrated now, which are configuration and which require a separate quote. A scoped proposal should make that distinction visible before any delivery dates are agreed."] },
@@ -159,8 +390,10 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
   },
   {
     slug: "short-drama-app-development-cost",
-    title: "Short-Drama App Development Cost: Deployment, Licensing and Running Costs",
-    description: "Compare Short Drama app, website, and complete platform costs, including source code licenses, video delivery, store fees, and ongoing support.",
+    title: "How Much Does It Cost to Build a Micro Drama App?",
+    seoTitle: "Micro Drama App Development Cost | Packages & Running Costs",
+    description: "Compare micro drama app, website, and platform pricing. Budget for deployment, optional source code, video delivery, store fees, and ongoing support.",
+    dateModified: "2026-11-12",
     intro: "A useful short-drama budget separates the software you launch from the entertainment business you operate. A one-time deployment price does not include an unlimited catalog, unlimited streaming or a guaranteed audience.",
     takeaway: "Compare equivalent deliverables. Add source rights, custom work and recurring operations to the base deployment rather than treating every quote as the same product.",
     sections: [
