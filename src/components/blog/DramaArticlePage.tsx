@@ -57,7 +57,7 @@ const articleNextSteps: Partial<Record<string, {
   [MICRO_DRAMA_SOURCE_CODE_SLUG]: {
     title: "Review the handover before choosing a package",
     text: "Tell us which platforms you plan to launch and who will maintain them. We can walk you through the accounts, deployment, and optional source code license for that package.",
-    links: [{ href: "/blog/short-drama-app-development-cost#packages", label: "Compare deployment and source license prices" }],
+    links: [{ href: SHORT_DRAMA_PATHS.platform, label: "Explore the complete Micro Drama platform" }],
     whatsappMessage: "Hi, I read your micro drama source code guide and would like to discuss hosting and the source code license.",
   },
   [MICRO_DRAMA_PUBLISHING_SLUG]: {
@@ -129,6 +129,10 @@ const articleVisuals: Partial<Record<string, {
         alt: "MicroDrama series catalog showing artwork, series status, and the Add button",
       },
       "add-and-order-episodes": adminEpisodes,
+      "feature-the-series": {
+        src: "/showcase/microdrama-admin-home-sections.webp",
+        alt: "MicroDrama Home Sections showing widget order, series counts, and status",
+      },
     },
   },
   "short-drama-app-development": { previewSection: "viewer", screenshots: { operations: adminEpisodesWithCaption } },
@@ -265,7 +269,11 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
             {nextStep.links.map(({ href, label }) => <Link key={href} href={href} className="text-sm underline underline-offset-4">{label}</Link>)}
           </div>
         </section>}
-        <section className="space-y-4"><h2 className="text-xl font-semibold">Sources and further reading</h2><p className="text-sm text-ink-3">{article.datePublished ? `Sources checked on ${articleDateFormat.format(new Date(article.datePublished))}.` : "Sources checked on 2 November 2026. App features and provider prices can change. Brand names are used as references; our product is not affiliated with them."}</p><ul className="list-disc pl-5 space-y-2 text-sm">{article.sources.map(source => <li key={source.url}><a href={source.url} className="underline underline-offset-4">{source.title}</a></li>)}</ul></section>
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold">Sources and further reading</h2>
+          {!article.datePublished && <p className="text-sm text-ink-3">App features and provider prices can change. The apps discussed here are independent of our product.</p>}
+          <ul className="list-disc pl-5 space-y-2 text-sm">{article.sources.map(source => <li key={source.url}><a href={source.url} className="underline underline-offset-4">{source.title}</a></li>)}</ul>
+        </section>
         <nav aria-label="Related short-drama guides" className="border-t border-line pt-8 space-y-4"><h2 className="text-xl font-semibold">More short-drama guides</h2><ul className="space-y-3">{DRAMA_ARTICLES.filter(item => item.slug !== slug).map(item => <li key={item.slug}><Link href={`/blog/${item.slug}`} className="text-ink-2 underline underline-offset-4">{item.title}</Link></li>)}</ul></nav>
       </article>
     </main><Footer />

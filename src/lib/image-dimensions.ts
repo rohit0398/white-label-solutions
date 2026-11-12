@@ -30,6 +30,7 @@ const dimensions: Record<string, readonly [number, number]> = {
   ],
   "/showcase/microdrama-admin-analytics.webp": [1280, 631],
   "/showcase/microdrama-admin-episodes.webp": [1280, 631],
+  "/showcase/microdrama-admin-home-sections.webp": [1280, 631],
   "/showcase/microdrama-admin-series.webp": [1280, 631],
   "/showcase/microdrama-mobile-feed.webp": [328, 718],
   "/showcase/microdrama-mobile-catalog.webp": [327, 715],

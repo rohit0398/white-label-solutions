@@ -28,6 +28,11 @@ export const MICRO_DRAMA_SOURCE_CODE_SLUG = "micro-drama-app-source-code";
 export const MICRO_DRAMA_PUBLISHING_SLUG = "publish-micro-drama-series";
 export const MICRO_DRAMA_APP_CHECKLIST_SLUG = "micro-drama-app-launch-checklist";
 
+const shortDramaMarketReport = {
+  title: "Sensor Tower: State of Short Drama Apps 2026",
+  url: "https://sensortower.com/blog/state-of-short-drama-apps-2026-report",
+};
+
 const platformSources = [
   { title: "Cloudflare Stream: storage and delivery pricing", url: "https://developers.cloudflare.com/stream/pricing/" },
   { title: "Apple Developer: program and fee information", url: "https://developer.apple.com/programs/whats-included/" },
@@ -110,7 +115,16 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     intro: "If a viewer discovers your micro drama in a social clip, do you want them to open an episode in their browser or install an app first? That decision changes what your studio needs to test and support on launch day.",
     takeaway: "Start on the web if shared episode links drive discovery. Start with apps if you have a plan to drive installs and bring viewers back. Launch both together if you already need both routes and can test them end to end.",
     datePublished: "2026-11-11",
+    dateModified: "2026-11-12",
     sections: [
+      {
+        id: "netshort-web-and-apps",
+        title: "NetShort gives viewers two ways to start watching",
+        paragraphs: [
+          "NetShort offers its catalog in browsers as well as on iOS and Android. Its FAQ says that early episodes are often free to start, and that audio and subtitle options vary by title and region. It gives viewers a way to try a story from a link and an app option for people who prefer to watch there.",
+          "For your first campaign, pick a series you have permission to distribute in one market. Run the same trailer against two destinations: the opening episode on the web and the relevant store listing. Give both groups a similar audience and budget. Compare spend per first episode start and how many of those viewers finish the episode. For the app group, count how many installs turn into a play to see where the extra step costs you viewers.",
+        ],
+      },
       {
         id: "choose-your-launch",
         title: "Choose how viewers will start watching",
@@ -166,6 +180,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
       },
     ],
     sources: [
+      { title: "NetShort: official viewing, language, and episode access FAQ", url: "https://netshort.com/api/faq" },
       { title: "Apple Developer: submit an app for review", url: "https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app/" },
       { title: "Google Play Console: prepare and roll out a release", url: "https://support.google.com/googleplay/android-developer/answer/9859348?hl=en" },
     ],
@@ -188,6 +203,19 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         ],
       },
       {
+        id: "do-you-need-the-source-code",
+        title: "When is the source code license worth adding?",
+        paragraphs: [
+          "Start with the first change you expect after launch. If your studio mainly needs to add shows, change artwork, and set episode access, those are admin tasks. If you expect your developers to redesign the player or build a new payment integration, ask which repositories and services they would need to change before deciding on the license.",
+          "A studio launching on the web first can ask for the repository list for that package and the separate scope for adding apps later. A studio launching on all three platforms should ask for the build and release instructions for each client, the admin panel, and any backend services included in the agreement.",
+        ],
+        bullets: [
+          "Ask for a named list of repositories, the version delivered at handover, and instructions to build it.",
+          "Ask which services still need accounts or credentials, such as video delivery, authentication, and payments.",
+          "Confirm what support covers, who can ship changes, and how future updates are quoted.",
+        ],
+      },
+      {
         id: "accounts-and-operating-costs",
         title: "Which accounts should the studio control?",
         paragraphs: [
@@ -201,6 +229,18 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         ],
       },
       {
+        id: "estimate-the-first-month",
+        title: "Estimate the first month of streaming",
+        paragraphs: [
+          "Suppose you launch with 10 series of 50 episodes at 90 seconds each. That is 750 minutes of video before trailers or alternate cuts. If the launch delivers 120,000 minutes to viewers, Cloudflare Stream’s published rates put that example at $5 for the first 1,000 minutes of storage capacity and $120 for delivery. Add hosting, your database, monitoring, payment fees, and support as separate lines.",
+          "Use delivered minutes when you compare the estimate with your bill. The video player may buffer or preload part of the next episode, and Cloudflare counts those requests as delivery. After a small launch, compare video delivery with episode starts and completions before you budget for a bigger campaign.",
+        ],
+        options: [
+          { title: "Separate the one-time launch costs", text: "Compare the published deployment and optional source code fees for web, apps, and the complete platform.", href: "/blog/short-drama-app-development-cost#packages", linkLabel: "See deployment and source code prices" },
+          { title: "See how a studio set up video delivery", text: "The Short Drama case study shows how one studio combined the vertical player, publishing dashboard, and Cloudflare Stream.", href: "/case-studies/short-drama-platform", linkLabel: "Read the Short Drama case study" },
+        ],
+      },
+      {
         id: "handover-checklist",
         title: "What should another developer be able to do?",
         paragraphs: [
@@ -209,6 +249,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         checklist: [
           { title: "Check the code against the quote", text: "Match the delivered repositories and build instructions to the mobile apps, website, and services listed in the agreement." },
           { title: "Rehearse a small update", text: "Build and deploy a change to a test environment. Check one episode playback and one paid-access flow after the update." },
+          { title: "Ask for an export and restore rehearsal", text: "Agree which catalog, user, and access records can be exported. Ask your team to recover a test copy and check that the episodes still point to playable videos." },
           { title: "Assign responsibility after launch", text: "Agree who takes backups, responds to incidents, handles store updates, and answers questions once the included support period ends." },
         ],
       },
@@ -229,6 +270,22 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     datePublished: "2026-11-12",
     sections: [
       {
+        id: "dramawave-publishing-for-more-languages",
+        title: "DramaWave’s multilingual catalog gives studios a publishing lesson",
+        paragraphs: [
+          "DramaWave’s App Store listing highlights new originals and subtitle options in languages including Spanish, Japanese, and Korean. For a studio preparing a second market, that means checking the series and its promotion together. The poster and trailer should set the same expectation as the episode a viewer opens.",
+          "Try this with the eight-episode pilot below. Pick one additional language, confirm distribution rights for that market, and prepare its series title, poster text, trailer, and subtitles. Have a native speaker watch episodes two and three on a phone. Ask them to check subtitle timing and readability, then follow the shared link and confirm the first VIP episode behaves as expected.",
+        ],
+      },
+      {
+        id: "prepare-the-episode-files",
+        title: "Prepare a release sheet for the series",
+        paragraphs: [
+          "Start with one row per episode. Record the season and episode number, the approved video filename, the language, the caption file if you have one, and the planned access level. For an eight-episode pilot, your sheet could list episodes 1 and 2 as free and episodes 3 through 8 as VIP. The publishing and QA teams can then check the same list.",
+          "Check that the vertical video reads well on a phone. Leave room for subtitles and player controls so they don’t cover faces or important text. If your deployment uses Cloudflare Stream caption tracks, its documented upload format is WebVTT. Confirm that your target player exposes the tracks, then check language labels and timing on the actual web and app builds.",
+        ],
+      },
+      {
         id: "create-a-series",
         title: "Add the series to the catalog",
         paragraphs: [
@@ -241,7 +298,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         title: "Add episodes in viewing order",
         paragraphs: [
           "Open the series, select the season, and go to Episodes. Add individual episodes or use the bulk upload option shown in the admin panel. Check each episode number and status before publishing. Play the first, last, and a few middle episodes to catch a misnumbered file or the wrong video before viewers do.",
-          "If your release uses captions or multiple language versions, verify the files and playback on the devices you’ll launch on. Confirm how your team will correct or replace a video if an episode goes out with the wrong edit.",
+          "Start with a small batch and let the video provider process the files. Open the actual player and verify the video, audio, and caption tracks before uploading the rest. If an episode fails to play, compare the file and processing status with your release sheet before deciding whether to retry the upload or replace the source file.",
         ],
       },
       {
@@ -250,6 +307,19 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         paragraphs: [
           "For a sample release, make the first two episodes free and set the third to VIP. Open episode two as a viewer and continue to episode three. Check that the VIP message explains what the viewer gets and that an eligible account can play the locked episode.",
           "Repeat the check with a fresh account on each launch platform. If you want coins, rewarded unlocks, or a different access model, bring the exact viewing flow to the walkthrough so we can confirm the scope.",
+        ],
+        bullets: [
+          "Open the shared link to the VIP episode directly and check that the access rule still applies.",
+          "Try the transition with a viewer who has active VIP, and again with one whose access has ended.",
+          "For a combined release, check web and app checkout separately. Confirm what should happen when a subscriber switches devices.",
+        ],
+      },
+      {
+        id: "feature-the-series",
+        title: "Help viewers find the new series",
+        paragraphs: [
+          "In the demo admin panel, Home Sections shows which catalog widgets are active and how they’re ordered. If your launch uses a spotlight or a new releases section, check which series it shows and where it appears on the viewer’s home screen. A series can be playable from a direct link and still be hard to find in the catalog.",
+          "Before sending traffic, open the destination from a fresh phone session. Check that tapping the poster or the campaign link takes viewers to the intended series or opening episode. Check web and mobile separately if you plan to send traffic to both.",
         ],
       },
       {
@@ -264,8 +334,22 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
           "The free and VIP episodes behave as configured for the viewer’s account.",
         ],
       },
+      {
+        id: "check-and-correct-after-release",
+        title: "Review the release and correct mistakes",
+        paragraphs: [
+          "Give one person the job of checking the live series and responding to issues. If viewers report the wrong cut or a broken episode, record the series, season, episode number, and where the report came from. After correcting it, retest the same link and the next-episode transition so you can confirm the fix from the viewer’s side.",
+          "If you have episode-level reporting, start with three numbers: episode one starts, episode two completions, and visits to the first VIP episode. A drop before viewers see the VIP offer is a reason to review discovery, playback, and episode order before changing the offer.",
+        ],
+        options: [
+          { title: "Plan how viewers unlock episodes", text: "Use the monetization guide to compare VIP passes, episode purchases, and rewarded ads.", href: "/blog/short-drama-monetization", linkLabel: "Compare episode access models" },
+        ],
+      },
     ],
     sources: [
+      { title: "DramaWave: original series and subtitle options on the App Store", url: "https://apps.apple.com/us/app/dramawave-dramas-reels/id6670430706" },
+      { title: "Cloudflare Stream: uploading video", url: "https://developers.cloudflare.com/stream/uploading-videos/" },
+      { title: "Cloudflare Stream: adding caption tracks", url: "https://developers.cloudflare.com/stream/edit-videos/adding-captions/" },
       { title: "MultiTV: catalog tools for micro drama platforms", url: "https://multitvsolution.com/micro-drama-platform.php" },
       { title: "Vodlix: content management and release scheduling checklist", url: "https://vodlix.com/blog/best-short-drama-app-builders" },
     ],
@@ -286,13 +370,35 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
           "Set up Apple Developer and Google Play Console accounts for the business publishing the apps. Decide who will manage each account and give your implementation team the access it needs for setup and submission. Confirm which countries you plan to launch in and that you can distribute your series there.",
           "Gather your app name, icon, artwork, support contact, and policy links. Prepare one complete series with the correct episode order, plus any captions or artwork it needs. Choose which episodes are free and describe what a VIP viewer can watch.",
         ],
+        bullets: [
+          "Studio: confirm the app name, launch markets, approved series and artwork, and the person who owns each developer account.",
+          "Implementation team: confirm the iOS bundle ID, Android package name, app signing, and the test builds tied to your store accounts.",
+          "Together: agree the subscription price and renewal period, the launch date, and who can respond to a review request or viewer issue.",
+        ],
+      },
+      {
+        id: "plan-the-release-timeline",
+        title: "Build store testing into the schedule",
+        paragraphs: [
+          "Our setup estimate is 2–4 weeks once the agreed scope, branding, videos, and account access are ready. Plan the store release around separate milestones: test builds available, store submission complete, and the public listings live. The last milestone depends on the store accounts, testing and review.",
+          "Google says personal Play developer accounts created after November 13, 2023 must run a closed test with at least 12 testers continuously opted in for at least 14 days before applying for production access. Check the requirement in the account you’ll use and recruit testers early if it applies. Use TestFlight to distribute the iOS test build and collect feedback before App Store submission.",
+        ],
+        options: [
+          { title: "Get the first series ready for testing", text: "Prepare the episode order, artwork, and free-to-VIP transition before giving testers the build.", href: `/blog/${MICRO_DRAMA_PUBLISHING_SLUG}`, linkLabel: "Follow the series publishing guide" },
+        ],
       },
       {
         id: "test-ios-and-android",
         title: "Test a free episode and a VIP purchase on both platforms",
         paragraphs: [
           "Use test builds and test billing accounts on real iOS and Android devices. Walk through the same sequence on both: sign in if required, watch a free episode, reach a VIP episode, and make a test purchase. Confirm that access updates after the purchase and works when the viewer closes and reopens the app.",
-          "Try cancelling the payment prompt and retrying after a network interruption. If your package uses recurring plans, test purchase restoration and check how access behaves after expiry. Write down the exact episode, device, and account state for any issue you find.",
+          "The Micro Drama app package uses Apple and Google Play billing for VIP subscriptions. Use Apple’s sandbox and a Google Play license tester account to exercise the purchase flows. If the website is also launching, give its checkout a separate test pass and confirm which purchases should carry across platforms.",
+        ],
+        checklist: [
+          { title: "Watch on Wi-Fi and mobile data", text: "Start a free episode, swipe to the next, then leave and reopen the app. Check that video, sound, captions, and viewing progress behave as expected." },
+          { title: "Complete and cancel a test payment", text: "Verify that a confirmed purchase opens the VIP episode. Cancel or decline a purchase and check that the episode stays locked and the viewer can retry." },
+          { title: "Test renewal and restoration", text: "Use a test subscription to check expiry and renewal. Reinstall the app or use another supported device and verify the expected purchase restoration flow." },
+          { title: "Record a reproducible issue", text: "Capture the build number, device, network, episode, and account state so the team can repeat the problem." },
         ],
       },
       {
@@ -300,7 +406,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         title: "Submit the builds with clear reviewer instructions",
         paragraphs: [
           "Use screenshots that match the submitted build. Complete the store listing, content rating, privacy disclosures, and any billing information required for your release. In the review notes, name a sample series and the episode that triggers VIP access. If sign-in is required, provide review access and keep the backend available for the review.",
-          "Check the production access requirements in your Play Console. Google applies additional testing requirements to eligible new personal developer accounts. Plan testing and store review into the schedule, and confirm who will respond if a reviewer requests a change.",
+          "Try the review instructions on a clean install. An example route is: sign in with the review account, open the named series, play episode one, then open the VIP episode. Verify that an account-based release has the deletion flow and links required by the stores. Apple requires in-app account deletion for apps that support account creation. Google Play requires a way to request deletion in the app and an external web link when its account deletion policy applies.",
         ],
       },
       {
@@ -308,6 +414,7 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
         title: "Check the public release before sending viewers to it",
         paragraphs: [
           "The app package includes help preparing and submitting the builds through your developer accounts. Apple and Google handle their own review. Once the listings are live, install from each public store page and test the same series a viewer will see from your first campaign.",
+          "In the first few days, check for problems at three points: after install, at first playback, and when a viewer tries to get VIP access. If installs are coming in but first episodes rarely start, verify the campaign destination and opening catalog before increasing spend. If viewers reach the paywall but report that their purchases don’t unlock episodes, check the billing and access flow before adjusting prices.",
         ],
         checklist: [
           { title: "Check the store links", text: "Open the public listings from a phone and confirm they’re available in the intended launch markets." },
@@ -318,8 +425,12 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     ],
     sources: [
       { title: "Apple Developer: App Review Guidelines", url: "https://developer.apple.com/app-store/review/guidelines/" },
+      { title: "Apple Developer: TestFlight beta testing", url: "https://developer.apple.com/testflight/" },
+      { title: "Apple Developer: testing purchases in sandbox", url: "https://developer.apple.com/help/app-store-connect/test-in-app-purchases/overview-of-testing-in-sandbox/" },
       { title: "Google Play Console: prepare and roll out a release", url: "https://support.google.com/googleplay/android-developer/answer/9859348?hl=en" },
       { title: "Google Play Console: testing requirements for new personal accounts", url: "https://support.google.com/googleplay/android-developer/answer/14151465?hl=en" },
+      { title: "Android Developers: test Google Play Billing", url: "https://developer.android.com/google/play/billing/test" },
+      { title: "Google Play Console: app account deletion requirements", url: "https://support.google.com/googleplay/android-developer/answer/13327111?hl=en" },
       { title: "Flicknexs: micro drama build and launch considerations", url: "https://flicknexs.com/micro-drama-app-development" },
     ],
   },
@@ -362,15 +473,32 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     description: "A founder’s guide to a ReelShort-style platform: serialized video, catalog operations, MVP scope, white-label versus custom delivery, costs and live demos.",
     intro: "An app like ReelShort is a serialized entertainment business, not simply a vertical video feed. For a studio or founder, the useful question is which viewer journey, catalog workflow and commercial model to launch under an independent brand.",
     takeaway: "Start with a complete discovery-to-playback-to-access journey for your own licensed catalog. Add advanced engagement features only when their scope and operating costs are understood.",
+    dateModified: "2026-11-12",
     sections: [
-      { id: "reference", title: "1. What to learn from ReelShort", paragraphs: ["ReelShort’s official listing describes short, vertically presented serialized entertainment. That is a reference for the viewer format, not public documentation of its backend, recommendation engine or development budget. Competitor screenshots cannot establish which infrastructure or programming language a service uses.", "Use the reference to discuss outcomes: a viewer can discover a story, understand its episode sequence, continue watching and make a clear access decision. Build original branding and use content you have permission to distribute. Try our short-drama app from the live demo at the top of this guide."] },
+      {
+        id: "reference",
+        title: "1. How ReelShort turns a scene into a reason to install",
+        paragraphs: [
+          "In a 2024 TIME interview, Crazy Maple Studio CEO Joey Jia described how ReelShort used clips on Facebook to make viewers curious enough to download the app. He also described using viewing and payment data to see where viewers lost interest and which stories they paid to finish. Google Play displayed 100M+ downloads for ReelShort when checked in November 2026. That figure is a cumulative Android download milestone. Repeat viewing and paid conversion each need their own measure.",
+          "A smaller studio can test the same idea with one series. Cut three clips from footage you have permission to promote. Try one that introduces the central conflict, one that reveals the stakes, and one that stops before a choice is resolved. Give all three a similar audience, budget, and destination so you can compare the opening scenes fairly.",
+        ],
+        bullets: [
+          "Link each clip to the same opening episode and make sure the first screen shows the story viewers expect.",
+          "Count clicks, first episode starts, and completions separately. A clip can win on clicks while sending fewer viewers who finish the episode.",
+          "Before spending more, check whether viewers who finish episode one continue to episode two or return for the next release.",
+        ],
+      },
       { id: "mvp", title: "2. Define a focused first release", paragraphs: ["Write a release checklist around the first complete series. It should cover discovery, episode playback, authentication where necessary, watch progress, access rules and a support route. Choose one principal paid-access model before adding overlapping passes, wallets and promotions.", "The operator side needs equal attention: creating a series, placing episodes in order, uploading artwork and captions, setting access and publishing. A polished viewer screen without a workable catalog operation leaves the studio dependent on developers for routine releases."], bullets: ["Launch catalog and series/episode metadata.", "Vertical player, episode navigation and viewing continuity.", "Account access and one agreed monetization model.", "CMS publishing workflow and failed-upload visibility.", "Basic viewing and payment reporting, with definitions agreed in scope."] },
-      { id: "delivery", title: "3. Choose a white-label platform or a custom build", paragraphs: ["A white-label deployment fits when an existing product’s workflows closely match your first release. Evaluate the actual build rather than a feature checklist: test the player, ask to see publishing, and identify configuration versus new development. Our web, Android and iOS test links are provided below for that evaluation.", "Custom delivery becomes relevant when the product depends on unusual editorial workflows, a new access model or integrations outside the existing foundation. A hybrid plan can launch an agreed base while separately scoping later work. Do not assume an AI recommendation system, offline downloads or licensed multi-DRM is included merely because a competitor offers a similar experience."] },
+      { id: "delivery", title: "3. Choose a white-label platform or a custom build", paragraphs: ["A white-label deployment fits when an existing product’s workflows closely match your first release. Evaluate the actual build rather than a feature checklist: test the player, ask to see publishing, and identify configuration versus new development. Open the web, Android, or iOS demo at the top of the guide to start that evaluation.", "Custom delivery becomes relevant when the product depends on unusual editorial workflows, a new access model or integrations outside the existing foundation. A hybrid plan can launch an agreed base while separately scoping later work. Do not assume an AI recommendation system, offline downloads or licensed multi-DRM is included merely because a competitor offers a similar experience."] },
       { id: "cost", title: "4. Understand what the development price buys", paragraphs: ["Compare proposals on client platforms, CMS scope, integrations, deployment, testing and support. Separate the base deployment from source-code licensing. The linked cost guide compares our published packages and source code options.", "Your complete launch budget also includes content rights or production, video storage and delivery, payment/store fees and audience acquisition. Paid advertising is not a development feature. A working app does not by itself establish that a catalog can acquire and retain viewers profitably."], bullets: ["Request a list of included workflows and explicitly excluded features.", "Confirm source rights, cloud-account ownership and export options.", "Budget for ongoing support after the included support period.", "Model usage at several viewing levels rather than relying on one monthly hosting number."] },
       { id: "acceptance", title: "5. Validate the experience before launch", paragraphs: ["Test a viewer arriving from a shared episode link, opening the player, returning after interruption and reaching a paid-access decision. Repeat on slower mobile connections and a representative older phone. Record initial start time, playback interruptions and episode transitions as separate measures.", "Run a second acceptance session with the person who will operate the CMS. Publish a sample series, change its availability and correct an upload. Agree how billing issues are investigated and how access is restored. These practical tests are more useful than a promise of identical performance to an established entertainment network."] },
       { id: "readiness", title: "6. Prepare the studio’s side of the project", paragraphs: ["Have approved brand assets, a launch catalog, captions, territory rights and developer/payment accounts ready. Nominate one decision-maker for scope and one operator for catalog training. External account approval and app-store review sit outside a developer’s direct control.", "Bring a short list of must-have features to a walkthrough. Ask which can be demonstrated now, which are configuration and which require a separate quote. A scoped proposal should make that distinction visible before any delivery dates are agreed."] },
     ],
-    sources: [{ title: "ReelShort: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.newleaf.app.android.victor" }, ...platformSources],
+    sources: [
+      { title: "TIME: interview with Crazy Maple Studio CEO Joey Jia", url: "https://time.com/7173765/reelshort-crazy-maple-studio-joey-jia-interview/" },
+      { title: "ReelShort: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.newleaf.app.android.victor" },
+      ...platformSources,
+    ],
   },
   {
     slug: "build-app-like-dramabox",
@@ -378,15 +506,28 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     description: "Plan a DramaBox-style short-drama product: free episodes, VIP access, optional coin unlocks, verified payments, CMS controls and realistic launch scope.",
     intro: "For founders studying DramaBox, access to episodes is a central product decision. This guide focuses on how to design that decision clearly for viewers and reliably for the team handling payments, catalog releases and support.",
     takeaway: "Define what a purchase grants before selecting payment screens. Episode ownership, time-limited VIP access and ad rewards need distinct rules and recoverable transaction records.",
+    dateModified: "2026-11-12",
     sections: [
-      { id: "reference", title: "1. Separate observed features from your own design", paragraphs: ["DramaBox’s official store listing describes short-drama discovery, viewing and optional subscriptions. Exact offers and access behavior can change by market or account. An independent platform should define its own rules instead of assuming a competitor has one universal price or unlock mechanism.", "The flows below are implementation planning examples, not a description of DramaBox’s private systems. Our short-drama packages cover an agreed scope; optional wallet, refund automation or specialized access behavior must be verified in the proposal and demo."] },
+      {
+        id: "reference",
+        title: "1. What DramaBox’s revenue tells us about paid viewing",
+        paragraphs: [
+          "Sensor Tower estimated that DramaBox generated close to US$140 million in in-app revenue in Q1 2026. Google Play displayed 100M+ cumulative Android downloads when checked in November 2026 and lists both ads and in-app purchases. The quarterly estimate covers in-app revenue. Profit depends on costs such as content, marketing, streaming, and operations.",
+          "For your first release, measure a series from its free opening through the first paid episode. For example, if 200 viewers see a VIP offer, 20 complete a verified purchase, and 15 then play the locked episode, the offer converted 10% of viewers who saw it and 75% of buyers started watching. These are example numbers for planning your own reports. That last step helps you spot access problems after a successful payment.",
+          "Offers can vary by market and account. Test the terms and price your own viewer sees, then check the purchase, access, and support flows on each launch platform. If the plan calls for a coin wallet or a custom refund flow, include it explicitly in your walkthrough and quote.",
+        ],
+      },
       { id: "rules", title: "2. Write the episode-access rules in plain language", paragraphs: ["For each episode, decide whether access is free, purchased individually, included in a VIP period or awarded after an advertisement. Specify how long that access lasts and whether it works across devices. Avoid making a viewer guess whether a payment unlocks one chapter or a complete series.", "Build a small decision table before engineering the interface. Include a signed-out visitor, a subscribed viewer, someone whose subscription expired and someone returning after a refund. The CMS and backend should apply the same decisions as the player."], bullets: ["Free preview: which episodes are available without a purchase?", "VIP pass: what catalog and time period does it cover?", "Episode unlock: permanent, series-specific or time-limited?", "Rewarded access: what happens if the advertisement is interrupted?", "Availability expiry: what does a previously paying viewer see?"] },
       { id: "payments", title: "3. Verify payments before granting access", paragraphs: ["Treat a completed purchase as a server-side entitlement decision, not just a successful animation on a phone. Plan receipt verification, duplicate notification handling, purchase restoration and pending transactions. A viewer changing devices should not need to pay again solely because local app state was lost.", "Refunds, cancellation and renewal are different events. Cancellation may stop a future renewal while an existing paid period remains active; the product must follow its published terms and provider rules. Test these cases using the appropriate provider test environments before launch."] },
       { id: "coins", title: "4. Scope a coin wallet as a separate subsystem", paragraphs: ["If you choose coins, define the purchase, bonus, spend and reversal records. Distinguish promotional credits from paid credits where your rules require it. A balance alone cannot explain a dispute; the operator needs a transaction history and a link between a spend and the resulting access.", "Design duplicate handling around interrupted connections. Retrying an episode unlock should not spend twice, and retrying a reward should not grant it twice. A coin economy, ledger and its administrative tools should be priced and demonstrated explicitly rather than assumed from the words short-drama platform."], bullets: ["Record each change with a transaction identifier and reason.", "Define expiry, bonus usage and refund behavior before launch.", "Verify ad-reward callbacks rather than trusting a client-only counter.", "Agree what support staff may correct and how corrections are recorded."] },
       { id: "operations", title: "5. Give operators usable controls", paragraphs: ["The team publishing a drama needs to understand which episodes are previews, when the next episode becomes available and which plans cover the series. Review the screens used to change those rules and preview the result before publishing.", "Measure access decisions alongside viewing: paywall exposure, checkout starts, verified purchases and subsequent viewing are separate events. An apparent drop in conversion could be a failed payment callback or a poorly placed gate. Define the metrics before comparing series or changing prices."] },
       { id: "launch", title: "6. Evaluate the supplier with a scenario", paragraphs: ["Bring a sample series and ask for a walkthrough from upload to an episode access decision. Then ask what happens when payment is pending, a subscriber returns on another device and an operator needs to investigate a complaint. Use the live demo links to try the viewer experience and ask us about the features you need.", "Compare base deployment, optional source licensing, custom monetization work and recurring usage separately. We take no platform revenue share; that does not remove payment processing, app-store fees or other operating expenses. Confirm the access model and scope in writing before choosing the launch package."] },
     ],
-    sources: [{ title: "DramaBox: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.storymatrix.drama" }, ...platformSources],
+    sources: [
+      shortDramaMarketReport,
+      { title: "DramaBox: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.storymatrix.drama" },
+      ...platformSources,
+    ],
   },
   {
     slug: "short-drama-app-development-cost",
@@ -412,15 +553,28 @@ export const DRAMA_ARTICLES: DramaArticle[] = [
     description: "Compare short-drama monetization models, entitlement rules, rewarded-ad verification and costs. Includes examples from FreeReels and links to our live demos.",
     intro: "Monetization controls how a viewer continues a story and what your team must support. Choosing between subscriptions, episode purchases and advertising is a product decision as well as a revenue decision.",
     takeaway: "Start with a model your audience understands and your operations can support. Measure net receipts, repeat viewing and delivery costs before adding more ways to unlock an episode.",
+    dateModified: "2026-11-12",
     sections: [
-      { id: "vip", title: "1. VIP subscriptions: access for a defined period", paragraphs: ["A VIP plan can make a continuing catalog easy to explain: an eligible viewer watches the included content during an active period. Define any exclusions, renewal behavior and what happens to access after cancellation or expiry. The viewer should know the period and price before confirming.", "Subscriptions require purchase verification, restoration and renewal-state handling. For the operator, a repeatable publishing schedule and a clear support route matter alongside the payment integration. Evaluate retention using your own catalog rather than borrowing another app’s reported performance."] },
-      { id: "coins", title: "2. Coins and episode unlocks: make value understandable", paragraphs: ["Coins can connect small purchases with episode-level access, but they also introduce a balance, a ledger, bonus rules and refund questions. Explain the effective cost of access and how long an unlock lasts. Avoid hiding the distinction between a paid balance and a promotional reward.", "A wallet is a separately scoped capability. Demonstrate its payment, spend, reversal and duplicate-request behavior before promising it in a launch. Do not assume that every plan on a short-drama price card includes a complete coin economy and its administrative tooling."] },
-      { id: "ads", title: "3. Rewarded ads: verify the reward and the interruption", paragraphs: ["In a rewarded flow, the viewer chooses an advertisement in return for an explicit benefit, such as access to an episode. State the benefit before playback. Decide what happens after an interrupted ad, a failed callback or a repeated request, and verify completion with the supported provider integration.", "An ad-heavy experience also has a viewer cost: time and interruption. Track whether people continue watching after receiving the reward, not just how many ads start. Availability, fill and proceeds vary by region and provider; an installed SDK is not a guarantee of profitable inventory."] },
-      { id: "freereels", title: "4. What to learn from FreeReels", paragraphs: ["The official FreeReels listing identifies both advertising and in-app purchases. Its name alone is not evidence of an exclusively ad-funded business. Use the listing as a reference for a viewing proposition, then verify current behavior in the specific market you are researching.", "For your own app, decide whether ads pay for all viewing, a free tier or just selected episode unlocks. Optional purchases and subscriptions can be evaluated as separate paths. These are product planning choices, not claims about FreeReels’ private economics, revenue or backend architecture."] },
+      {
+        id: "freereels",
+        title: "1. How FreeReels makes free viewing part of the offer",
+        paragraphs: [
+          "FreeReels promotes free access to short dramas. Its Google Play listing showed 100M+ cumulative Android downloads when checked in November 2026 and labels the app as containing ads and in-app purchases. Sensor Tower highlighted its download growth in India and Southeast Asia in its 2026 report. The listing and report give a picture of reach. You would need the app’s ad earnings and operating costs to judge how much that reach is worth.",
+          "If you’re considering ads, start with one series and one market. For example, offer two groups the same first two episodes for free. Let one group watch episode three directly and offer the other a rewarded ad to unlock it. Compare how many viewers start and finish episode three, how many return, and what the ads earn per viewer who reached that choice.",
+          "If ads bring in money but fewer viewers make it to the next episode, try a later placement or a different reward before adding more ad breaks. Keep the story, audience, and episode order consistent while you test the change.",
+        ],
+      },
+      { id: "vip", title: "2. VIP subscriptions: access for a defined period", paragraphs: ["A VIP plan can make a continuing catalog easy to explain: an eligible viewer watches the included content during an active period. Define any exclusions, renewal behavior and what happens to access after cancellation or expiry. The viewer should know the period and price before confirming.", "Subscriptions require purchase verification, restoration and renewal-state handling. For the operator, a repeatable publishing schedule and a clear support route matter alongside the payment integration. Evaluate retention using your own catalog rather than borrowing another app’s reported performance."] },
+      { id: "coins", title: "3. Coins and episode unlocks: make value understandable", paragraphs: ["Coins can connect small purchases with episode-level access, but they also introduce a balance, a ledger, bonus rules and refund questions. Explain the effective cost of access and how long an unlock lasts. Avoid hiding the distinction between a paid balance and a promotional reward.", "A wallet is a separately scoped capability. Demonstrate its payment, spend, reversal and duplicate-request behavior before promising it in a launch. Do not assume that every plan on a short-drama price card includes a complete coin economy and its administrative tooling."] },
+      { id: "ads", title: "4. Rewarded ads: verify the reward and the interruption", paragraphs: ["In a rewarded flow, the viewer chooses an advertisement in return for an explicit benefit, such as access to an episode. State the benefit before playback. Decide what happens after an interrupted ad, a failed callback or a repeated request, and verify completion with the supported provider integration.", "An ad-heavy experience also has a viewer cost: time and interruption. Track whether people continue watching after receiving the reward, not just how many ads start. Availability, fill and proceeds vary by region and provider; an installed SDK is not a guarantee of profitable inventory."] },
       { id: "economics", title: "5. Work out what you keep after costs", paragraphs: ["To estimate what you keep, subtract streaming, content and other running costs from the money you receive. For subscriptions, account for relevant store/payment deductions and refunds. For ads, disclose assumed completed impressions, fill and net revenue per thousand impressions. Keep acquisition costs visible rather than assuming every install arrives free.", "For example, if a planning sheet assumes 10,000 completed impressions and $5 net per thousand impressions, the implied receipts are $50. The $5 rate is just an example; your actual ad revenue will vary. Compare it with the viewing minutes and costs required to deliver those sessions."] },
       { id: "experiment", title: "6. Choose a launch experiment you can measure", paragraphs: ["Test one clear access model with a defined catalog and audience. Measure episode starts, completion, access decisions, verified purchases or rewards, repeat viewing and support requests. Agree event definitions so that a failed purchase does not look like a completed transaction.", "Open the live demo or ask us to show you the admin panel. Ask which access rules are already supported, what is configurable and what needs custom work. Choose scope from evidence before mixing several revenue models in the first release."], bullets: ["Define the first free-to-paid or free-to-reward transition.", "Publish understandable prices, durations and access rules.", "Test interruption, restoration and duplicate notifications.", "Review net receipts and repeat viewing by market and channel.", "Add another monetization path only with a clear reason and acceptance plan."] },
     ],
-    sources: [{ title: "FreeReels: official listing identifies ads and in-app purchases", url: "https://play.google.com/store/apps/details?id=com.freereels.app" }, ...platformSources],
+    sources: [
+      { title: "FreeReels: official Google Play listing", url: "https://play.google.com/store/apps/details?id=com.freereels.app" },
+      shortDramaMarketReport,
+      ...platformSources,
+    ],
   },
 ];
 
