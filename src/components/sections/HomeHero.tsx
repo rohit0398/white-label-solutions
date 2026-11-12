@@ -84,13 +84,13 @@ export function HomeHero() {
       </div>
 
       <div className="wrap-wide mt-8 grid gap-3 md:mt-10 md:grid-cols-3 md:gap-4">
-        {homePlatforms.map(({ family, title, desc, action, proof, icon: Icon }) => (
+        {homePlatforms.map(({ family, href, title, desc, action, proof, icon: Icon }) => (
           <article
             key={family}
             className="flex min-w-0 flex-col rounded-2xl border border-line bg-wash/85 transition-colors hover:border-accent/60 hover:bg-paper"
           >
             <Link
-              href={`/solutions/${family}`}
+              href={href}
               onClick={() => trackEvent("select_platform", { platform: family, placement: "HomeHero" })}
               className="group flex flex-1 flex-col gap-3 rounded-t-2xl p-4 focus-visible:outline-2 focus-visible:outline-accent md:p-5"
             >

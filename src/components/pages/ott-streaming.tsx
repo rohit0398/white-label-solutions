@@ -1,9 +1,10 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { createLocalizer, englishMessage } from "@/lib/messages";
 import { getLocaleMessages } from "@/lib/locale-messages";
 
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
-import { SITE_URL } from "@/lib/site-config";
+import { languageAlternates, localizedPath, SITE_URL } from "@/lib/site-config";
 import { LOCALIZED_OTT_SEO } from "@/lib/translations/seo";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
@@ -37,19 +38,13 @@ export const metadata: Metadata = {
     "flutter streaming app",
   ],
   alternates: {
-    canonical: "/solutions/ott-streaming",
-    languages: {
-      en: "/solutions/ott-streaming",
-      es: "/es/solutions/ott-streaming",
-      de: "/de/solutions/ott-streaming",
-      fr: "/fr/solutions/ott-streaming",
-      hi: "/hi/solutions/ott-streaming",
-    },
+    canonical: OTT_PATHS.platform,
+    languages: languageAlternates(OTT_PATHS.platform),
   },
   openGraph: {
     title,
     description,
-    url: "/solutions/ott-streaming",
+    url: OTT_PATHS.platform,
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
@@ -67,11 +62,12 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
   const translateCopy = createLocalizer(language, getLocaleMessages(language));
 
   const siteUrl = SITE_URL;
+  const pagePath = localizedPath(OTT_PATHS.platform, language);
 
   const breadcrumbs = [
     { name: translateCopy(englishMessage("ecommerce.home.70f8bb9")), item: language === "en" ? "/" : `/${language}` },
     { name: translateCopy(englishMessage("ecommerce.solutions.05b004a")), item: "/solutions" },
-    { name: translateCopy(englishMessage("ott-streaming.cinematic.ott.platform.4474378")), item: language === "en" ? "/solutions/ott-streaming" : `/${language}/solutions/ott-streaming` },
+    { name: translateCopy(englishMessage("ott-streaming.cinematic.ott.platform.4474378")), item: pagePath },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
@@ -81,7 +77,7 @@ export default function OttStreamingSolutionPage({ language = "en" }: { language
     description:
       translateCopy(englishMessage("ott-streaming.production.ready.white.label.ott.streaming.p.e97bc58")),
     price: schemaPrice(FAMILY_PACKAGE["ott-streaming"]),
-    url: language === "en" ? "/solutions/ott-streaming" : `/${language}/solutions/ott-streaming`,
+    url: pagePath,
     operatingSystem: "Android, iOS, Web, Smart TV",
     applicationCategory: "MultimediaApplication",
     siteUrl,

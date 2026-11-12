@@ -17,7 +17,7 @@ import { OTT_PACKAGES, type OttOffer } from "@/lib/ott-offers";
 
 const content = {
   platform: {
-    title: englishMessage("OttOverview.platform.title"),
+    title: englishMessage("OttOverview.platform.heading"),
     intro: englishMessage("OttOverview.platform.intro"),
     mode: "ott",
     image: "/showcase/microdrama-catalog.webp",
@@ -31,7 +31,7 @@ const content = {
     ],
   },
   app: {
-    title: englishMessage("OttOverview.app.title"),
+    title: englishMessage("OttOverview.app.heading"),
     intro: englishMessage("OttOverview.app.intro"),
     mode: "ott-app",
     image: undefined,
@@ -45,7 +45,7 @@ const content = {
     ],
   },
   web: {
-    title: englishMessage("OttOverview.web.title"),
+    title: englishMessage("OttOverview.web.heading"),
     intro: englishMessage("OttOverview.web.intro"),
     mode: "ott-web",
     image: "/showcase/microdrama-web-genres.webp",

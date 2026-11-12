@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { CaseStudyPage, caseStudyMetadata } from "../_components/CaseStudyPage";
 import { buttonClass } from "@/components/ui/Button";
 import { Screenshot } from "@/components/ui/Screenshot";
@@ -30,7 +31,7 @@ export default function MechatronLabCaseStudyPage() {
         title: "Planning a store with multiple warehouses?",
         description: "Tell us how you manage products, stock, and fulfillment today. We can walk through the admin panel and scope any integrations you need.",
         packageId: "ecommerce",
-        solution: { href: "/solutions/ecommerce#admin-crm", label: "Explore the inventory and order tools" },
+        solution: { href: `${ECOMMERCE_PATHS.platform}#admin-crm`, label: "Explore the inventory and order tools" },
         guide: { href: "/blog/ecommerce-website-development", label: "Read the e-commerce website launch guide" },
       }}
     >

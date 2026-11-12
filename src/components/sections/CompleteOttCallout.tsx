@@ -1,4 +1,6 @@
 "use client";
+
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { englishMessage } from "@/lib/messages";
 import { useSite } from "@/components/site/SiteProvider";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
@@ -41,7 +43,7 @@ export function CompleteOttCallout() {
         "0% Platform Commission",
       ]}
       ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
-      ctaHref="/solutions/ott-streaming"
+      ctaHref={OTT_PATHS.platform}
     />
   );
 }

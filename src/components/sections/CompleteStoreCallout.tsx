@@ -1,4 +1,6 @@
 "use client";
+
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { englishMessage } from "@/lib/messages";
 import { useSite } from "@/components/site/SiteProvider";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
@@ -40,7 +42,7 @@ export function CompleteStoreCallout() {
         "0% Platform Commission",
       ]}
       ctaText={englishMessage("CompleteShortDramaCallout.view.platform")}
-      ctaHref="/solutions/ecommerce"
+      ctaHref={ECOMMERCE_PATHS.platform}
     />
   );
 }

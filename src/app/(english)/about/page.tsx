@@ -1,3 +1,5 @@
+import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -24,9 +26,9 @@ export const metadata: Metadata = {
 };
 
 const platforms = [
-  { name: "E-commerce", description: "A storefront, shopping apps, and an admin panel to manage products and orders.", href: "/solutions/ecommerce" },
-  { name: "Short drama", description: "Apps and a website for vertical episodes, with tools for publishing and managing access.", href: "/solutions/short-drama" },
-  { name: "OTT streaming", description: "A streaming website and apps with a dashboard to manage your video catalog.", href: "/solutions/ott-streaming" },
+  { name: "E-commerce", description: "A storefront, shopping apps, and an admin panel to manage products and orders.", href: ECOMMERCE_PATHS.platform },
+  { name: "Short drama", description: "Apps and a website for vertical episodes, with tools for publishing and managing access.", href: SHORT_DRAMA_PATHS.platform },
+  { name: "OTT streaming", description: "A streaming website and apps with a dashboard to manage your video catalog.", href: OTT_PATHS.platform },
 ];
 
 const delivery = [

@@ -3,7 +3,8 @@ import { getLocaleMessages } from "@/lib/locale-messages";
 
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
-import { SITE_URL } from "@/lib/site-config";
+import { SITE_URL, languageAlternates, localizedPath } from "@/lib/site-config";
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { Metadata } from "next";
 import { SHORT_DRAMA_FAQS, SHORT_DRAMA_BASE_PRICING_TIERS } from "@/lib/constants";
 import { ShortDramaOverview } from "@/components/sections/ShortDramaOverview";
@@ -39,19 +40,13 @@ export const metadata: Metadata = {
     "flutter video streaming app",
   ],
   alternates: {
-    canonical: "/solutions/short-drama",
-    languages: {
-      en: "/solutions/short-drama",
-      es: "/es/solutions/short-drama",
-      de: "/de/solutions/short-drama",
-      fr: "/fr/solutions/short-drama",
-      hi: "/hi/solutions/short-drama",
-    },
+    canonical: SHORT_DRAMA_PATHS.platform,
+    languages: languageAlternates(SHORT_DRAMA_PATHS.platform),
   },
   openGraph: {
     title,
     description,
-    url: "/solutions/short-drama",
+    url: SHORT_DRAMA_PATHS.platform,
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
     type: "website",
@@ -69,11 +64,12 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
   const translateCopy = createLocalizer(language, getLocaleMessages(language));
 
   const siteUrl = SITE_URL;
+  const pagePath = localizedPath(SHORT_DRAMA_PATHS.platform, language);
 
   const breadcrumbs = [
     { name: translateCopy(englishMessage("ecommerce.home.70f8bb9")), item: language === "en" ? "/" : `/${language}` },
     { name: translateCopy(englishMessage("ecommerce.solutions.05b004a")), item: "/solutions" },
-    { name: translateCopy(englishMessage("short-drama.short.drama.streaming.platform.cedf920")), item: language === "en" ? "/solutions/short-drama" : `/${language}/solutions/short-drama` },
+    { name: translateCopy(englishMessage("short-drama.short.drama.streaming.platform.cedf920")), item: pagePath },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
@@ -83,7 +79,7 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
     description:
       translateCopy(englishMessage("short-drama.complete.white.label.9.16.vertical.short.dra.0dcb7d8")),
     price: schemaPrice(FAMILY_PACKAGE["short-drama"]),
-    url: language === "en" ? "/solutions/short-drama" : `/${language}/solutions/short-drama`,
+    url: pagePath,
     operatingSystem: "iOS, Android, Web, Cloud",
     applicationCategory: "MultimediaApplication",
     siteUrl,
@@ -99,7 +95,7 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         englishMessage("ShortDrama.architecture.app.vip"),
         englishMessage("ShortDrama.architecture.app.publish"),
       ],
-      link: { href: "/solutions/short-drama-app-development", label: englishMessage("ShortDrama.architecture.app.link") },
+      link: { href: SHORT_DRAMA_PATHS.app, label: englishMessage("ShortDrama.architecture.app.link") },
       portrait: true,
       galleryLabel: englishMessage("ShortDrama.top.app.previewCaption"),
       images: [
@@ -117,7 +113,7 @@ export default function ShortDramaPlatformPage({ language = "en" }: { language?:
         englishMessage("ShortDrama.architecture.web.browse"),
         englishMessage("ShortDrama.top.web.checkout"),
       ],
-      link: { href: "/solutions/short-drama-website-development", label: englishMessage("ShortDrama.architecture.web.link") },
+      link: { href: SHORT_DRAMA_PATHS.web, label: englishMessage("ShortDrama.architecture.web.link") },
       images: [
         { src: "/showcase/microdrama-web-player.webp", alt: englishMessage("ShortDrama.top.web.image") },
         { src: "/showcase/microdrama-catalog.webp", alt: englishMessage("ShortDrama.top.platform.image") },

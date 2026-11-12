@@ -1,3 +1,4 @@
+import { OTT_PATHS } from "@/lib/solution-paths";
 import { basePath } from "@/lib/site-config";
 
 export const OTT_PACKAGES = {
@@ -10,8 +11,8 @@ export type OttOffer = keyof typeof OTT_PACKAGES;
 
 export function ottOfferForPath(pathname: string): OttOffer | undefined {
   switch (basePath(pathname)) {
-    case "/solutions/ott-streaming": return "platform";
-    case "/solutions/ott-app-development": return "app";
-    case "/solutions/ott-website-development": return "web";
+    case OTT_PATHS.platform: return "platform";
+    case OTT_PATHS.app: return "app";
+    case OTT_PATHS.web: return "web";
   }
 }

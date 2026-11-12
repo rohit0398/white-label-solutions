@@ -1,3 +1,4 @@
+import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import Link from "next/link";
 import { CaseStudyPage, caseStudyMetadata } from "../_components/CaseStudyPage";
 import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
@@ -27,7 +28,7 @@ export default function ShortDramaCaseStudyPage() {
         title: "Planning a short drama launch?",
         description: "Tell us how viewers should watch and unlock episodes. The platform includes apps, a website, and an admin panel. We scope coin wallets separately.",
         packageId: SHORT_DRAMA_PACKAGES.platform,
-        solution: { href: "/solutions/short-drama", label: "Explore the short drama platform" },
+        solution: { href: SHORT_DRAMA_PATHS.platform, label: "Explore the short drama platform" },
         guide: { href: "/blog/short-drama-app-development", label: "Read the short drama launch guide" },
       }}
     >

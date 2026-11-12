@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { ArchitectureModule, type ArchitectureModuleContent } from "@/components/sections/ArchitectureModule";
 import { Section } from "@/components/ui/Section";
 import { ADMIN_FEATURES } from "@/lib/constants";
@@ -17,7 +18,7 @@ const modules: (ArchitectureModuleContent & { id: string })[] = [
       { src: "/showcase/commerce-storefront.webp", alt: englishMessage("Hero.mechatron.lab.online.store.built.on.the.plat.0e5abc6") },
       { src: "/showcase/commerce-marketplace.webp", alt: englishMessage("EcommerceArchitecture.marketplaceImage") },
     ],
-    link: { href: "/solutions/ecommerce-website-development", label: englishMessage("Footer.e.commerce.website.e37a1d0") },
+    link: { href: ECOMMERCE_PATHS.web, label: englishMessage("Footer.e.commerce.website.e37a1d0") },
   },
   {
     id: "mobile-apps",
@@ -36,7 +37,7 @@ const modules: (ArchitectureModuleContent & { id: string })[] = [
       { src: "/showcase/commerce-app-checkout.webp", alt: englishMessage("EcommerceArchitecture.checkoutImage") },
       { src: "/showcase/commerce-app-orders.webp", alt: englishMessage("MobileAppScreenshots.order.tracking.alerts.ce718e0") },
     ],
-    link: { href: "/solutions/ecommerce-app-development", label: englishMessage("Footer.e.commerce.mobile.app.e48da2f") },
+    link: { href: ECOMMERCE_PATHS.app, label: englishMessage("Footer.e.commerce.mobile.app.e48da2f") },
   },
   {
     id: "admin-crm",

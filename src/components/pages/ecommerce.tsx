@@ -1,8 +1,9 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { createLocalizer, englishMessage } from "@/lib/messages";
 import { getLocaleMessages } from "@/lib/locale-messages";
 import type { Language } from "@/types";
 import { FAMILY_PACKAGE, schemaPrice } from "@/lib/pricing-catalog";
-import { languageAlternates, SITE_URL } from "@/lib/site-config";
+import { languageAlternates, localizedPath, SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import { FAQS } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
@@ -19,20 +20,20 @@ import Link from "@/components/ui/LocalizedLink";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateFaqSchema, generateSoftwareSchema } from "@/lib/schema";
 
-const title = "White-Label E-Commerce Platform for Web and Mobile";
-const description = "Launch an online store and iOS and Android shopping apps. Manage orders and multi-warehouse inventory from one admin panel on your cloud.";
+const title = "Launch an E-Commerce Platform | Web, iOS & Android";
+const description = englishMessage("EcommerceHero.platformIntro");
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: {
-    canonical: "/solutions/ecommerce",
-    languages: languageAlternates("/solutions/ecommerce"),
+    canonical: ECOMMERCE_PATHS.platform,
+    languages: languageAlternates(ECOMMERCE_PATHS.platform),
   },
   openGraph: {
     title,
     description,
-    url: "/solutions/ecommerce",
+    url: ECOMMERCE_PATHS.platform,
     images: ["/og-image.png"],
   },
   twitter: {
@@ -47,11 +48,12 @@ export default function EcommerceSolutionPillarPage({ language = "en" }: { langu
   const translateCopy = createLocalizer(language, getLocaleMessages(language));
 
   const siteUrl = SITE_URL;
+  const pagePath = localizedPath(ECOMMERCE_PATHS.platform, language);
 
   const breadcrumbs = [
     { name: translateCopy(englishMessage("ecommerce.home.70f8bb9")), item: language === "en" ? "/" : `/${language}` },
     { name: translateCopy(englishMessage("ecommerce.solutions.05b004a")), item: "/solutions" },
-    { name: translateCopy(englishMessage("ecommerce.pre.built.e.commerce.store.f5dda60")), item: language === "en" ? "/solutions/ecommerce" : `/${language}/solutions/ecommerce` },
+    { name: translateCopy(englishMessage("ecommerce.pre.built.e.commerce.store.f5dda60")), item: pagePath },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema(siteUrl, breadcrumbs);
@@ -61,7 +63,7 @@ export default function EcommerceSolutionPillarPage({ language = "en" }: { langu
     description:
       translateCopy(englishMessage("ecommerce.complete.pre.built.white.label.e.commerce.ar.93dfe17")),
     price: schemaPrice(FAMILY_PACKAGE["ecommerce"]),
-    url: language === "en" ? "/solutions/ecommerce" : `/${language}/solutions/ecommerce`,
+    url: pagePath,
     operatingSystem: "Web, iOS, Android, Cloud (AWS, GCP, Azure, DigitalOcean)",
     applicationCategory: "BusinessApplication",
     siteUrl,
@@ -86,7 +88,7 @@ export default function EcommerceSolutionPillarPage({ language = "en" }: { langu
           ]}
           badge={translateCopy(translateCopy(englishMessage("ecommerce.pre.built.ready.to.launch.2.4.week.deploymen.3636217")))}
           headline={translateCopy(englishMessage("ecommerce.pre.built.e.commerce.store.mobile.apps.ready.f9105e8"))}
-          subtitle={translateCopy(englishMessage("ecommerce.pre.built.production.ready.architecture.desi.3d7f316"))}
+          subtitle={translateCopy(englishMessage("EcommerceHero.platformIntro"))}
           anchors={[
             { label: englishMessage("EcommerceProof.title"), href: "#work" },
             { label: englishMessage("ShortDrama.top.included"), href: "#architecture" },

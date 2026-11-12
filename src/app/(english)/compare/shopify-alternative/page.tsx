@@ -1,3 +1,4 @@
+import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import { displayPackagePrice, FAMILY_PACKAGE, packageAmount } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
@@ -229,7 +230,7 @@ export default function ShopifyAlternativePage() {
             </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-ink-2">
-            A hosted store can suit a team that wants managed hosting and ready-made integrations. Running on your own cloud gives your team control of the deployment and can make sense when the store needs custom workflows. Check what your chosen hosted plan charges for branded shopping apps before comparing the budgets.
+            A hosted store can suit a team that wants managed hosting and a catalog of integrations. Running on your own cloud gives your team control of the deployment and can make sense when the store needs custom workflows. Check what your chosen hosted plan charges for branded shopping apps before comparing the budgets.
           </p>
         </section>
 
@@ -266,7 +267,7 @@ export default function ShopifyAlternativePage() {
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <DemoButton size="sm">Book a demo</DemoButton>
-              <Link href="/solutions/ecommerce#pricing" className={buttonClass("link", "sm")}>
+              <Link href={`${ECOMMERCE_PATHS.platform}#pricing`} className={buttonClass("link", "sm")}>
                 View e-commerce pricing →
               </Link>
             </div>
