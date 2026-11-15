@@ -27,6 +27,7 @@ export const MICRO_DRAMA_BUILDERS_SLUG = "white-label-micro-drama-app-builders";
 export const MICRO_DRAMA_SOURCE_CODE_SLUG = "micro-drama-app-source-code";
 export const MICRO_DRAMA_PUBLISHING_SLUG = "publish-micro-drama-series";
 export const MICRO_DRAMA_APP_CHECKLIST_SLUG = "micro-drama-app-launch-checklist";
+export const MICRO_DRAMA_BACKEND_SLUG = "micro-drama-backend-architecture";
 
 const shortDramaMarketReport = {
   title: "Sensor Tower: State of Short Drama Apps 2026",
@@ -40,6 +41,102 @@ const platformSources = [
 ];
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
+  {
+    slug: MICRO_DRAMA_BACKEND_SLUG,
+    title: "Micro Drama Backend Architecture",
+    seoTitle: "Micro Drama Backend Architecture | Streaming, Payments & DRM",
+    description: "See how a micro drama backend publishes episodes, verifies VIP subscriptions, issues signed playback links, and scales for traffic spikes.",
+    intro: "A viewer finishes two free episodes and taps episode three. The backend has to check their VIP access, give the player a valid stream, and handle the next request just as reliably when a new series brings in more viewers. This guide follows that episode through our OTT backend and explains the decisions a studio should test before launch.",
+    takeaway: "Use one series to test the whole system. Publish it, watch a free episode, unlock a VIP episode with a test purchase, then repeat with expired access. Check the behavior on every device you plan to launch.",
+    datePublished: "2026-11-15",
+    sections: [
+      {
+        id: "backend-stack",
+        title: "What the micro drama backend handles",
+        paragraphs: [
+          "Our Node.js and Express API handles the catalog, accounts, subscriptions, and requests for playback. MongoDB, accessed through Mongoose, stores records such as series, seasons, episodes, and subscription history. The video provider handles encoding and delivers the video to the player, so a viewer’s stream does not need to pass through Express.",
+          "Redis caches frequently requested data. Redis also backs BullMQ, which runs background work such as analytics events and like processing. The scheduled publishing flow uses Azure Service Bus to send a worker a message when a release is due. This lets a studio prepare tomorrow’s episode without leaving the admin panel open until release time.",
+        ],
+      },
+      {
+        id: "publish-one-series",
+        title: "From admin upload to a published episode",
+        paragraphs: [
+          "In the admin panel, create a series, set the episode order, and associate each episode with its video. The video provider prepares playback at several quality levels. With adaptive HLS, the player can switch quality as a viewer moves between Wi-Fi and mobile data. Check that the video is ready and that sound and captions work before releasing it.",
+          "For this example, make episodes one and two free and set episode three to VIP. In a scheduled release, the worker reads the publishing message and applies the release in the catalog. Test that a draft stays hidden until release time and that the new episode appears in the right order when it goes live.",
+        ],
+        options: [
+          { title: "See the publishing workflow", text: "Follow the admin steps for preparing artwork, uploading episodes, and reviewing the published series.", href: `/blog/${MICRO_DRAMA_PUBLISHING_SLUG}`, linkLabel: "Read the series publishing guide" },
+        ],
+      },
+      {
+        id: "vip-playback-access",
+        title: "What happens when a viewer taps a VIP episode?",
+        paragraphs: [
+          "In this example, the player requests episode three. The API checks the account and applies the episode’s access rule. If the viewer is allowed to watch, the API can issue a signed playback link. The video provider checks that signature and expiration before serving the protected stream.",
+        ],
+        checklist: [
+          { title: "Identify the viewer", text: "For signed-in requests, authentication establishes which account is asking. The OTT API uses Firebase authentication for viewers and JWT-based admin authentication." },
+          { title: "Check permission for the episode", text: "The backend uses the catalog and the viewer’s access record to decide whether this episode is free, available with active VIP, or locked." },
+          { title: "Issue playback access", text: "A signed link gives the player time-limited access to a protected asset. A Mux DRM asset also needs a separate license token so a compatible player can request a license to decrypt it." },
+        ],
+      },
+      {
+        id: "signed-playback-and-drm",
+        title: "How signed playback links and DRM protect video",
+        paragraphs: [
+          "On Cloudflare Stream, requiring signed URLs on a video makes playback require a valid token. In the Mux DRM path, the video is encrypted and a compatible player uses a DRM license to play it. FairPlay is common on Apple platforms and Widevine on Android and supported browsers. Confirm the video provider, asset policy, and device support for the deployment you choose.",
+          "Review access at the point the API issues the link. Resolve the episode and its provider asset from the catalog on the server. Apply the same rule to direct links and requests for several episodes at once. Keep signed links and signing secrets out of logs, and make sure cached links expire before they can be handed back after their validity ends.",
+          "The API also uses Helmet security headers, a browser origin allowlist, and rate limits on selected routes such as login. Keep admin publishing actions behind role checks. Transport security, API permissions, and video protection each cover a different part of the request.",
+        ],
+        bullets: [
+          "Open the free and VIP episodes as a guest, an active subscriber, and a viewer whose access has expired.",
+          "Repeat the test using a shared link and while advancing from episode two to episode three.",
+          "For DRM-enabled releases, test the license request and playback on each supported browser and phone.",
+        ],
+      },
+      {
+        id: "subscriptions-and-payments",
+        title: "How a confirmed payment gives the viewer VIP access",
+        paragraphs: [
+          "The OTT backend has Stripe and Razorpay integrations and handles Apple and Google Play subscriptions. Choose the payment path for each client and market. A payment provider’s signed notification or a store-verified purchase lets the backend update access before the player retries the VIP episode.",
+          "A successful checkout screen gives viewers feedback while the backend confirms the purchase. Keep pending purchases pending until verified. If a viewer cancels renewal, use the plan’s paid-through date and provider rules to decide when access ends. Give support enough information to investigate a confirmed payment that didn’t unlock an episode.",
+          "For the launch, verify webhook signatures against the original request body when the provider requires it. Test that a repeated notification can be processed without granting access twice and that a late event leaves the account in the correct state. Reconcile with the provider if the order or state is unclear.",
+        ],
+        options: [
+          { title: "Choose which episodes viewers can unlock", text: "Compare subscription access, episode purchases, and rewarded ads before choosing a payment model.", href: "/blog/short-drama-monetization", linkLabel: "Read the monetization guide" },
+        ],
+      },
+      {
+        id: "scale-on-release-day",
+        title: "What to test before a release-day traffic spike",
+        paragraphs: [
+          "Azure App Service can add API instances when scale-out is configured on an eligible plan. The video provider continues to serve video as API traffic grows. A useful load test follows a real viewing session: opening the catalog, playing the free preview, and requesting access to the VIP episode. Measure those steps separately so you can tell whether the bottleneck is in the API, database, payment flow, or player.",
+          "The API starts background workers alongside the web process in this setup. Adding API instances can therefore add worker processes too. Set concurrency and connection limits with MongoDB, Redis, and downstream services in mind. Review retries so a repeated job leaves publishing or analytics in the expected state.",
+        ],
+        bullets: [
+          "Watch slow requests, errors, and MongoDB connections while traffic rises.",
+          "Track how long jobs wait, which jobs fail, and whether retry volume grows after a provider outage.",
+          "Check first-play failures and billing verification errors separately so the team knows where to look.",
+        ],
+        options: [
+          { title: "Plan who runs the service after launch", text: "Review cloud accounts, operating costs, and what to ask for at handover.", href: `/blog/${MICRO_DRAMA_SOURCE_CODE_SLUG}`, linkLabel: "Read the source code and hosting guide" },
+        ],
+      },
+    ],
+    sources: [
+      { title: "Azure App Service automatic scaling", url: "https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling" },
+      { title: "Azure Service Bus scheduled messages", url: "https://learn.microsoft.com/en-us/azure/service-bus-messaging/message-sequencing" },
+      { title: "BullMQ: designing jobs for retries", url: "https://docs.bullmq.io/patterns/idempotent-jobs" },
+      { title: "Mux: signed playback and DRM license tokens", url: "https://www.mux.com/docs/guides/protect-videos-with-drm" },
+      { title: "Cloudflare Stream: protect videos with signed URLs", url: "https://developers.cloudflare.com/stream/viewing-videos/securing-your-stream/" },
+      { title: "Stripe: webhook verification, duplicates, and event ordering", url: "https://docs.stripe.com/webhooks" },
+      { title: "Razorpay: validate and test webhooks", url: "https://razorpay.com/docs/webhooks/validate-test" },
+      { title: "Google Play Billing: server-side purchase verification", url: "https://developer.android.com/google/play/billing/security" },
+      { title: "OWASP: API authentication and authorization risks", url: "https://api-security.owasp.org/editions/2023/en/0x11-t10/" },
+      { title: "AWS: the Dramaze short drama streaming architecture", url: "https://aws.amazon.com/blogs/media/how-aws-powers-dramaze-ai-enhanced-streaming-platform/" },
+    ],
+  },
   {
     slug: MICRO_DRAMA_BUILDERS_SLUG,
     title: "How to Compare White-Label Micro Drama App Builders",

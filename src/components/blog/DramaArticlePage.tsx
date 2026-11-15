@@ -15,6 +15,7 @@ import { BRAND } from "@/lib/constants";
 import {
   DRAMA_ARTICLES,
   MICRO_DRAMA_APP_CHECKLIST_SLUG,
+  MICRO_DRAMA_BACKEND_SLUG,
   MICRO_DRAMA_BUILDERS_SLUG,
   MICRO_DRAMA_LAUNCH_SLUG,
   MICRO_DRAMA_PUBLISHING_SLUG,
@@ -35,6 +36,12 @@ const articleNextSteps: Partial<Record<string, {
   offer?: ShortDramaOffer;
   whatsappMessage?: string;
 }>> = {
+  [MICRO_DRAMA_BACKEND_SLUG]: {
+    title: "Bring one series to a walkthrough",
+    text: "Tell us which episodes are free, where VIP starts, and which devices you’ll launch on. We can walk through publishing, playback, and the payment options for your deployment.",
+    links: [{ href: SHORT_DRAMA_PATHS.platform, label: "Explore the Micro Drama platform" }],
+    whatsappMessage: "Hi, I read the micro drama backend architecture guide and would like to discuss publishing, VIP playback, and hosting for my series.",
+  },
   [MICRO_DRAMA_BUILDERS_SLUG]: {
     title: "Ask for a walkthrough with one series",
     text: "Tell us where viewers will watch and how you want to charge for episodes. We can show you the viewer and publishing flows for the package you’re considering.",
@@ -80,6 +87,7 @@ const articleNextSteps: Partial<Record<string, {
       { href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, label: "Compare launching on web or apps first" },
       { href: `/blog/${MICRO_DRAMA_BUILDERS_SLUG}`, label: "Compare white-label and custom options" },
       { href: `/blog/${MICRO_DRAMA_PUBLISHING_SLUG}`, label: "See how to publish a series" },
+      { href: `/blog/${MICRO_DRAMA_BACKEND_SLUG}`, label: "See how the Micro Drama backend works" },
       { href: SHORT_DRAMA_PATHS.app, label: "iOS and Android apps" },
       { href: SHORT_DRAMA_PATHS.web, label: "Short Drama website" },
       { href: "/case-studies/short-drama-platform", label: "Short Drama case study" },
@@ -121,6 +129,7 @@ const articleVisuals: Partial<Record<string, {
   previewSection?: string;
   screenshots?: Partial<Record<string, { src: string; alt: string; caption?: string }>>;
 }>> = {
+  [MICRO_DRAMA_BACKEND_SLUG]: { screenshots: { "publish-one-series": adminEpisodes } },
   [MICRO_DRAMA_BUILDERS_SLUG]: { screenshots: { "live-demo-checklist": adminEpisodesWithCaption } },
   [MICRO_DRAMA_PUBLISHING_SLUG]: {
     screenshots: {

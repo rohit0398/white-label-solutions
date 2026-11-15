@@ -4,9 +4,10 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 53);
+assert.equal(urls.length, 54);
 assert.equal(sitemap.includes("<lastmod>"), false);
 const dramaGuides = [
+  "micro-drama-backend-architecture",
   "white-label-micro-drama-app-builders",
   "launch-micro-drama-platform",
   "micro-drama-app-source-code",
