@@ -37,6 +37,7 @@ const dimensions: Record<string, readonly [number, number]> = {
   "/showcase/microdrama-catalog.webp": [1280, 633],
   "/showcase/microdrama-web-genres.webp": [1280, 636],
   "/showcase/microdrama-web-player.webp": [1280, 631],
+  "/showcase/microdrama-web-sign-in.webp": [1280, 631],
   "/showcase/ott-cinematic-web.webp": [1280, 714],
   "/apple-touch-icon.png": [
     180,

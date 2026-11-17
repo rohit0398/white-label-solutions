@@ -20,13 +20,15 @@ import {
   MICRO_DRAMA_LAUNCH_SLUG,
   MICRO_DRAMA_PUBLISHING_SLUG,
   MICRO_DRAMA_SOURCE_CODE_SLUG,
+  MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG,
+  NETSHORT_LAUNCH_SLUG,
   dramaArticle,
 } from "@/lib/content/short-drama-articles";
 import { displayPackagePrice, packageAmount, type PackageId } from "@/lib/pricing-catalog";
 import { SHORT_DRAMA_PACKAGES, type ShortDramaOffer } from "@/lib/short-drama-offers";
 import { SITE_URL } from "@/lib/site-config";
 
-const articleImage = "/showcase/microdrama-catalog.webp";
+const defaultArticleImage = "/showcase/microdrama-catalog.webp";
 const updated = "2026-11-10";
 const articleDateFormat = new Intl.DateTimeFormat("en-GB", { dateStyle: "long", timeZone: "UTC" });
 const articleNextSteps: Partial<Record<string, {
@@ -36,10 +38,26 @@ const articleNextSteps: Partial<Record<string, {
   offer?: ShortDramaOffer;
   whatsappMessage?: string;
 }>> = {
+  [NETSHORT_LAUNCH_SLUG]: {
+    title: "Plan the first release around one series",
+    text: "Tell us where viewers should start watching and what should happen at the first VIP episode. We can show the web and app flows for the package you’re considering.",
+    links: [{ href: SHORT_DRAMA_PATHS.platform, label: "Explore the complete Micro Drama platform" }],
+    whatsappMessage: "Hi, I read your NetShort-style launch guide and would like to discuss launching our short drama platform.",
+  },
+  [MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG]: {
+    title: "Try the website with a series in mind",
+    text: "Bring an episode you plan to share and tell us where VIP starts. We can show how the browser player, episode links, and checkout fit your launch.",
+    links: [{ href: SHORT_DRAMA_PATHS.web, label: "Explore the Micro Drama website package" }],
+    offer: "web",
+    whatsappMessage: "Hi, I read the micro drama website architecture guide and would like to discuss a web launch for my series.",
+  },
   [MICRO_DRAMA_BACKEND_SLUG]: {
     title: "Bring one series to a walkthrough",
     text: "Tell us which episodes are free, where VIP starts, and which devices you’ll launch on. We can walk through publishing, playback, and the payment options for your deployment.",
-    links: [{ href: SHORT_DRAMA_PATHS.platform, label: "Explore the Micro Drama platform" }],
+    links: [
+      { href: SHORT_DRAMA_PATHS.platform, label: "Explore the Micro Drama platform" },
+      { href: `/blog/${MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG}`, label: "See how the streaming website works" },
+    ],
     whatsappMessage: "Hi, I read the micro drama backend architecture guide and would like to discuss publishing, VIP playback, and hosting for my series.",
   },
   [MICRO_DRAMA_BUILDERS_SLUG]: {
@@ -58,6 +76,7 @@ const articleNextSteps: Partial<Record<string, {
       { href: "/blog/short-drama-app-development-cost#packages", label: "Compare package prices" },
       { href: `/blog/${MICRO_DRAMA_BUILDERS_SLUG}`, label: "Compare white-label app builders" },
       { href: `/blog/${MICRO_DRAMA_APP_CHECKLIST_SLUG}`, label: "Use the iOS and Android launch checklist" },
+      { href: `/blog/${NETSHORT_LAUNCH_SLUG}`, label: "See the NetShort-style launch plan" },
     ],
     whatsappMessage: "Hi, I read your micro drama launch guide and would like help choosing between a website and mobile apps.",
   },
@@ -100,11 +119,15 @@ const articleNextSteps: Partial<Record<string, {
       { href: SHORT_DRAMA_PATHS.app, label: "Explore Short Drama app development" },
       { href: "/blog/short-drama-app-development-cost#packages", label: "Compare launch packages and prices" },
     ],
+    offer: "app",
+    whatsappMessage: "Hi, I read your ReelShort guide and would like to discuss launching our short drama app.",
   },
   "build-app-like-dramabox": {
     title: "Test episode access with a sample series",
     text: "Bring a sample series and your proposed access rules. Ask to see how a free episode, a paid episode, and a failed purchase work in the app.",
     links: [{ href: "/blog/short-drama-monetization", label: "Compare Short Drama monetization models" }],
+    offer: "app",
+    whatsappMessage: "Hi, I read your DramaBox guide and would like to discuss launching our short drama app.",
   },
   "short-drama-app-development-cost": {
     title: "Get an estimate for your launch",
@@ -129,6 +152,18 @@ const articleVisuals: Partial<Record<string, {
   previewSection?: string;
   screenshots?: Partial<Record<string, { src: string; alt: string; caption?: string }>>;
 }>> = {
+  [MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG]: {
+    screenshots: {
+      "catalog-and-watch-page-seo": {
+        src: "/showcase/microdrama-web-genres.webp",
+        alt: "MicroDrama browser catalog showing genre filters and series cards",
+      },
+      "vip-checkout-and-return": {
+        src: "/showcase/microdrama-web-sign-in.webp",
+        alt: "MicroDrama website sign-in with Google and mobile verification options",
+      },
+    },
+  },
   [MICRO_DRAMA_BACKEND_SLUG]: { screenshots: { "publish-one-series": adminEpisodes } },
   [MICRO_DRAMA_BUILDERS_SLUG]: { screenshots: { "live-demo-checklist": adminEpisodesWithCaption } },
   [MICRO_DRAMA_PUBLISHING_SLUG]: {
@@ -154,10 +189,11 @@ export function articleMetadata(slug: string): Metadata {
   const article = dramaArticle(slug);
   const url = `/blog/${slug}`;
   const title = article.seoTitle ?? article.title;
+  const image = article.image ?? defaultArticleImage;
   return { title, description: article.description,
     alternates: { canonical: url },
-    openGraph: { type: "article", title, description: article.description, url, images: [articleImage], publishedTime: article.datePublished, modifiedTime: article.dateModified },
-    twitter: { card: "summary_large_image", title, description: article.description, images: [articleImage] },
+    openGraph: { type: "article", title, description: article.description, url, images: [image], publishedTime: article.datePublished, modifiedTime: article.dateModified },
+    twitter: { card: "summary_large_image", title, description: article.description, images: [image] },
   };
 }
 
@@ -189,13 +225,14 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
   const url = `${SITE_URL}/blog/${slug}`;
   const { previewSection, screenshots } = articleVisuals[slug] ?? {};
   const nextStep = articleNextSteps[slug];
+  const packageId = SHORT_DRAMA_PACKAGES[nextStep?.offer ?? "platform"];
   const articleDate = article.dateModified ?? article.datePublished ?? updated;
   const whatsappUrl = nextStep?.whatsappMessage ? new URL(BRAND.contact.whatsappUrl) : undefined;
   if (whatsappUrl && nextStep?.whatsappMessage) whatsappUrl.searchParams.set("text", nextStep.whatsappMessage);
   const showPackageComparison = slug === "short-drama-app-development-cost" || slug === MICRO_DRAMA_BUILDERS_SLUG;
   return <div className="min-h-screen flex flex-col bg-paper text-ink">
     <JsonLd schema={{ "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description,
-      mainEntityOfPage: url, url, image: `${SITE_URL}${articleImage}`, inLanguage: "en",
+      mainEntityOfPage: url, url, image: `${SITE_URL}${article.image ?? defaultArticleImage}`, inLanguage: "en",
       author: { "@type": "Organization", name: "Mechatron Lab Engineering Team", url: `${SITE_URL}/about` },
       publisher: { "@type": "Organization", name: "Mechatron Lab Solutions", url: SITE_URL },
       datePublished: article.datePublished, dateModified: articleDate }} />
@@ -216,6 +253,14 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           <aside className="p-5 rounded-xl bg-wash border border-line"><p className="font-semibold mb-2">Before you start</p><p className="text-ink-2 leading-relaxed">{article.takeaway}</p></aside>
           {showPackageComparison && <a href="#packages" className="inline-block text-sm underline underline-offset-4">See packages and prices</a>}
         </header>
+        <section aria-labelledby="launch-cta" className="space-y-3 rounded-2xl border border-line bg-wash p-5 sm:p-6">
+          <h2 id="launch-cta" className="text-xl font-semibold tracking-tight sm:text-2xl">Get your short drama app ready in as little as 2 weeks</h2>
+          <p className="text-sm leading-relaxed text-ink-2">Setup takes an estimated 2–4 weeks once your videos, branding, and accounts are ready. Store review timing varies. Try our live web, iOS, and Android examples below.</p>
+          <div className="flex flex-wrap gap-3">
+            <DemoButton tierId={packageId} trackingPlacement={`${slug}-top`}>Contact us about your launch</DemoButton>
+            <ContactWhatsAppLink href={whatsappUrl?.toString() ?? BRAND.contact.whatsappUrl} placement={`${slug}-top`} className={buttonClass("secondary")}>Chat on WhatsApp</ContactWhatsAppLink>
+          </div>
+        </section>
         <ShortDramaLiveAccess emphasis="both" landing />
         <nav aria-label="Article contents" className="rounded-xl border border-line p-5 space-y-3"><h2 className="font-semibold">In this guide</h2><ol className="space-y-2 text-sm text-ink-2">{article.sections.map(section => <li key={section.id}><a className="underline underline-offset-4" href={`#${section.id}`}>{section.title}</a></li>)}</ol></nav>
         {article.sections.map(({ id, ...section }) => <section key={id} id={id} className="space-y-5 scroll-mt-24">
@@ -271,7 +316,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           <h2 className="text-2xl font-semibold">{nextStep.title}</h2>
           <p className="leading-relaxed text-ink-2">{nextStep.text}</p>
           <div className="flex flex-wrap items-center gap-4">
-            <DemoButton tierId={SHORT_DRAMA_PACKAGES[nextStep.offer ?? "platform"]} trackingPlacement={nextStep.whatsappMessage ? slug : undefined}>Request a walkthrough</DemoButton>
+            <DemoButton tierId={packageId} trackingPlacement={nextStep.whatsappMessage ? slug : undefined}>Request a walkthrough</DemoButton>
             {whatsappUrl && (
               <ContactWhatsAppLink href={whatsappUrl.toString()} placement={slug} className={buttonClass("secondary")}>Chat on WhatsApp</ContactWhatsAppLink>
             )}

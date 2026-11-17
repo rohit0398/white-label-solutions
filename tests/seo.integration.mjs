@@ -4,9 +4,11 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 54);
+assert.equal(urls.length, 56);
 assert.equal(sitemap.includes("<lastmod>"), false);
 const dramaGuides = [
+  "launch-app-like-netshort",
+  "micro-drama-website-architecture",
   "micro-drama-backend-architecture",
   "white-label-micro-drama-app-builders",
   "launch-micro-drama-platform",
@@ -70,13 +72,23 @@ for (const url of urls) {
   }
   if (dramaGuides.some(slug => path === `/blog/${slug}`)) {
     assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `Article schema: ${path}`);
+    const contactStart = html.indexOf('id="launch-cta"');
     const demoStart = html.indexOf('id="live-demo"');
     const contentsStart = html.indexOf('aria-label="Article contents"');
+    assert.ok(contactStart >= 0 && contactStart < demoStart, `Launch contact before live examples: ${path}`);
+    const contactSection = html.slice(contactStart, demoStart);
+    assert.ok(contactSection.includes("Contact us about your launch"), `Launch contact button: ${path}`);
+    assert.match(contactSection, /href="https:\/\/wa\.me\/[^"\s]+"/, `Launch WhatsApp link: ${path}`);
     assert.ok(demoStart >= 0 && demoStart < contentsStart, `Live demo before guide contents: ${path}`);
     assert.ok(html.includes('href="/solutions/launch-micro-drama-platform"'), `Commercial link: ${path}`);
     for (const slug of dramaGuides) {
       if (path !== `/blog/${slug}`) assert.ok(html.includes(`href="/blog/${slug}"`), `Related guide discovery: ${path}`);
     }
+  }
+  if (path === "/blog/micro-drama-website-architecture") {
+    assert.ok(html.includes('href="/blog/micro-drama-backend-architecture#vip-playback-access"'), "Backend playback reference");
+    assert.ok(html.includes('href="/solutions/launch-micro-drama-website"'), "Website package link");
+    assert.match(html, /<meta property="og:image" content="[^"]+\/showcase\/microdrama-web-genres\.webp"/);
   }
   if (path === "/blog/short-drama-app-development-cost") {
     assert.ok(html.includes('id="packages"'), `Package comparison: ${path}`);
