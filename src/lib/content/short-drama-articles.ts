@@ -6,6 +6,7 @@ export interface DramaArticle {
   title: string;
   seoTitle?: string;
   description: string;
+  image?: string;
   intro: string;
   takeaway: string;
   datePublished?: string;
@@ -28,6 +29,8 @@ export const MICRO_DRAMA_SOURCE_CODE_SLUG = "micro-drama-app-source-code";
 export const MICRO_DRAMA_PUBLISHING_SLUG = "publish-micro-drama-series";
 export const MICRO_DRAMA_APP_CHECKLIST_SLUG = "micro-drama-app-launch-checklist";
 export const MICRO_DRAMA_BACKEND_SLUG = "micro-drama-backend-architecture";
+export const MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG = "micro-drama-website-architecture";
+export const NETSHORT_LAUNCH_SLUG = "launch-app-like-netshort";
 
 const shortDramaMarketReport = {
   title: "Sensor Tower: State of Short Drama Apps 2026",
@@ -41,6 +44,149 @@ const platformSources = [
 ];
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
+  {
+    slug: NETSHORT_LAUNCH_SLUG,
+    title: "How to Launch a White-Label Short Drama App Like NetShort",
+    seoTitle: "Launch an App Like NetShort | White-Label Short Drama",
+    description: "Plan a NetShort-style launch with a white-label short drama platform. Compare web, iOS and Android, localize one series, and test the first VIP episode.",
+    image: "/showcase/microdrama-web-genres.webp",
+    intro: "NetShort gives viewers several ways to start the same kind of story: open an episode in a browser or install the app. If you’re planning a short drama service, start with one series, decide how people will find it, and test how they move from a free episode to VIP access.",
+    takeaway: "Pick one market and one complete series. Choose where viewers should start watching, then test the opening episodes and the first VIP episode on every platform in that release.",
+    datePublished: "2026-11-17",
+    sections: [
+      {
+        id: "what-netshort-shows",
+        title: "What studios can learn from NetShort",
+        paragraphs: [
+          "Insightrackr ranked NetShort fourth by estimated downloads and third by estimated revenue among short drama apps in October 2026. NetShort’s own FAQ describes a catalog of original and licensed series, with browser viewing alongside iOS and Android. It says early episodes are often free and that access to later episodes can vary by series.",
+          "The launch question for a studio is where a new viewer should start. If most people discover a series through a trailer or a shared link, send them to the matching episode and see how many start it. If your campaign is built around installs, test how quickly a new app user can find that same series and play it. The MicroDrama demos above show our independent platform and give you both viewing paths to try.",
+        ],
+      },
+      {
+        id: "choose-your-launch-surfaces",
+        title: "Choose what goes live first",
+        paragraphs: [
+          "A white-label launch starts with prebuilt player and publishing software that we configure for your brand and catalog. Choose a starting package around the screens you need for the first campaign. If you launch web and mobile together, agree how sign-in, viewing progress, and VIP access should behave when someone changes devices, then test that behavior before promotion.",
+        ],
+        options: [
+          { title: "Start with shareable episode links", text: "Give viewers a browser route from a trailer or partner link directly to the series or episode.", href: SHORT_DRAMA_PATHS.web, linkLabel: "Explore the website package" },
+          { title: "Start with iOS and Android", text: "Use the app package if your campaign already sends viewers to the stores and you plan to publish under your own developer accounts.", href: SHORT_DRAMA_PATHS.app, linkLabel: "Explore the mobile app package" },
+          { title: "Launch web and apps together", text: "Use one publishing panel to manage the catalog across your browser player and apps.", href: SHORT_DRAMA_PATHS.platform, linkLabel: "Explore the complete platform" },
+        ],
+      },
+      {
+        id: "localize-the-first-series",
+        title: "Prepare one series for a second market",
+        paragraphs: [
+          "NetShort says its localized catalog varies by title and region, including audio and subtitle availability. For your first expansion, choose a series you have permission to distribute in a second market. Give it a title, description, trailer, and artwork that make sense to that audience. Confirm which caption tracks or dubbed versions the launch players will actually support.",
+          "Have someone who speaks the language follow the real viewing path. Send them the trailer link and ask them to start episode one, read the captions on a small screen, and find the next episode. Then have them explain what the VIP offer includes in their own words. This exposes gaps that can be easy to miss when the team reviews each screen on its own.",
+        ],
+        options: [
+          { title: "Prepare the episode files and catalog", text: "Use the publishing guide to organize the first series and check it from the viewer’s side.", href: `/blog/${MICRO_DRAMA_PUBLISHING_SLUG}`, linkLabel: "Read the series publishing guide" },
+        ],
+      },
+      {
+        id: "test-the-first-vip-episode",
+        title: "Test how viewers move from free to VIP",
+        paragraphs: [
+          "For a sample launch, make episodes one and two free and set episode three to VIP. Test what happens when someone reaches episode three by watching in order and when they open its link directly. Show the price, renewal period, and what the subscription unlocks before asking for payment.",
+          "Count first episode starts, episode two completions, VIP offer views, and confirmed subscriptions separately. If viewers drop before they reach the offer, review discovery and playback first. If a confirmed buyer still can’t play episode three, investigate payment verification and access. If your plan calls for a coin wallet or a custom episode purchase, scope that workflow during the walkthrough.",
+        ],
+      },
+      {
+        id: "prepare-for-the-launch",
+        title: "What to have ready before kickoff",
+        paragraphs: [
+          "For the agreed prebuilt scope, setup is estimated at 2–4 weeks once the videos, branding, and account access are ready. The public release also depends on the payment setup and, for mobile apps, Apple and Google review. Bring the first series to kickoff so the studio can try the proposed viewing and VIP flow during setup.",
+        ],
+        checklist: [
+          { title: "Bring one complete series", text: "Prepare the episode files, artwork, captions if needed, and the order in which viewers should watch." },
+          { title: "Define the first launch", text: "Choose the market, viewing platform, and free-to-VIP transition. List the accounts your team can provide." },
+          { title: "Test the campaign path", text: "Use a phone to follow the trailer link, start the first episode, and verify access after a test purchase." },
+        ],
+      },
+    ],
+    sources: [
+      { title: "NetShort: official FAQ on languages, playback, and episode access", url: "https://netshort.com/faq" },
+      { title: "Insightrackr: October 2026 short drama app downloads and revenue estimates", url: "https://blog.insightrackr.com/en/docs/blog_Oct-2026-Top-Short-Drama" },
+    ],
+  },
+  {
+    slug: MICRO_DRAMA_WEBSITE_ARCHITECTURE_SLUG,
+    title: "Micro Drama Website Architecture",
+    seoTitle: "Micro Drama Website Architecture | Web Playback & VIP Checkout",
+    description: "See how a Next.js micro drama website opens shared episode links, plays vertical HLS video, and takes viewers from a free preview to VIP checkout.",
+    image: "/showcase/microdrama-web-genres.webp",
+    intro: "Someone sees a scene from your series on Instagram and taps the link. The website needs to open the right episode, play it on their phone, and give them a clear way to continue when they reach VIP. This guide follows that journey through our Next.js web player and explains what to test before sending traffic to it.",
+    takeaway: "Send one trailer to one free episode. Test the link in real phone browsers, follow the transition to VIP, and verify that a confirmed subscription lets the viewer return to the episode they wanted to watch.",
+    datePublished: "2026-11-17",
+    sections: [
+      {
+        id: "shared-episode-links",
+        title: "Open the episode viewers came to watch",
+        paragraphs: [
+          "Our Next.js reference website has separate pages for a series and for individual episodes. A series page helps viewers explore the story and browse the episode list. A shared episode link can go directly to the chapter used in a trailer or campaign. The same link can open on a phone or desktop browser without an app install.",
+          "For example, send a trailer to episode one of a free preview series. When someone opens the link, show the series title, episode number, and play control so they know they landed in the right place. Offer a route back to the series if they want context or open a later episode first. Keep campaign parameters for measurement and use the clean episode URL as the canonical address.",
+          "NetShort publicly offers browser viewing alongside apps and says early episodes are often free to start. For a web-first launch, use that pattern to test how many people go from a trailer to a first play, then decide where to send the next campaign.",
+        ],
+        options: [
+          { title: "Decide where viewers should start", text: "Compare the web-first and app-first paths using the same series and audience.", href: `/blog/${MICRO_DRAMA_LAUNCH_SLUG}`, linkLabel: "Compare launching on web or apps" },
+        ],
+      },
+      {
+        id: "vertical-hls-in-the-browser",
+        title: "Play vertical HLS video across browsers",
+        paragraphs: [
+          "The web player uses hls.js where supported and falls back to native HLS when the browser can play it. An HLS stream can offer several video qualities, allowing the player to adapt to changes in network speed. The backend can issue playback access for protected episodes, and the player fetches the media from the video provider.",
+          "Reserve space for the portrait video and present a clear play button. Browsers and in-app browsers can apply different autoplay rules, especially when audio is enabled. Check that a viewer who needs to tap can start the episode immediately and can still reach mute, captions where available, and the episode picker. Test the next-episode transition and an interrupted connection as well as the first play.",
+          "Keep the first watch screen light. Request the current episode before preparing the next one, limit preloading on slow connections, and avoid requesting protected video until the backend confirms access. Measure time to first frame, playback errors, and how many viewers make it to the next episode.",
+        ],
+        options: [
+          { title: "See where playback access comes from", text: "Follow the API, video provider, and payment system behind the player.", href: `/blog/${MICRO_DRAMA_BACKEND_SLUG}#vip-playback-access`, linkLabel: "Read the backend architecture guide" },
+        ],
+      },
+      {
+        id: "catalog-and-watch-page-seo",
+        title: "Make series pages and free previews easy to find",
+        paragraphs: [
+          "Our reference website has catalog, genre, series, and episode views. For a public launch, give each series a short synopsis, poster, and crawlable links to the episodes you intend to promote. Serve the title, description, thumbnail, and canonical URL in the initial HTML so search engines and messaging previews can see the right story when they open a link. Check what the server actually returns for a real title.",
+          "If a free preview is a candidate for Google video results, give it a dedicated watch page where the video is the main content. Use a stable, crawlable thumbnail and check Google’s video indexing requirements on the published URL. Treat catalog discovery, video indexing, and access to the video files as separate settings. Keep signed media URLs out of sitemaps and sharing links.",
+        ],
+      },
+      {
+        id: "vip-checkout-and-return",
+        title: "Take viewers from a free episode to VIP checkout",
+        paragraphs: [
+          "Use the same example as the backend guide: episodes one and two are free, and episode three requires VIP. When a viewer reaches episode three, show what the plan unlocks, what it costs, and how often it renews. Keep the selected series and episode as context if they need to sign in before continuing.",
+          "The web reference includes a Stripe Payment Element for card checkout. The website package uses Stripe for web VIP subscriptions, with payment options confirmed for the target market. The UI can show payment progress, while the backend verifies the payment and records the viewer’s access. After confirmation, refresh the access state and let the viewer continue the episode. Show a pending or retry state if the payment is still processing or was interrupted.",
+          "Check the complete return path when a payment opens a new window or requires an extra confirmation step. In a test environment, try a successful purchase, a cancelled purchase, and a viewer reopening the same locked episode link after subscribing.",
+        ],
+      },
+      {
+        id: "test-the-web-release",
+        title: "Test the journey from a real campaign link",
+        paragraphs: [
+          "Try the same link from a social app, a chat app, and a normal mobile browser. Run through the first two episodes as a new viewer, then repeat as an active VIP subscriber and as someone whose access has expired. Use one series and a consistent set of accounts so playback and billing results are easy to compare.",
+        ],
+        checklist: [
+          { title: "Check the shared link and preview", text: "Send it in a chat. Verify that the preview names the correct series and the link opens the intended episode." },
+          { title: "Test first play and the next episode", text: "Try iPhone Safari, Android Chrome, and a browser inside the social app you use for your campaign. Test playback over mobile data and after a network interruption." },
+          { title: "Retest the VIP return path", text: "After the backend confirms a test purchase, return to the episode. Repeat with a cancelled payment and expired access and check that each state is clear." },
+          { title: "Measure where people leave", text: "Count episode starts, completions, paywall views, and confirmed purchases separately. Compare them by campaign so you can see whether to improve the trailer, player, or offer." },
+        ],
+      },
+    ],
+    sources: [
+      { title: "Apple Developer: HTTP Live Streaming", url: "https://developer.apple.com/streaming/" },
+      { title: "hls.js: browser support and native HLS fallback", url: "https://github.com/video-dev/hls.js#compatibility" },
+      { title: "WebKit: inline playback and autoplay policies on iOS", url: "https://webkit.org/blog/6784/new-video-policies-for-ios/" },
+      { title: "Stripe: Payment Element", url: "https://docs.stripe.com/payments/payment-element" },
+      { title: "Stripe: subscription events and webhooks", url: "https://docs.stripe.com/billing/subscriptions/webhooks" },
+      { title: "Google Search Central: video watch pages and indexing", url: "https://developers.google.com/search/docs/appearance/video" },
+      { title: "Google Search Central: canonical URLs", url: "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" },
+      { title: "NetShort: official browser and app viewing options", url: "https://netshort.com/faq" },
+    ],
+  },
   {
     slug: MICRO_DRAMA_BACKEND_SLUG,
     title: "Micro Drama Backend Architecture",
