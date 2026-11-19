@@ -1,4 +1,6 @@
 {
+  "HomeProof.pauseRotation": "Automatischen Plattformwechsel pausieren",
+  "HomeProof.resumeRotation": "Automatischen Plattformwechsel fortsetzen",
   "HomeProof.microDramaCase": "Fallstudie zur Kurzserien-Plattform lesen",
   "HomeChooser.microDrama.title": "Plattform für Kurzserien",
   "HomeProof.title": "Die Plattformen im Einsatz",

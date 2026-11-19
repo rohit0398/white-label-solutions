@@ -1,4 +1,6 @@
 {
+  "HomeProof.pauseRotation": "Pausar el cambio automático de plataforma",
+  "HomeProof.resumeRotation": "Reanudar el cambio automático de plataforma",
   "HomeProof.microDramaCase": "Leer el caso de la plataforma de microdramas",
   "HomeChooser.microDrama.title": "Plataforma de microdramas",
   "HomeProof.title": "Mira las plataformas en acción",
