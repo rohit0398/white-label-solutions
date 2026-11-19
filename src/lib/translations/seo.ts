@@ -11,11 +11,11 @@ export const LOCALIZED_SEO: Record<Language, LocalizedSeo> = {
   en: {
     title: "White-Label Platforms for Streaming and E-Commerce",
     description:
-      "Launch a branded Short Drama platform, widescreen OTT service, or online store with shopping apps. Compare packages for deployment on your cloud.",
+      "Launch a branded micro drama platform, online store with shopping apps, or widescreen OTT service. Compare packages for deployment on your cloud.",
     keywords: [
       "white label software platforms",
       "pre-built ecommerce store",
-      "short drama platform",
+      "micro drama platform",
       "white label ott platform",
       "reelshort clone app",
       "netflix clone app",

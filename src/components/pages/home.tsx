@@ -84,7 +84,7 @@ export default function HomePage({ language = "en" }: { language?: Language }) {
           headline={englishMessage("HomeRollout.techTitle")}
           subheadline={englishMessage("HomeRollout.cloud")}
         />
-        <Work id="work" index="" title={englishMessage("HomeProof.projects")} intro="" projects={ALL_HOME_SHOWCASE_PROJECTS} wide />
+        <Work id="work" index="" title={englishMessage("HomeProof.projects")} intro="" projects={ALL_HOME_SHOWCASE_PROJECTS} imageLayout="wide" wide />
         <Section id="how-it-works" title={englishMessage("HomeRollout.title")} intro={estimate} wide>
           <LaunchSteps steps={translateCopy(launchSteps)} />
           <p className="mt-5 text-sm leading-relaxed text-ink-2">{translateCopy(storeReview)}</p>

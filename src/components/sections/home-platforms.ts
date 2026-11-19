@@ -9,6 +9,25 @@ import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 
 export const homePlatforms = [
   {
+    family: "short-drama",
+    href: SHORT_DRAMA_PATHS.platform,
+    title: englishMessage("HomeChooser.microDrama.title"),
+    desc: englishMessage("HomeChooser.shortDrama.description"),
+    action: englishMessage("HomeChooser.shortDrama.action"),
+    proof: { href: CASE_STUDIES.shortDrama.path, label: englishMessage("HomeProof.microDramaCase") },
+    icon: Smartphone,
+    demoTier: SHORT_DRAMA_PACKAGES.platform,
+    app: { href: SHORT_DRAMA_PATHS.app, price: SHORT_DRAMA_PACKAGES.app },
+    web: { href: SHORT_DRAMA_PATHS.web, price: SHORT_DRAMA_PACKAGES.web },
+    preview: {
+      src: "/showcase/microdrama-web-player.webp",
+      alt: englishMessage("ShortDrama.top.web.image"),
+      note: englishMessage("HomeProof.shortDrama"),
+      href: MICRODRAMA_DEMO.websiteUrl,
+      action: englishMessage("HomeProof.openDemo"),
+    },
+  },
+  {
     family: "ecommerce",
     href: ECOMMERCE_PATHS.platform,
     title: englishMessage("HomeHero.e.commerce.d395b71"),
@@ -28,25 +47,6 @@ export const homePlatforms = [
     },
   },
   {
-    family: "short-drama",
-    href: SHORT_DRAMA_PATHS.platform,
-    title: englishMessage("ShortDrama.top.platform.title"),
-    desc: englishMessage("HomeChooser.shortDrama.description"),
-    action: englishMessage("HomeChooser.shortDrama.action"),
-    proof: { href: CASE_STUDIES.shortDrama.path, label: englishMessage("HomeProof.dramaCase") },
-    icon: Smartphone,
-    demoTier: SHORT_DRAMA_PACKAGES.platform,
-    app: { href: SHORT_DRAMA_PATHS.app, price: SHORT_DRAMA_PACKAGES.app },
-    web: { href: SHORT_DRAMA_PATHS.web, price: SHORT_DRAMA_PACKAGES.web },
-    preview: {
-      src: "/showcase/microdrama-web-player.webp",
-      alt: englishMessage("ShortDrama.top.web.image"),
-      note: englishMessage("HomeProof.shortDrama"),
-      href: MICRODRAMA_DEMO.websiteUrl,
-      action: englishMessage("HomeProof.openDemo"),
-    },
-  },
-  {
     family: "ott-streaming",
     href: OTT_PATHS.platform,
     title: englishMessage("OttOverview.platform.title"),
@@ -58,7 +58,7 @@ export const homePlatforms = [
     app: { href: OTT_PATHS.app, price: OTT_PACKAGES.app },
     web: { href: OTT_PATHS.web, price: OTT_PACKAGES.web },
     preview: {
-      src: CASE_STUDIES.ott.image,
+      src: "/showcase/microdrama-catalog.webp",
       alt: englishMessage("HomeProof.ottImage"),
       note: englishMessage("HomeProof.ott"),
       href: CASE_STUDIES.ott.path,

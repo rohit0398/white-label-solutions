@@ -19,8 +19,8 @@ export function CookieConsent() {
     try {
       const consent = localStorage.getItem("cookie_consent");
       if (!consent) {
-        // Small delay so page loads smoothly before banner slides up
-        const timer = setTimeout(() => setVisible(true), 800);
+        // Give visitors a minute to explore before showing the banner.
+        const timer = setTimeout(() => setVisible(true), 60_000);
         return () => clearTimeout(timer);
       }
     } catch {}

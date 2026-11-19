@@ -9,6 +9,7 @@ import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { trackEvent, trackWhatsAppClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { MessageSquare, ArrowRight } from "lucide-react";
 import { homePlatforms } from "@/components/sections/home-platforms";
@@ -22,65 +23,70 @@ export function HomeHero() {
     <section id="hero" className="relative isolate bg-paper pb-16 pt-16 sm:pb-20 sm:pt-14">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(100%,30rem)] overflow-hidden md:h-full [[data-theme=light]_&]:opacity-25"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[min(100%,30rem)] overflow-hidden md:h-full lg:h-[40rem] [[data-theme=light]_&]:opacity-25"
       >
         <Image
-          src="/showcase/home-hero-platforms.webp"
+          src="/showcase/home-hero-devices-v2.webp"
           alt=""
           fill
           sizes="100vw"
           loading="eager"
           fetchPriority="low"
-          className="object-cover object-right"
+          className="home-hero-art object-cover object-right-top lg:translate-x-[3%] lg:-translate-y-6"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-paper/85 via-paper/72 to-paper/55 md:from-paper md:from-20% md:via-paper/60 md:via-60% md:to-transparent" />
+        <div className="absolute inset-0 bg-black/5 md:bg-black/15" />
+        <div className="absolute inset-0 bg-linear-to-r from-paper/90 via-paper/72 to-paper/55 md:from-paper md:from-25% md:via-paper/75 md:via-52% md:to-paper/15" />
         <div className="absolute inset-0 bg-linear-to-b from-paper/10 via-transparent to-paper" />
       </div>
-      <div className="wrap space-y-6">
-        <div>
-          <HeadingBadge category="default">{translateCopy(englishMessage("HomeChooser.badge"))}</HeadingBadge>
-        </div>
+      <div className="wrap-wide">
+        <div className="max-w-xl space-y-6 lg:max-w-[34rem]">
+          <div>
+            <HeadingBadge category="default">{translateCopy(englishMessage("HomeChooser.badge"))}</HeadingBadge>
+          </div>
 
-        <AnimatedHeadline
-          as="h1"
-          variant="default"
-          className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink"
-        >
-          {englishMessage("HomeChooser.title")}
-        </AnimatedHeadline>
-
-        <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
-          {translateCopy(englishMessage("HomeChooser.intro"))}
-        </p>
-
-        <div className="pt-2 flex flex-wrap items-center gap-4">
-          <Button
-            size="md"
-            onClick={() => openDemo()}
-            className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
+          <AnimatedHeadline
+            as="h1"
+            variant="default"
+            className="text-[2.4rem] sm:text-[3.7rem] font-semibold tracking-[-0.035em] leading-[1.05] max-w-4xl text-ink"
           >
-            <span>{translateCopy(englishMessage("HomeHero.book.a.platform.walkthrough.b209190"))}</span>
-            <span className="text-paper/70 font-mono text-xs">→</span>
-          </Button>
+            {englishMessage("HomeChooser.title")}
+          </AnimatedHeadline>
 
-          <a
-            href={whatsappUrl}
-            onClick={() => trackWhatsAppClick("HomeHero")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
-          >
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-            </span>
-            <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
-            <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
-            <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
-          </a>
+          <p className="text-lg sm:text-xl text-ink/90 md:text-ink-2 leading-relaxed max-w-lg">
+            {translateCopy(englishMessage("HomeChooser.intro"))}
+          </p>
+
+          <LaunchTimeline />
+
+          <div className="pt-2 flex flex-wrap items-center gap-4">
+            <Button
+              size="md"
+              onClick={() => openDemo()}
+              className="animate-pulse-ink hover:shadow-lg hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.96] transition-all duration-200"
+            >
+              <span>{translateCopy(englishMessage("HomeHero.book.a.platform.walkthrough.b209190"))}</span>
+              <span className="text-paper/70 font-mono text-xs">→</span>
+            </Button>
+
+            <a
+              href={whatsappUrl}
+              onClick={() => trackWhatsAppClick("HomeHero")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 px-4 h-11 rounded-md border border-accent/40 bg-accent/5 hover:bg-accent/15 hover:border-accent text-accent font-medium text-[15px] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-[0.96] transition-all duration-200 animate-pulse-glow"
+            >
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-radar-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-80" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+              </span>
+              <MessageSquare className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12 group-hover:scale-110" />
+              <span>{translateCopy(englishMessage("Hero.chat.on.whatsapp.8eb8a88"))}</span>
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-xs">↗</span>
+            </a>
+          </div>
+
+          <p className="text-sm leading-relaxed text-ink-3">{translateCopy(englishMessage("HomeChooser.terms"))}</p>
         </div>
-
-        <p className="text-sm leading-relaxed text-ink-3">{translateCopy(englishMessage("HomeChooser.terms"))}</p>
       </div>
 
       <div className="wrap-wide mt-8 grid gap-3 md:mt-10 md:grid-cols-3 md:gap-4">

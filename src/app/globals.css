@@ -431,6 +431,27 @@ body,
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
 
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .home-hero-art { animation: home-hero-drift 16s ease-in-out infinite; }
+  .home-platform-shot { animation: home-platform-float 12s ease-in-out infinite; }
+  .home-platform-reveal { animation: home-platform-in 450ms ease-out both; }
+}
+
+@keyframes home-hero-drift {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.008); }
+}
+
+@keyframes home-platform-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes home-platform-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes short-drama-title-in {
   from { opacity: 0.85; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }

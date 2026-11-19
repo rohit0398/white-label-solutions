@@ -617,8 +617,12 @@ export const OTT_SHOWCASE_PROJECTS: ShowcaseProject[] = [
 ];
 
 export const ALL_HOME_SHOWCASE_PROJECTS: ShowcaseProject[] = [
-  ...OTT_SHOWCASE_PROJECTS,
+  ...OTT_SHOWCASE_PROJECTS.slice(0, 1).map(project => ({
+    ...project,
+    title: englishMessage("HomeChooser.microDrama.title"),
+  })),
   ...SHOWCASE_PROJECTS.slice(0, 2),
+  ...OTT_SHOWCASE_PROJECTS.slice(1),
 ];
 
 export const SHORT_DRAMA_FAQS: Faq[] = [
