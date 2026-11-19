@@ -24,9 +24,10 @@ export interface WorkProps {
   projects?: ShowcaseProject[];
   mode?: "all" | "web" | "app";
   demoPlatforms?: "all" | "web" | "app";
+  imageLayout?: "compact" | "wide";
 }
 
-export function Work({ id = "work", index, title, intro, projects, mode = "all", demoPlatforms = "all", wide }: WorkProps = {}) {
+export function Work({ id = "work", index, title, intro, projects, mode = "all", demoPlatforms = "all", imageLayout = "compact", wide }: WorkProps = {}) {
   const translateCopy = useMessages();
 
   const { language } = useSite();
@@ -44,6 +45,9 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
   const activeIndex = index !== undefined ? index : t.work.index;
   const activeTitle = title || t.work.title;
   const activeIntro = intro !== undefined ? intro : t.work.intro;
+  const screenshotSizes = imageLayout === "wide"
+    ? "(min-width: 1088px) 600px, (min-width: 768px) calc((100vw - 88px) * 0.6), calc(100vw - 48px)"
+    : "(min-width: 640px) 192px, calc(100vw - 48px)";
 
   return (
     <Section
@@ -59,9 +63,11 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
           return (
             <li
               key={p.id}
-              className="group py-8 px-4 -mx-4 rounded-xl grid gap-5 sm:grid-cols-[1fr_12rem] sm:gap-8 sm:items-start transition-all duration-300 hover:bg-wash/60 hover:shadow-xs"
+              className={`group py-8 px-4 -mx-4 rounded-xl grid gap-5 transition-all duration-300 hover:bg-wash/60 hover:shadow-xs ${imageLayout === "wide"
+                ? "md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10 md:items-center"
+                : "sm:grid-cols-[1fr_12rem] sm:gap-8 sm:items-start"}`}
             >
-              <div>
+              <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <h3 className="text-xl font-semibold tracking-tight text-ink group-hover:text-ink transition-colors">
                     {translateCopy(translatedProject.title)}
@@ -153,7 +159,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                     <Image
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
-                      sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
+                      sizes={screenshotSizes}
                       alt={p.screenshotAlt ?? translateCopy.format("media.screenshot", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
@@ -171,7 +177,7 @@ export function Work({ id = "work", index, title, intro, projects, mode = "all",
                     <Image
                       src={p.screenshotUrl}
                       {...imageDimensions(p.screenshotUrl)}
-                      sizes="(min-width: 640px) 192px, calc(100vw - 48px)"
+                      sizes={screenshotSizes}
                       alt={p.screenshotAlt ?? translateCopy.format("Work..value0.storefront.screenshot.a572497", { value0: translatedProject.title })}
                       loading="lazy"
                       className="block w-full h-auto object-contain transition-transform duration-500 group-hover:scale-[1.04]"
