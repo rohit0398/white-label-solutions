@@ -10,6 +10,7 @@ import { DemoButton } from "@/components/site/DemoButton";
 import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
 import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -313,6 +314,8 @@ export default function SolutionsCatalogPage() {
           <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
             Choose a platform for online stores, Short Drama, or OTT streaming. We deploy it to your cloud account. Source code licensing is available as an add-on.
           </p>
+
+          <LaunchTimeline />
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <DemoButton size="md">

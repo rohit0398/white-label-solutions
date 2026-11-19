@@ -13,6 +13,7 @@ import { imageDimensions } from "@/lib/image-dimensions";
 import { Button } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge, BadgeCategory } from "@/components/ui/HeadingBadge";
+import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
 import { MessageSquare } from "lucide-react";
 import { trackWhatsAppClick } from "@/lib/analytics";
 
@@ -89,6 +90,7 @@ export function Hero({
             {headlineText}
           </AnimatedHeadline>
           <p className="mt-4 text-base leading-relaxed text-ink-2 sm:text-lg">{translateCopy(subtitleText)}</p>
+          <LaunchTimeline className="mt-4" />
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Button

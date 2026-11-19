@@ -9,6 +9,7 @@ import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { trackEvent, trackWhatsAppClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { MessageSquare, ArrowRight } from "lucide-react";
 import { homePlatforms } from "@/components/sections/home-platforms";
@@ -54,6 +55,8 @@ export function HomeHero() {
           <p className="text-lg sm:text-xl text-ink/90 md:text-ink-2 leading-relaxed max-w-lg">
             {translateCopy(englishMessage("HomeChooser.intro"))}
           </p>
+
+          <LaunchTimeline />
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <Button

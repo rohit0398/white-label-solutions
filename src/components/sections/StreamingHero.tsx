@@ -7,6 +7,7 @@ import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { useMessages } from "@/components/site/useMessages";
 import { buttonClass } from "@/components/ui/Button";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
+import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
 import Link from "@/components/ui/LocalizedLink";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { englishMessage } from "@/lib/messages";
@@ -42,6 +43,7 @@ export function StreamingHero({ heading, badge, intro, tierId, theme, quickLinks
             <span className="short-drama-title-accent">{title}</span>
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-2 sm:text-lg">{t(intro)}</p>
+          <LaunchTimeline className="mt-4" />
           <div className="mt-6 flex flex-wrap gap-3">
             <DemoButton tierId={tierId}>
               {t(englishMessage("ShortDrama.top.walkthrough"))}
