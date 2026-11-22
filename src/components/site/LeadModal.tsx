@@ -1,11 +1,12 @@
 "use client";
+import { ADDITIONAL_PLATFORM_SUMMARIES, isAdditionalPlatformId } from "@/lib/additional-platform-paths";
+import { resolveInitialPackage } from "@/lib/lead-interest";
 import { englishMessage } from "@/lib/messages";
 import { useMessages } from "@/components/site/useMessages";
 import { useContactWhatsApp } from "@/components/site/useContactWhatsApp";
 import { priceText } from "@/lib/pricing-catalog";
-import { SHORT_DRAMA_PACKAGES, shortDramaOfferForPath } from "@/lib/short-drama-offers";
-import { OTT_PACKAGES, ottOfferForPath } from "@/lib/ott-offers";
-import { ECOMMERCE_PACKAGES, ecommerceOfferForPath } from "@/lib/ecommerce-offers";
+import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
 
 
 import React, { useEffect, useState } from "react";
@@ -27,6 +28,8 @@ interface LeadModalProps {
 }
 
 const PLATFORM_OPTIONS = [
+  ...ADDITIONAL_PLATFORM_SUMMARIES.map(platform => ({ id: platform.id, label: platform.title })),
+  { id: "more-platforms", label: englishMessage("MorePlatforms.nav") },
   { id: "ecommerce", label: priceText(englishMessage("LeadModal..white.label.e.commerce.platform.price.launc.661f078")) },
   { id: "app-launch", label: englishMessage("Footer.e.commerce.mobile.app.e48da2f") },
   { id: "web-launch", label: englishMessage("Footer.e.commerce.website.e37a1d0") },
@@ -40,31 +43,6 @@ const PLATFORM_OPTIONS = [
   { id: "developer-time", label: englishMessage("LeadModal..dedicated.engineering.support.20.hr.c9f5793") },
   { id: "launch", label: englishMessage("LeadModal..full.custom.white.label.cloud.launch.2bf35ab") },
 ];
-
-function resolveInitialPackage(tierId?: string, pathname?: string): string {
-  // If explicitly passed a specific platform tier (other than default generic 'launch')
-  if (tierId && tierId !== "launch") {
-    if (tierId === "source-code-license") return "source-code";
-    if (tierId === "dedicated-support") return "developer-time";
-    if (tierId === "short-drama-base") return SHORT_DRAMA_PACKAGES.platform;
-    if (tierId === "ott-streaming") return OTT_PACKAGES.platform;
-    return tierId;
-  }
-  // Otherwise, dynamically pre-select based on current URL path
-  const path = (pathname || "").toLowerCase();
-  const offer = shortDramaOfferForPath(path);
-  if (offer) return SHORT_DRAMA_PACKAGES[offer];
-  const ottOffer = ottOfferForPath(path);
-  if (ottOffer) return OTT_PACKAGES[ottOffer];
-  const ecommerceOffer = ecommerceOfferForPath(path);
-  if (ecommerceOffer) return ECOMMERCE_PACKAGES[ecommerceOffer];
-  if (path.includes("short-drama")) return SHORT_DRAMA_PACKAGES.platform;
-  if (path.includes("ott") || path.includes("streaming")) return OTT_PACKAGES.platform;
-  if (path.includes("ecommerce") || path.includes("shopify")) return "ecommerce";
-  if (path.includes("source-code")) return "source-code";
-
-  return tierId || "ecommerce";
-}
 
 const field =
   "w-full h-11 rounded-md border border-line bg-paper px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors";
@@ -173,7 +151,9 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                   ? englishMessage("ShortDrama.top.modalIntro")
                   : Object.values(OTT_PACKAGES).some((id) => id === selectedPackage)
                     ? englishMessage("OttOverview.modalIntro")
-                    : t.leadModal.subtitle
+                    : isAdditionalPlatformId(selectedPackage) || selectedPackage === "more-platforms"
+                      ? englishMessage("MorePlatforms.modalIntro")
+                      : t.leadModal.subtitle
               )}
             </p>
 

@@ -1,4 +1,5 @@
 import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
+import { ADDITIONAL_PLATFORM_PATHS, ADDITIONAL_PLATFORM_SUMMARIES, OTHER_PLATFORMS_HREF } from "@/lib/additional-platform-paths";
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import { priceText } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
@@ -11,12 +12,16 @@ import { buttonClass } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/ui/AnimatedHeadline";
 import { HeadingBadge } from "@/components/ui/HeadingBadge";
 import { LaunchTimeline } from "@/components/ui/LaunchTimeline";
+import { PlatformCards } from "@/components/sections/MorePlatforms";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ShoppingBag, Globe, Smartphone, Clapperboard, Layers, ArrowRight, ShieldCheck, Zap } from "lucide-react";
+
+const catalogDescription = "Explore white-label Micro Drama, e-commerce, OTT, taxi booking, food delivery, appointment, real estate, and solar CRM platforms. View demos and request a quote.";
 
 export const metadata: Metadata = {
   title: "White-Label Software Solutions Catalog | Mechatron Lab",
   description:
-    "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Deploy to your cloud, with optional source code licensing and no platform commission.",
+    catalogDescription,
   keywords: [
     "white label software solutions",
     "white label ecommerce platform",
@@ -26,11 +31,12 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/solutions",
+    languages: {},
   },
   openGraph: {
     title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming. Deploy to your cloud, with optional source code licensing and no platform commission.",
+      catalogDescription,
     url: "/solutions",
     images: ["/og-image.png"],
   },
@@ -38,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "White-Label Software Solutions Catalog | Mechatron Lab",
     description:
-      "Explore pre-built software platforms for e-commerce, 9:16 short drama, and OTT video streaming with optional source code licensing.",
+      catalogDescription,
     images: ["/og-image.png"],
   },
 };
@@ -260,12 +266,16 @@ export default function SolutionsCatalogPage() {
     },
   ];
 
+  const orderedSolutions = [
+    ...solutions.filter(solution => solution.id.startsWith("short-drama")),
+    ...solutions.filter(solution => solution.id.startsWith("ecommerce")),
+    ...solutions.filter(solution => solution.id.startsWith("ott")),
+  ];
+  const catalogItems = [
+    ...orderedSolutions.map(solution => ({ name: solution.title, url: siteUrl + solution.href })),
+    ...ADDITIONAL_PLATFORM_SUMMARIES.map(platform => ({ name: platform.title, url: siteUrl + ADDITIONAL_PLATFORM_PATHS[platform.id] })),
+  ];
   const upcomingSolutions = [
-    {
-      title: "On-Demand Delivery & Logistics",
-      desc: "Multi-branch dispatch engine, real-time rider GPS tracking, and vendor portals.",
-      eta: "Q3 2026",
-    },
     {
       title: "EdTech & Learning Management (LMS)",
       desc: "Course video streaming, student progress tracking, quizzes, and recurring certificates.",
@@ -286,6 +296,18 @@ export default function SolutionsCatalogPage() {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
+      <JsonLd schema={{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "White-Label Software Solutions Catalog",
+        description: catalogDescription,
+        url: `${siteUrl}/solutions`,
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: catalogItems.length,
+          itemListElement: catalogItems.map((item, index) => ({ "@type": "ListItem", position: index + 1, ...item })),
+        },
+      }} />
 
       <Navbar />
 
@@ -312,10 +334,8 @@ export default function SolutionsCatalogPage() {
           </AnimatedHeadline>
 
           <p className="text-lg sm:text-xl text-ink-2 leading-relaxed max-w-3xl">
-            Choose a platform for online stores, Short Drama, or OTT streaming. We deploy it to your cloud account. Source code licensing is available as an add-on.
+            Explore Micro Drama, e-commerce, and OTT platforms, plus booking, delivery, real estate, and solar business software. See the product details and available demos, then discuss the launch scope and quote.
           </p>
-
-          <LaunchTimeline />
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
             <DemoButton size="md">
@@ -328,16 +348,18 @@ export default function SolutionsCatalogPage() {
         </div>
 
         {/* Live Flagship Solutions Grid */}
-        <div className="wrap-wide space-y-10">
+        <div id="primary-platforms" className="wrap-wide space-y-10">
           <div className="border-t border-line pt-10">
             <span className="font-mono text-xs text-ink-3 uppercase block mb-1">Flagship Solutions</span>
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">
               Ready-to-Deploy Platforms
             </h2>
+            <LaunchTimeline />
+            <Link href={OTHER_PLATFORMS_HREF} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm underline underline-offset-4">Explore booking, delivery, property, and solar platforms<ArrowRight aria-hidden="true" className="size-4" /></Link>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            {solutions.map((sol) => {
+            {orderedSolutions.map((sol) => {
               const Icon = sol.icon;
               return (
                 <div
@@ -403,6 +425,15 @@ export default function SolutionsCatalogPage() {
             })}
           </div>
         </div>
+
+        <section id="other-platforms" className="wrap-wide scroll-mt-24" aria-labelledby="other-platforms-heading">
+          <div className="mb-10 border-t border-line pt-10">
+            <h2 id="other-platforms-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">Other business platforms</h2>
+            <p className="mt-4 max-w-3xl leading-relaxed text-ink-2">Explore taxi booking, food delivery, appointment booking, real estate, and solar CRM software. Review the screens and available demos on each product page. Price on request; scope and delivery dates are agreed for each project.</p>
+          </div>
+          <PlatformCards screenshots />
+          <DemoButton tierId="more-platforms" trackingPlacement="solutions-other-platforms" variant="secondary" className="mt-6">Discuss a platform</DemoButton>
+        </section>
 
         {/* Why White-Label Architecture */}
         <div className="wrap-wide">

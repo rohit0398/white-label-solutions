@@ -13,7 +13,8 @@
 # testing
 /coverage
 /scratch/
-/docs/
+/docs/*
+!/docs/PROJECT_HANDOFF.md
 
 # next.js
 /.next/

@@ -4,9 +4,11 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 56);
+assert.equal(urls.length, 72);
 assert.equal(sitemap.includes("<lastmod>"), false);
 const dramaGuides = [
+  "micro-drama-marketing-strategy",
+  "localize-micro-drama-app",
   "launch-app-like-netshort",
   "micro-drama-website-architecture",
   "micro-drama-backend-architecture",
@@ -24,6 +26,16 @@ const dramaGuides = [
 for (const slug of dramaGuides) {
   assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing guide in sitemap: ${slug}`);
 }
+const ottGuides = ["white-label-ott-platform-cost", "ott-monetization-svod-avod-tvod"];
+for (const slug of ottGuides) {
+  assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing OTT guide in sitemap: ${slug}`);
+}
+const commerceGuides = ["move-to-white-label-ecommerce-platform", "multi-warehouse-ecommerce-inventory"];
+const businessGuides = ["launch-white-label-taxi-booking-app", "white-label-food-delivery-platform-guide", "appointment-booking-software-staff-calendar", "real-estate-listing-website-lead-generation", "solar-crm-lead-to-installation-workflow"];
+for (const slug of businessGuides) assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing business guide: ${slug}`);
+for (const slug of commerceGuides) {
+  assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing e-commerce guide in sitemap: ${slug}`);
+}
 const titles = new Set();
 const descriptions = new Set();
 const pages = [];
@@ -39,6 +51,7 @@ const movedRoutes = [
   ["ecommerce-app-development", "launch-ecommerce-app"],
   ["ecommerce-website-development", "launch-ecommerce-website"],
 ].map(([oldSlug, newSlug]) => [`/solutions/${oldSlug}`, `/solutions/${newSlug}`]);
+movedRoutes.push(["/solutions/more-platforms", "/solutions"]);
 const retiredPaths = new Set(movedRoutes.map(([oldPath]) => oldPath));
 for (const url of urls) {
   const path = new URL(url).pathname;
@@ -67,8 +80,41 @@ for (const url of urls) {
   assert.equal(nodes.some(node => node.aggregateRating), false, path);
   const products = nodes.filter(node => node["@type"] === "SoftwareApplication");
   assert.equal(products.length, path.includes("/solutions/") ? 1 : 0, path);
+  if (/\/solutions\/launch-(taxi-booking-platform|food-delivery-platform|appointment-booking-platform|real-estate-platform|solar-crm)$/.test(path)) {
+    assert.equal(products[0].offers, undefined, `No invented price: ${path}`);
+    assert.ok(html.includes("Price on request"), `Quote-based pricing: ${path}`);
+    assert.ok(html.includes('id="live-demo"'), `Early examples: ${path}`);
+    assert.ok(html.includes('href="/solutions#other-platforms"'), `Catalog discovery: ${path}`);
+  }
+  if (path === "/solutions") {
+    const collection = nodes.find(node => node["@type"] === "CollectionPage");
+    assert.equal(collection?.mainEntity.itemListElement.length, 14, "Combined platform collection");
+    assert.ok(html.includes('id="other-platforms"'), "Additional platform section");
+    for (const item of collection.mainEntity.itemListElement) {
+      assert.ok(html.includes(`href="${new URL(item.url).pathname}"`), item.name);
+    }
+  }
   if (path === "/blog") {
-    for (const slug of dramaGuides) assert.ok(html.includes(`href="/blog/${slug}"`), `Blog index link: ${slug}`);
+    for (const slug of [...dramaGuides, ...ottGuides, ...commerceGuides, ...businessGuides]) assert.ok(html.includes(`href="/blog/${slug}"`), `Blog index link: ${slug}`);
+  }
+  if (businessGuides.some(slug => path === `/blog/${slug}`)) {
+    assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `Business guide Article schema: ${path}`);
+    assert.ok(html.indexOf('id="live-demo"') < html.indexOf('aria-label="Article contents"'), `Early product examples: ${path}`);
+    assert.ok(html.includes("Price on request"), path);
+    assert.ok(html.includes('href="/solutions#other-platforms"'), path);
+    assert.equal(html.includes("Launch within 2–4 weeks"), false, `No unconfirmed timeline: ${path}`);
+  }
+  if (commerceGuides.some(slug => path === `/blog/${slug}`)) {
+    assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `E-commerce article schema: ${path}`);
+    const liveStart = html.indexOf('id="live-examples"');
+    assert.ok(liveStart >= 0 && liveStart < html.indexOf('aria-label="Article contents"'), `Live stores before guide contents: ${path}`);
+    assert.ok(html.includes('href="/solutions/launch-ecommerce-platform"'), `E-commerce commercial link: ${path}`);
+  }
+  if (ottGuides.some(slug => path === `/blog/${slug}`)) {
+    assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `OTT article schema: ${path}`);
+    assert.ok(html.indexOf('id="live-demo"') < html.indexOf('aria-label="Article contents"'), `OTT reference demo before guide: ${path}`);
+    assert.ok(html.includes('href="/solutions/launch-ott-streaming-platform"'), `OTT commercial link: ${path}`);
+    assert.ok(html.includes("MicroDrama test builds"), `Reference demo identified: ${path}`);
   }
   if (dramaGuides.some(slug => path === `/blog/${slug}`)) {
     assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `Article schema: ${path}`);

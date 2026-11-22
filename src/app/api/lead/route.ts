@@ -1,4 +1,5 @@
 import { priceText } from "@/lib/pricing-catalog";
+import { ADDITIONAL_PLATFORM_SUMMARIES } from "@/lib/additional-platform-paths";
 import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { NextResponse } from "next/server";
@@ -49,6 +50,8 @@ export async function POST(request: Request) {
     let delivered = false;
 
     const PACKAGE_LABELS: Record<string, string> = {
+      ...Object.fromEntries(ADDITIONAL_PLATFORM_SUMMARIES.map(platform => [platform.id, `${platform.title} — price on request`])),
+      "more-platforms": "Additional software platform — price on request",
       "general": "General project inquiry",
       "launch": priceText("🚀 White-Label Launch Package ({price:launch})"),
       "source-code-license": priceText("💻 Full Source Code & License ({price:source-code-license})"),

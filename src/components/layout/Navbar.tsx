@@ -118,7 +118,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur border-b border-line">
-      <div className="wrap-wide h-16 flex items-center justify-between gap-2 sm:gap-6">
+      <div className="wrap-wide max-[359px]:px-3 h-16 flex items-center justify-between gap-2 sm:gap-6">
         <Link
           href={homeHref}
           id="nav-home"
@@ -299,7 +299,7 @@ export function Navbar() {
             id="nav-book-demo"
             size="sm"
             onClick={() => openDemo()}
-            className="animate-pulse-ink hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 shrink-0 text-xs sm:text-sm font-medium"
+            className="max-[359px]:px-2 animate-pulse-ink hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 shrink-0 text-xs sm:text-sm font-medium"
           >
             {translateCopy(t.nav.bookDemo)}
           </Button>

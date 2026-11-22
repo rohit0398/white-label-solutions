@@ -1,4 +1,5 @@
 import { OTT_PATHS } from "@/lib/solution-paths";
+import { OTT_ARTICLES } from "@/lib/content/ott-articles";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -24,7 +25,7 @@ import {
   Smartphone,
 } from "lucide-react";
 
-const updated = "2026-11-10";
+const updated = "2026-11-22";
 const title = "OTT Streaming Development Guide for Web and Mobile";
 const description = "Plan an OTT streaming service for web and mobile. Compare adaptive playback, content protection, TV casting, and launch costs.";
 const guideSections = [
@@ -165,7 +166,7 @@ export default function OttVideoStreamingDevelopmentPage() {
               <span>By Mechatron Lab Engineering Team</span>
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5" />
-                <time dateTime={updated}>Updated 10 November 2026</time>
+                <time dateTime={updated}>Updated 22 November 2026</time>
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" />
@@ -389,6 +390,15 @@ export default function OttVideoStreamingDevelopmentPage() {
               <Link href="/case-studies/ott-streaming-network" className="underline underline-offset-4">live TV and on-demand OTT case study</Link>.
             </p>
           </section>
+
+          <nav aria-label="More OTT guides" className="space-y-4 border-t border-line pt-8">
+            <h2 className="text-xl font-semibold">More OTT guides</h2>
+            <ul className="space-y-3">
+              {OTT_ARTICLES.map(article => (
+                <li key={article.slug}><Link href={`/blog/${article.slug}`} className="text-ink-2 underline underline-offset-4">{article.title}</Link></li>
+              ))}
+            </ul>
+          </nav>
 
           <section aria-labelledby="ott-sources" className="space-y-3">
             <h2 id="ott-sources" className="text-xl font-semibold">Technical references</h2>

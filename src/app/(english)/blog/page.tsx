@@ -1,7 +1,9 @@
 import { ECOMMERCE_PATHS, OTT_PATHS } from "@/lib/solution-paths";
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
-import { ECOMMERCE_GUIDES } from "@/lib/content/ecommerce-guides";
+import { ECOMMERCE_GUIDES, ECOMMERCE_GUIDE_UPDATED } from "@/lib/content/ecommerce-guides";
 import { DRAMA_ARTICLES } from "@/lib/content/short-drama-articles";
+import { OTT_ARTICLES } from "@/lib/content/ott-articles";
+import { BUSINESS_PLATFORM_GUIDES } from "@/lib/content/business-platform-guides";
 import { displayPackagePrice, FAMILY_PACKAGE } from "@/lib/pricing-catalog";
 import { SITE_URL } from "@/lib/site-config";
 import type { Metadata } from "next";
@@ -15,10 +17,12 @@ import { Sparkles, ChevronRight } from "lucide-react";
 
 import { BlogGrid, BlogPost } from "@/components/blog/BlogGrid";
 
+const blogDescription = "Practical guides for white-label Micro Drama, OTT, e-commerce, booking, delivery, property, and solar CRM platforms. Plan workflows, integrations, and launches.";
+
 export const metadata: Metadata = {
-  title: "Engineering & Architecture Blog | E-Commerce, Short Drama & OTT | Mechatron Lab",
+  title: "White-Label Software Guides | Streaming, Commerce & Business",
   description:
-    "Engineering guides on vertical short drama apps, adaptive OTT video streaming, e-commerce development costs, and private cloud architecture.",
+    blogDescription,
   keywords: [
     "software engineering blog",
     "video streaming architecture",
@@ -30,11 +34,12 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/blog",
+    languages: {},
   },
   openGraph: {
-    title: "Engineering & Architecture Blog | E-Commerce, Short Drama & OTT",
+    title: "White-Label Software Guides | Streaming, Commerce & Business",
     description:
-      "Engineering guides on vertical short drama apps, adaptive OTT video streaming, e-commerce development costs, and private cloud architecture.",
+      blogDescription,
     url: "/blog",
     siteName: "Mechatron Lab Solutions",
     locale: "en_US",
@@ -43,9 +48,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Engineering & Architecture Blog | E-Commerce, Short Drama & OTT",
+    title: "White-Label Software Guides | Streaming, Commerce & Business",
     description:
-      "Engineering guides on software development costs, vertical short drama, OTT video streaming, and private cloud architecture.",
+      blogDescription,
     images: ["/og-image.png"],
   },
 };
@@ -77,7 +82,7 @@ export default function BlogIndexPage() {
     "@type": "Blog",
     name: "Mechatron Lab Software Architecture & Engineering Blog",
     description:
-      "Technical blueprints, infrastructure cost comparisons, and engineering guides for launching e-commerce, 9:16 short drama, and cinematic OTT streaming platforms.",
+      blogDescription,
     publisher: {
       "@type": "Organization",
       name: "Mechatron Lab Solutions",
@@ -90,6 +95,8 @@ export default function BlogIndexPage() {
   };
 
   const posts: BlogPost[] = [
+    ...BUSINESS_PLATFORM_GUIDES.map((guide): BlogPost => ({ slug: guide.slug, category: "Business Platforms", pillar: "business-platforms", title: guide.title, excerpt: guide.description, readTime: "Launch guide", date: "November 2026", tags: guide.tags })),
+    ...OTT_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "OTT Streaming", pillar: "ott", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", tags: ["OTT Streaming", "Launch Planning", "Monetization"] })),
     ...DRAMA_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "Short Drama", pillar: "short-drama", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", featured: article.slug === "short-drama-app-development", tags: ["Short Drama", "Launch Planning", "Monetization"] })),
     {
       slug: "ott-video-streaming-development",
@@ -103,39 +110,21 @@ export default function BlogIndexPage() {
       featured: true,
       tags: ["HLS Streaming", "Widevine DRM", "TV Cast", "Video CMS"],
     },
-    {
-      slug: ECOMMERCE_GUIDES.cost.slug,
-      category: "Pricing & ROI",
+    ...Object.entries(ECOMMERCE_GUIDES).map(([key, guide]): BlogPost => ({
+      slug: guide.slug,
+      category: key === "cost" ? "Pricing & ROI" : key === "app" ? "Mobile Apps" : "Web Engineering",
       pillar: "ecommerce",
-      title: ECOMMERCE_GUIDES.cost.title,
-      excerpt: ECOMMERCE_GUIDES.cost.description,
+      title: guide.title,
+      excerpt: guide.description,
       readTime: "Launch guide",
-      date: "November 2026",
+      date: new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date("dateModified" in guide ? guide.dateModified : ECOMMERCE_GUIDE_UPDATED)),
       featured: false,
-      tags: ["Development Cost", "Source Code", "Hosting"],
-    },
-    {
-      slug: ECOMMERCE_GUIDES.website.slug,
-      category: "Web Engineering",
-      pillar: "ecommerce",
-      title: ECOMMERCE_GUIDES.website.title,
-      excerpt: ECOMMERCE_GUIDES.website.description,
-      readTime: "Launch guide",
-      date: "November 2026",
-      featured: false,
-      tags: ["Storefront", "Checkout", "Fulfillment"],
-    },
-    {
-      slug: ECOMMERCE_GUIDES.app.slug,
-      category: "Mobile Apps",
-      pillar: "ecommerce",
-      title: ECOMMERCE_GUIDES.app.title,
-      excerpt: ECOMMERCE_GUIDES.app.description,
-      readTime: "Launch guide",
-      date: "November 2026",
-      featured: false,
-      tags: ["iOS and Android", "Checkout", "App Store Review"],
-    },
+      tags: key === "inventory" ? ["Inventory", "Warehouses", "Fulfillment"]
+        : key === "migration" ? ["Store Migration", "SEO", "White Label"]
+        : key === "cost" ? ["Development Cost", "Source Code", "Hosting"]
+        : key === "app" ? ["iOS and Android", "Checkout", "App Store Review"]
+        : ["Storefront", "Checkout", "Fulfillment"],
+    })),
   ];
 
   return (
@@ -177,11 +166,11 @@ export default function BlogIndexPage() {
               as="h1"
               className="text-3xl sm:text-5xl font-semibold tracking-[-0.035em] leading-[1.08] text-ink"
             >
-              Software Architecture, Streaming Engines &amp; Development Costs.
+              Software Launch Guides, Workflows &amp; Architecture.
             </AnimatedHeadline>
 
             <p className="text-base sm:text-lg text-ink-2 leading-relaxed max-w-2xl mx-auto">
-              Transparent research, architectural deep dives, and commercial guides to help founders launch E-Commerce, 9:16 Short Drama, and 16:9 Cinematic Video platforms without recurring software rent.
+              Practical guides for launching Micro Drama, e-commerce, OTT, booking, delivery, property, and solar business software. Explore product examples, plan the workflows, and prepare questions for a walkthrough.
             </p>
           </div>
 
@@ -196,7 +185,7 @@ export default function BlogIndexPage() {
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink max-w-2xl mx-auto">
-              Deploy Production-Tested Software to Your Cloud in 2–4 Weeks
+              Launch Micro Drama, E-Commerce, or OTT Within 2–4 Weeks
             </h3>
 
             <p className="text-sm sm:text-base text-ink-2 leading-relaxed max-w-2xl mx-auto">

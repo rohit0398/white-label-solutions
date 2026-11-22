@@ -10,7 +10,7 @@ const solutionMoves = [
 
 const nextConfig: NextConfig = {
   async redirects() {
-    const redirects = solutionMoves.flatMap(([previous, current]) =>
+    const redirects: { source: string; destination: string; permanent: boolean }[] = solutionMoves.flatMap(([previous, current]) =>
       (["platform", "app", "web"] as const).flatMap(offer =>
         ["", "/en"].map(prefix => ({
           source: prefix + previous[offer],
@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
       ),
     );
     for (const prefix of ["", "/en"]) {
+      redirects.push({
+        source: prefix + "/solutions/more-platforms",
+        destination: "/solutions",
+        permanent: true,
+      });
       redirects.push({
         source: prefix + "/solutions/ott-video-streaming-development",
         destination: OTT_PATHS.web,

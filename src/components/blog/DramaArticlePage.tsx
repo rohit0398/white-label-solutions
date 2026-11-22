@@ -1,4 +1,7 @@
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
+import { OTT_PATHS } from "@/lib/solution-paths";
+import { OTT_PACKAGES } from "@/lib/ott-offers";
+import { OTT_ARTICLES, OTT_COST_SLUG, ottArticle } from "@/lib/content/ott-articles";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
@@ -185,8 +188,10 @@ const articleVisuals: Partial<Record<string, {
   "short-drama-monetization": { screenshots: { vip: adminEpisodesWithCaption } },
 };
 
-export function articleMetadata(slug: string): Metadata {
-  const article = dramaArticle(slug);
+type ArticleFamily = "short-drama" | "ott";
+
+export function articleMetadata(slug: string, family: ArticleFamily = "short-drama"): Metadata {
+  const article = family === "ott" ? ottArticle(slug) : dramaArticle(slug);
   const url = `/blog/${slug}`;
   const title = article.seoTitle ?? article.title;
   const image = article.image ?? defaultArticleImage;
@@ -197,8 +202,12 @@ export function articleMetadata(slug: string): Metadata {
   };
 }
 
-function PackageComparison() {
-  const rows: { label: string; base: PackageId; source: PackageId; href: string }[] = [
+function PackageComparison({ family }: { family: ArticleFamily }) {
+  const rows: { label: string; base: PackageId; source: PackageId; href: string }[] = family === "ott" ? [
+    { label: "Apps, website and CMS", base: "cinematic-base", source: "cinematic-base-source-code", href: OTT_PATHS.platform },
+    { label: "Native apps + CMS", base: "cinematic-app-launch", source: "cinematic-app-source-code", href: OTT_PATHS.app },
+    { label: "Website + CMS", base: "cinematic-web-launch", source: "cinematic-web-source-code", href: OTT_PATHS.web },
+  ] : [
     { label: "Apps, website and CMS", base: "short-drama-base", source: "short-drama-source-code", href: SHORT_DRAMA_PATHS.platform },
     { label: "Native apps + CMS", base: "short-drama-app-launch", source: "short-drama-app-source-code", href: SHORT_DRAMA_PATHS.app },
     { label: "Web player + CMS", base: "short-drama-web-launch", source: "short-drama-web-source-code", href: SHORT_DRAMA_PATHS.web },
@@ -207,7 +216,7 @@ function PackageComparison() {
     <h2 className="text-2xl font-semibold">Compare our published launch packages</h2>
     <p className="text-ink-2 leading-relaxed">Prices below are in US dollars. Source code is an optional extra. Content, hosting, streaming fees and custom changes are charged separately.</p>
     <div className="overflow-x-auto rounded-xl border border-line">
-      <table className="w-full text-left text-sm"><caption className="sr-only">Short-drama deployment and optional source-code prices in USD</caption>
+      <table className="w-full text-left text-sm"><caption className="sr-only">{family === "ott" ? "OTT" : "Short-drama"} deployment and optional source-code prices in USD</caption>
         <thead className="bg-wash"><tr>{["Offer", "Deployment", "Source add-on", "Combined"].map(label => <th key={label} scope="col" className="p-4 font-semibold">{label}</th>)}</tr></thead>
         <tbody>{rows.map(row => <tr key={row.base} className="border-t border-line"><th scope="row" className="p-4 font-medium"><Link href={row.href} className="underline underline-offset-4">{row.label}</Link></th>
           <td className="p-4 whitespace-nowrap">{displayPackagePrice(row.base, "en-US")}</td>
@@ -220,16 +229,20 @@ function PackageComparison() {
   </section>;
 }
 
-export default function DramaArticlePage({ slug }: { slug: string }) {
-  const article = dramaArticle(slug);
+export default function DramaArticlePage({ slug, family = "short-drama" }: { slug: string; family?: ArticleFamily }) {
+  const ott = family === "ott";
+  const article = ott ? ottArticle(slug) : dramaArticle(slug);
+  const platformPath = ott ? OTT_PATHS.platform : SHORT_DRAMA_PATHS.platform;
+  const familyLabel = ott ? "OTT streaming" : "Micro Drama";
+  const relatedArticles = ott ? OTT_ARTICLES : DRAMA_ARTICLES;
   const url = `${SITE_URL}/blog/${slug}`;
   const { previewSection, screenshots } = articleVisuals[slug] ?? {};
-  const nextStep = articleNextSteps[slug];
-  const packageId = SHORT_DRAMA_PACKAGES[nextStep?.offer ?? "platform"];
+  const nextStep = article.nextStep ?? articleNextSteps[slug];
+  const packageId = (ott ? OTT_PACKAGES : SHORT_DRAMA_PACKAGES)[nextStep?.offer ?? "platform"];
   const articleDate = article.dateModified ?? article.datePublished ?? updated;
   const whatsappUrl = nextStep?.whatsappMessage ? new URL(BRAND.contact.whatsappUrl) : undefined;
   if (whatsappUrl && nextStep?.whatsappMessage) whatsappUrl.searchParams.set("text", nextStep.whatsappMessage);
-  const showPackageComparison = slug === "short-drama-app-development-cost" || slug === MICRO_DRAMA_BUILDERS_SLUG;
+  const showPackageComparison = slug === "short-drama-app-development-cost" || slug === MICRO_DRAMA_BUILDERS_SLUG || slug === OTT_COST_SLUG;
   return <div className="min-h-screen flex flex-col bg-paper text-ink">
     <JsonLd schema={{ "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description,
       mainEntityOfPage: url, url, image: `${SITE_URL}${article.image ?? defaultArticleImage}`, inLanguage: "en",
@@ -245,7 +258,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
     <main className="flex-1 pt-14 sm:pt-10 pb-20">
       <article className="wrap space-y-12" lang="en">
         <header className="space-y-5">
-          <nav aria-label="Breadcrumb" className="text-sm text-ink-3 flex flex-wrap gap-2"><Link href="/blog" className="underline">Blog</Link><span>/</span><Link href={SHORT_DRAMA_PATHS.platform} className="underline">Short drama</Link></nav>
+          <nav aria-label="Breadcrumb" className="text-sm text-ink-3 flex flex-wrap gap-2"><Link href="/blog" className="underline">Blog</Link><span>/</span><Link href={platformPath} className="underline">{familyLabel}</Link></nav>
           <p className="text-xs font-mono uppercase tracking-wider text-accent">Guides for studios and founders</p>
           <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight">{article.title}</h1>
           <p className="text-sm text-ink-3">By <Link href="/about" className="underline">Mechatron Lab Engineering Team</Link> · {article.datePublished && !article.dateModified ? "Published" : "Updated"} <time dateTime={articleDate}>{articleDateFormat.format(new Date(articleDate))}</time></p>
@@ -254,8 +267,14 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           {showPackageComparison && <a href="#packages" className="inline-block text-sm underline underline-offset-4">See packages and prices</a>}
         </header>
         <section aria-labelledby="launch-cta" className="space-y-3 rounded-2xl border border-line bg-wash p-5 sm:p-6">
-          <h2 id="launch-cta" className="text-xl font-semibold tracking-tight sm:text-2xl">Get your short drama app ready in as little as 2 weeks</h2>
-          <p className="text-sm leading-relaxed text-ink-2">Setup takes an estimated 2–4 weeks once your videos, branding, and accounts are ready. Store review timing varies. Try our live web, iOS, and Android examples below.</p>
+          <h2 id="launch-cta" className="text-xl font-semibold tracking-tight sm:text-2xl">{article.launchHeadline ?? (ott ? "Launch within 2–4 weeks" : "Get your short drama app ready in as little as 2 weeks")}</h2>
+          {ott ? (
+            <p className="text-sm leading-relaxed text-ink-2">Try our MicroDrama test builds below for a reference catalog and viewing experience. For widescreen playback and the OTT features you need, request a walkthrough.</p>
+          ) : article.launchHeadline ? (
+            article.launchIntro && <p className="text-sm leading-relaxed text-ink-2">{article.launchIntro}</p>
+          ) : (
+            <p className="text-sm leading-relaxed text-ink-2">Setup takes an estimated 2–4 weeks once your videos, branding, and accounts are ready. Store review timing varies. Try our live web, iOS, and Android examples below.</p>
+          )}
           <div className="flex flex-wrap gap-3">
             <DemoButton tierId={packageId} trackingPlacement={`${slug}-top`}>Contact us about your launch</DemoButton>
             <ContactWhatsAppLink href={whatsappUrl?.toString() ?? BRAND.contact.whatsappUrl} placement={`${slug}-top`} className={buttonClass("secondary")}>Chat on WhatsApp</ContactWhatsAppLink>
@@ -298,6 +317,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
             </div>
           )}
           {section.checklist && <LaunchSteps steps={section.checklist} compact />}
+          {section.image && <Screenshot {...section.image} sizes="(min-width: 704px) 656px, calc(100vw - 48px)" />}
           {id === previewSection && (
             <div className="space-y-3">
               <p className="text-sm text-ink-3">MicroDrama’s mobile website shows how viewers browse the catalog and preview an episode.</p>
@@ -311,7 +331,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
             />
           )}
         </section>)}
-        {showPackageComparison && <PackageComparison />}
+        {showPackageComparison && <PackageComparison family={family} />}
         {nextStep && <section className="space-y-4 rounded-2xl border border-line bg-wash p-6 sm:p-8">
           <h2 className="text-2xl font-semibold">{nextStep.title}</h2>
           <p className="leading-relaxed text-ink-2">{nextStep.text}</p>
@@ -328,7 +348,7 @@ export default function DramaArticlePage({ slug }: { slug: string }) {
           {!article.datePublished && <p className="text-sm text-ink-3">App features and provider prices can change. The apps discussed here are independent of our product.</p>}
           <ul className="list-disc pl-5 space-y-2 text-sm">{article.sources.map(source => <li key={source.url}><a href={source.url} className="underline underline-offset-4">{source.title}</a></li>)}</ul>
         </section>
-        <nav aria-label="Related short-drama guides" className="border-t border-line pt-8 space-y-4"><h2 className="text-xl font-semibold">More short-drama guides</h2><ul className="space-y-3">{DRAMA_ARTICLES.filter(item => item.slug !== slug).map(item => <li key={item.slug}><Link href={`/blog/${item.slug}`} className="text-ink-2 underline underline-offset-4">{item.title}</Link></li>)}</ul></nav>
+        <nav aria-label={`Related ${familyLabel} guides`} className="border-t border-line pt-8 space-y-4"><h2 className="text-xl font-semibold">More {familyLabel} guides</h2><ul className="space-y-3">{relatedArticles.filter(item => item.slug !== slug).map(item => <li key={item.slug}><Link href={`/blog/${item.slug}`} className="text-ink-2 underline underline-offset-4">{item.title}</Link></li>)}{ott && <li><Link href="/blog/ott-video-streaming-development" className="text-ink-2 underline underline-offset-4">OTT Streaming Development Guide for Web and Mobile</Link></li>}</ul></nav>
       </article>
     </main><Footer />
   </div>;

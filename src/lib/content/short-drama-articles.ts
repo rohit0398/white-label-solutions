@@ -1,5 +1,6 @@
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 import type { LaunchStep } from "@/components/ui/LaunchSteps";
+import { MICRO_DRAMA_GROWTH_GUIDES } from "@/lib/content/micro-drama-growth-guides";
 
 export interface DramaArticle {
   slug: string;
@@ -11,10 +12,20 @@ export interface DramaArticle {
   takeaway: string;
   datePublished?: string;
   dateModified?: string;
+  launchHeadline?: string;
+  launchIntro?: string;
+  nextStep?: {
+    title: string;
+    text: string;
+    links: { href: string; label: string }[];
+    offer?: "platform" | "app" | "web";
+    whatsappMessage?: string;
+  };
   sections: {
     id: string;
     title: string;
     paragraphs: string[];
+    image?: { src: string; alt: string };
     bullets?: string[];
     checklist?: readonly LaunchStep[];
     options?: { title: string; text: string; href: string; linkLabel: string }[];
@@ -44,6 +55,7 @@ const platformSources = [
 ];
 
 export const DRAMA_ARTICLES: DramaArticle[] = [
+  ...MICRO_DRAMA_GROWTH_GUIDES,
   {
     slug: NETSHORT_LAUNCH_SLUG,
     title: "How to Launch a White-Label Short Drama App Like NetShort",

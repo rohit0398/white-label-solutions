@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { ADDITIONAL_PLATFORM_SUMMARIES } from "@/lib/additional-platform-paths";
 import Link from "next/link";
 import { CheckCircle2, ChevronDown, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -132,6 +133,7 @@ export function ContactForm() {
           <option value="ecommerce">E-commerce</option>
           <option value={SHORT_DRAMA_PACKAGES.platform}>Short drama</option>
           <option value={OTT_PACKAGES.platform}>OTT streaming</option>
+          {ADDITIONAL_PLATFORM_SUMMARIES.map(platform => <option key={platform.id} value={platform.id}>{platform.title}</option>)}
           <option value="source-code">Source code licensing</option>
           <option value="developer-time">Developer support</option>
           <option value="custom">Custom project</option>

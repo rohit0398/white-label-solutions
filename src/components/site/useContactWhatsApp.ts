@@ -2,6 +2,7 @@
 
 
 import { usePathname } from "next/navigation";
+import { ADDITIONAL_PLATFORM_SUMMARIES, additionalInquiryForPath } from "@/lib/additional-platform-paths";
 import { useMessages } from "@/components/site/useMessages";
 import { BRAND } from "@/lib/constants";
 import { englishMessage } from "@/lib/messages";
@@ -28,6 +29,13 @@ export function useContactWhatsApp() {
   const offer = shortDramaOfferForPath(pathname);
   const ottOffer = ottOfferForPath(pathname);
   const ecommerceOffer = ecommerceOfferForPath(pathname);
+  const additional = additionalInquiryForPath(pathname);
+  const platform = ADDITIONAL_PLATFORM_SUMMARIES.find(item => item.id === additional);
+  if (additional) {
+    const url = new URL(BRAND.contact.whatsappUrl);
+    url.searchParams.set("text", translateCopy.format("MorePlatforms.whatsapp", { value0: platform?.title ?? englishMessage("MorePlatforms.title") }));
+    return url.toString();
+  }
 
   const messages = {
     platform: englishMessage("ShortDrama.top.platform.whatsapp"),
