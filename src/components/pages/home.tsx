@@ -4,6 +4,7 @@ import { Faq } from "@/components/sections/Faq";
 import { HomeHero } from "@/components/sections/HomeHero";
 import { HomePlatformsDeck } from "@/components/sections/HomePlatformsDeck";
 import { HomePricing } from "@/components/sections/HomePricing";
+import { MorePlatforms } from "@/components/sections/MorePlatforms";
 import { TechStackStrip } from "@/components/sections/TechStackStrip";
 import { Work } from "@/components/sections/Work";
 import { Footer } from "@/components/layout/Footer";
@@ -85,6 +86,7 @@ export default function HomePage({ language = "en" }: { language?: Language }) {
           subheadline={englishMessage("HomeRollout.cloud")}
         />
         <Work id="work" index="" title={englishMessage("HomeProof.projects")} intro="" projects={ALL_HOME_SHOWCASE_PROJECTS} imageLayout="wide" wide />
+        <MorePlatforms />
         <Section id="how-it-works" title={englishMessage("HomeRollout.title")} intro={estimate} wide>
           <LaunchSteps steps={translateCopy(launchSteps)} />
           <p className="mt-5 text-sm leading-relaxed text-ink-2">{translateCopy(storeReview)}</p>

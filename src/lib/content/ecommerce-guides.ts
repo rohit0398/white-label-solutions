@@ -1,12 +1,16 @@
 import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 import type { PackageId } from "@/lib/pricing-catalog";
+import { ECOMMERCE_OPERATIONS_GUIDES } from "@/lib/content/ecommerce-operations-guides";
 
-interface CommerceGuide {
+export interface CommerceGuide {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   intro: string;
   datePublished: string;
+  dateModified?: string;
+  showLiveExamples?: boolean;
   image: { src: string; alt: string; section: string; example: { href: string; label: string } };
   offer: { href: string; label: string; tierId: PackageId };
   sections: { id: string; title: string; paragraphs: string[]; bullets?: string[] }[];
@@ -16,6 +20,7 @@ interface CommerceGuide {
 }
 
 export const ECOMMERCE_GUIDES = {
+  ...ECOMMERCE_OPERATIONS_GUIDES,
   website: {
     slug: "ecommerce-website-development",
     title: "How to Plan an E-Commerce Website Launch",

@@ -1,7 +1,196 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { NextRequest } from "next/server.js";
+import { unstable_getResponseFromNextConfig } from "next/experimental/testing/server.js";
 import { loadTs } from "./helpers/load-ts.mjs";
+
+test("additional platforms have unique indexable pages, quote-based schema, real demos and compact local media", () => {
+  const cache = new Map();
+  const { ADDITIONAL_PLATFORMS, additionalPlatform } = loadTs("src/lib/content/additional-platforms.ts", cache);
+  const { additionalPlatformMetadata, additionalPlatformSchema } = loadTs("src/lib/additional-platform-seo.ts", cache);
+  const { default: sitemap } = loadTs("src/app/sitemap.ts", cache);
+  const { SITE_URL } = loadTs("src/lib/site-config.ts", cache);
+  const paths = new Set(sitemap().map(item => new URL(item.url).pathname));
+  assert.equal(ADDITIONAL_PLATFORMS.length, 5);
+  assert.equal(sitemap().length, 72);
+  assert.ok(paths.has("/solutions"));
+  assert.equal(paths.has("/solutions/more-platforms"), false);
+  for (const field of ["id", "heading", "seoTitle", "description"]) {
+    assert.equal(new Set(ADDITIONAL_PLATFORMS.map(platform => platform[field])).size, 5, field);
+  }
+  for (const record of ADDITIONAL_PLATFORMS) {
+    const platform = additionalPlatform(record.id);
+    const metadata = additionalPlatformMetadata(platform.id);
+    const schema = additionalPlatformSchema(platform.id);
+    assert.ok(paths.has(platform.path), platform.path);
+    assert.ok(existsSync(`src/app/(english)${platform.path}/page.tsx`));
+    assert.equal(metadata.alternates.canonical, platform.path);
+    assert.deepEqual(metadata.alternates.languages, {}, "Do not claim unbuilt translations");
+    assert.equal(metadata.openGraph.images[0].url, platform.image);
+    assert.equal(schema.url, `${SITE_URL}${platform.path}`);
+    assert.equal(schema.description, metadata.description);
+    for (const field of ["offers", "aggregateRating", "review"]) assert.equal(field in schema, false, field);
+    assert.equal(new Set(platform.modules.map(module => module.id)).size, platform.modules.length);
+    for (const image of [platform.image, ...platform.modules.flatMap(module => module.images.map(image => image.src))]) {
+      assert.ok(existsSync(`public${image}`), image);
+      assert.ok(statSync(`public${image}`).size < 150_000, image);
+      assert.match(image, /\.webp$/);
+    }
+    for (const demo of platform.demos) assert.equal(new URL(demo.href).protocol, "https:");
+    assert.ok(platform.features.length >= 4 && platform.faqs.length >= 3);
+  }
+  assert.equal(additionalPlatform("real-estate").demos.length, 0, "No fabricated real estate demo");
+});
+
+test("retired platform catalog redirects permanently to solutions and preserves campaign queries", async () => {
+  const { default: nextConfig } = loadTs("next.config.ts");
+  for (const prefix of ["", "/en"]) {
+    for (const suffix of ["", "?utm_source=campaign&product=solar"]) {
+      const response = await unstable_getResponseFromNextConfig({
+        url: `https://example.com${prefix}/solutions/more-platforms${suffix}`,
+        nextConfig,
+      });
+      assert.equal(response.status, 308);
+      assert.equal(response.headers.get("location"), `https://example.com/solutions${suffix}`);
+    }
+  }
+});
+
+test("generic and explicit inquiry buttons resolve to the right additional platform without changing existing packages", () => {
+  const cache = new Map();
+  const { resolveInitialPackage } = loadTs("src/lib/lead-interest.ts", cache);
+  const { ADDITIONAL_PLATFORM_PATHS, ADDITIONAL_PLATFORM_GUIDE_SLUGS, additionalInquiryForPath } = loadTs("src/lib/additional-platform-paths.ts", cache);
+  for (const [id, path] of Object.entries(ADDITIONAL_PLATFORM_PATHS)) {
+    for (const variation of [path, `${path}/`, `${path}?campaign=test`, `/en${path}`]) {
+      assert.equal(additionalInquiryForPath(variation), id);
+      assert.equal(resolveInitialPackage("launch", variation), id);
+    }
+    assert.equal(resolveInitialPackage(id, "/"), id);
+    assert.equal(resolveInitialPackage("source-code-license", path), "source-code");
+    const guidePath = `/blog/${ADDITIONAL_PLATFORM_GUIDE_SLUGS[id]}`;
+    for (const variation of [guidePath, `${guidePath}?utm_source=search`, `/en${guidePath}`]) {
+      assert.equal(additionalInquiryForPath(variation), id);
+      assert.equal(resolveInitialPackage("launch", variation), id);
+    }
+  }
+  assert.equal(resolveInitialPackage("launch", "/solutions/more-platforms"), "more-platforms");
+  assert.equal(resolveInitialPackage("launch", "/solutions/launch-micro-drama-app"), "short-drama-app-launch");
+  assert.equal(resolveInitialPackage("launch", "/solutions/launch-ecommerce-platform"), "ecommerce");
+});
+
+test("each business platform has a distinct guide, valid source links, section anchors and discoverable canonical route", () => {
+  const cache = new Map();
+  const { BUSINESS_PLATFORM_GUIDES } = loadTs("src/lib/content/business-platform-guides.ts", cache);
+  const { ADDITIONAL_PLATFORM_PATHS, ADDITIONAL_PLATFORM_GUIDE_SLUGS } = loadTs("src/lib/additional-platform-paths.ts", cache);
+  const { default: sitemap } = loadTs("src/app/sitemap.ts", cache);
+  const paths = new Set(sitemap().map(item => new URL(item.url).pathname));
+  assert.deepEqual(BUSINESS_PLATFORM_GUIDES.map(guide => guide.platformId).sort(), Object.keys(ADDITIONAL_PLATFORM_PATHS).sort());
+  for (const key of ["slug", "title", "seoTitle", "description"]) assert.equal(new Set(BUSINESS_PLATFORM_GUIDES.map(guide => guide[key])).size, 5, key);
+  for (const guide of BUSINESS_PLATFORM_GUIDES) {
+    assert.equal(guide.slug, ADDITIONAL_PLATFORM_GUIDE_SLUGS[guide.platformId]);
+    assert.ok(paths.has(`/blog/${guide.slug}`), guide.slug);
+    assert.ok(existsSync(`src/app/(english)/blog/${guide.slug}/page.tsx`), guide.slug);
+    assert.ok(paths.has(ADDITIONAL_PLATFORM_PATHS[guide.platformId]));
+    assert.equal(guide.datePublished, "2026-11-23");
+    const ids = guide.sections.map(section => section.id);
+    assert.equal(new Set([...ids, "live-demo", "launch-checklist", "questions", "next-step"]).size, ids.length + 4);
+    assert.ok(guide.sections.some(section => section.source));
+    for (const section of guide.sections) {
+      assert.ok(section.paragraphs.length >= 2);
+      if (section.source) assert.equal(new URL(section.source.href).protocol, "https:");
+    }
+  }
+});
+
+test("additional-platform inquiries retain product labels in mocked notifications without a fixed package price", async () => {
+  const keys = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "LEAD_WEBHOOK_URL"];
+  const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
+  const originalFetch = globalThis.fetch;
+  const { POST } = loadTs("src/app/api/lead/route.ts");
+  const { ADDITIONAL_PLATFORM_SUMMARIES } = loadTs("src/lib/additional-platform-paths.ts");
+  try {
+    process.env.TELEGRAM_BOT_TOKEN = "fake-test-token";
+    process.env.TELEGRAM_CHAT_ID = "fake-test-chat";
+    delete process.env.LEAD_WEBHOOK_URL;
+    for (const platform of ADDITIONAL_PLATFORM_SUMMARIES) {
+      let notification = "";
+      globalThis.fetch = async (_url, options) => {
+        notification = JSON.parse(options.body).text;
+        return Response.json({ ok: true });
+      };
+      const result = await POST(new Request("https://example.com/api/lead", { method: "POST", body: JSON.stringify({ name: "Test", email: "test@example.com", package: platform.id }) }));
+      assert.equal((await result.json()).accepted, true);
+      assert.ok(notification.includes(platform.title), platform.id);
+      assert.ok(notification.includes("price on request"));
+      assert.doesNotMatch(notification, /\$[0-9]/);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
+});
+
+test("new streaming guides have discoverable routes, valid media, unique sections and working article links", () => {
+  const cache = new Map();
+  const { DRAMA_ARTICLES } = loadTs("src/lib/content/short-drama-articles.ts", cache);
+  const { MICRO_DRAMA_GROWTH_GUIDES } = loadTs("src/lib/content/micro-drama-growth-guides.ts", cache);
+  const { OTT_ARTICLES } = loadTs("src/lib/content/ott-articles.ts", cache);
+  const { default: sitemap } = loadTs("src/app/sitemap.ts", cache);
+  const allArticles = [...DRAMA_ARTICLES, ...OTT_ARTICLES];
+  assert.equal(new Set(allArticles.map(article => article.slug)).size, allArticles.length);
+  assert.equal(new Set(allArticles.map(article => article.seoTitle ?? article.title)).size, allArticles.length);
+  const paths = new Set(sitemap().map(item => new URL(item.url).pathname));
+  const index = readFileSync("src/app/(english)/blog/page.tsx", "utf8");
+  assert.match(index, /DRAMA_ARTICLES\.map/);
+  assert.match(index, /OTT_ARTICLES\.map/);
+  for (const article of [...MICRO_DRAMA_GROWTH_GUIDES, ...OTT_ARTICLES]) {
+    assert.ok(paths.has(`/blog/${article.slug}`), article.slug);
+    assert.ok(existsSync(`src/app/(english)/blog/${article.slug}/page.tsx`), article.slug);
+    assert.ok(article.datePublished && !Number.isNaN(Date.parse(article.datePublished)));
+    const ids = article.sections.map(section => section.id);
+    assert.equal(new Set(ids).size, ids.length, article.slug);
+    for (const image of [article.image, ...article.sections.map(section => section.image?.src)].filter(Boolean)) {
+      assert.ok(existsSync(`public${image}`), image);
+    }
+    for (const section of article.sections) {
+      for (const option of section.options ?? []) {
+        const [pathname, fragment] = option.href.split("#");
+        assert.ok(paths.has(pathname), `Missing internal destination: ${option.href}`);
+        const target = allArticles.find(item => `/blog/${item.slug}` === pathname);
+        if (fragment && target) assert.ok(target.sections.some(item => item.id === fragment), option.href);
+      }
+    }
+    assert.ok(article.nextStep?.links.some(link => link.href.startsWith("/solutions/")), article.slug);
+    for (const source of article.sources) assert.equal(new URL(source.url).protocol, "https:");
+  }
+});
+
+test("e-commerce operations guides have valid dates, routes, media, section anchors and related destinations", () => {
+  const cache = new Map();
+  const { ECOMMERCE_GUIDES } = loadTs("src/lib/content/ecommerce-guides.ts", cache);
+  const { ECOMMERCE_OPERATIONS_GUIDES } = loadTs("src/lib/content/ecommerce-operations-guides.ts", cache);
+  const { default: sitemap } = loadTs("src/app/sitemap.ts", cache);
+  const paths = new Set(sitemap().map(item => new URL(item.url).pathname));
+  const guides = Object.values(ECOMMERCE_GUIDES);
+  assert.equal(new Set(guides.map(guide => guide.slug)).size, guides.length);
+  for (const guide of Object.values(ECOMMERCE_OPERATIONS_GUIDES)) {
+    assert.ok(paths.has(`/blog/${guide.slug}`), guide.slug);
+    assert.ok(existsSync(`src/app/(english)/blog/${guide.slug}/page.tsx`), guide.slug);
+    assert.ok(Date.parse(guide.dateModified) >= Date.parse(guide.datePublished), guide.slug);
+    assert.ok(existsSync(`public${guide.image.src}`), guide.image.src);
+    assert.ok(guide.sections.some(section => section.id === guide.image.section), guide.slug);
+    assert.equal(new Set(guide.sections.map(section => section.id)).size, guide.sections.length);
+    for (const { href } of [...guide.links, guide.offer, guide.image.example]) {
+      if (href.startsWith("/")) assert.ok(paths.has(href.split("#")[0]), href);
+    }
+    for (const { href } of guide.sources) assert.equal(new URL(href).protocol, "https:");
+  }
+  assert.match(readFileSync("src/app/(english)/blog/page.tsx", "utf8"), /Object\.entries\(ECOMMERCE_GUIDES\)/);
+});
 
 test("currency defaults follow language and manual preferences are isolated by locale", () => {
   const { defaultCurrency, preferredCurrency, currencyPreferenceKey } = loadTs("src/lib/currency-preferences.ts");
@@ -171,7 +360,10 @@ test("API never reports undelivered inquiries as accepted; notification requests
     assert.equal((await (await POST(request({}))).json()).accepted, true);
   } finally {
     globalThis.fetch = originalFetch;
-    keys.forEach((key, index) => previous[index] === undefined ? delete process.env[key] : process.env[key] = previous[index]);
+    for (const [index, key] of keys.entries()) {
+      if (previous[index] === undefined) delete process.env[key];
+      else process.env[key] = previous[index];
+    }
   }
 });
 
@@ -191,6 +383,9 @@ test("lead analytics has distinct GA4 and Ads destinations and no invented sale 
     assert.equal(events[0][2].value, undefined);
   } finally {
     globalThis.window = oldWindow;
-    for (const [key, value] of Object.entries(previous)) value === undefined ? delete process.env[key] : process.env[key] = value;
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
   }
 });

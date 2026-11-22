@@ -10,12 +10,13 @@ import {
   Layers,
   Tv,
   Film,
+  Building2,
 } from "lucide-react";
 
 export interface BlogPost {
   slug: string;
-  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "OTT Streaming";
-  pillar: "all" | "ecommerce" | "short-drama" | "ott";
+  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "OTT Streaming" | "Business Platforms";
+  pillar: "all" | "ecommerce" | "short-drama" | "ott" | "business-platforms";
   title: string;
   excerpt: string;
   readTime: string;
@@ -29,7 +30,7 @@ interface BlogGridProps {
 }
 
 export function BlogGrid({ posts }: BlogGridProps) {
-  const [activeFilter, setActiveFilter] = useState<"all" | "ecommerce" | "short-drama" | "ott">("all");
+  const [activeFilter, setActiveFilter] = useState<BlogPost["pillar"]>("all");
 
   const filteredPosts = posts.filter((p) => {
     if (activeFilter === "all") return true;
@@ -41,10 +42,13 @@ export function BlogGrid({ posts }: BlogGridProps) {
     { id: "ecommerce" as const, label: "E-Commerce", count: posts.filter((p) => p.pillar === "ecommerce").length },
     { id: "short-drama" as const, label: "9:16 Short Drama", count: posts.filter((p) => p.pillar === "short-drama").length },
     { id: "ott" as const, label: "OTT Streaming", count: posts.filter((p) => p.pillar === "ott").length },
+    { id: "business-platforms" as const, label: "Business Platforms", count: posts.filter((p) => p.pillar === "business-platforms").length },
   ];
 
   const getCategoryIcon = (category: BlogPost["category"]) => {
     switch (category) {
+      case "Business Platforms":
+        return <Building2 className="h-3.5 w-3.5 text-accent shrink-0" />;
       case "Short Drama":
         return <Film className="h-3.5 w-3.5 text-accent shrink-0" />;
       case "OTT Streaming":
@@ -98,7 +102,7 @@ export function BlogGrid({ posts }: BlogGridProps) {
           >
             <div>
               {/* Top Badge Strip */}
-              <div className="flex items-center justify-between gap-3 text-xs font-mono text-ink-3 mb-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-ink-3 mb-4">
                 <span className="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-md border border-line bg-wash text-ink text-[11px] font-medium">
                   {getCategoryIcon(post.category)}
                   <span>{post.category}</span>

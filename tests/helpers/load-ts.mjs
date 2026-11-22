@@ -14,6 +14,7 @@ export function loadTs(relative, cache = new Map()) {
   const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true, target: ts.ScriptTarget.ES2022 } });
   const localRequire = name => name.startsWith("@/")
     ? name.endsWith(".json") ? require(path.resolve(`src/${name.slice(2)}`)) : loadTs(`src/${name.slice(2)}.ts`, cache)
+    : name.startsWith(".") ? loadTs(path.resolve(path.dirname(filename), `${name}.ts`), cache)
     : require(name);
   new Function("require", "module", "exports", outputText)(localRequire, compiledModule, compiledModule.exports);
   return compiledModule.exports;
