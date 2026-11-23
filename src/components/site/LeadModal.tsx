@@ -12,7 +12,9 @@ import { OTT_PACKAGES } from "@/lib/ott-offers";
 import React, { useEffect, useState } from "react";
 import Link from "@/components/ui/LocalizedLink";
 import { usePathname } from "next/navigation";
-import { submitLead } from "@/lib/submit-lead";
+import { LeadSubmissionError, submitLead } from "@/lib/submit-lead";
+import { validateLeadFields, type LeadFieldErrors } from "@/lib/lead-validation";
+import { LeadFieldWarning, LeadFormWarning, leadSubmissionMessage } from "@/components/site/LeadFormWarnings";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
@@ -45,7 +47,7 @@ const PLATFORM_OPTIONS = [
 ];
 
 const field =
-  "w-full h-11 rounded-md border border-line bg-paper px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors";
+  "w-full h-11 rounded-md border border-line bg-paper px-3 text-[15px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink aria-invalid:border-warning transition-colors";
 const label = "block text-sm font-medium text-ink-2 mb-1.5";
 
 export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps) {
@@ -62,6 +64,7 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<LeadFieldErrors>({});
   const submittingRef = React.useRef(false);
   const [showDetails, setShowDetails] = useState(false);
   const [form, setForm] = useState({
@@ -74,11 +77,24 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
     honeypot: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submittingRef.current) return;
-    submittingRef.current = true;
+    const formElement = e.currentTarget;
+    const showFieldErrors = (issues: LeadFieldErrors) => {
+      setFieldErrors(issues);
+      if (issues.message) setShowDetails(true);
+      const firstField = issues.name ? "name" : issues.email ? "email" : "message";
+      requestAnimationFrame(() => formElement.querySelector<HTMLElement>(`#lead-${firstField}`)?.focus());
+    };
     setError(null);
+    const issues = validateLeadFields(form);
+    if (Object.keys(issues).length) {
+      showFieldErrors(issues);
+      return;
+    }
+    setFieldErrors({});
+    submittingRef.current = true;
     setLoading(true);
     try {
       const fullPhone = form.phone.trim() ? `${form.countryCode} ${form.phone.trim()}` : "";
@@ -96,8 +112,9 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
 
       trackLeadSubmission(selectedPackage);
       setSubmitted(true);
-    } catch {
-      setError(ui.error);
+    } catch (failure) {
+      if (failure instanceof LeadSubmissionError && Object.keys(failure.fields).length) showFieldErrors(failure.fields);
+      else setError(leadSubmissionMessage(failure));
     } finally {
       submittingRef.current = false;
       setLoading(false);
@@ -118,8 +135,10 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
 
   const set =
     (k: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
       setForm((prev) => ({ ...prev, [k]: e.target.value }));
+      if (k === "name" || k === "email" || k === "message") setFieldErrors(prev => ({ ...prev, [k]: undefined }));
+    };
 
   return (
     <div
@@ -157,8 +176,8 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
               )}
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-              {error && <p role="alert" className="text-sm text-ink">{translateCopy(error)}</p>}
+            <form noValidate onSubmit={handleSubmit} className="mt-5 space-y-4">
+              {error && <LeadFormWarning message={error} />}
               {/* Architecture / Platform of Interest (Dynamic & Editable) */}
               <div>
                 <label htmlFor="lead-package" className={label}>
@@ -199,11 +218,16 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                   <input
                     id="lead-name"
                     required
+                    autoComplete="name"
+                    readOnly={loading}
+                    aria-invalid={Boolean(fieldErrors.name)}
+                    aria-describedby={fieldErrors.name ? "lead-name-error" : undefined}
                     placeholder={translateCopy(t.leadModal.namePlaceholder)}
                     value={form.name}
                     onChange={set("name")}
                     className={field}
                   />
+                  <LeadFieldWarning id="lead-name-error" code={fieldErrors.name} />
                 </div>
                 <div>
                   <label htmlFor="lead-email" className={label}>{translateCopy(t.leadModal.emailLabel)}</label>
@@ -211,11 +235,16 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                     id="lead-email"
                     type="email"
                     required
+                    autoComplete="email"
+                    readOnly={loading}
+                    aria-invalid={Boolean(fieldErrors.email)}
+                    aria-describedby={fieldErrors.email ? "lead-email-error" : undefined}
                     placeholder={translateCopy(t.leadModal.emailPlaceholder)}
                     value={form.email}
                     onChange={set("email")}
                     className={field}
                   />
+                  <LeadFieldWarning id="lead-email-error" code={fieldErrors.email} />
                 </div>
               </div>
 
@@ -297,11 +326,15 @@ export function LeadModal({ onClose, selectedTierId = "launch" }: LeadModalProps
                       <textarea
                         id="lead-message"
                         rows={2}
+                        readOnly={loading}
+                        aria-invalid={Boolean(fieldErrors.message)}
+                        aria-describedby={fieldErrors.message ? "lead-message-error" : undefined}
                         placeholder={translateCopy(ui.notesPlaceholder)}
                         value={form.message}
                         onChange={set("message")}
-                        className="w-full rounded-md border border-line bg-paper px-3 py-2 text-[14px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink transition-colors resize-none"
+                        className="w-full rounded-md border border-line bg-paper px-3 py-2 text-[14px] text-ink placeholder:text-ink-3 focus:outline-none focus:border-ink aria-invalid:border-warning transition-colors resize-none"
                       />
+                      <LeadFieldWarning id="lead-message-error" code={fieldErrors.message} />
                     </div>
                   </div>
                 )}

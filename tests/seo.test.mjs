@@ -104,7 +104,7 @@ test("each business platform has a distinct guide, valid source links, section a
 });
 
 test("additional-platform inquiries retain product labels in mocked notifications without a fixed package price", async () => {
-  const keys = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "LEAD_WEBHOOK_URL"];
+  const keys = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "TELEGRAM_ALERT_BOT_TOKEN", "TELEGRAM_ALERT_CHAT_ID", "LEAD_WEBHOOK_URL"];
   const previous = Object.fromEntries(keys.map(key => [key, process.env[key]]));
   const originalFetch = globalThis.fetch;
   const { POST } = loadTs("src/app/api/lead/route.ts");
@@ -320,7 +320,7 @@ test("software schema does not manufacture ratings and offers match the selected
 });
 
 test("client accepts only explicitly confirmed leads", async () => {
-  const { submitLead } = loadTs("src/lib/submit-lead.ts");
+  const { submitLead, LeadSubmissionError } = loadTs("src/lib/submit-lead.ts");
   for (const [status, body] of [[503, { success: true, accepted: true }], [200, { success: false }], [200, { success: true, accepted: false }]]) {
     await assert.rejects(submitLead({ name: "Test" }, async () => Response.json(body, { status })));
   }
@@ -333,10 +333,33 @@ test("client accepts only explicitly confirmed leads", async () => {
     return Response.json({ success: true, accepted: true });
   });
   assert.equal(calls, 1);
+  await assert.rejects(submitLead({}, async () => Response.json({ fieldErrors: { email: "email_invalid", name: "Untrusted server text" } }, { status: 400 })), error => {
+    assert.ok(error instanceof LeadSubmissionError);
+    assert.equal(error.kind, "validation");
+    assert.deepEqual(error.fields, { email: "email_invalid" });
+    return true;
+  });
+  await assert.rejects(submitLead({}, async () => new Response("<html>", { status: 502 })), { kind: "unconfirmed" });
+  await assert.rejects(submitLead({}, async () => { throw new DOMException("Timed out", "TimeoutError"); }), { kind: "unconfirmed" });
+  await assert.rejects(submitLead({}, async () => Response.json({ accepted: false }, { status: 503 })), { kind: "delivery" });
 });
 
-test("API never reports undelivered inquiries as accepted; notification requests are mocked", async () => {
-  const keys = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "LEAD_WEBHOOK_URL"];
+test("lead field rules accept common addresses and give specific correction codes at boundaries", () => {
+  const { validateLeadFields, LEAD_LIMITS } = loadTs("src/lib/lead-validation.ts");
+  assert.deepEqual(validateLeadFields({ name: "   ", email: " " }), { name: "name_required", email: "email_required" });
+  for (const email of ["person@internal", "name@company..com", "name@-company.com", "a..b@example.com", "test@example.com,other@example.com"]) {
+    assert.equal(validateLeadFields({ name: "Test", email }).email, "email_invalid");
+  }
+  assert.deepEqual(validateLeadFields({ name: " आलोक ", email: " Lead+Tag@Sub.Example.com ", message: "n".repeat(LEAD_LIMITS.message) }), {});
+  assert.deepEqual(validateLeadFields({ name: "आलोक", email: "आलोक@उदाहरण.भारत" }), {});
+  assert.equal(validateLeadFields({ name: "Test", email: "a".repeat(247) + "@example.com" }).email, "email_too_long");
+  assert.equal(validateLeadFields({ name: "n".repeat(201), email: "test@example.com" }).name, "name_too_long");
+  assert.equal(validateLeadFields({ name: "Test", email: "test@example.com", message: "n".repeat(LEAD_LIMITS.message + 1) }).message, "notes_too_long");
+});
+
+test("API never reports undelivered inquiries as accepted; notification requests are mocked", async t => {
+  t.mock.method(console, "warn", () => {});
+  const keys = ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "TELEGRAM_ALERT_BOT_TOKEN", "TELEGRAM_ALERT_CHAT_ID", "LEAD_WEBHOOK_URL"];
   const previous = keys.map(key => process.env[key]);
   const originalFetch = globalThis.fetch;
   const { POST } = loadTs("src/app/api/lead/route.ts");
@@ -365,6 +388,170 @@ test("API never reports undelivered inquiries as accepted; notification requests
       else process.env[key] = previous[index];
     }
   }
+});
+
+test("lead alerts capture recoverable rejected submissions and separate their details from diagnostics", async t => {
+  const settings = {
+    TELEGRAM_BOT_TOKEN: "mock-lead-bot",
+    TELEGRAM_CHAT_ID: "mock-lead-chat",
+    TELEGRAM_ALERT_BOT_TOKEN: "mock-alert-bot",
+    TELEGRAM_ALERT_CHAT_ID: "mock-alert-chat",
+    LEAD_WEBHOOK_URL: "https://notifications.invalid/test",
+  };
+  const previous = Object.fromEntries(Object.keys(settings).map(key => [key, process.env[key]]));
+  Object.assign(process.env, settings);
+  t.after(() => {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  });
+  const { POST } = loadTs("src/app/api/lead/route.ts");
+  const privateDetails = {
+    name: "Private Lead Name",
+    email: "private-lead@example.com",
+    phone: "+1 202 555 0148",
+    company: "Private Lead Company",
+    message: "Private project notes",
+  };
+  const request = fields => new Request("https://example.com/api/lead", {
+    method: "POST",
+    body: JSON.stringify({ ...privateDetails, package: "short-drama", ...fields }),
+  });
+  const alerts = [];
+  const logs = t.mock.method(console, "warn", () => {});
+  let telegramStatus = 200;
+  let webhookStatus = 200;
+  let temporaryAlertFailures = 0;
+  let temporaryLeadFailures = 0;
+  let retryAfterSeconds = 1;
+  const leadSends = [];
+  const documents = [];
+  const webhookNotes = [];
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    const { chat_id, text } = options.body instanceof FormData
+      ? { chat_id: options.body.get("chat_id"), text: options.body.get("caption") }
+      : JSON.parse(options.body);
+    if (options.body instanceof FormData) documents.push({ url, text, contents: await options.body.get("document").text() });
+    if (text.includes("Endpoint: POST /api/lead")) {
+      alerts.push({ url, chat_id, text });
+      if (temporaryAlertFailures > 0) {
+        temporaryAlertFailures--;
+        throw new DOMException("Mocked timeout", "TimeoutError");
+      }
+      return Response.json({ ok: true });
+    }
+    if (String(url).includes("api.telegram.org")) {
+      leadSends.push(text);
+      if (temporaryLeadFailures > 0) {
+        temporaryLeadFailures--;
+        return Response.json({ ok: false, parameters: { retry_after: retryAfterSeconds } }, { status: 429 });
+      }
+      return Response.json({ ok: telegramStatus === 200 }, { status: telegramStatus });
+    }
+    webhookNotes.push(text);
+    return new Response(null, { status: webhookStatus });
+  });
+
+  const invalid = await POST(request({ email: "Typed@Example", website: "Ignored field" }));
+  assert.equal(invalid.status, 400);
+  assert.equal(leadSends.length, 0);
+  assert.match(alerts[0].text, /validation rejected/);
+  assert.match(alerts[0].text, /Email format is invalid/);
+  assert.match(alerts[0].text, /Email: Typed@Example/);
+  assert.deepEqual((await invalid.json()).fieldErrors, { email: "email_invalid" });
+  assert.ok(alerts[0].text.includes(invalid.headers.get("x-lead-request-id")));
+  assert.equal(alerts[0].text.includes("Ignored field"), false);
+  assert.equal(logs.mock.calls[0].arguments[1].includes("Typed@Example"), false);
+  assert.equal((await POST(new Request("https://example.com/api/lead", { method: "POST", body: "{" }))).status, 400);
+  assert.match(alerts[1].text, /Malformed or empty JSON body/);
+  assert.equal((await POST(request({ package: 123 }))).status, 400);
+  assert.match(alerts[2].text, /package must be text/);
+  assert.equal((await (await POST(request({ honeypot: "filled" }))).json()).accepted, false);
+  assert.match(alerts[3].text, /spam check/);
+  assert.equal(alerts[3].text.includes(privateDetails.email), false);
+  assert.equal((await POST(request({}))).status, 200);
+  delete process.env.LEAD_WEBHOOK_URL;
+  assert.equal((await POST(request({}))).status, 200);
+  assert.equal(alerts.length, 4);
+  assert.equal(logs.mock.callCount(), 4);
+  process.env.LEAD_WEBHOOK_URL = settings.LEAD_WEBHOOK_URL;
+
+  telegramStatus = 400;
+  webhookStatus = 503;
+  const leadsBeforeFailure = leadSends.length;
+  const failed = await POST(request({}));
+  assert.equal(failed.status, 503);
+  assert.equal((await failed.json()).accepted, false);
+  const requestId = failed.headers.get("x-lead-request-id");
+  assert.ok(requestId);
+  assert.equal(leadSends.length - leadsBeforeFailure, 1, "Telegram does not retry a permanent HTTP 400");
+  assert.equal(alerts.length, 5);
+  const failureAlert = alerts.at(-1);
+  assert.equal(failureAlert.url, "https://api.telegram.org/botmock-alert-bot/sendMessage");
+  assert.equal(failureAlert.chat_id, "mock-alert-chat");
+  assert.ok(failureAlert.text.includes(requestId));
+  assert.match(failureAlert.text, /Lead notification failed/);
+  assert.match(failureAlert.text, /Telegram: HTTP 400\nWebhook: HTTP 503/);
+  assert.match(failureAlert.text, /Platform: short-drama/);
+  const diagnostic = logs.mock.calls.at(-1).arguments[1];
+  assert.ok(diagnostic.includes(requestId));
+  for (const value of Object.values(privateDetails)) {
+    assert.ok(failureAlert.text.includes(value));
+    assert.equal(diagnostic.includes(value), false);
+  }
+
+  await Promise.all([POST(request({})), POST(request({}))]);
+  assert.equal(alerts.length, 7, "Each failed submission is reported separately");
+  assert.equal(logs.mock.callCount(), 7);
+
+  delete process.env.TELEGRAM_ALERT_BOT_TOKEN;
+  delete process.env.TELEGRAM_ALERT_CHAT_ID;
+  telegramStatus = 200;
+  temporaryAlertFailures = 1;
+  const untrustedPackage = "Private unrecognized package text";
+  const partial = await POST(request({ package: untrustedPackage }));
+  assert.deepEqual(await partial.json(), { success: true, accepted: true });
+  assert.ok(partial.headers.get("x-lead-request-id"));
+  assert.equal(alerts.length, 9);
+  assert.equal(alerts[7].text, alerts[8].text, "Retry retains the same request ID and alert");
+  assert.equal(alerts[8].url, "https://api.telegram.org/botmock-lead-bot/sendMessage");
+  assert.equal(alerts[8].chat_id, "mock-lead-chat");
+  assert.match(alerts[8].text, /Lead delivered to one channel/);
+  assert.match(alerts[8].text, /Platform: unrecognized/);
+  assert.equal(alerts[8].text.includes(untrustedPackage), false);
+
+  webhookStatus = 200;
+  temporaryLeadFailures = 1;
+  const beforeRetry = Date.now();
+  const longNotes = "First line\n" + "👋".repeat(3900) + "\nLast line & <example>";
+  const recovered = await POST(request({ message: longNotes }));
+  assert.equal(recovered.status, 200);
+  assert.ok(Date.now() - beforeRetry >= 950, "Telegram rate-limit hint is respected");
+  assert.equal(leadSends.at(-1), leadSends.at(-2));
+  assert.equal(documents.length, 2);
+  assert.ok(documents.at(-1).url.endsWith("/sendDocument"));
+  assert.ok(documents.at(-1).contents.includes(longNotes));
+  assert.ok(webhookNotes.at(-1).includes(longNotes));
+  assert.ok(leadSends.at(-1).includes(recovered.headers.get("x-lead-request-id")));
+  assert.equal(alerts.length, 9, "Recovered delivery needs no failure alert");
+
+  delete process.env.LEAD_WEBHOOK_URL;
+  retryAfterSeconds = 60;
+  temporaryLeadFailures = 1;
+  const callsBeforeRateLimit = leadSends.length;
+  const rateLimited = await POST(request({}));
+  assert.equal(rateLimited.status, 503);
+  assert.equal(leadSends.length, callsBeforeRateLimit + 1);
+  assert.equal(alerts.length, 9, "The same bot must not bypass a rate-limit wait that exceeds the request budget");
+  assert.match(logs.mock.calls.at(-1).arguments[0], /Telegram alert failed/);
+  assert.equal(logs.mock.calls.at(-1).arguments[1].requestId, rateLimited.headers.get("x-lead-request-id"));
+
+  const oversized = await POST(request({ message: "n".repeat(8001) }));
+  assert.equal(oversized.status, 400);
+  assert.deepEqual((await oversized.json()).fieldErrors, { message: "notes_too_long" });
+  assert.match(documents.at(-1).text, /validation rejected/);
+  assert.match(documents.at(-1).contents, /\[truncated\]/);
 });
 
 test("lead analytics has distinct GA4 and Ads destinations and no invented sale value", () => {

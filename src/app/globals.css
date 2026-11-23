@@ -13,6 +13,7 @@
   --color-ink-3: var(--theme-ink-3);
   --color-line: var(--theme-line);
   --color-accent: var(--theme-accent);
+  --color-warning: var(--theme-warning);
 }
 
 :root,
@@ -25,6 +26,7 @@
   --theme-ink-3: #a1a1aa;
   --theme-line: #262626;
   --theme-accent: #34d399;
+  --theme-warning: #fcd34d;
   --theme-scrollbar-thumb: rgba(255, 255, 255, 0.2);
   --theme-scrollbar-thumb-hover: rgba(255, 255, 255, 0.45);
   --theme-shimmer-highlight: rgba(255, 255, 255, 0.08);
@@ -41,6 +43,7 @@
   --theme-ink-3: #625f59;
   --theme-line: #e4e2dd;
   --theme-accent: #1e5b45;
+  --theme-warning: #78350f;
   --theme-scrollbar-thumb: rgba(22, 22, 22, 0.2);
   --theme-scrollbar-thumb-hover: rgba(22, 22, 22, 0.45);
   --theme-shimmer-highlight: rgba(30, 91, 69, 0.12);
