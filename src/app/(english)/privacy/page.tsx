@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-lg font-semibold tracking-tight text-ink">1. Information We Collect</h2>
               <p>When you interact with our website or book a software demonstration, we may collect:</p>
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-ink-2">
-                <li><strong className="text-ink">Inquiry Information:</strong> Name, work email address, telephone/WhatsApp number, company name, and your selected software solution package.</li>
+                <li><strong className="text-ink">Inquiry Information:</strong> Name, email address, telephone/WhatsApp number, company name, selected software package, and any project notes you submit.</li>
                 <li><strong className="text-ink">Communications Data:</strong> Direct correspondence sent via WhatsApp or email, including project specifications and technical requirements.</li>
                 <li><strong className="text-ink">Device &amp; Telemetry Data:</strong> IP address, browser type, device identifiers, and aggregated browsing patterns collected via cookies and measurement tags.</li>
               </ul>
@@ -116,6 +116,7 @@ export default function PrivacyPolicyPage() {
               <ul className="list-disc pl-5 space-y-1.5 text-xs text-ink-2">
                 <li>To schedule, configure, and conduct personalized live demonstrations of our e-commerce and OTT video streaming platforms.</li>
                 <li>To prepare technical proposals, source code licensing agreements, and architecture deployment roadmaps.</li>
+                <li>To route inquiries to our team through notification services such as Telegram. If an inquiry fails validation or delivery, our team may review the submitted contact details and project notes to recover the inquiry.</li>
                 <li>To deliver post-launch developer support, system maintenance, and warranty services.</li>
                 <li>To measure marketing campaign efficacy, evaluate conversion metrics, and optimize digital advertising ROI.</li>
               </ul>

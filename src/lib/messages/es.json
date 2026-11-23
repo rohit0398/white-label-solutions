@@ -1176,5 +1176,15 @@
   "MorePlatforms.estate.title": "Plataforma inmobiliaria",
   "MorePlatforms.estate.summary": "Búsqueda de inmuebles, anuncios de terrenos y consultas comerciales.",
   "MorePlatforms.solar.title": "CRM solar",
-  "MorePlatforms.solar.summary": "Gestiona contactos, visitas técnicas, instalaciones y posventa."
+  "MorePlatforms.solar.summary": "Gestiona contactos, visitas técnicas, instalaciones y posventa.",
+  "LeadForm.nameRequired": "Escribe tu nombre.",
+  "LeadForm.nameTooLong": "Usa un máximo de 200 caracteres para tu nombre.",
+  "LeadForm.emailRequired": "Escribe tu correo electrónico.",
+  "LeadForm.emailInvalid": "Escribe un correo como nombre@example.com. Revisa el texto después de @.",
+  "LeadForm.emailTooLong": "Usa un máximo de 254 caracteres para tu correo electrónico.",
+  "LeadForm.notesTooLong": "Reduce las notas del proyecto a 8.000 caracteres o menos.",
+  "LeadForm.checkDetails": "Revisa tus datos y vuelve a intentarlo.",
+  "LeadForm.connection": "Comprueba tu conexión a Internet y vuelve a intentarlo.",
+  "LeadForm.delivery": "No pudimos entregar tu consulta. Inténtalo de nuevo o contáctanos por WhatsApp.",
+  "LeadForm.unconfirmed": "No pudimos confirmar si tu consulta llegó. Tus datos siguen aquí. Inténtalo de nuevo o contáctanos por WhatsApp."
 }

@@ -1176,5 +1176,15 @@
   "MorePlatforms.estate.title": "Real estate platform",
   "MorePlatforms.estate.summary": "Property discovery, land listings, and agent or buyer inquiries.",
   "MorePlatforms.solar.title": "Solar CRM",
-  "MorePlatforms.solar.summary": "Track leads, surveys, installations, and after-sales work."
+  "MorePlatforms.solar.summary": "Track leads, surveys, installations, and after-sales work.",
+  "LeadForm.nameRequired": "Enter your name.",
+  "LeadForm.nameTooLong": "Use 200 characters or fewer for your name.",
+  "LeadForm.emailRequired": "Enter your email address.",
+  "LeadForm.emailInvalid": "Enter an email address like name@example.com. Check the part after @ for typos.",
+  "LeadForm.emailTooLong": "Use 254 characters or fewer for your email address.",
+  "LeadForm.notesTooLong": "Shorten your project notes to 8,000 characters or fewer.",
+  "LeadForm.checkDetails": "Check your details and try again.",
+  "LeadForm.connection": "Check your internet connection and try again.",
+  "LeadForm.delivery": "We couldn’t deliver your inquiry. Try again or reach us on WhatsApp.",
+  "LeadForm.unconfirmed": "We couldn’t confirm whether your inquiry arrived. Your details are still here. Try again or contact us on WhatsApp."
 }

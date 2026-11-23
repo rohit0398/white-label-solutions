@@ -1176,5 +1176,15 @@
   "MorePlatforms.estate.title": "Immobilienplattform",
   "MorePlatforms.estate.summary": "Immobiliensuche, Grundstücksangebote und Makler- oder Käuferanfragen.",
   "MorePlatforms.solar.title": "Solar-CRM",
-  "MorePlatforms.solar.summary": "Leads, Vor-Ort-Termine, Installationen und Kundendienst verfolgen."
+  "MorePlatforms.solar.summary": "Leads, Vor-Ort-Termine, Installationen und Kundendienst verfolgen.",
+  "LeadForm.nameRequired": "Gib deinen Namen ein.",
+  "LeadForm.nameTooLong": "Verwende höchstens 200 Zeichen für deinen Namen.",
+  "LeadForm.emailRequired": "Gib deine E-Mail-Adresse ein.",
+  "LeadForm.emailInvalid": "Gib eine E-Mail-Adresse wie name@example.com ein. Prüfe den Teil nach dem @ auf Tippfehler.",
+  "LeadForm.emailTooLong": "Verwende höchstens 254 Zeichen für deine E-Mail-Adresse.",
+  "LeadForm.notesTooLong": "Kürze deine Projektnotizen auf höchstens 8.000 Zeichen.",
+  "LeadForm.checkDetails": "Prüfe deine Angaben und versuche es erneut.",
+  "LeadForm.connection": "Prüfe deine Internetverbindung und versuche es erneut.",
+  "LeadForm.delivery": "Wir konnten deine Anfrage nicht zustellen. Versuche es erneut oder kontaktiere uns per WhatsApp.",
+  "LeadForm.unconfirmed": "Wir konnten den Eingang deiner Anfrage nicht bestätigen. Deine Angaben sind noch da. Versuche es erneut oder kontaktiere uns per WhatsApp."
 }

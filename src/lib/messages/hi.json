@@ -1176,5 +1176,15 @@
   "MorePlatforms.estate.title": "रियल एस्टेट प्लेटफ़ॉर्म",
   "MorePlatforms.estate.summary": "प्रॉपर्टी खोज, ज़मीन की लिस्टिंग और एजेंट या खरीदार की पूछताछ।",
   "MorePlatforms.solar.title": "सोलर CRM",
-  "MorePlatforms.solar.summary": "लीड, साइट सर्वे, इंस्टॉलेशन और बिक्री के बाद का काम संभालें।"
+  "MorePlatforms.solar.summary": "लीड, साइट सर्वे, इंस्टॉलेशन और बिक्री के बाद का काम संभालें।",
+  "LeadForm.nameRequired": "अपना नाम दर्ज करें।",
+  "LeadForm.nameTooLong": "अपने नाम के लिए 200 या कम वर्ण इस्तेमाल करें।",
+  "LeadForm.emailRequired": "अपना ईमेल पता दर्ज करें।",
+  "LeadForm.emailInvalid": "name@example.com जैसा ईमेल पता दर्ज करें। @ के बाद का हिस्सा जाँचें।",
+  "LeadForm.emailTooLong": "अपने ईमेल पते के लिए 254 या कम वर्ण इस्तेमाल करें।",
+  "LeadForm.notesTooLong": "प्रोजेक्ट नोट्स को 8,000 या कम वर्णों में लिखें।",
+  "LeadForm.checkDetails": "अपनी जानकारी जाँचें और दोबारा कोशिश करें।",
+  "LeadForm.connection": "अपना इंटरनेट कनेक्शन जाँचें और दोबारा कोशिश करें।",
+  "LeadForm.delivery": "हम आपकी पूछताछ भेज नहीं पाए। दोबारा कोशिश करें या WhatsApp पर संपर्क करें।",
+  "LeadForm.unconfirmed": "हम पुष्टि नहीं कर पाए कि आपकी पूछताछ पहुँची या नहीं। आपकी जानकारी यहीं है। दोबारा कोशिश करें या WhatsApp पर संपर्क करें।"
 }

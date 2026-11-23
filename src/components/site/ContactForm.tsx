@@ -10,10 +10,12 @@ import { BRAND } from "@/lib/constants";
 import { POPULAR_COUNTRIES, ALL_COUNTRIES } from "@/lib/countryCodes";
 import { OTT_PACKAGES } from "@/lib/ott-offers";
 import { SHORT_DRAMA_PACKAGES } from "@/lib/short-drama-offers";
-import { submitLead } from "@/lib/submit-lead";
+import { LeadSubmissionError, submitLead } from "@/lib/submit-lead";
+import { validateLeadFields, type LeadFieldErrors } from "@/lib/lead-validation";
+import { LeadFieldWarning, LeadFormWarning, leadSubmissionMessage } from "@/components/site/LeadFormWarnings";
 
 const label = "block text-sm font-medium text-ink";
-const field = "mt-1.5 w-full rounded-lg border border-line bg-paper px-3 py-2.5 text-base text-ink placeholder:text-ink-3 focus:border-ink sm:text-sm";
+const field = "mt-1.5 w-full rounded-lg border border-line bg-paper px-3 py-2.5 text-base text-ink placeholder:text-ink-3 focus:border-ink aria-invalid:border-warning sm:text-sm";
 const popularCountryIds = new Set(POPULAR_COUNTRIES.map((country) => country.iso));
 const otherCountries = ALL_COUNTRIES.filter((country) => !popularCountryIds.has(country.iso));
 const countryCodes = new Map([...POPULAR_COUNTRIES, ...otherCountries].map((country) => [country.iso, country.code]));
@@ -42,24 +44,35 @@ export function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState<{ email: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<LeadFieldErrors>({});
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current) return;
     setError(null);
 
-    const values = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const values = new FormData(formElement);
     const read = (field: string) => String(values.get(field) ?? "").trim();
     const name = read("name");
     const email = read("email");
     const phone = read("phone");
     const dialCode = countryCodes.get(read("country")) ?? "+1";
     const solution = read("solution");
+    const message = read("message");
 
-    if (!name || !email) {
-      setError("Please enter your name and email address.");
+    const showFieldErrors = (issues: LeadFieldErrors) => {
+      setFieldErrors(issues);
+      if (issues.message) formElement.querySelector("details")?.setAttribute("open", "");
+      const firstField = issues.name ? "name" : issues.email ? "email" : "message";
+      requestAnimationFrame(() => formElement.querySelector<HTMLElement>(`#contact-${firstField}`)?.focus());
+    };
+    const issues = validateLeadFields({ name, email, message });
+    if (Object.keys(issues).length) {
+      showFieldErrors(issues);
       return;
     }
+    setFieldErrors({});
 
     submitting.current = true;
     setLoading(true);
@@ -70,13 +83,14 @@ export function ContactForm() {
         phone: phone ? `${dialCode} ${phone}` : undefined,
         company: read("company") || undefined,
         package: solution || "general",
-        message: read("message") || undefined,
+        message: message || undefined,
         honeypot: read("website_url"),
       });
       trackLeadSubmission(solution ? `ContactPage - ${solution}` : "ContactPage - General");
       setConfirmation({ email });
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "We couldn't send your inquiry. Please try again or reach us on WhatsApp.");
+    } catch (failure) {
+      if (failure instanceof LeadSubmissionError && Object.keys(failure.fields).length) showFieldErrors(failure.fields);
+      else setError(leadSubmissionMessage(failure));
     } finally {
       submitting.current = false;
       setLoading(false);
@@ -105,7 +119,12 @@ export function ContactForm() {
   }
 
   return (
-    <form method="post" aria-labelledby="contact-form-title" onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-line bg-wash p-5 sm:p-8">
+    <form method="post" noValidate aria-labelledby="contact-form-title" onSubmit={handleSubmit} onChange={event => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) return;
+      const field = target.name;
+      if (field === "name" || field === "email" || field === "message") setFieldErrors(prev => ({ ...prev, [field]: undefined }));
+    }} className="space-y-5 rounded-2xl border border-line bg-wash p-5 sm:p-8">
       <input type="text" name="website_url" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
       <div>
@@ -113,17 +132,19 @@ export function ContactForm() {
         <p className="mt-1 text-sm text-ink-2">Leave your name and email so we can get back to you.</p>
       </div>
 
-      {error && <p role="alert" className="rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-700 dark:text-red-300">{error}</p>}
+      {error && <LeadFormWarning message={error} />}
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className={label} htmlFor="contact-name">
-          Name
-          <input id="contact-name" name="name" autoComplete="name" type="text" required className={field} />
-        </label>
-        <label className={label} htmlFor="contact-email">
-          Email
-          <input id="contact-email" name="email" autoComplete="email" type="email" required className={field} />
-        </label>
+        <div>
+          <label className={label} htmlFor="contact-name">Name</label>
+          <input id="contact-name" name="name" autoComplete="name" type="text" required readOnly={loading} aria-invalid={Boolean(fieldErrors.name)} aria-describedby={fieldErrors.name ? "contact-name-error" : undefined} className={field} />
+          <LeadFieldWarning id="contact-name-error" code={fieldErrors.name} />
+        </div>
+        <div>
+          <label className={label} htmlFor="contact-email">Email</label>
+          <input id="contact-email" name="email" autoComplete="email" type="email" required readOnly={loading} aria-invalid={Boolean(fieldErrors.email)} aria-describedby={fieldErrors.email ? "contact-email-error" : undefined} className={field} />
+          <LeadFieldWarning id="contact-email-error" code={fieldErrors.email} />
+        </div>
       </div>
 
       <label className={label} htmlFor="contact-solution">
@@ -145,10 +166,11 @@ export function ContactForm() {
           Add project details <ChevronDown aria-hidden="true" className="size-4 text-ink-3 group-open:rotate-180" />
         </summary>
         <div className="space-y-4 pt-1">
-          <label className={label} htmlFor="contact-message">
-            What are you building? <span className="font-normal text-ink-3">(optional)</span>
-            <textarea id="contact-message" name="message" rows={3} placeholder="Tell us about the platform, features, or launch date you have in mind." className={field} />
-          </label>
+          <div>
+            <label className={label} htmlFor="contact-message">What are you building? <span className="font-normal text-ink-3">(optional)</span></label>
+            <textarea id="contact-message" name="message" rows={3} readOnly={loading} aria-invalid={Boolean(fieldErrors.message)} aria-describedby={fieldErrors.message ? "contact-message-error" : undefined} placeholder="Tell us about the platform, features, or launch date you have in mind." className={field} />
+            <LeadFieldWarning id="contact-message-error" code={fieldErrors.message} />
+          </div>
           <label className={label} htmlFor="contact-company">
             Company <span className="font-normal text-ink-3">(optional)</span>
             <input id="contact-company" name="company" autoComplete="organization" className={field} />
