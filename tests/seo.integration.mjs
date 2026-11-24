@@ -183,6 +183,16 @@ for (const agent of ["Mozilla/5.0", "Googlebot"]) {
     assert.equal(missing.status, 404, path);
     assert.match(await missing.text(), /noindex/);
   }
+  for (const path of ["/blog/null", "/solutions/null"]) {
+    const missing = await fetch(origin + path, { redirect: "manual", headers: { "user-agent": agent } });
+    assert.equal(missing.status, 404, path);
+    const html = await missing.text();
+    assert.match(html, /noindex/);
+    assert.match(html, /<h1\b[^>]*>Page not found<\/h1>/);
+    for (const destination of ["/", "/solutions", "/blog"]) {
+      assert.ok(html.includes(`href="${destination}"`), `${path} links to ${destination}`);
+    }
+  }
 }
 for (const [oldPath, newPath] of movedRoutes) {
   assert.ok(urls.some(url => new URL(url).pathname === newPath), `Missing from sitemap: ${newPath}`);
