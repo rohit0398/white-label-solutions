@@ -9,6 +9,7 @@ const solutionMoves = [
 ] as const;
 
 const nextConfig: NextConfig = {
+  experimental: { globalNotFound: true },
   async redirects() {
     const redirects: { source: string; destination: string; permanent: boolean }[] = solutionMoves.flatMap(([previous, current]) =>
       (["platform", "app", "web"] as const).flatMap(offer =>

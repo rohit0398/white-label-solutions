@@ -1,6 +1,6 @@
 # Project handoff: Mechatron Lab Solutions
 
-Last updated: **23 November 2026** (Asia/Calcutta).
+Last updated: **24 November 2026** (Asia/Calcutta).
 
 This document records the recent decisions and verified implementation so another AI agent or IDE can continue without reconstructing the conversation. Paths below are relative to the repository root. Current source and the user's latest instructions take precedence over this dated snapshot.
 
@@ -308,6 +308,11 @@ Verification:
 - `TELEGRAM_ALERT_BOT_TOKEN` and `TELEGRAM_ALERT_CHAT_ID` optionally override the lead bot and chat for alerts. Telegram delivery gets up to two attempts. Alerts get up to three, with one- and two-second backoff and Telegram's rate-limit wait respected within the applicable budget. Telegram and the lead webhook are attempted in parallel. The forms and API accept up to 8,000 characters of notes. If a Telegram message would approach the text limit, send one UTF-8 text attachment with a summary to keep the notes and inquiry together across retries. The webhook payload includes the full accepted notes.
 - Retries run within the handler and no durable lead storage or job queue is configured. If all channels and retries fail, logs support diagnosis but cannot reconstruct the contact fields. An ambiguous provider timeout can result in duplicate messages sharing the same request ID.
 - Verification for the form follow-up used mocked notification calls and browser interception on the running local site. Tested client and API validation, inline warnings in light and dark themes, focus, input retention, connection and delivery failures, duplicate clicks, retry, and a long multiline Unicode note in both the Telegram attachment and webhook payload. No real test lead or message was sent.
+
+## Missing pages — 24 November 2026
+
+- `src/app/global-not-found.tsx` gives visitors Home, Solutions, and Blog links on unmatched routes. The app uses Next.js's global 404 convention because the English and localized routes have separate root layouts. Invalid paths such as `/blog/null` and `/solutions/null` keep their 404 status and `noindex` metadata.
+- The prior log audit found no `/null` link on the affected production pages. There is no redirect, crawler rule, or special route for those paths. The integration check covers their 404 status, noindex metadata, and navigation links.
 
 ## Verification and release status
 
