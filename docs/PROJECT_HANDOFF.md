@@ -1,6 +1,6 @@
 # Project handoff: Mechatron Lab Solutions
 
-Last updated: **24 November 2026** (Asia/Calcutta).
+Last updated: **25 November 2026** (Asia/Calcutta).
 
 This document records the recent decisions and verified implementation so another AI agent or IDE can continue without reconstructing the conversation. Paths below are relative to the repository root. Current source and the user's latest instructions take precedence over this dated snapshot.
 
@@ -313,6 +313,20 @@ Verification:
 
 - `src/app/global-not-found.tsx` gives visitors Home, Solutions, and Blog links on unmatched routes. The app uses Next.js's global 404 convention because the English and localized routes have separate root layouts. Invalid paths such as `/blog/null` and `/solutions/null` keep their 404 status and `noindex` metadata.
 - The prior log audit found no `/null` link on the affected production pages. There is no redirect, crawler rule, or special route for those paths. The integration check covers their 404 status, noindex metadata, and navigation links.
+
+## Micro Drama client milestone
+
+- `ShortDramaOverview` shows the approved **5M+ downloads on Google Play** client proof point below the live demo on the platform and mobile app pages. The supporting sentence attributes the short drama app build to our team for an unnamed entertainment client.
+- `ShortDramaClientMilestone` shows only the **50L+ Downloads** crop from Google Play (`public/showcase/play-download-milestone.webp`, 198 × 98, 1,596 bytes). The translated heading conveys the same metric, so the image uses empty alt text. The image loads lazily and its frame pulses twice on first view, respecting reduced motion and forced colors.
+- Keep the app and publisher unnamed in public images, filenames, page copy, and accessibility text. The card uses the generic **View on Google Play** label, with the requested store address used only as the link destination. It opens in a new tab and uses `nofollow`. The arrow moves on hover or keyboard focus when motion is enabled. The previous identifying crop was removed from `public`.
+- This client app is separate from the public MicroDrama demo and the existing case study. The shared platform page localizes the milestone, including **50 lakh** in Hindi.
+
+## New buyer guides — 25 November 2026
+
+- `/blog/short-drama-content-licensing` covers sourcing a title, documenting its rights, accepting the media files, and testing availability from publish through expiry. It uses the MicroDrama test builds and an existing episode admin screenshot. The studio supplies its own catalog and rights.
+- `/blog/live-ott-streaming-checklist` covers broadcast inputs, switching to a backup, testing viewer access and playback, and preparing a replay. The early walkthrough asks the broadcaster to bring its feed details. The MicroDrama test builds are a catalog/player reference, and the guide links to the live broadcaster case study. Live channels and feeds are separately scoped.
+- `/blog/ecommerce-cash-on-delivery` follows delivered and returned orders through checkout, dispatch, stock recovery, and courier payout reconciliation. It includes live store links and existing compressed checkout and admin screenshots. Carrier-specific rules and integrations are discussed as requirements to confirm.
+- The three English routes reuse the existing guide registries and templates. They have their own title, description, canonical URL, share image, Article and breadcrumb data, and source links. The blog index, related guides, and sitemap include them. The sitemap total is now **75 canonical URLs**.
 
 ## Verification and release status
 

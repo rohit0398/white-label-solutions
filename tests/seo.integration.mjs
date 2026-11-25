@@ -4,9 +4,10 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 72);
+assert.equal(urls.length, 75);
 assert.equal(sitemap.includes("<lastmod>"), false);
 const dramaGuides = [
+  "short-drama-content-licensing",
   "micro-drama-marketing-strategy",
   "localize-micro-drama-app",
   "launch-app-like-netshort",
@@ -26,11 +27,11 @@ const dramaGuides = [
 for (const slug of dramaGuides) {
   assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing guide in sitemap: ${slug}`);
 }
-const ottGuides = ["white-label-ott-platform-cost", "ott-monetization-svod-avod-tvod"];
+const ottGuides = ["live-ott-streaming-checklist", "white-label-ott-platform-cost", "ott-monetization-svod-avod-tvod"];
 for (const slug of ottGuides) {
   assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing OTT guide in sitemap: ${slug}`);
 }
-const commerceGuides = ["move-to-white-label-ecommerce-platform", "multi-warehouse-ecommerce-inventory"];
+const commerceGuides = ["ecommerce-cash-on-delivery", "move-to-white-label-ecommerce-platform", "multi-warehouse-ecommerce-inventory"];
 const businessGuides = ["launch-white-label-taxi-booking-app", "white-label-food-delivery-platform-guide", "appointment-booking-software-staff-calendar", "real-estate-listing-website-lead-generation", "solar-crm-lead-to-installation-workflow"];
 for (const slug of businessGuides) assert.ok(urls.some(url => new URL(url).pathname === `/blog/${slug}`), `Missing business guide: ${slug}`);
 for (const slug of commerceGuides) {
@@ -115,6 +116,10 @@ for (const url of urls) {
     assert.ok(html.indexOf('id="live-demo"') < html.indexOf('aria-label="Article contents"'), `OTT reference demo before guide: ${path}`);
     assert.ok(html.includes('href="/solutions/launch-ott-streaming-platform"'), `OTT commercial link: ${path}`);
     assert.ok(html.includes("MicroDrama test builds"), `Reference demo identified: ${path}`);
+  }
+  if (path === "/blog/live-ott-streaming-checklist") {
+    assert.ok(html.includes('href="/case-studies/ott-streaming-network"'), "Live OTT case study");
+    assert.equal(html.includes("Launch within 2–4 weeks"), false, "Live delivery requires separate scoping");
   }
   if (dramaGuides.some(slug => path === `/blog/${slug}`)) {
     assert.equal(nodes.filter(node => node["@type"] === "Article").length, 1, `Article schema: ${path}`);

@@ -88,7 +88,7 @@ export function EcommerceGuide({ guideKey }: { guideKey: EcommerceGuideKey }) {
               </section>
               <section id="live-examples" aria-labelledby="commerce-live-title" className="space-y-4">
                 <h2 id="commerce-live-title" className="text-2xl font-semibold tracking-tight">See the live stores and shopping apps</h2>
-                <p className="leading-relaxed text-ink-2">Browse the shopper experience below. For migration, warehouse rules, and integrations, ask for an admin walkthrough.</p>
+                <p className="leading-relaxed text-ink-2">{guide.liveExamplesIntro ?? "Browse the shopper experience below. For migration, warehouse rules, and integrations, ask for an admin walkthrough."}</p>
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {SHOWCASE_PROJECTS.slice(0, 2).map(project => (
                     <li key={project.id} className="space-y-3 rounded-xl border border-line bg-wash p-5">
@@ -117,6 +117,14 @@ export function EcommerceGuide({ guideKey }: { guideKey: EcommerceGuideKey }) {
               <h2 className="text-2xl font-semibold tracking-tight">{section.title}</h2>
               {section.paragraphs.map(paragraph => <p key={paragraph} className="leading-relaxed text-ink-2">{paragraph}</p>)}
               {"bullets" in section && section.bullets && <ul className="list-disc space-y-2 pl-5 text-ink-2">{section.bullets.map(item => <li key={item}>{item}</li>)}</ul>}
+              {section.image && (
+                <Screenshot
+                  src={section.image.src}
+                  alt={section.image.alt}
+                  sizes={section.image.portrait ? "224px" : "(min-width: 704px) 656px, calc(100vw - 48px)"}
+                  className={section.image.portrait ? "mx-auto w-full max-w-56" : undefined}
+                />
+              )}
               {section.id === guide.image.section && (
                 <div className="space-y-3">
                   <div className={guideKey === "app" ? "mx-auto w-full max-w-56" : undefined}>

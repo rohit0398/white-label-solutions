@@ -11,9 +11,16 @@ export interface CommerceGuide {
   datePublished: string;
   dateModified?: string;
   showLiveExamples?: boolean;
+  liveExamplesIntro?: string;
   image: { src: string; alt: string; section: string; example: { href: string; label: string } };
   offer: { href: string; label: string; tierId: PackageId };
-  sections: { id: string; title: string; paragraphs: string[]; bullets?: string[] }[];
+  sections: {
+    id: string;
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+    image?: { src: string; alt: string; portrait?: boolean };
+  }[];
   checklist: { title: string; text: string }[];
   links: { href: string; label: string }[];
   sources?: { href: string; label: string }[];

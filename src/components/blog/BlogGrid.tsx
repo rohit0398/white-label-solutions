@@ -15,7 +15,7 @@ import {
 
 export interface BlogPost {
   slug: string;
-  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "OTT Streaming" | "Business Platforms";
+  category: "Pricing & ROI" | "Web Engineering" | "Mobile Apps" | "Short Drama" | "OTT Streaming" | "Business Platforms" | "Store Operations";
   pillar: "all" | "ecommerce" | "short-drama" | "ott" | "business-platforms";
   title: string;
   excerpt: string;
@@ -56,6 +56,7 @@ export function BlogGrid({ posts }: BlogGridProps) {
       case "Pricing & ROI":
         return <TrendingUp className="h-3.5 w-3.5 text-accent shrink-0" />;
       case "Web Engineering":
+      case "Store Operations":
         return <Layers className="h-3.5 w-3.5 text-accent shrink-0" />;
       case "Mobile Apps":
       default:

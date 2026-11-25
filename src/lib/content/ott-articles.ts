@@ -1,10 +1,100 @@
 import type { DramaArticle } from "@/lib/content/short-drama-articles";
+import { CASE_STUDIES } from "@/lib/content/case-studies";
 import { OTT_PATHS } from "@/lib/solution-paths";
 
 export const OTT_COST_SLUG = "white-label-ott-platform-cost";
 export const OTT_MONETIZATION_SLUG = "ott-monetization-svod-avod-tvod";
+export const LIVE_OTT_CHECKLIST_SLUG = "live-ott-streaming-checklist";
 
 export const OTT_ARTICLES: DramaArticle[] = [
+  {
+    slug: LIVE_OTT_CHECKLIST_SLUG,
+    title: "Live OTT Streaming Checklist for Broadcasters and Events",
+    seoTitle: "Live OTT Streaming Checklist: Feeds, Playback & Backup",
+    description: "Rehearse a live OTT channel or event. Check the feed, schedule, viewer access, sound, captions, backup feed, and replay before you go live.",
+    tags: ["OTT Streaming", "Live broadcast", "Playback testing"],
+    image: "/showcase/microdrama-catalog.webp",
+    datePublished: "2026-11-25",
+    intro: "A scheduled broadcast has a deadline. At start time the feed must arrive, the player must open on the devices viewers use, and the team must know what to do if the signal drops. Use this checklist to rehearse a live channel or event before you share the viewing link.",
+    takeaway: "Rehearse the real feed on the same viewing devices and access rules you’ll use on launch day. During the rehearsal, interrupt the primary feed and watch what happens on the viewer’s screen.",
+    launchHeadline: "Plan a walkthrough for your live stream",
+    launchIntro: "Share your feed type, target devices, and schedule so we can scope live delivery. The MicroDrama test builds below show a reference catalog and player.",
+    nextStep: {
+      title: "Bring your feed and device list to a walkthrough",
+      text: "Tell us whether you’ll run a scheduled event or continuous channels, who supplies the feed, and where people need to watch. We’ll review the standard on-demand package and scope the live requirements with you.",
+      links: [
+        { href: OTT_PATHS.platform, label: "Explore the OTT streaming platform" },
+        { href: CASE_STUDIES.ott.path, label: "Read the live TV and on-demand case study" },
+      ],
+      whatsappMessage: "Hi, I’m planning a live OTT stream and would like to discuss my feed, viewing devices, and schedule.",
+    },
+    sections: [
+      {
+        id: "define-the-broadcast",
+        title: "Decide what viewers are tuning in to",
+        paragraphs: [
+          "A single event needs an event page, a scheduled start, and a plan for the replay. A continuous channel also needs a program guide, schedule updates, and an operating plan outside event hours. Write down what viewers should see before, during, and after the broadcast.",
+          "List who can watch, where they can watch, and how they gain access. Pick the launch devices upfront. The standard OTT package covers on-demand video on mobile and web. Live ingest, continuous channels, dedicated TV apps, and any broadcast-specific protections are scoped separately.",
+        ],
+        options: [{
+          title: "See a broadcaster’s live and on-demand setup",
+          text: "The broadcaster case study describes how scheduled channels, a program guide, and a video catalog came together in one service.",
+          href: CASE_STUDIES.ott.path,
+          linkLabel: "Read the broadcaster case study",
+        }],
+      },
+      {
+        id: "agree-the-feed-handoff",
+        title: "Agree who supplies the feed and how it reaches the player",
+        paragraphs: [
+          "Ask the broadcast team for the feed protocol, resolution, frame rate, audio tracks, and captions. A production encoder might send SRT or RTMP to the streaming service, which then prepares an adaptive HLS stream for viewers. Some broadcasters already supply a playable feed, so agree what each team will operate.",
+          "Name the team responsible for the encoder, stream delivery, player, and audience support. Agree when the source goes live for testing and how the production team will tell the app team about a late start, schedule change, or interrupted feed.",
+        ],
+      },
+      {
+        id: "practice-backup-switch",
+        title: "Practice switching to a backup feed",
+        paragraphs: [
+          "Test a backup independent of the likely failure. Two encoders using the same upstream connection can both go down if that connection fails. Choose what should appear while the feed recovers, such as a holding slate with the program name and a short status message.",
+          "AWS MediaLive documents different failover signals, including missing input, black video, and audio silence. Even if you use another provider, rehearse these cases on your own setup. Watch for a silent or frozen player, check whether it recovers on its own, and record how much time the handover takes.",
+        ],
+      },
+      {
+        id: "rehearse-as-a-viewer",
+        title: "Test the event with real viewers’ conditions",
+        paragraphs: [
+          "Use the published viewing route on a browser, an iPhone, and an Android device if those are in scope. Start on Wi-Fi, repeat on mobile data, and interrupt the connection for a few seconds. Check time to first frame, buffering, audio sync, captions, and whether the viewer returns to the live position after reconnecting.",
+          "On a private stream, try a signed-out browser and an account that has access. If the event uses a schedule, confirm the display in a second time zone and test a delayed start. During a rehearsal with multiple devices, compare video and application monitoring so the team can distinguish a feed outage from a sign-in or player problem.",
+        ],
+      },
+      {
+        id: "example-live-event",
+        title: "Walk through one event from opening slate to replay",
+        paragraphs: [
+          "For example, suppose a broadcaster plans a 60-minute interview with captions and a replay the next day. Fifteen minutes before the start, an operator checks both sources and opens the event page in a private window. During rehearsal, the operator disconnects the primary source while another person watches on mobile data and notes what the viewer sees.",
+          "After the show, end the live state, check that the page displays the planned replay message, and review the recording for missing audio, gaps, and caption alignment. Keep the recording private until the editor has approved it and confirmed the replay window.",
+        ],
+      },
+      {
+        id: "launch-day-checklist",
+        title: "Use this checklist on launch day",
+        paragraphs: [
+          "Pick one person to make the go-live decision. Agree who can switch sources, who updates the event page, and who communicates with viewers if the schedule changes. Keep the checklist and contact details where those people can access them during the broadcast.",
+        ],
+        checklist: [
+          { title: "Confirm both sources", text: "Check video, audio, captions, backup feed, and monitoring before viewers arrive." },
+          { title: "Check the public viewing route", text: "Test the actual event link, time zone, access rules, and launch devices." },
+          { title: "Rehearse a disruption", text: "Interrupt the primary input and confirm the backup or holding screen appears as expected." },
+          { title: "Close out the event", text: "End the live state and review the recording, captions, and replay access." },
+        ],
+      },
+    ],
+    sources: [
+      { title: "Apple on HTTP Live Streaming and stream validation", url: "https://developer.apple.com/documentation/http-live-streaming" },
+      { title: "AWS MediaLive input types and protocols", url: "https://docs.aws.amazon.com/medialive/latest/ug/inputs-supported-formats.html" },
+      { title: "AWS MediaLive automatic input failover", url: "https://docs.aws.amazon.com/medialive/latest/ug/automatic-input-failover.html" },
+    ],
+  },
   {
     slug: OTT_COST_SLUG,
     title: "White-Label OTT Platform Cost: Launch Fees and Monthly Costs",

@@ -1136,6 +1136,8 @@
   "HomeProof.ottCase": "Lire le cas de la plateforme OTT",
   "HomeProof.ottImage": "Démo MicroDrama avec des séries à la une et un catalogue de streaming",
   "ShortDrama.top.platform.walkthroughTitle": "Découvrez comment publier une série",
+  "ShortDrama.clientMilestone.heading": "Plus de 5 millions de téléchargements sur Google Play",
+  "ShortDrama.clientMilestone.description": "Une application de séries courtes développée par notre équipe pour un client du secteur du divertissement a atteint 5 millions de téléchargements sur Google Play.",
   "ShortDrama.top.platform.walkthroughIntro": "Lors d’une démo, nous pouvons montrer à votre équipe comment publier une série, choisir les épisodes gratuits et VIP, puis tester la lecture. La plateforme standard prend en charge les abonnements VIP et les publicités récompensées. Nous pouvons étudier un système de pièces ou de paiement par épisode.",
   "ShortDramaRollout.launchGuide": "Comparer un lancement web et un lancement par application",
   "ShortDramaRollout.costGuide": "Lire le guide des coûts d’une application de séries courtes",
