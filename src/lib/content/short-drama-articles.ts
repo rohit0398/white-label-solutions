@@ -8,6 +8,7 @@ export interface DramaArticle {
   seoTitle?: string;
   description: string;
   image?: string;
+  tags?: string[];
   intro: string;
   takeaway: string;
   datePublished?: string;

@@ -5,6 +5,7 @@ import { StreamingHero } from "@/components/sections/StreamingHero";
 import { MicroDramaAppPreview } from "@/components/sections/MicroDramaAppPreview";
 import { ShortDramaCapabilities } from "@/components/sections/ShortDramaCapabilities";
 import { ShortDramaCardRail } from "@/components/sections/ShortDramaCardRail";
+import { ShortDramaClientMilestone } from "@/components/sections/ShortDramaClientMilestone";
 import { ShortDramaLiveAccess } from "@/components/sections/ShortDramaLiveAccess";
 import { EngineeringCard, TechStackStrip } from "@/components/sections/TechStackStrip";
 import { useMessages } from "@/components/site/useMessages";
@@ -109,6 +110,8 @@ export function ShortDramaOverview({ offer }: { offer: ShortDramaOffer }) {
           </div>
         )}
       </ShortDramaLiveAccess>
+
+      {offer !== "web" && <ShortDramaClientMilestone />}
 
       <TechStackStrip
         id="short-drama-features"

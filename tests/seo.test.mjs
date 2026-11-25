@@ -13,7 +13,7 @@ test("additional platforms have unique indexable pages, quote-based schema, real
   const { SITE_URL } = loadTs("src/lib/site-config.ts", cache);
   const paths = new Set(sitemap().map(item => new URL(item.url).pathname));
   assert.equal(ADDITIONAL_PLATFORMS.length, 5);
-  assert.equal(sitemap().length, 72);
+  assert.equal(sitemap().length, 75);
   assert.ok(paths.has("/solutions"));
   assert.equal(paths.has("/solutions/more-platforms"), false);
   for (const field of ["id", "heading", "seoTitle", "description"]) {
@@ -181,7 +181,9 @@ test("e-commerce operations guides have valid dates, routes, media, section anch
     assert.ok(paths.has(`/blog/${guide.slug}`), guide.slug);
     assert.ok(existsSync(`src/app/(english)/blog/${guide.slug}/page.tsx`), guide.slug);
     assert.ok(Date.parse(guide.dateModified) >= Date.parse(guide.datePublished), guide.slug);
-    assert.ok(existsSync(`public${guide.image.src}`), guide.image.src);
+    for (const image of [guide.image, ...guide.sections.flatMap(section => section.image ? [section.image] : [])]) {
+      assert.ok(existsSync(`public${image.src}`), image.src);
+    }
     assert.ok(guide.sections.some(section => section.id === guide.image.section), guide.slug);
     assert.equal(new Set(guide.sections.map(section => section.id)).size, guide.sections.length);
     for (const { href } of [...guide.links, guide.offer, guide.image.example]) {

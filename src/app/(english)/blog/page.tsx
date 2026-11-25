@@ -96,8 +96,8 @@ export default function BlogIndexPage() {
 
   const posts: BlogPost[] = [
     ...BUSINESS_PLATFORM_GUIDES.map((guide): BlogPost => ({ slug: guide.slug, category: "Business Platforms", pillar: "business-platforms", title: guide.title, excerpt: guide.description, readTime: "Launch guide", date: "November 2026", tags: guide.tags })),
-    ...OTT_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "OTT Streaming", pillar: "ott", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", tags: ["OTT Streaming", "Launch Planning", "Monetization"] })),
-    ...DRAMA_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "Short Drama", pillar: "short-drama", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", featured: article.slug === "short-drama-app-development", tags: ["Short Drama", "Launch Planning", "Monetization"] })),
+    ...OTT_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "OTT Streaming", pillar: "ott", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", tags: article.tags ?? ["OTT Streaming", "Launch Planning", "Monetization"] })),
+    ...DRAMA_ARTICLES.map((article): BlogPost => ({ slug: article.slug, category: "Short Drama", pillar: "short-drama", title: article.title, excerpt: article.description, readTime: "Launch guide", date: "November 2026", featured: article.slug === "short-drama-app-development", tags: article.tags ?? ["Short Drama", "Launch Planning", "Monetization"] })),
     {
       slug: "ott-video-streaming-development",
       category: "OTT Streaming",
@@ -112,7 +112,7 @@ export default function BlogIndexPage() {
     },
     ...Object.entries(ECOMMERCE_GUIDES).map(([key, guide]): BlogPost => ({
       slug: guide.slug,
-      category: key === "cost" ? "Pricing & ROI" : key === "app" ? "Mobile Apps" : "Web Engineering",
+      category: key === "cost" ? "Pricing & ROI" : key === "app" ? "Mobile Apps" : key === "cashOnDelivery" ? "Store Operations" : "Web Engineering",
       pillar: "ecommerce",
       title: guide.title,
       excerpt: guide.description,
@@ -121,6 +121,7 @@ export default function BlogIndexPage() {
       featured: false,
       tags: key === "inventory" ? ["Inventory", "Warehouses", "Fulfillment"]
         : key === "migration" ? ["Store Migration", "SEO", "White Label"]
+        : key === "cashOnDelivery" ? ["Cash on Delivery", "Returns", "Fulfillment"]
         : key === "cost" ? ["Development Cost", "Source Code", "Hosting"]
         : key === "app" ? ["iOS and Android", "Checkout", "App Store Review"]
         : ["Storefront", "Checkout", "Fulfillment"],

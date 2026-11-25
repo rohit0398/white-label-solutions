@@ -1136,6 +1136,8 @@
   "HomeProof.ottCase": "Read the OTT case study",
   "HomeProof.ottImage": "MicroDrama demo showing featured series and a streaming catalog",
   "ShortDrama.top.platform.walkthroughTitle": "See how a series goes live",
+  "ShortDrama.clientMilestone.heading": "5M+ downloads on Google Play",
+  "ShortDrama.clientMilestone.description": "A short drama app built by our team for an entertainment client reached 5 million downloads on Google Play.",
   "ShortDrama.top.platform.walkthroughIntro": "In a walkthrough, we can show your team how to publish a series, choose free and VIP episodes, and check playback. The standard platform supports VIP subscriptions and rewarded ads. Ask us to scope a coin wallet or pay-per-episode model if you need one.",
   "ShortDramaRollout.launchGuide": "Compare a web-first and app-first launch",
   "ShortDramaRollout.costGuide": "Read the Short Drama app cost guide",

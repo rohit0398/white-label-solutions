@@ -1,10 +1,114 @@
 import type { DramaArticle } from "@/lib/content/short-drama-articles";
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 
+export const SHORT_DRAMA_LICENSING_SLUG = "short-drama-content-licensing";
+
 export const MICRO_DRAMA_MARKETING_SLUG = "micro-drama-marketing-strategy";
 export const MICRO_DRAMA_LOCALIZATION_SLUG = "localize-micro-drama-app";
 
 export const MICRO_DRAMA_GROWTH_GUIDES: DramaArticle[] = [
+  {
+    slug: SHORT_DRAMA_LICENSING_SLUG,
+    title: "How to License Short Drama Content for a Micro Drama App",
+    seoTitle: "Short Drama Content Licensing for Micro Drama Apps",
+    description: "Find vertical dramas to license and check territories, languages, release windows, and episode files before publishing a series on your app or website.",
+    tags: ["Short Drama", "Content Licensing", "Publishing"],
+    image: "/showcase/microdrama-catalog.webp",
+    datePublished: "2026-11-25",
+    intro: "If you’re launching a Micro Drama app, start with one series you can actually put in front of viewers. Ask who can license it, where you can show it, and which files you’ll receive. Those answers tell your editorial team what it can publish and your developer what the app needs to enforce.",
+    takeaway: "Get the rights and delivery details for one complete series in writing. Use that title to test the catalog, player, captions, and access rules before committing to a larger slate.",
+    launchHeadline: "Launch within 2–4 weeks",
+    launchIntro: "Try the web, iOS, and Android builds to see how a series appears to viewers.",
+    nextStep: {
+      title: "Bring a series to a publishing walkthrough",
+      text: "Share the episode list, languages, release markets, and which episodes viewers can watch for free. We’ll show you the publishing flow and discuss any territory, scheduling, or access rules your launch needs.",
+      links: [
+        { href: SHORT_DRAMA_PATHS.platform, label: "Explore the Micro Drama platform" },
+        { href: "/blog/publish-micro-drama-series", label: "Read the series publishing guide" },
+      ],
+      whatsappMessage: "Hi, I’m preparing a short drama catalog and would like to see how to publish a series on the platform.",
+    },
+    sections: [
+      {
+        id: "where-to-source-short-dramas",
+        title: "Find a series and the team that can license it",
+        paragraphs: [
+          "Start with producers, production studios, sales agents, and distributors that list vertical dramas. For example, Unisun publishes a short drama licensing catalog. Ask for sample episodes, a current title list, available territories, and the contact authorized to negotiate your specific rights.",
+          "Share your intended audience, first release languages, viewing surfaces, and access model. A catalog that broadly includes a country or language may still have different availability for each series. Request a title-level offer and ask your rights team to confirm that the seller can grant the uses you need.",
+        ],
+      },
+      {
+        id: "rights-to-check",
+        title: "Write down where and how you can show it",
+        paragraphs: [
+          "WIPO describes film distribution agreements in terms of territory, language, and medium. Make each of those fields explicit. Ask whether the agreement covers an app, a browser player, or both, and whether it allows you to stream dubbed or subtitled versions. Record exclusivity and any existing release windows that affect yours.",
+          "Describe the actual viewer offer in the contract discussion. A studio might want to show the opening episodes for free, fund the rest through ads, or reserve later episodes for subscribers. Ask about trailer excerpts and social promotion separately, especially when you plan to use the clips in paid campaigns.",
+        ],
+        bullets: [
+          "Countries and languages, including subtitle and dubbing rights",
+          "Permitted platforms, devices, and monetization models",
+          "Start and end dates, exclusivity, and any blackout windows",
+          "Trailers, social clips, artwork, and other promotional uses",
+        ],
+      },
+      {
+        id: "review-the-delivery-list",
+        title: "Ask for the files your publishing team will need",
+        paragraphs: [
+          "Use one episode to verify the file format, vertical framing, picture and audio quality, subtitle timing, and episode numbering. Ask who will replace a corrupt master or missing caption file. Confirm whether captions arrive separately and which artwork works at phone size.",
+          "Request a manifest for the whole series with the episode order, durations, filenames, audio tracks, posters, metadata, and approved promotional assets. Check the complete set before scheduling the release so a missing episode or language file can be resolved while there is still time.",
+        ],
+      },
+      {
+        id: "one-series-rights-sheet",
+        title: "Make a rights sheet for one title",
+        paragraphs: [
+          "For an example pilot, imagine a 12-episode series available in India in Hindi for six months. Your intended release is web and mobile, with three free episodes and the remaining nine available to subscribers. Record whether the actual agreement permits that offer and whether the trailer can run in a paid campaign.",
+          "Add a date and an owner for confirming the first publish, checking the release from allowed and restricted territories, and taking the series down when the window ends. Document each rule for the developer and editorial team. Ask about automated scheduling or geographic restrictions during scoping if those controls are required.",
+        ],
+        checklist: [
+          { title: "Name the rights holder", text: "Record the agreement, approved uses, contacts, and person who confirmed the rights." },
+          { title: "Record the publishing window", text: "List launch dates, expiry dates, territories, devices, and language versions." },
+          { title: "Track what arrived", text: "Check each episode, subtitle file, poster, and trailer against the delivery list." },
+          { title: "Assign the expiry check", text: "Give one person responsibility for renewal, withdrawal, and checking old links." },
+        ],
+      },
+      {
+        id: "test-the-pilot",
+        title: "Test the series from upload to expiry",
+        paragraphs: [
+          "Publish a test copy with authorized assets. Check the poster and title in the catalog, play the first and last episode, and make sure captions match the chosen language. Open a shared link as a signed-out viewer. Then try the first paid episode with a standard test account and a subscriber test account.",
+          "Test the restrictions you discussed before launch. Check what happens when an episode is withdrawn, when the release window expires, and when a previously shared link is opened. Record what the admin handles, which steps staff handle, and any rules that need to be included in the proposal.",
+        ],
+        image: { src: "/showcase/microdrama-admin-episodes.webp", alt: "MicroDrama admin panel showing episode order and publishing status" },
+        options: [{
+          title: "See the publishing steps",
+          text: "Follow one series through catalog setup, episode ordering, and viewer checks.",
+          href: "/blog/publish-micro-drama-series",
+          linkLabel: "Read how to publish a Micro Drama series",
+        }],
+      },
+      {
+        id: "budget-for-content",
+        title: "Keep the catalog budget up to date",
+        paragraphs: [
+          "Ask how the content deal works, whether it is a fixed fee, revenue share, or a combination. Discuss what counts toward revenue, how usage is reported, and when payment is due. Include subtitle, dubbing, and artwork costs where the distributor delivers only the masters.",
+          "Budget separately for the software launch, hosting, video delivery, and the team that keeps the catalog current. Our offer covers the software deployment. Your team supplies the series and agreements that allow you to distribute them.",
+        ],
+        options: [{
+          title: "Plan the software spend",
+          text: "Compare launch packages and ongoing delivery costs once you know the size of the starting catalog.",
+          href: "/blog/short-drama-app-development-cost",
+          linkLabel: "See the Micro Drama app cost guide",
+        }],
+      },
+    ],
+    sources: [
+      { title: "WIPO on film licensing and distribution", url: "https://www.wipo.int/en/web/copyright/creative-industries/how-to-make-a-living-from-movie-copyright" },
+      { title: "WIPO on documenting rights in film production", url: "https://www.wipo.int/pressroom/en/stories/ip_and_film.html" },
+      { title: "Unisun short drama licensing catalog", url: "https://unisunhk.com/" },
+    ],
+  },
   {
     slug: MICRO_DRAMA_MARKETING_SLUG,
     title: "Micro Drama Marketing: From Trailer Clicks to Paying Viewers",

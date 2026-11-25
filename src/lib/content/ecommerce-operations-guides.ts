@@ -1,7 +1,102 @@
 import type { CommerceGuide } from "@/lib/content/ecommerce-guides";
+import { CASE_STUDIES } from "@/lib/content/case-studies";
 import { ECOMMERCE_PATHS } from "@/lib/solution-paths";
 
 export const ECOMMERCE_OPERATIONS_GUIDES = {
+  cashOnDelivery: {
+    slug: "ecommerce-cash-on-delivery",
+    title: "Cash on Delivery for E-Commerce: Checkout, Failed Deliveries, and Returns",
+    seoTitle: "Cash on Delivery for E-Commerce: Checkout, COD Orders & RTO",
+    description: "Plan cash on delivery for your online store. Learn when to offer COD, handle failed deliveries, restore returned stock, and reconcile courier payouts.",
+    intro: "A cash-on-delivery order leaves checkout before the money comes in. A courier may deliver it, return it, or remit the cash days later. Plan for each outcome when choosing an online store, especially if your staff handle prepaid and COD orders in the same admin panel.",
+    datePublished: "2026-11-25",
+    dateModified: "2026-11-25",
+    showLiveExamples: true,
+    liveExamplesIntro: "Browse the storefronts and shopping apps below. Bring a sample COD order to a walkthrough so we can review checkout, order status, and the carrier handoff.",
+    image: {
+      src: "/showcase/commerce-admin.webp",
+      alt: "E-commerce admin dashboard with order and sales summaries",
+      section: "reconcile-courier-payouts",
+      example: { href: CASE_STUDIES.electronics.path, label: "See how the electronics store manages orders" },
+    },
+    offer: { href: ECOMMERCE_PATHS.platform, label: "Explore the e-commerce platform", tierId: "launch" },
+    sections: [
+      {
+        id: "offer-cod-at-checkout",
+        title: "Decide when to offer cash on delivery",
+        paragraphs: [
+          "Start with the locations and orders your courier will accept for COD. Check the destination postal code, order value, and any product or shipment restrictions. If the carrier can deliver a parcel but cannot collect cash there, show the eligible prepaid options before the buyer places the order.",
+          "Make the amount due visible on the last checkout screen and in the order confirmation. Keep payment and fulfillment status distinct. A COD order can be accepted for dispatch while payment is still pending. Shopify’s manual payment documentation gives one example of this distinction.",
+        ],
+        image: {
+          src: "/showcase/commerce-app-checkout.webp",
+          alt: "Checkout screen from the Mechatron Lab shopping app",
+          portrait: true,
+        },
+      },
+      {
+        id: "confirm-and-dispatch",
+        title: "Confirm the order before it leaves the warehouse",
+        paragraphs: [
+          "Decide which COD orders need a manual review. Staff might verify unclear addresses, unusually large first orders, or orders for items that are expensive to ship. Make sure the checkout records a usable contact number and that the order confirmation repeats the delivery address and amount due.",
+          "Give the warehouse a clear point at which it can reserve, pack, and hand off stock. Record the order and carrier tracking reference together. If the customer cancels before pickup, staff should be able to stop dispatch and release the reserved stock.",
+        ],
+      },
+      {
+        id: "manage-a-failed-delivery",
+        title: "Choose between a second attempt and a return",
+        paragraphs: [
+          "A non-delivery report tells you that the courier tried to deliver the parcel and could not complete the handoff. Check the reason. A customer who was unavailable might still want a second attempt. For a refused order or an address the carrier cannot reach, decide when to request return to origin, known as RTO.",
+          "Assign one person to handle the response and record it on the order. When the parcel comes back, receive and inspect the item before making it available for sale. Record damaged or missing goods separately so your sellable stock matches what you can ship.",
+        ],
+        bullets: [
+          "Recipient unavailable — confirm a new delivery window where the courier supports it.",
+          "Address problem — confirm the details and check the carrier’s rules for changes.",
+          "Order refused — record the outcome and follow the return until the warehouse receives it.",
+        ],
+      },
+      {
+        id: "reconcile-courier-payouts",
+        title: "Match courier payouts to delivered orders",
+        paragraphs: [
+          "Keep the delivery, cash collection, and carrier payout dates visible where your tools allow it. Reconcile the carrier statement against your order and tracking identifiers. Check the amount collected, any deductions, and the net deposit.",
+          "For example, if a carrier collected ₹1,000 and deducted a ₹60 fee listed in the agreement, the expected net deposit is ₹940. If the statement shows ₹900, flag the ₹40 difference for accounts to investigate. Record missing payouts and partial settlements as exceptions with a named owner.",
+        ],
+      },
+      {
+        id: "two-test-orders",
+        title: "Run two orders before launch",
+        paragraphs: [
+          "Test one delivered COD order. Place it on a phone, check the amount on the confirmation, dispatch it from the right warehouse, and record delivery. Use a sample courier statement to verify that staff can match the payment to that order and explain the balance.",
+          "Test a second order that fails delivery and comes back. Confirm that no payment is expected, record the failure reason, and receive the returned item. Repeat the stock check with a damaged item. Ask us which steps are handled in the platform and what a carrier-specific connection or reconciliation report would require.",
+        ],
+      },
+      {
+        id: "monitor-cod-performance",
+        title: "Track COD performance by delivery route",
+        paragraphs: [
+          "Compare delivery success, returns to origin, and unsettled payouts by carrier and service area. Keep shipped and unshipped orders separate. One useful measure is the share of shipped COD parcels that end up returned, measured over a group of orders with enough time to reach a final outcome.",
+          "Use that breakdown to decide where to review addresses, adjust delivery zones, or offer a prepaid option more prominently. If you need partial upfront payments, automatic risk checks, or courier settlement imports, include those requirements explicitly when comparing platforms.",
+        ],
+      },
+    ],
+    checklist: [
+      { title: "Set COD eligibility", text: "Check destinations, order limits, eligible items, and the amount the buyer will owe." },
+      { title: "Agree the warehouse handoff", text: "Define when staff approve, reserve, pack, and hand the parcel to the courier." },
+      { title: "Rehearse a failed delivery", text: "Assign who decides on a second attempt and who inspects returned stock." },
+      { title: "Reconcile a payout", text: "Match a sample statement to orders and flag unpaid or short-paid items." },
+    ],
+    links: [
+      { href: "/blog/multi-warehouse-ecommerce-inventory", label: "Plan inventory and returns across warehouses" },
+      { href: "/blog/ecommerce-website-development", label: "Plan the storefront launch" },
+      { href: CASE_STUDIES.electronics.path, label: "Read the electronics store case study" },
+    ],
+    sources: [
+      { href: "https://help.shopify.com/en/manual/payments/manual-payments", label: "Shopify on cash on delivery and pending payments" },
+      { href: "https://support.shiprocket.in/support/solutions/articles/43000664209-what-is-ndr-", label: "Shiprocket on failed delivery and reattempts" },
+      { href: "https://support.shiprocket.in/support/solutions/articles/152000000935-what-is-rto-what-are-the-possible-reasons-behind-rto-", label: "Shiprocket on return to origin" },
+    ],
+  },
   migration: {
     slug: "move-to-white-label-ecommerce-platform",
     title: "Moving an Online Store to a White-Label E-Commerce Platform",

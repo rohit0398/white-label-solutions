@@ -268,11 +268,11 @@ export default function DramaArticlePage({ slug, family = "short-drama" }: { slu
         </header>
         <section aria-labelledby="launch-cta" className="space-y-3 rounded-2xl border border-line bg-wash p-5 sm:p-6">
           <h2 id="launch-cta" className="text-xl font-semibold tracking-tight sm:text-2xl">{article.launchHeadline ?? (ott ? "Launch within 2–4 weeks" : "Get your short drama app ready in as little as 2 weeks")}</h2>
-          {ott ? (
+          {article.launchIntro ? (
+            <p className="text-sm leading-relaxed text-ink-2">{article.launchIntro}</p>
+          ) : ott ? (
             <p className="text-sm leading-relaxed text-ink-2">Try our MicroDrama test builds below for a reference catalog and viewing experience. For widescreen playback and the OTT features you need, request a walkthrough.</p>
-          ) : article.launchHeadline ? (
-            article.launchIntro && <p className="text-sm leading-relaxed text-ink-2">{article.launchIntro}</p>
-          ) : (
+          ) : !article.launchHeadline && (
             <p className="text-sm leading-relaxed text-ink-2">Setup takes an estimated 2–4 weeks once your videos, branding, and accounts are ready. Store review timing varies. Try our live web, iOS, and Android examples below.</p>
           )}
           <div className="flex flex-wrap gap-3">
