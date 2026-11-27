@@ -4,9 +4,10 @@ const sitemapResponse = await fetch(`${origin}/sitemap.xml`);
 assert.equal(sitemapResponse.status, 200);
 const sitemap = await sitemapResponse.text();
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 75);
+assert.equal(urls.length, 76);
 assert.equal(sitemap.includes("<lastmod>"), false);
 const dramaGuides = [
+  "add-short-drama-to-ott-app",
   "short-drama-content-licensing",
   "micro-drama-marketing-strategy",
   "localize-micro-drama-app",

@@ -1,6 +1,6 @@
 # Project handoff: Mechatron Lab Solutions
 
-Last updated: **25 November 2026** (Asia/Calcutta).
+Last updated: **27 November 2026** (Asia/Calcutta).
 
 This document records the recent decisions and verified implementation so another AI agent or IDE can continue without reconstructing the conversation. Paths below are relative to the repository root. Current source and the user's latest instructions take precedence over this dated snapshot.
 
@@ -114,11 +114,8 @@ Implementation: `src/components/sections/HomePlatformsDeck.tsx`; animation style
 
 Implementation: `src/components/site/CookieConsent.tsx`.
 
-- Popup delay changed from **800 ms to 60,000 ms** after the component mounts.
-- Only appears if there is no saved `cookie_consent` choice.
-- Existing accept/decline behavior and Google consent updates were preserved.
-- Timeout is cleared on unmount.
-- Do not revert the delay to an immediate or sub-second popup.
+- The previous **60-second** wait was removed on 27 November. The banner appears on the next browser frame after the component mounts for visitors without a saved `cookie_consent` choice.
+- Accept and Decline save the visitor's choice locally when storage is available and update Google Consent Mode. Visitors can still choose during the current visit if storage is unavailable.
 
 ## Current public product URLs
 
@@ -327,6 +324,12 @@ Verification:
 - `/blog/live-ott-streaming-checklist` covers broadcast inputs, switching to a backup, testing viewer access and playback, and preparing a replay. The early walkthrough asks the broadcaster to bring its feed details. The MicroDrama test builds are a catalog/player reference, and the guide links to the live broadcaster case study. Live channels and feeds are separately scoped.
 - `/blog/ecommerce-cash-on-delivery` follows delivered and returned orders through checkout, dispatch, stock recovery, and courier payout reconciliation. It includes live store links and existing compressed checkout and admin screenshots. Carrier-specific rules and integrations are discussed as requirements to confirm.
 - The three English routes reuse the existing guide registries and templates. They have their own title, description, canonical URL, share image, Article and breadcrumb data, and source links. The blog index, related guides, and sitemap include them. The sitemap total is now **75 canonical URLs**.
+
+## Micro Drama integration guide — 27 November 2026
+
+- `/blog/add-short-drama-to-ott-app` helps broadcasters decide between a homepage row, a vertical tab, and a standalone app. It covers catalog ownership, existing subscriber access, shared links, playback checks, and a pilot with rollback criteria.
+- The guide cites ViX MicrO and Peacock's own announcements. The early MicroDrama demos and screenshots illustrate the standalone product. Connections to an existing OTT service are separately scoped, so this guide uses a walkthrough heading and excludes the standard launch timeline.
+- The English route is included through the existing registry in the blog index, related guides, and sitemap. The sitemap total is now **76 canonical URLs**.
 
 ## Verification and release status
 

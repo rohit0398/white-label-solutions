@@ -1,12 +1,121 @@
 import type { DramaArticle } from "@/lib/content/short-drama-articles";
 import { SHORT_DRAMA_PATHS } from "@/lib/short-drama-paths";
 
+export const SHORT_DRAMA_OTT_INTEGRATION_SLUG = "add-short-drama-to-ott-app";
 export const SHORT_DRAMA_LICENSING_SLUG = "short-drama-content-licensing";
 
 export const MICRO_DRAMA_MARKETING_SLUG = "micro-drama-marketing-strategy";
 export const MICRO_DRAMA_LOCALIZATION_SLUG = "localize-micro-drama-app";
 
 export const MICRO_DRAMA_GROWTH_GUIDES: DramaArticle[] = [
+  {
+    slug: SHORT_DRAMA_OTT_INTEGRATION_SLUG,
+    title: "How to Add Micro Drama to an Existing OTT App",
+    description: "Compare a carousel, a vertical video tab, and a separate app. Plan the catalog, viewer accounts, paid access, and rollout for a Micro Drama pilot.",
+    tags: ["Micro Drama", "OTT Integration", "Vertical Video"],
+    image: "/showcase/microdrama-web-player.webp",
+    datePublished: "2026-11-27",
+    intro: "If you already run an OTT service, you can introduce short dramas through a row on the homepage, a dedicated vertical tab, or a separate app. Each choice changes what your team has to build and what viewers have to do before episode one. This guide helps broadcasters and streaming teams choose a first release and work out what it needs from their existing platform.",
+    takeaway: "Start with two series and one viewing experience. Decide where viewers will find the series, whose account determines access, and how you’ll turn off the pilot if it disrupts the main service.",
+    launchHeadline: "See the vertical viewing experience",
+    launchIntro: "Try our web, iOS, and Android test builds to see how viewers find a series, go from one episode to the next, and reach VIP content. Bring your existing app and catalog to a walkthrough so we can scope the connections you need.",
+    nextStep: {
+      title: "Bring your current app to a Micro Drama walkthrough",
+      text: "Share the devices you support, how you publish titles, and whether short dramas should use the same sign-in and subscription. We’ll walk through the standalone MicroDrama builds and identify the work involved in connecting them to your service.",
+      links: [
+        { href: SHORT_DRAMA_PATHS.platform, label: "Explore the Micro Drama platform" },
+        { href: "/blog/launch-micro-drama-platform", label: "Compare web-first and app-first launches" },
+      ],
+      whatsappMessage: "Hi, we already run a streaming service and would like to discuss adding short drama to it.",
+    },
+    sections: [
+      {
+        id: "what-broadcasters-have-tried",
+        title: "What ViX and Peacock put in front of viewers",
+        paragraphs: [
+          "TelevisaUnivision announced ViX MicrO in February 2026. Its release described a social-first approach where viewers see trailers and opening episodes on social channels and continue the story in the existing ViX app. The decision to work through the existing app gives viewers a familiar place to finish the series.",
+          "NBCUniversal described a different entry point in its November 2026 preview of Peacock’s mobile updates. Its proposed franchise hubs put microdramas alongside related shows, clips, games, and live moments. If your viewers already follow a particular franchise, a short drama can have a clear place next to the content they came to watch.",
+          "Use those announcements as examples of how viewers discover short drama. For your own release, define what happens when someone opens the app from a shared episode link or goes looking for a new short series from the homepage.",
+        ],
+      },
+      {
+        id: "choose-the-placement",
+        title: "Choose a homepage row, a vertical tab, or a separate app",
+        paragraphs: [
+          "A homepage row is a practical pilot for a few series. It gives you a named place to compare how existing viewers respond to a short story. Decide whether each card opens an episode or a series page, then let viewers continue in order once they start.",
+          "A dedicated tab makes sense when there is enough new material for viewers to come back regularly. It needs a clear way to browse by series as well as by video. A feed that jumps between unrelated episodes can work for discovery, while a viewer already following a story needs the next part in order and a way back to their last episode.",
+          "A separate app gives a new brand, audience, or catalog its own home. Budget for its own store listings, releases, support, and audience acquisition. If viewers should bring an existing login or subscription with them, put that work in the proposal before choosing a standalone launch.",
+        ],
+      },
+      {
+        id: "map-the-catalog",
+        title: "Decide where series and episodes are published",
+        paragraphs: [
+          "Give each series and episode a stable ID, even if a title is renamed or released in a second language. Agree which system owns episode order, posters, languages, captions, release dates, and territory restrictions. If both systems have an admin panel, decide where editors make changes and how the other system receives them.",
+          "Test one correction and one withdrawal. Change the display title without breaking the shared URL, then withdraw a test episode and verify that it disappears from the homepage, vertical feed, and series page. Open its old URL as well. Have an editor run the test so the same process can be used after launch.",
+        ],
+        image: { src: "/showcase/microdrama-admin-series.webp", alt: "MicroDrama demo series admin showing artwork and publishing status" },
+        options: [{
+          title: "Prepare the catalog",
+          text: "Use the publishing guide for episode order, artwork, free previews, and the viewer review.",
+          href: "/blog/publish-micro-drama-series",
+          linkLabel: "Read how to publish a Micro Drama series",
+        }],
+      },
+      {
+        id: "keep-access-consistent",
+        title: "Work out who can watch past the free episodes",
+        paragraphs: [
+          "Write down the rule before reviewing designs. Existing OTT subscribers might get the full vertical catalog, only selected series, or the same free preview as everyone else. Decide what happens when a subscription has expired and which system makes the final access decision.",
+          "An integration also needs to match the account the viewer signed in with to its subscription status and viewing progress. Ask the team to show how an expired or recently renewed subscription is handled on each surface. Include account switching and a return to the locked episode after sign-in so cached access or a stale screen cannot confuse the viewer.",
+          "If you want a new paid tier, ask for the purchase, renewal, refund, and support flows to be scoped. Sharing an account across apps, carrying over a purchase, or connecting to an existing billing service are integration requirements to review with your team.",
+        ],
+      },
+      {
+        id: "test-player-and-links",
+        title: "Test the portrait player and shared episode links",
+        paragraphs: [
+          "Choose what a shared link opens on a phone with the existing app installed and on one without it. Apple’s Universal Links and Android App Links can open a supported screen from a verified website link when configured for the app. Give browser visitors a useful series or episode page. If they need to sign in, check that they return to the intended episode afterward.",
+          "Test the controls with captions turned on, switch to mobile data, and move quickly between episodes. Then return to the normal widescreen catalog and confirm the existing player still behaves as expected. If TV is part of your service, decide whether the pilot is visible there and test that decision on the supported devices.",
+        ],
+        image: { src: "/showcase/microdrama-web-player.webp", alt: "MicroDrama demo browser player showing a vertical episode beside the episode list" },
+      },
+      {
+        id: "example-pilot",
+        title: "Run a pilot with two series and one viewer group",
+        paragraphs: [
+          "Imagine a streamer with existing mobile viewers in one market. It puts two licensed vertical series on a homepage row, each with two free episodes. Existing active subscribers can watch the rest. The team gives its support staff the test links and starts with a limited audience.",
+          "Compare how many people opened a series with how many started playback. Among viewers who started episode one, count how many began episode two. Record playback failures, access complaints, and time to first frame separately so the team knows which issue to investigate if people drop out. Keep the scope, audience, and measurement definitions consistent during the pilot.",
+          "Write down when to pause expansion. For example, if subscribers cannot continue past the free episodes or the new navigation interrupts normal viewing, hide the pilot entry point while the team fixes the issue. Check that old links still land somewhere useful and that the existing catalog and subscriptions continue to work.",
+        ],
+        options: [{
+          title: "Plan how viewers will discover the pilot",
+          text: "Pick one trailer destination and define a few viewing and access events you can check.",
+          href: `/blog/${MICRO_DRAMA_MARKETING_SLUG}`,
+          linkLabel: "Read the Micro Drama marketing guide",
+        }],
+      },
+      {
+        id: "integration-checklist",
+        title: "What to ask for in the integration quote",
+        paragraphs: [
+          "Bring your current app, the devices you support, a sample series, and the system names for catalog, login, billing, and video. Ask for a written breakdown of what can be reused, what needs changes in your existing app, and which work belongs to your current supplier. Use the pilot’s viewer steps as the acceptance criteria.",
+        ],
+        checklist: [
+          { title: "Agree where viewers enter", text: "Show the homepage row, tab, or separate app and the route to episode one." },
+          { title: "Test access and continuity", text: "Try a guest, a subscriber, and an expired account. Check the next episode, resume position, and return after sign-in." },
+          { title: "Rehearse an editorial change", text: "Publish an episode, change its artwork, and then withdraw it. Verify the catalog and shared link outcomes." },
+          { title: "Plan release and rollback", text: "List supported devices, pilot audience, release owners, and who can hide the pilot or restore the old navigation." },
+        ],
+      },
+    ],
+    sources: [
+      { title: "TelevisaUnivision’s February 2026 ViX MicrO launch", url: "https://corporate.televisaunivision.com/articles/2026/02/26/vix-officially-launches-vix-micro-its-innovative-original-micro-content-platform/" },
+      { title: "NBCUniversal’s November 2026 Peacock mobile preview", url: "https://www.nbcuniversal.com/article/peacock-extends-its-vertical-video-leadership-reimagined-mobile-experience" },
+      { title: "Apple’s guide to associated domains and Universal Links", url: "https://developer.apple.com/documentation/xcode/supporting-associated-domains" },
+      { title: "Android’s guide to deep links and App Links", url: "https://developer.android.com/training/app-links" },
+    ],
+  },
   {
     slug: SHORT_DRAMA_LICENSING_SLUG,
     title: "How to License Short Drama Content for a Micro Drama App",

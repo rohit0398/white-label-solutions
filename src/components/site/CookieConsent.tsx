@@ -16,14 +16,14 @@ export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    try {
-      const consent = localStorage.getItem("cookie_consent");
-      if (!consent) {
-        // Give visitors a minute to explore before showing the banner.
-        const timer = setTimeout(() => setVisible(true), 60_000);
-        return () => clearTimeout(timer);
+    const frame = requestAnimationFrame(() => {
+      try {
+        setVisible(!localStorage.getItem("cookie_consent"));
+      } catch {
+        setVisible(true);
       }
-    } catch {}
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const handleAccept = () => {
